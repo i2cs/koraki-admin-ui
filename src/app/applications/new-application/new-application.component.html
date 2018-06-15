@@ -1,0 +1,55 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="col-md-8 mr-auto ml-auto">
+      <div class="card card-wizard" data-color="orange">
+
+        <mat-progress-bar mode="{{creatingApp?'indeterminate':''}}"></mat-progress-bar>
+
+        <div class="card-header text-center">
+          <h3 class="card-title">
+            Create a new application
+          </h3>
+          <h5 class="card-description">Give following basic details to start using koraki</h5>
+        </div>
+
+        <form [formGroup]="type" action="" method="">
+          <div class="tab-pane active" id="about">
+            <h5 class="info-text">Let's start with application name and website URL</h5>
+            <div class="row justify-content-center">
+              <div class="col-sm-12">
+                <div class="input-group form-control-lg">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="material-icons">sms</i>
+                    </span>
+                  </div>
+                  <mat-form-field hintLabel="Max 15 characters" class="example-full-width has-label" [ngClass]="displayFieldCss(type, 'appName')">
+                    <input type="text" name="appname" matInput #appname [(ngModel)]="model.applicationName" required="required" maxlength="15"
+                      placeholder="Application name" formControlName="appName">
+                    <mat-hint align="end">{{appname.value?.length || 0}}/15</mat-hint>
+                  </mat-form-field>
+                </div>
+                <div class="input-group form-control-lg">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="material-icons">language</i>
+                    </span>
+                  </div>
+                  <mat-form-field hintLabel="URL of your website. Just to use as a description" class="example-full-width has-label" [ngClass]="displayFieldCss(type, 'url')">
+                    <input type="url" name="url" required="required" [(ngModel)]="model.url" matInput placeholder="Website URL" formControlName="url">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div>
+                <mat-divider></mat-divider>
+              </div>
+              <div>
+                <button mat-stroked-button (click)="createApp()">Create</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
