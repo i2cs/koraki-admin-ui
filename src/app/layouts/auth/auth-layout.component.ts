@@ -11,7 +11,7 @@ export class AuthLayoutComponent implements OnInit {
     private sidebarVisible: boolean;
     mobile_menu_visible: any = 0;
     private _router: Subscription;
-    private test: Date = new Date();
+    public test: Date = new Date();
   
     constructor(private router: Router, private element: ElementRef) {
         this.sidebarVisible = false;
