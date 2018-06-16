@@ -1,10 +1,7 @@
 <div class="main-content">
   <div class="container-fluid">
     <div class="col-md-8 mr-auto ml-auto">
-
       <div class="card ">
-        <mat-progress-bar mode="{{loadingApp?'indeterminate':''}}"></mat-progress-bar>
-
         <div class="card-header text-center">
           <h3 class="card-title">
             {{application.applicationName}}
@@ -29,9 +26,9 @@
               </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#link4" role="tablist">
-                  Analytics
-                </a>
+              <a class="nav-link" data-toggle="tab" href="#link4" role="tablist">
+                Analytics
+              </a>
             </li>
           </ul>
           <div class="tab-content tab-space">
@@ -39,32 +36,32 @@
 
 
               <!-- <div class="row justify-content-center"> -->
-                <div class="col-sm-12">
+              <div class="col-sm-12">
 
 
-                  <p>
-                    <mat-form-field  appearance="outline" hintLabel="Access token of the application" class="example-full-width has-label">
-                      <mat-label>Token</mat-label>
-                      <textarea readonly rows=6 matInput [(ngModel)]="application.token"></textarea>
-                    </mat-form-field>
-                  </p>
+                <p>
+                  <mat-form-field appearance="outline" hintLabel="Access token of the application" class="example-full-width has-label">
+                    <mat-label>Token</mat-label>
+                    <textarea readonly rows=6 matInput [(ngModel)]="application.token"></textarea>
+                  </mat-form-field>
+                </p>
 
-                  <p>
-                    <mat-form-field appearance="outline" hintLabel="Client id or the app key" class="example-full-width has-label">
-                      <mat-label>Client Id</mat-label>
-                      <input type="text" [(ngModel)]="application.clientId" matInput readonly>
-                    </mat-form-field>
-                  </p>
+                <p>
+                  <mat-form-field appearance="outline" hintLabel="Client id or the app key" class="example-full-width has-label">
+                    <mat-label>Client Id</mat-label>
+                    <input type="text" [(ngModel)]="application.clientId" matInput readonly>
+                  </mat-form-field>
+                </p>
 
-                  <p>
-                    <mat-form-field appearance="outline">
-                      <mat-label>Secret</mat-label>
-                      <input matInput readonly [(ngModel)]="application.clientSecret" [type]="hide ? 'password' : 'text'">
-                      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-                    </mat-form-field>
-                  </p>
+                <p>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Secret</mat-label>
+                    <input matInput readonly [(ngModel)]="application.clientSecret" [type]="hide ? 'password' : 'text'">
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                  </mat-form-field>
+                </p>
 
-                </div>
+              </div>
               <!-- </div> -->
 
             </div>
@@ -81,11 +78,11 @@
               <br />Dynamically innovate resource-leveling customer service for state of the art customer service.
             </div>
             <div class="tab-pane" id="link4">
-                Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer
-                service with robust ideas.
-                <br />
-                <br />Dynamically innovate resource-leveling customer service for state of the art customer service.
-              </div>
+              Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer
+              service with robust ideas.
+              <br />
+              <br />Dynamically innovate resource-leveling customer service for state of the art customer service.
+            </div>
           </div>
         </div>
       </div>

@@ -5,6 +5,7 @@ import { Validators, FormGroup } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { ApplicationsService, ApplicationCreateDataModel, ApplicationViewDataModel } from 'koraki-angular-client';
 import { Router } from '@angular/router';
+import { LoadingServiceService } from '../../services/loading-service.service';
 
 declare const $: any;
 
@@ -17,13 +18,13 @@ declare const $: any;
 export class NewApplicationComponent implements OnInit {
     appCreatedResponse: ApplicationViewDataModel;
     appCreated: boolean;
-    creatingApp: boolean;
     type: FormGroup;
     model: ApplicationCreateDataModel = <ApplicationCreateDataModel>{};
     constructor(
         private appservice: ApplicationsService,
         private formBuilder: FormBuilder,
-        private router: Router
+        private router: Router,
+        private loadingService: LoadingServiceService
     ) { }
 
     isFieldValid(form: FormGroup, field: string) {
@@ -42,10 +43,10 @@ export class NewApplicationComponent implements OnInit {
             return;
         }
 
-        this.creatingApp = true;
+        this.loadingService.loading(true);
 
         this.appservice.createApplication(this.model).subscribe(a => {
-            this.creatingApp = false;
+            this.loadingService.loading(false);
             if (!a.token) {
                 $.notify({
                     icon: "add_alert",
@@ -65,7 +66,7 @@ export class NewApplicationComponent implements OnInit {
                 this.router.navigate(['applications/view', this.appCreatedResponse.id], { queryParams: { new: true } });
             }
         }, e => {
-            this.creatingApp = false;
+            this.loadingService.loading(false);
             $.notify({
                 icon: "add_alert",
                 message: "<b>" + e.error.message + "<br>" + e.error.errors.join("<br>")

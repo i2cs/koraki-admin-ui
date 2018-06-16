@@ -1,5 +1,7 @@
-
 <div class="wrapper">
+    <mat-progress-bar color="primary" mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+    <div style="width:1px; height:5px;" *ngIf="!loading"></div>
+
     <div class="sidebar" data-background-color="white" data-color="orange">
         <app-sidebar-cmp></app-sidebar-cmp>
         <div class="sidebar-background"></div>
@@ -7,8 +9,6 @@
     <div class="main-panel">
         <app-navbar-cmp></app-navbar-cmp>
         <router-outlet></router-outlet>
-        <div *ngIf="!isMap()">
-            <app-footer-cmp></app-footer-cmp>
-        </div>
+        <app-footer-cmp></app-footer-cmp>
     </div>
 </div>

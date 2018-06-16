@@ -1,0 +1,46 @@
+@import '~@angular/material/theming';
+
+// Include non-theme styles for core.
+@include mat-core();
+
+$koraki-md: (
+    50 : #fff8e9,
+    100 : #ffefc7,
+    200 : #ffe4a2,
+    300 : #ffd97c,
+    400 : #ffd060,
+    500 : #ffc844,
+    600 : #ffc23e,
+    700 : #ffbb35,
+    800 : #ffb42d,
+    900 : #ffa71f,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #ffebce,
+    A700 : #ffe0b5,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+
+$custom-theme-primary: mat-palette($koraki-md);
+$custom-theme-accent: mat-palette($mat-orange, A200, A100, A400);
+$custom-theme-warn: mat-palette($mat-red);
+
+$custom-theme: mat-light-theme($custom-theme-primary, $custom-theme-accent, $custom-theme-warn);
+
+@include angular-material-theme($custom-theme);

@@ -53,6 +53,7 @@ import { AuthService } from './services/auth.service';
 import { AngularWebStorageModule } from 'angular-web-storage';
 import { AuthGuardService, NoAuthGuardService } from './services/auth-gurads.service';
 import { CallbackComponent } from './authenticate/callback/callback.component';
+import { LoadingServiceService } from './services/loading-service.service';
 
 @NgModule({
   exports: [
@@ -120,7 +121,8 @@ export class MaterialModule { }
     multi: false
   },
     AuthGuardService,
-    NoAuthGuardService
+    NoAuthGuardService,
+    LoadingServiceService
   ],
   bootstrap: [AppComponent]
 })
