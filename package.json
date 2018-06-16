@@ -4,12 +4,13 @@
   "license": "",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build --prod --build-optimizer",
+    "start": "ng serve --port 80",
+    "build": "ng build",
     "prod": "ng build --prod --build-optimizer",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "ng build --prod --build-optimizer"
   },
   "private": true,
   "dependencies": {
@@ -90,5 +91,9 @@
     "ts-node": "2.0.0",
     "tslint": "5.9.1",
     "typescript": "~2.7.0"
+  },
+  "engines": {
+    "node": "8.9.4",
+    "npm": "5.6.0"
   }
 }
