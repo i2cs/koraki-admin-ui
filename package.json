@@ -33,6 +33,7 @@
     "angular-web-storage": "^3.0.0",
     "animate.css": "3.5.2",
     "arrive": "2.3.1",
+    "auth0-js": "^9.6.1",
     "bootstrap": "4.1.0",
     "bootstrap-material-design": "4.1.1",
     "bootstrap-notify": "3.1.3",

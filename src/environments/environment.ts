@@ -5,5 +5,15 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: "http://localhost:5000"
+  apiBaseUrl: "http://localhost:5000",
+  auth: {
+    clientID: 'gn0sF3vg8ziAWNS3EzdHIYR26x5564Vn',
+    domain: 'koraki.auth0.com',
+    redirect: 'http://localhost:4200/auth/callback',
+    audience: 'https://koraki.auth0.com/userinfo',
+    scope: 'openid email',
+    namespace: 'http://koraki.io',
+    autoRenewToken: true,
+    dynamicRedirect: true
+  }
 };

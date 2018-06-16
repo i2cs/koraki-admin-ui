@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import PerfectScrollbar from 'perfect-scrollbar';
+import { AuthService } from '../services/auth.service';
 
 declare const $: any;
 
@@ -22,17 +23,17 @@ export interface ChildrenItems {
 
 //Menu Items
 export const ROUTES: RouteInfo[] = [{
-        path: '/dashboard',
-        title: 'Dashboard',
-        type: 'link',
-        icontype: 'dashboard'
-    },{
-        path: '/applications',
-        title: 'Applications',
-        type: 'link',
-        icontype: 'cloud'
+    path: '/dashboard',
+    title: 'Dashboard',
+    type: 'link',
+    icontype: 'dashboard'
+}, {
+    path: '/applications',
+    title: 'Applications',
+    type: 'link',
+    icontype: 'cloud'
 
-    }
+}
 ];
 @Component({
     selector: 'app-sidebar-cmp',
@@ -41,6 +42,8 @@ export const ROUTES: RouteInfo[] = [{
 
 export class SidebarComponent implements OnInit {
     public menuItems: any[];
+
+    constructor(private auth: AuthService) { }
 
     isMobileMenu() {
         if ($(window).width() > 991) {
@@ -52,7 +55,7 @@ export class SidebarComponent implements OnInit {
     ngOnInit() {
         this.menuItems = ROUTES.filter(menuItem => menuItem);
     }
-    updatePS(): void  {
+    updatePS(): void {
         if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
             const elemSidebar = <HTMLElement>document.querySelector('.sidebar .sidebar-wrapper');
             let ps = new PerfectScrollbar(elemSidebar, { wheelSpeed: 2, suppressScrollX: true });
@@ -64,5 +67,9 @@ export class SidebarComponent implements OnInit {
             bool = true;
         }
         return bool;
+    }
+
+    logout() {
+        this.auth.logout()
     }
 }

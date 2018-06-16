@@ -48,10 +48,11 @@ import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 
 import { AppRoutes } from './app.routing';
 import { HttpClientModule } from '@angular/common/http';
-import { ApiModule, Configuration, ConfigurationParameters } from 'koraki-angular-client';
-import { environment } from 'environments/environment';
+import { ApiModule, Configuration } from 'koraki-angular-client';
 import { AuthService } from './services/auth.service';
 import { AngularWebStorageModule } from 'angular-web-storage';
+import { AuthGuardService, NoAuthGuardService } from './services/auth-gurads.service';
+import { CallbackComponent } from './authenticate/callback/callback.component';
 
 @NgModule({
   exports: [
@@ -109,14 +110,18 @@ export class MaterialModule { }
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    AuthLayoutComponent
+    AuthLayoutComponent,
+    CallbackComponent
   ],
   providers: [{
     provide: Configuration,
     useFactory: (authSvc: AuthService) => authSvc.getAuthConfig(),
     deps: [AuthService],
     multi: false
-  }],
+  },
+    AuthGuardService,
+    NoAuthGuardService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

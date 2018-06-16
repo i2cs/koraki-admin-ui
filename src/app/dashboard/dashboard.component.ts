@@ -1,16 +1,10 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
-
-import * as Chartist from 'chartist';
-
-declare const $: any;
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html'
 })
-export class DashboardComponent implements OnInit, AfterViewInit {
+export class DashboardComponent implements OnInit {
 
   public ngOnInit() {}
-
-  ngAfterViewInit() {}
 }
