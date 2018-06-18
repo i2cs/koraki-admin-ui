@@ -67,12 +67,11 @@
             </div>
             <div class="tab-pane" id="link2">
 
-              <p>You can copy/paste following code snippet into your website. Otherwise you can use one or more of the following integrations to add Koraki to your site</p>
+              <p>You can copy/paste following code snippet into your website. Otherwise you can use one or more of the following
+                integrations to add Koraki to your site</p>
 
-              <mat-form-field appearance="outline" hintLabel="Learn how to add this script to your website" class="example-full-width has-label">
-                <mat-label>Widget code</mat-label>
-                <textarea readonly rows=6 matInput><script>window.sparkleSettings = { app_id: '{{application.clientId}}' } !function(){function t(){var t=a.createElement("script"); t.type="text/javascript", t.async=!0,t.src="//i2csmobile.com/market/index.php?route=extension/module/sparkle/js"; var e=a.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)} var e=window,a=document;e.attachEvent?e.attachEvent("onload",t):e.addEventListener("load",t,!1)}(); </script>
-                </textarea>
+              <mat-form-field appearance="outline" hintLabel="Learn how to add this script to your website" class="example-full-width">
+                <textarea readonly rows=5 matInput>{{script}}</textarea>
               </mat-form-field>
 
 
@@ -90,10 +89,31 @@
               </div>
             </div>
             <div class="tab-pane" id="link3">
-              Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer
-              service with robust ideas.
-              <br />
-              <br />Dynamically innovate resource-leveling customer service for state of the art customer service.
+              <div class="row">
+
+
+                <div class="col-md-12 mr-auto">
+                  <legend>Status is {{status?'Active':'Deactivated'}}</legend>
+                  <div class="togglebutton">
+                    <label>
+                      <input type="checkbox" [(ngModel)]="status" (change)="updateApplicationStatus()">
+                      <span class="toggle"></span>
+                      No notifications will be displayed if the application is deactivated
+                    </label>
+                  </div>
+                </div>
+
+                <div class="card col-md-12 mr-auto">
+                  <legend></legend>
+                  <div class="togglebutton">
+                    <label>
+                      <a mat-raised-button class="btn btn-danger" href="#" onclick="return false" (click)="deleteApplication()">Delete Application</a>
+                    </label>
+                  </div>
+                </div>
+
+
+              </div>
             </div>
             <div class="tab-pane" id="link4">
               Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer
