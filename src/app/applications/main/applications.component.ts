@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { ApplicationsService, ApplicationViewDataModel } from 'koraki-angular-client';
 import { LoadingServiceService } from '../../services/loading-service.service';
 import { MemoryDataHolderServiceService } from '../../services/memory-data-holder-service.service';
@@ -12,10 +12,11 @@ declare const $: any;
   styleUrls: ['./applications.component.scss']
 })
 
-export class ApplicationsComponent implements OnInit, AfterViewInit {
+export class ApplicationsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   applications: Array<ApplicationViewDataModel>;
   loading: boolean;
+  interval: any;
 
   constructor(
     private appservice: ApplicationsService,
@@ -29,7 +30,7 @@ export class ApplicationsComponent implements OnInit, AfterViewInit {
       this.applications = <Array<ApplicationViewDataModel>>(this.cache.store.get("applications"));
     }
     this.load();
-    setInterval(() => { this.load() }, 60000);
+    this.interval = setInterval(() => { this.load() }, 60000);
   }
 
   load(): any {
@@ -49,4 +50,8 @@ export class ApplicationsComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() { }
+
+  ngOnDestroy(): void {
+    clearInterval(this.interval);
+  }
 }
