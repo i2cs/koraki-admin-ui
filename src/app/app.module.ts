@@ -55,6 +55,7 @@ import { AuthGuardService, NoAuthGuardService } from './services/auth-gurads.ser
 import { CallbackComponent } from './authenticate/callback/callback.component';
 import { LoadingServiceService } from './services/loading-service.service';
 import { MomentModule } from 'ngx-moment';
+import { MemoryDataHolderServiceService } from './services/memory-data-holder-service.service';
 
 @NgModule({
   exports: [
@@ -124,7 +125,8 @@ export class MaterialModule { }
   },
     AuthGuardService,
     NoAuthGuardService,
-    LoadingServiceService
+    LoadingServiceService,
+    MemoryDataHolderServiceService
   ],
   bootstrap: [AppComponent]
 })
