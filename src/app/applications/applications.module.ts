@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NewApplicationComponent } from './new-application/new-application.component';
 import { ViewApplicationComponent } from './view-application/view-application.component';
+import { MomentModule } from 'ngx-moment';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { ViewApplicationComponent } from './view-application/view-application.co
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    MomentModule
   ],
   declarations: [ApplicationsComponent, NewApplicationComponent, ViewApplicationComponent]
 })

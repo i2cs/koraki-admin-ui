@@ -11,20 +11,30 @@ declare const $: any;
 })
 
 export class ApplicationsComponent implements OnInit, AfterViewInit {
+  
   applications: Array<ApplicationViewDataModel>;
+  loading: boolean;
 
   constructor(
     private appservice: ApplicationsService,
     private loadingService: LoadingServiceService) { }
 
   ngOnInit() {
-    this.loadingService.loading(true);
+    this.load();
+    setInterval(() => { this.load() }, 30000);
+  }
+
+  load(): any {
+    if(this.loading) return;
+    this.loading = true;
     this.appservice.getAllApplications().subscribe(a => {
       this.applications = a.items;
       this.loadingService.loading(false);
+      this.loading = false;
     }, e => {
       this.loadingService.loading(false);
-    });
+      this.loading = false;
+    });    
   }
 
   ngAfterViewInit() { }

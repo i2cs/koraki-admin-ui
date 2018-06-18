@@ -1,38 +1,47 @@
 <div class="main-content">
     <div class="container-fluid">
-            <div class="row">
+        <div class="row">
 
-                <div class="col-md-4" id="create-new-app">
-                    <div class="card card-pricing">
-                        <a routerLink="/applications/new">
-                            <div class="card-body">
-                                <div class="card-icon">
-                                    <i class="material-icons">add</i>
-                                </div>
-                                <h3 class="card-title">NEW</h3>
-                                <p class="card-description">
-                                    Create a new application to add koraki notification widget to your website
-                                </p>
+            <div class="col-md-4" id="create-new-app">
+                <div class="card card-pricing">
+                    <a routerLink="/applications/new">
+                        <div class="card-body">
+                            <div class="card-icon">
+                                <i class="material-icons">add</i>
                             </div>
-                        </a>
-                    </div>
+                            <h3 class="card-title">NEW</h3>
+                            <p class="card-description">
+                                Create a new application to add koraki notification widget to your website
+                            </p>
+                        </div>
+                    </a>
                 </div>
+            </div>
 
-                <div class="col-md-4" *ngFor="let app of applications">
-                    <div class="card card-stats">
-                        <div class="card-header card-header-success card-header-icon">
-                            
-                            <p class="card-category">{{app.url}}</p>
-                            <h3 class="card-title">{{app.applicationName}}</h3>
+            <div class="col-md-4" *ngFor="let app of applications">
+                <div class="card card-chart">
+
+                    <div class="card-header card-header-{{app.notificationsCount>0?'success':'rose'}} card-header-icon">
+                        <div class="card-icon">
+                            {{app.notificationsCount==0?'No':app.notificationsCount}} Active notifications
                         </div>
-                        <div class="card-footer">
-                            <div class="stats">
-                                <i class="material-icons">date_range</i>Active Last {{app.lastNotificationSeconds}}
-                            </div>
-                            <a mat-raised-button class="btn btn-primary" routerLink="/applications/view/{{app.id}}">View</a>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-category">{{app.url}}</p>
+                        <h3 class="card-title">{{app.applicationName}}</h3>
+                    </div>
+
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">date_range</i>Last Active&nbsp;
+                            <span title="{{app.lastNotificationTime | amDateFormat:'LLL'}}">
+                                {{app.lastNotificationSeconds>1?(app.lastNotificationSeconds | amDuration:'seconds') + ' ago' :'Never'}}
+                            </span>
                         </div>
+                        <a mat-raised-button class="btn btn-primary" routerLink="/applications/view/{{app.id}}">View</a>
                     </div>
                 </div>
             </div>
+        </div>
     </div>
 </div>

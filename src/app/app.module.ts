@@ -54,6 +54,7 @@ import { AngularWebStorageModule } from 'angular-web-storage';
 import { AuthGuardService, NoAuthGuardService } from './services/auth-gurads.service';
 import { CallbackComponent } from './authenticate/callback/callback.component';
 import { LoadingServiceService } from './services/loading-service.service';
+import { MomentModule } from 'ngx-moment';
 
 @NgModule({
   exports: [
@@ -106,6 +107,7 @@ export class MaterialModule { }
     FooterModule,
     HttpClientModule,
     AngularWebStorageModule,
+    MomentModule,
     ApiModule
   ],
   declarations: [
