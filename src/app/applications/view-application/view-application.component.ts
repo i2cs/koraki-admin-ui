@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApplicationsService, ApplicationViewDataModel, ApplicationUpdateDataModel } from 'koraki-angular-client';
 import { LoadingServiceService } from '../../services/loading-service.service';
+import { NotificationService } from '../../services/notification.service';
 
 declare const $: any;
 
@@ -20,7 +21,9 @@ export class ViewApplicationComponent implements OnInit {
     private route: ActivatedRoute,
     private appservice: ApplicationsService,
     private loadingService: LoadingServiceService,
-    public router: Router) { }
+    public router: Router,
+    public notify: NotificationService
+  ) { }
 
   ngOnInit() {
     this.hide = true;
@@ -38,18 +41,7 @@ export class ViewApplicationComponent implements OnInit {
 
         this.route.queryParams.subscribe(query => {
           if (query['new']) {
-            $.notify({
-              icon: "add_alert",
-              message: "Application created!"
-            }, {
-                type: 'success',
-                timer: 4000,
-                placement: {
-                  from: "top",
-                  align: "right"
-                }
-              }
-            );
+            this.notify.success("Application created!");
           }
         });
       }
@@ -62,18 +54,7 @@ export class ViewApplicationComponent implements OnInit {
       this.appservice.updateApplication(this.application.id, <ApplicationUpdateDataModel>{ status : status }).subscribe(a => {
         this.loadingService.loading(false);
         this.application = a;
-        $.notify({
-          icon: "add_alert",
-          message: "Application updated"
-        }, {
-            type: 'success',
-            timer: 2000,
-            placement: {
-              from: "top",
-              align: "right"
-            }
-          }
-        );
+        this.notify.success("Application is " + status.toString());
       }, e => {
         this.loadingService.loading(false);
       });
@@ -85,20 +66,7 @@ export class ViewApplicationComponent implements OnInit {
       this.loadingService.loading(true);
       this.appservice.deleteApplication(this.application.id).subscribe(a => {
         this.loadingService.loading(false);
-
-        $.notify({
-          icon: "add_alert",
-          message: "Application deleted!"
-        }, {
-            type: 'success',
-            timer: 4000,
-            placement: {
-              from: "top",
-              align: "right"
-            }
-          }
-        );
-
+        this.notify.success("Application deleted!");
         this.router.navigate(['/applications']);
       }, e => {
         this.loadingService.loading(false);

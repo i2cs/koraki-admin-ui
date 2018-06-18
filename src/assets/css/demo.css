@@ -5,3 +5,17 @@ background: -webkit-radial-gradient(center, ellipse cover, #fcfcfc 0%,#f2f2f2 10
 background: radial-gradient(ellipse at center, #fcfcfc 0%,#f2f2f2 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#f2f2f2',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
+
+.app-notify-status{
+    padding: 5px;
+    border-radius: 6px;
+    border: 1px #f18233 solid;
+    color: #f18233;
+}
+
+.app-notify-count{
+    padding: 5px;
+    border-radius: 6px;
+    border: 1px #2fdea5 solid;
+    color: #2fdea5;
+}

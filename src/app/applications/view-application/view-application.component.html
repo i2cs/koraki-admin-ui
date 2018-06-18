@@ -2,12 +2,22 @@
   <div class="container-fluid">
     <div class="col-md-8 mr-auto ml-auto">
       <div class="card ">
-        <div class="card-header text-center">
+        <div class="card-header">
+          <div class="pull-right app-notify-status" *ngIf="application.status!='Active'" >
+            <i class="material-icons" style="vertical-align: middle;">warning</i> Not Active
+          </div>
+          <div class="pull-right app-notify-count" *ngIf="application.status=='Active'" >
+              {{application.notificationsCount==0?'No':application.notificationsCount}} Active notifications
+            </div>
           <h3 class="card-title">
             {{application.applicationName}}
           </h3>
-          <h5 class="card-description">{{application.url}}</h5>
+
+          <h5 class="card-description">{{application.url}}
+          </h5>
+
         </div>
+        <mat-divider></mat-divider>
         <div class="card-body ">
           <ul class="nav nav-pills nav-pills-warning justify-content-center" role="tablist">
             <li class="nav-item">

@@ -6,6 +6,7 @@ import { FormBuilder } from '@angular/forms';
 import { ApplicationsService, ApplicationCreateDataModel, ApplicationViewDataModel } from 'koraki-angular-client';
 import { Router } from '@angular/router';
 import { LoadingServiceService } from '../../services/loading-service.service';
+import { NotificationService } from '../../services/notification.service';
 
 declare const $: any;
 
@@ -24,7 +25,8 @@ export class NewApplicationComponent implements OnInit {
         private appservice: ApplicationsService,
         private formBuilder: FormBuilder,
         private router: Router,
-        private loadingService: LoadingServiceService
+        private loadingService: LoadingServiceService,
+        public notify: NotificationService
     ) { }
 
     isFieldValid(form: FormGroup, field: string) {
@@ -48,18 +50,8 @@ export class NewApplicationComponent implements OnInit {
         this.appservice.createApplication(this.model).subscribe(a => {
             this.loadingService.loading(false);
             if (!a.token) {
-                $.notify({
-                    icon: "add_alert",
-                    message: "Could not create the application"
-                }, {
-                        type: 'error',
-                        timer: 4000,
-                        placement: {
-                            from: "top",
-                            align: "right"
-                        }
-                    }
-                );
+                this.notify.error("Could not create the application");
+
             } else {
                 this.appCreated = true;
                 this.appCreatedResponse = a;
@@ -67,18 +59,7 @@ export class NewApplicationComponent implements OnInit {
             }
         }, e => {
             this.loadingService.loading(false);
-            $.notify({
-                icon: "add_alert",
-                message: "<b>" + e.error.message + "<br>" + e.error.errors.join("<br>")
-            }, {
-                    type: 'danger',
-                    timer: 4000,
-                    placement: {
-                        from: "top",
-                        align: "right"
-                    }
-                }
-            );
+            this.notify.error("<b>" + e.error.message + "<br>" + e.error.errors.join("<br>"));
         });
     }
 

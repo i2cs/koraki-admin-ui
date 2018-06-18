@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ApplicationsService, ApplicationViewDataModel } from 'koraki-angular-client';
 import { LoadingServiceService } from '../../services/loading-service.service';
 import { MemoryDataHolderServiceService } from '../../services/memory-data-holder-service.service';
+import { NotificationService } from '../../services/notification.service';
 
 declare const $: any;
 
@@ -19,7 +20,9 @@ export class ApplicationsComponent implements OnInit, AfterViewInit {
   constructor(
     private appservice: ApplicationsService,
     private loadingService: LoadingServiceService,
-    private cache: MemoryDataHolderServiceService) { }
+    private cache: MemoryDataHolderServiceService,
+    public notify: NotificationService
+  ) { }
 
   ngOnInit() {
     if(this.cache.store.has("applications")){
@@ -41,6 +44,7 @@ export class ApplicationsComponent implements OnInit, AfterViewInit {
     }, e => {
       this.loadingService.loading(false);
       this.loading = false;
+      this.notify.error("Error loading applications");
     });
   }
 
