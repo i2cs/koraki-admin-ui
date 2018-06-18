@@ -90,10 +90,11 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit {
         }
     }
     isMac(): boolean {
-        let bool = false;
-        if (navigator.platform.toUpperCase().indexOf('MAC') >= 0 || navigator.platform.toUpperCase().indexOf('IPAD') >= 0) {
-            bool = true;
-        }
-        return bool;
+        return true;
+        // let bool = false;
+        // if (navigator.platform.toUpperCase().indexOf('MAC') >= 0 || navigator.platform.toUpperCase().indexOf('IPAD') >= 0) {
+        //     bool = true;
+        // }
+        // return bool;
     }
 }

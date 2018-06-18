@@ -1,6 +1,5 @@
 <div class="wrapper">
-    <mat-progress-bar color="primary" mode="indeterminate" *ngIf="loading"></mat-progress-bar>
-    <div style="width:1px; height:5px;" *ngIf="!loading"></div>
+    <mat-progress-bar color="primary" style="position: fixed;z-index: 10000;" mode="indeterminate" *ngIf="loading"></mat-progress-bar>
 
     <div class="sidebar" data-background-color="white" data-color="orange">
         <app-sidebar-cmp></app-sidebar-cmp>

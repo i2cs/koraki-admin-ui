@@ -9,7 +9,7 @@
     top: 0;
     bottom: 0;
     left: 0;
-    z-index: 2;
+    z-index: 1100;
     width: 260px;
     background: $white-color;
     @include shadow-big();
@@ -301,7 +301,7 @@
 
     .logo-koraki{
         img{
-            width: 130px;
+            width: 100px;
         }
     }
 
