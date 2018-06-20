@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiBaseUrl: "https://koraki-api-backend.azurewebsites.net/",
+  apiBaseUrl: "https://api.koraki.io",
   auth: {
     clientID: 'gn0sF3vg8ziAWNS3EzdHIYR26x5564Vn',
     domain: 'koraki.auth0.com',
