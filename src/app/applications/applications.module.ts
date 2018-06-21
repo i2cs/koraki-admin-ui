@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { NewApplicationComponent } from './new-application/new-application.component';
 import { ViewApplicationComponent } from './view-application/view-application.component';
 import { MomentModule } from 'ngx-moment';
+import { AnalyticsViewComponent } from './analytics-view/analytics-view.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,6 @@ import { MomentModule } from 'ngx-moment';
     MaterialModule,
     MomentModule
   ],
-  declarations: [ApplicationsComponent, NewApplicationComponent, ViewApplicationComponent]
+  declarations: [ApplicationsComponent, NewApplicationComponent, ViewApplicationComponent, AnalyticsViewComponent]
 })
 export class ApplicationsModule { }
