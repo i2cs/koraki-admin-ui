@@ -42,6 +42,7 @@
     "bootstrap-tagsinput": "0.7.1",
     "chartist": "0.9.4",
     "chartist-plugin-zoom": "0.4.0",
+    "compression": "^1.7.2",
     "core-js": "2.4.1",
     "datatables": "1.10.13",
     "datatables.net-bs": "1.10.16",

@@ -1,5 +1,6 @@
 //Install express server
 const express = require('express');
+var compression = require('compression');
 const path = require('path');
 
 const app = express();
@@ -17,6 +18,8 @@ var https_redirect = function(req, res, next) {
 };
 
 app.use(https_redirect);
+
+app.use(compression());
 
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + '/dist'));
