@@ -34,7 +34,7 @@ export class ViewApplicationComponent implements OnInit {
           this.loadingService.loading(false);
           this.application = a;
           this.status = a.status == "Active";
-          this.script = "<script>window.sparkleSettings = { app_id: \"" + a.clientId + "\", analytics_id: \"" + a.analyticsId +"\" }; !function(){function t(){var t=a.createElement(\"script\"); t.type=\"text/javascript\", t.async=!0,t.src=\"\/\/i2csmobile.com/market/index.php?route=extension/module/sparkle/js\"; var e=a.getElementsByTagName(\"script\")[0];e.parentNode.insertBefore(t,e)} var e=window,a=document;e.attachEvent?e.attachEvent(\"onload\",t):e.addEventListener(\"load\",t,!1)}();</script>"
+          this.script = "<script>window.sparkleSettings = { app_id: \"" + a.clientId + "\", analytics_id: \"" + a.analyticsId +"\" }; !function(){function t(){var t=a.createElement(\"script\"); t.type=\"text/javascript\", t.async=!0,t.src=\"\/\/api.koraki.io/widget.js\"; var e=a.getElementsByTagName(\"script\")[0];e.parentNode.insertBefore(t,e)} var e=window,a=document;e.attachEvent?e.attachEvent(\"onload\",t):e.addEventListener(\"load\",t,!1)}();</script>"
         }, e => {
           this.loadingService.loading(false);
         });

@@ -4,6 +4,20 @@ const path = require('path');
 
 const app = express();
 
+var https_redirect = function(req, res, next) {
+    if (process.env.NODE_ENV === 'production') {
+        if (req.headers['x-forwarded-proto'] != 'https') {
+            return res.redirect('https://' + req.headers.host + req.url);
+        } else {
+            return next();
+        }
+    } else {
+        return next();
+    }
+};
+
+app.use(https_redirect);
+
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + '/dist'));
 
