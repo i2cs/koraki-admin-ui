@@ -21,9 +21,9 @@
             <div class="col-md-4" *ngFor="let app of applications" style="background: linear-gradient(60deg, #e6e6e6, #e0e4e4);">
                 <div class="card card-chart" [ngClass]="{'deactivated-card' : app.status!='Active'}">
 
-                    <div class="card-header card-header-{{app.notificationsCount>0?'success':'rose'}} card-header-icon" [ngClass]="{'card-header-default' : app.status!='Active'}">
+                    <div class="card-header card-header-{{app.activeNotificationsCount>0?'success':'rose'}} card-header-icon" [ngClass]="{'card-header-default' : app.status!='Active'}">
                         <div class="card-icon" *ngIf="app.status=='Active'">
-                            {{app.notificationsCount==0?'No':app.notificationsCount}} Active notifications
+                            {{app.activeNotificationsCount==0?'No':app.activeNotificationsCount}} Active notifications
                         </div>
                         <div class="card-icon" *ngIf="app.status!='Active'">
                             Deactivated

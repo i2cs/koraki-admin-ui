@@ -7,7 +7,7 @@
             <i class="material-icons" style="vertical-align: middle;">warning</i> Not Active
           </div>
           <div class="pull-right app-notify-count" *ngIf="application.status=='Active'" >
-              {{application.notificationsCount==0?'No':application.notificationsCount}} Active notifications
+              {{application.activeNotificationsCount==0?'No':application.activeNotificationsCount}} Active notifications
             </div>
           <h3 class="card-title">
             {{application.applicationName}}
