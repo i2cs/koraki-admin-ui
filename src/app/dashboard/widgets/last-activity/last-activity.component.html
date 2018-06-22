@@ -3,8 +3,8 @@
     <div class="card-icon">
       <i class="material-icons">alarm</i>
     </div>
-    <p class="card-category">Last notification</p>
-    <h3 class="card-title">{{lastActivity=='0001-01-01T00:00:00'?'Never':(lastActivity | amFromUtc | amTimeAgo)}}</h3>
+    <p class="card-category">Last notification {{dateMin}} : {{lastActivityNumber}}</p>
+    <h3 class="card-title">{{noDate?'Never':(lastActivity | amFromUtc | amTimeAgo)}}</h3>
   </div>
   <div class="card-footer">
     <div class="stats">
