@@ -1,0 +1,17 @@
+<div class="card card-stats">
+  <div class="card-header card-header-rose card-header-icon">
+    <div class="card-icon">
+      <i class="material-icons">chat_bubble_outline</i>
+    </div>
+    <p class="card-category">Notifications</p>
+    <h3 class="card-title">{{active?active:'-'}}/<span>{{total?total:'-'}}</span></h3>
+  </div>
+  <div class="card-footer">
+    <div class="stats">
+      {{active?active:'No'}} notifications are visible on widgets
+      <div class="refresh">
+          <a href="#" onclick="return false;" (click)="load()"><i class="material-icons">refresh</i></a>
+        </div>
+    </div>
+  </div>
+</div>

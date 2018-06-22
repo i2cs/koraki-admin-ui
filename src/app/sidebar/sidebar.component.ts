@@ -33,6 +33,12 @@ export const ROUTES: RouteInfo[] = [{
     type: 'link',
     icontype: 'cloud'
 
+}, {
+    path: '/plan',
+    title: 'Pricing Plan',
+    type: 'link',
+    icontype: 'table_chart'
+
 }
 ];
 @Component({

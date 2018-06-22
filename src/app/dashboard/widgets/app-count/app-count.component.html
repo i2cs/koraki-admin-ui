@@ -1,0 +1,18 @@
+<div class="card card-stats">
+  <div class="card-header card-header-warning card-header-icon" routerLink="/applications">
+    <div class="card-icon">
+      <i class="material-icons">apps</i>
+    </div>
+    <p class="card-category">Apps count</p>
+    <h3 class="card-title">{{count?count:'-'}}</h3>
+  </div>
+  <div class="card-footer">
+    <div class="stats">
+      <i class="material-icons text-danger">warning</i>
+      <a href="#pablo">Upgrade to create more</a>
+      <div class="refresh">
+        <a href="#" onclick="return false;" (click)="load()"><i class="material-icons">refresh</i></a>
+      </div>
+    </div>
+  </div>
+</div>

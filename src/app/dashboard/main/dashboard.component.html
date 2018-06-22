@@ -1,0 +1,38 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <app-app-count (countLoaded)="appCountUpdated($event)"></app-app-count>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <app-notification-count></app-notification-count>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <app-total-views></app-total-views>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <app-last-activity></app-last-activity>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6 offset-lg-3 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="card-body text-center">
+            <div class="animal animal1"></div>
+
+            <h3 *ngIf="appCount == -1">Hi there!</h3>
+            <h3 *ngIf="appCount == 0">Looks like you don't have any Koraki widget yet. Click on + button to get started with Koraki</h3>
+            <h3 *ngIf="appCount > 0">Add Koraki widget to another website</h3>
+
+            <div class="card-icon new-app" data-hover="Add new application" routerLink="/applications/new"></div>
+
+            <p class="card-description">
+              Create a new application to add koraki notification widget to your website
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

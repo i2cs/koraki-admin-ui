@@ -1,0 +1,19 @@
+<div class="card card-stats">
+  <div class="card-header card-header-info card-header-icon">
+    <div class="card-icon">
+      <i class="material-icons">alarm</i>
+    </div>
+    <p class="card-category">Last notification</p>
+    <h3 class="card-title">{{lastActivity | amFromUtc | amTimeAgo}}</h3>
+  </div>
+  <div class="card-footer">
+    <div class="stats">
+      <div>Add integrations to create more</div>
+      <div class="refresh">
+        <a href="#" onclick="return false;" (click)="load()">
+          <i class="material-icons">refresh</i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

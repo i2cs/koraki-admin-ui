@@ -51,7 +51,6 @@ export class NewApplicationComponent implements OnInit {
             this.loadingService.loading(false);
             if (!a.token) {
                 this.notify.error("Could not create the application");
-
             } else {
                 this.appCreated = true;
                 this.appCreatedResponse = a;
@@ -59,7 +58,7 @@ export class NewApplicationComponent implements OnInit {
             }
         }, e => {
             this.loadingService.loading(false);
-            this.notify.error("<b>" + e.error.message + "<br>" + e.error.errors.join("<br>"));
+            this.notify.error("<b>" + e.error.message);
         });
     }
 

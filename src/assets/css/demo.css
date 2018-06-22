@@ -19,3 +19,36 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', end
     border: 1px #2fdea5 solid;
     color: #2fdea5;
 }
+
+.animal{
+    background-image: url('../img/animals.png');
+    background-repeat: no-repeat;
+    width: 245px;
+    height: 164px;
+    margin-right: auto; 
+    margin-left: auto;
+}
+
+.animal1{
+    background-position: -32px -29px;
+}
+
+.animal2{
+    background-position: -323px -18px;
+}
+
+.animal3{
+    background-position: -32px -195px;
+}
+
+.animal4{
+    background-position: -323px -207px;
+}
+
+.animal5{
+    background-position: -32px -389px;
+}
+
+.animal6{
+    background-position: -323px -389px;
+}
