@@ -7,7 +7,7 @@ import { AnalyticsService } from 'koraki-angular-client';
   styleUrls: ['./app-count.component.scss']
 })
 export class AppCountComponent implements OnInit {
-  count: number;
+  count: number = -1;
   @Output() countLoaded = new EventEmitter<number>();
   
   constructor(

@@ -4,7 +4,7 @@
       <i class="material-icons">alarm</i>
     </div>
     <p class="card-category">Last notification</p>
-    <h3 class="card-title">{{lastActivity | amFromUtc | amTimeAgo}}</h3>
+    <h3 class="card-title">{{lastActivity=='0001-01-01T00:00:00'?'Never':(lastActivity | amFromUtc | amTimeAgo)}}</h3>
   </div>
   <div class="card-footer">
     <div class="stats">

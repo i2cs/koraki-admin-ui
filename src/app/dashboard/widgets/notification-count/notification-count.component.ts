@@ -7,8 +7,8 @@ import { AnalyticsService } from 'koraki-angular-client';
   styleUrls: ['./notification-count.component.scss']
 })
 export class NotificationCountComponent implements OnInit {
-  total: number;
-  active: number;
+  total: number = -1;
+  active: number = -1;
   constructor(
     private analyticsservice: AnalyticsService
   ) { }

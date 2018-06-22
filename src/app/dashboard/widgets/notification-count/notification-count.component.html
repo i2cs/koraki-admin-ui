@@ -4,7 +4,7 @@
       <i class="material-icons">chat_bubble_outline</i>
     </div>
     <p class="card-category">Notifications</p>
-    <h3 class="card-title">{{active?active:'-'}}/<span>{{total?total:'-'}}</span></h3>
+    <h3 class="card-title">{{active!=-1?active:'-'}}/<span>{{total!=-1?total:'-'}}</span></h3>
   </div>
   <div class="card-footer">
     <div class="stats">
