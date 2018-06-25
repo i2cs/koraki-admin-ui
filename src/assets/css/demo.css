@@ -52,3 +52,19 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', end
 .animal6{
     background-position: -323px -389px;
 }
+
+.divider{
+    border-bottom: 1px #eee solid;
+    padding-top: 15px;
+    margin-bottom: 15px;
+    height: 1px;
+    width: 100%;
+}
+
+.more-top-padding{
+    padding-top: 30px;
+}
+
+.more-x2-top-padding{
+    padding-top: 50px;
+}

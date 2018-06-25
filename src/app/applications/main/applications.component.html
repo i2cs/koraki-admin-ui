@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
 
-            <div class="col-md-4" id="create-new-app" style="background: linear-gradient(60deg, #26c6da, #00acc1);">
+            <div class="col-md-12" id="create-new-app" style="">
                 <div class="card card-pricing">
                     <a routerLink="/applications/new">
                         <div class="card-body">
@@ -18,7 +18,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4" *ngFor="let app of applications" style="background: linear-gradient(60deg, #e6e6e6, #e0e4e4);">
+            <div class="col-md-4" *ngFor="let app of applications" style="">
                 <div class="card card-chart" [ngClass]="{'deactivated-card' : app.status!='Active'}">
 
                     <div class="card-header card-header-{{app.activeNotificationsCount>0?'success':'rose'}} card-header-icon" [ngClass]="{'card-header-default' : app.status!='Active'}">

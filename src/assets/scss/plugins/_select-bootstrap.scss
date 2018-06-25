@@ -39,7 +39,7 @@
     background: white;
 }
 .mat-option.mat-selected:not(.mat-option-multiple){
-    background-color: #9c27b0 !important;
+    background-color: #ff9800 !important;
     color: $white-color !important;
 }
 .mat-option {
@@ -47,8 +47,8 @@
     transition: all 150ms linear;
 
     &:hover {
-        @include box-shadow($shadow-mat-select-option);
-        background: #9c27b0 !important;
+        //@include box-shadow($shadow-mat-select-option);
+        background: #d3d3d3 !important;
         color: $white-color !important;
     }
     &:focus {
@@ -60,7 +60,7 @@
             }
         }
         &:hover{
-            background-color: #9c27b0 !important;
+            background-color: #ff9800 !important;
             color: $white-color !important;
         }
     }
@@ -75,7 +75,7 @@
             background: transparent !important;
         }
         &:hover {
-            background-color: #9c27b0 !important;
+            background-color: #ff9800 !important;
             color: $white-color !important;
             .mat-option-pseudo-checkbox:after{
                 color: $white-color;
@@ -114,7 +114,7 @@
     }
 }
 .mat-option.mat-selected:not(.mat-option-multiple) {
-        box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
+        box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(230, 230, 230, 0.4);
 }
 .mat-form-field-infix{
   width: auto !important;
