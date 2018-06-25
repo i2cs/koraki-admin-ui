@@ -119,9 +119,9 @@
                   <legend>Display on mobile devices</legend>
                   <div class="togglebutton">
                     <label>
-                      <input type="checkbox" [(ngModel)]="active" (change)="updateApplicationSettings()">
+                      <input type="checkbox" [(ngModel)]="mobile" (change)="updateApplicationSettings()">
                       <span class="toggle"></span>
-                      {{active?"Display":"Don't display"}} Koraki widget on mobile devices
+                      {{mobile?"Display":"Don't display"}} Koraki widget on mobile devices
                     </label>
                   </div>
                 </div>

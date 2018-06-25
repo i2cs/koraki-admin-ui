@@ -30,7 +30,8 @@ export class ViewApplicationComponent implements OnInit {
   hide: boolean;
   application: ApplicationViewDataModel = <ApplicationViewDataModel>{};
   script: string;
-  active: boolean;
+  status: boolean;
+  mobile: boolean;
   updatingSettings: boolean;
   possibleCounts: number[] = _Array.range(8, 100, 1);
 
@@ -50,7 +51,7 @@ export class ViewApplicationComponent implements OnInit {
         this.appservice.getApplicationById(params['id']).subscribe(a => {
           this.loadingService.loading(false);
           this.application = a;
-          this.active = a.status == "Active";
+          this.status = a.status == "Active";
           this.script = "<script>window.sparkleSettings = { app_id: \"" + a.clientId + "\", analytics_id: \"" + a.analyticsId + "\" }; !function(){function t(){var t=a.createElement(\"script\"); t.type=\"text/javascript\", t.async=!0,t.src=\"\/\/api.koraki.io//widget/v1.0/js\"; var e=a.getElementsByTagName(\"script\")[0];e.parentNode.insertBefore(t,e)} var e=window,a=document;e.attachEvent?e.attachEvent(\"onload\",t):e.addEventListener(\"load\",t,!1)}();</script>"
         }, e => {
           this.loadingService.loading(false);
@@ -67,7 +68,7 @@ export class ViewApplicationComponent implements OnInit {
 
   updateApplicationStatus() {
     this.loadingService.loading(true);
-    let status: ApplicationUpdateDataModel.StatusEnum = this.active ? ApplicationUpdateDataModel.StatusEnum.Active : ApplicationUpdateDataModel.StatusEnum.Disabled;
+    let status: ApplicationUpdateDataModel.StatusEnum = this.status ? ApplicationUpdateDataModel.StatusEnum.Active : ApplicationUpdateDataModel.StatusEnum.Disabled;
     this.appservice.updateApplication(this.application.id, <ApplicationUpdateDataModel>{ status: status }).subscribe(a => {
       this.loadingService.loading(false);
       this.application = a;
