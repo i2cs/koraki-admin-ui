@@ -1,0 +1,66 @@
+<div class="main-content">
+  <div class="container-fluid">
+
+    <div class="col-md-8 mr-auto ml-auto">
+
+
+      <div class="card ">
+        <div class="card-header">
+          <h3 class="card-title">
+            Facebook Page Integration
+          </h3>
+
+          <h5 class="card-description">Integrate your page with Koraki</h5>
+
+        </div>
+        <mat-divider></mat-divider>
+        <div class="card-body">
+          <div *ngIf="fbLoggedIn">
+            <mat-form-field>
+              <mat-select placeholder="Select your Facebook page" [(ngModel)]="page">
+                <mat-option *ngFor="let p of pages" [value]="p">
+                  <img height="20px" src="https://graph.facebook.com/{{p.id}}/picture?type=square" /> {{p.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <div *ngIf="page">
+              <div class="divider"></div>
+              <div class="fb-page-d">
+                <img src="https://graph.facebook.com/{{page.id}}/picture?width=100" />
+                <div>
+                  <h4>{{page.name}}</h4>
+                  <a href="#" mat-raised-button class="btn btn-primary" onclick="return false" (click)="subscribe()">
+                    Subscribe for notifications
+                  </a>
+                </div>
+              </div>
+              <div class="divider"></div>
+              <p>You are about to subscribe '{{page.name}}' page to Koraki widget. It will create notifications upon positive
+                ratings (4 or 5 starts) made on your page and daily or hourly updates of increase of like count.</p>
+            </div>
+
+          </div>
+
+          <div *ngIf="!fbLoggedIn">
+           
+            <p>
+              This integration can generate notifications on your Koraki widget. 
+              It will create notifications upon positive ratings (4 or 5 starts) made on your page and daily or hourly updates of increase
+              of like count.
+            </p>
+
+            <p>
+              First you need to allow Koraki to read Facebook pages updates. 
+              We will not publish any content on your pages.
+            </p>
+            <div class="divider"></div>
+
+            <a href="#" mat-raised-button class="btn btn-facebook" onclick="return false" (click)="login()">
+                <i class="fa fa-facebook"></i> Connect
+              </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

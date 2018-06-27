@@ -86,16 +86,27 @@
 
 
               <div class="row">
-                <div class="col-md-6" *ngFor="let app of [{}, {}]">
+                <div class="col-md-6">
                   <div class="card card-chart">
                     <div class="card-body">
                       <h3 class="card-title">OpenCart 2.x</h3>
                       <p>Module contains notification widget. This module can be installed from OpenCart admin panel</p>
                       <p>This integration can Read and Write notifications</p>
-                      <a mat-raised-button class="btn btn-twitter" routerLink="/applications/view/{{app.id}}">Download</a>
+                      <a mat-raised-button class="btn btn-twitter" routerLink="/applications/view/{{application.id}}">Download</a>
                     </div>
                   </div>
                 </div>
+
+                <div class="col-md-6">
+                    <div class="card card-chart">
+                      <div class="card-body">
+                        <h3 class="card-title">Facebook Page</h3>
+                        <p>Module contains notification widget. This module can be installed from OpenCart admin panel</p>
+                        <p>This integration can Read and Write notifications</p>
+                        <a mat-raised-button class="btn btn-twitter" routerLink="/integrations/facebook/{{application.id}}">Integrate</a>
+                      </div>
+                    </div>
+                  </div>
               </div>
             </div>
             <div class="tab-pane" id="link3">

@@ -39,8 +39,8 @@ export class ViewApplicationComponent implements OnInit {
     private route: ActivatedRoute,
     private appservice: ApplicationsService,
     private loadingService: LoadingServiceService,
-    public router: Router,
-    public notify: NotificationService
+    private router: Router,
+    private notify: NotificationService
   ) { }
 
   ngOnInit() {

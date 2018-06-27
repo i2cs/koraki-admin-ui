@@ -5,6 +5,7 @@ import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { AuthGuardService as AuthGurad } from './services/auth-gurads.service';
 import { NoAuthGuardService as NoAuthGurad } from './services/auth-gurads.service';
 import { CallbackComponent } from './authenticate/callback/callback.component';
+import { IntegrationsModule } from './integrations/integrations.module';
 
 export const AppRoutes: Routes = [
   {
@@ -21,6 +22,9 @@ export const AppRoutes: Routes = [
     }, {
       path: 'applications',
       loadChildren: './applications/applications.module#ApplicationsModule'
+    }, {
+      path: 'integrations',
+      loadChildren: './integrations/integrations.module#IntegrationsModule'
     }
     ]
   }, {
