@@ -26,6 +26,7 @@ export class ApplicationsComponent implements OnInit, AfterViewInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.loadingService.loading$.subscribe(a => {this.loading = a;});
     if(this.cache.store.has("applications")){
       this.applications = <Array<ApplicationViewDataModel>>(this.cache.store.get("applications"));
     }
@@ -40,11 +41,9 @@ export class ApplicationsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.appservice.getAllApplications().subscribe(a => {
       this.applications = a.items;
       this.loadingService.loading(false);
-      this.loading = false;
       this.cache.store.set("applications", this.applications);
     }, e => {
       this.loadingService.loading(false);
-      this.loading = false;
       this.notify.error("Error loading applications");
     });
   }

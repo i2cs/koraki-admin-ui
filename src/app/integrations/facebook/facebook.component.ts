@@ -99,17 +99,17 @@ export class FacebookComponent implements OnInit {
         };
         this.fbService.subscribe(subscribeRequest).subscribe(b => {
           this.loadingService.loading(false);
-          this.notify.success("Successfully subscribed " + this.application.applicationName + " to Koraki");
+          this.notify.success("Successfully subscribed " + this.page.name + " to Koraki");
         }, e => {
           this.loadingService.loading(false);
-          this.notify.error("Error occured while subscribing " + this.application.applicationName + " to Koraki<br/>" + e.error.message);
+          this.notify.error("Error occured while subscribing " + this.page.name + " to Koraki<br/>" + e.error.message);
         })
       }else{
         this.loadingService.loading(false);
       }
     }, e => {
       this.loadingService.loading(false);
-      this.notify.error("Permission error occured while subscribing " + this.application.applicationName + " from Facebook");
+      this.notify.error("Permission error occured while subscribing " + this.page.name + " from Facebook");
     });
   }
 

@@ -18,7 +18,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4" *ngFor="let app of applications" style="">
+            <div class="col-md-4" *ngFor="let app of applications">
                 <div class="card card-chart" [ngClass]="{'deactivated-card' : app.status!='Active'}">
 
                     <div class="card-header card-header-{{app.activeNotificationsCount>0?'success':'rose'}} card-header-icon" [ngClass]="{'card-header-default' : app.status!='Active'}">

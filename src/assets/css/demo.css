@@ -68,3 +68,54 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', end
 .more-x2-top-padding{
     padding-top: 50px;
 }
+
+.loading::before { 
+    content: "Loading";
+    content: "Loading";
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    width: 100%;
+}
+
+.loading{
+    display: table;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    background: linear-gradient(270deg, #ffffff, #f2f2f2);
+    background-size: 400% 400%;
+    -webkit-animation: loading-bg 14s ease infinite;
+    -moz-animation: loading-bg 14s ease infinite;
+    -o-animation: loading-bg 14s ease infinite;
+    animation: loading-bg 14s ease infinite;
+}
+
+.loading *{
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+}
+
+@-webkit-keyframes loading-bg {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes loading-bg {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-o-keyframes loading-bg {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes loading-bg { 
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}

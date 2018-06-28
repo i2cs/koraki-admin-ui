@@ -27,6 +27,7 @@ class _Array<T> extends Array<T> {
 
 export class ViewApplicationComponent implements OnInit {
   
+  loading: boolean;
   hide: boolean;
   application: ApplicationViewDataModel = <ApplicationViewDataModel>{};
   script: string;
@@ -44,6 +45,7 @@ export class ViewApplicationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loadingService.loading$.subscribe(a => {this.loading = a;});
     this.hide = true;
     this.route.params.subscribe(params => {
       if (params['id']) {
@@ -52,7 +54,7 @@ export class ViewApplicationComponent implements OnInit {
           this.loadingService.loading(false);
           this.application = a;
           this.status = a.status == "Active";
-          this.script = "<script>window.sparkleSettings = { app_id: \"" + a.clientId + "\", analytics_id: \"" + a.analyticsId + "\" }; !function(){function t(){var t=a.createElement(\"script\"); t.type=\"text/javascript\", t.async=!0,t.src=\"\/\/api.koraki.io//widget/v1.0/js\"; var e=a.getElementsByTagName(\"script\")[0];e.parentNode.insertBefore(t,e)} var e=window,a=document;e.attachEvent?e.attachEvent(\"onload\",t):e.addEventListener(\"load\",t,!1)}();</script>"
+          this.script = "<script>window.sparkleSettings = { app_id: \"" + a.clientId + "\" }; !function(){function t(){var t=a.createElement(\"script\"); t.type=\"text/javascript\", t.async=!0,t.src=\"\/\/api.koraki.io//widget/v1.0/js\"; var e=a.getElementsByTagName(\"script\")[0];e.parentNode.insertBefore(t,e)} var e=window,a=document;e.attachEvent?e.attachEvent(\"onload\",t):e.addEventListener(\"load\",t,!1)}();</script>"
         }, e => {
           this.loadingService.loading(false);
         });
