@@ -61,7 +61,7 @@
 
           <div *ngIf="integrations['mailchimp']">
               <p>
-                MailChimp is connected to <a [href]="convertUrl(configurations['mc_dc_url']) + '/lists/dashboard/overview?id=' + configurations['mc_web_id']" target="_blank">{{configurations['mc_web_id']}}</a>
+                Koraki is connected to MailChimp list <a [href]="convertUrl(configurations['mc_dc_url']) + '/lists/dashboard/overview?id=' + configurations['mc_web_id']" target="_blank">{{configurations['mc_web_id']}}</a>
               </p>
               <div class="divider"></div>
   

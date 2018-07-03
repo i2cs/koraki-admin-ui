@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { environment } from 'environments/environment';
 
 @Component({
     selector: 'app-footer-cmp',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
 })
 
 export class FooterComponent {
-    test: Date = new Date();
+    date: Date = new Date();
+    version: string = environment.version;
 }
