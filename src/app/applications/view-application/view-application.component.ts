@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApplicationsService, ApplicationViewDataModel, ApplicationUpdateDataModel } from 'koraki-angular-client';
+import { ApplicationsService, ApplicationViewDataModel, ApplicationUpdateDataModel, ApplicationIntegrationViewModel } from 'koraki-angular-client';
 import { LoadingServiceService } from '../../services/loading-service.service';
 import { NotificationService } from '../../services/notification.service';
 
@@ -30,11 +30,15 @@ export class ViewApplicationComponent implements OnInit {
   loading: boolean;
   hide: boolean;
   application: ApplicationViewDataModel = <ApplicationViewDataModel>{};
+  integrations: Map<string, ApplicationIntegrationViewModel> = new Map<string, ApplicationIntegrationViewModel>();
   script: string;
   status: boolean;
   mobile: boolean;
   updatingSettings: boolean;
+  allIntegrations: any[] = Array();
+  allIntegrationsOriginal: any[] = Array();
   possibleCounts: number[] = _Array.range(8, 100, 1);
+  filter: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -45,6 +49,35 @@ export class ViewApplicationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.allIntegrations.push({
+      code: "opencart",
+      title: "OpenCart 2.x",
+      description: "Module contains notification widget. This module can be installed from OpenCart admin panel",
+      capable: "This integration can <b>Read</b> and <b>Write</b> notifications",
+      buttonTitle: "Download",
+      ecommerce: true
+    });
+
+    this.allIntegrations.push({
+      code: "facebook",
+      title: "Facebook Page",
+      description: "Module contains notification widget. This module can be installed from OpenCart admin panel",
+      capable: "This integration can <b>Write</b> notifications",
+      buttonTitle: "Integrate",
+      ecommerce: false
+    });
+
+    this.allIntegrations.push({
+      code: "mailchimp",
+      title: "MailChimp Integration",
+      description: "Module contains notification widget. This module can be installed from OpenCart admin panel",
+      capable: "This integration can <b>Write</b> notifications",
+      buttonTitle: "Integrate",
+      ecommerce: false
+    });
+
+    this.allIntegrationsOriginal = this.allIntegrations;
+
     this.loadingService.loading$.subscribe(a => {this.loading = a;});
     this.hide = true;
     this.route.params.subscribe(params => {
@@ -59,6 +92,12 @@ export class ViewApplicationComponent implements OnInit {
           this.loadingService.loading(false);
         });
 
+        this.appservice.getApplicationIntegrationsById(params['id']).subscribe(a => {
+          a.forEach(value => {
+            this.integrations[value.code] = value;
+          });
+        });
+
         this.route.queryParams.subscribe(query => {
           if (query['new']) {
             this.notify.success("Application created!");
@@ -66,6 +105,11 @@ export class ViewApplicationComponent implements OnInit {
         });
       }
     });
+  }
+
+  filterList(){
+    var text = this.filter.toLowerCase();
+    this.allIntegrations = this.allIntegrationsOriginal.filter(a => a['title'].toLowerCase().indexOf(text) !== -1);
   }
 
   updateApplicationStatus() {

@@ -99,6 +99,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', end
     margin: 0;
 }
 
+.integration-image{
+    height: 100px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 @-webkit-keyframes loading-bg {
     0%{background-position:0% 50%}
     50%{background-position:100% 50%}

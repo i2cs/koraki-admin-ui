@@ -6,7 +6,7 @@
 export const environment = {
   production: false,
   apiBaseUrl: "http://localhost:5000",
-  baseUrl: "http://localhost:4200",
+  baseUrl: "http://127.0.0.1:4200",
   analytics: "http://localhost:8888/koraki-piwik-analytics",
   auth: {
     clientID: 'gn0sF3vg8ziAWNS3EzdHIYR26x5564Vn',

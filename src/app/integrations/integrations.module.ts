@@ -6,6 +6,7 @@ import { IntegrationsRoutes } from './integrations.routing';
 import { MainComponent } from './main/main.component';
 import { MaterialModule } from '../app.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MailchimpComponent } from './mailchimp/mailchimp.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     MaterialModule
   ],
-  declarations: [FacebookComponent, MainComponent]
+  declarations: [FacebookComponent, MainComponent, MailchimpComponent]
 })
 export class IntegrationsModule { }

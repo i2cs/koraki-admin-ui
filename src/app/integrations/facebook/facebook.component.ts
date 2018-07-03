@@ -33,7 +33,6 @@ export class FacebookComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
     if (this.route.snapshot.params['id']) {
       this.appId = this.route.snapshot.params['id'];
     } else {
@@ -100,6 +99,7 @@ export class FacebookComponent implements OnInit {
         this.fbService.subscribe(subscribeRequest).subscribe(b => {
           this.loadingService.loading(false);
           this.notify.success("Successfully subscribed " + this.page.name + " to Koraki");
+          this.router.navigate(['/applications/' + this.appId]);
         }, e => {
           this.loadingService.loading(false);
           this.notify.error("Error occured while subscribing " + this.page.name + " to Koraki<br/>" + e.error.message);
