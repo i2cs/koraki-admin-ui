@@ -3,8 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { LoadingServiceService } from '../../services/loading-service.service';
 import { environment } from 'environments/environment';
-import { ApplicationsService, ApplicationViewDataModel, FacebookService, FacebookPageSubscriptionDataCreateModel } from 'koraki-angular-client';
+import { ApplicationsService, ApplicationViewDataModel, FacebookService, FacebookPageSubscriptionDataCreateModel, ApplicationIntegrationViewModel } from 'koraki-angular-client';
 import { NotificationService } from '../../services/notification.service';
+import { MemoryDataHolderServiceService } from '../../services/memory-data-holder-service.service';
 
 @Component({
   selector: 'app-facebook',
@@ -21,6 +22,8 @@ export class FacebookComponent implements OnInit {
   pages: any[];
   application: ApplicationViewDataModel = <ApplicationViewDataModel>{};
   status: boolean;
+  integrations: Map<string, ApplicationIntegrationViewModel> = new Map<string, ApplicationIntegrationViewModel>();
+  configurations: any = {};
 
   constructor(
     private route: ActivatedRoute,
@@ -30,11 +33,35 @@ export class FacebookComponent implements OnInit {
     private notify: NotificationService,
     private loadingService: LoadingServiceService,
     private router: Router,
+    private data: MemoryDataHolderServiceService
   ) { }
 
   ngOnInit() {
     if (this.route.snapshot.params['id']) {
       this.appId = this.route.snapshot.params['id'];
+
+      this.integrations = <Map<string, ApplicationIntegrationViewModel>>this.data.store.get("integrations");
+      if (!this.integrations) {
+        this.integrations = new Map<string, ApplicationIntegrationViewModel>();
+        let id = Number(this.appId);
+        this.appservice.getApplicationIntegrationsById(id).subscribe(a => {
+          for (var i in a) {
+            this.integrations[a[i].code] = a[i];
+          }
+
+          this.data.store.set("integrations", this.integrations);
+          if (this.integrations['facebook'] && this.integrations['facebook'].configurations) {
+            this.integrations['facebook'].configurations.forEach(a => {
+              this.configurations[a.key] = a.value;
+            })
+          }
+        });
+      } else if (this.integrations && this.integrations['facebook'] && this.integrations['facebook'].configurations) {
+        this.integrations['facebook'].configurations.forEach(a => {
+          this.configurations[a.key] = a.value;
+        })
+      }
+
     } else {
       let fragment: string = this.route.snapshot.fragment;
       if (fragment != null) {
@@ -92,8 +119,8 @@ export class FacebookComponent implements OnInit {
     this.client.post(this.fbGraphUrl + this.page.id + "/subscribed_apps", { access_token: this.page.access_token }).subscribe(a => {
       if (a['success']) {
         //send to server for registration
-        var subscribeRequest : FacebookPageSubscriptionDataCreateModel = {
-          pageId : this.page.id,
+        var subscribeRequest: FacebookPageSubscriptionDataCreateModel = {
+          pageId: this.page.id,
           applicationId: this.application.id
         };
         this.fbService.subscribe(subscribeRequest).subscribe(b => {
@@ -104,7 +131,7 @@ export class FacebookComponent implements OnInit {
           this.loadingService.loading(false);
           this.notify.error("Error occured while subscribing " + this.page.name + " to Koraki<br/>" + e.error.message);
         })
-      }else{
+      } else {
         this.loadingService.loading(false);
       }
     }, e => {

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApplicationsService, ApplicationViewDataModel, ApplicationUpdateDataModel, ApplicationIntegrationViewModel } from 'koraki-angular-client';
 import { LoadingServiceService } from '../../services/loading-service.service';
 import { NotificationService } from '../../services/notification.service';
+import { MemoryDataHolderServiceService } from '../../services/memory-data-holder-service.service';
 
 declare const $: any;
 
@@ -12,10 +13,10 @@ interface _Iterable extends Iterable<{}> {
 
 class _Array<T> extends Array<T> {
   static range(from: number, to: number, step: number): number[] {
-      return Array.from(
-          (<_Iterable>{ length: Math.floor((to - from) / step) + 1 }),
-          (v, k) => from + k * step
-      );
+    return Array.from(
+      (<_Iterable>{ length: Math.floor((to - from) / step) + 1 }),
+      (v, k) => from + k * step
+    );
   }
 }
 
@@ -25,8 +26,8 @@ class _Array<T> extends Array<T> {
   styleUrls: ['./view-application.component.scss']
 })
 
-export class ViewApplicationComponent implements OnInit {
-  
+export class ViewApplicationComponent implements OnInit, AfterViewInit {
+
   loading: boolean;
   hide: boolean;
   application: ApplicationViewDataModel = <ApplicationViewDataModel>{};
@@ -45,8 +46,27 @@ export class ViewApplicationComponent implements OnInit {
     private appservice: ApplicationsService,
     private loadingService: LoadingServiceService,
     private router: Router,
-    private notify: NotificationService
+    private notify: NotificationService,
+    private data: MemoryDataHolderServiceService
   ) { }
+
+  ngAfterViewInit(){
+    this.route.params.subscribe(params => {
+      if (params['id']) {
+        this.integrations = <Map<string, ApplicationIntegrationViewModel>>this.data.store.get("integrations");
+        if (!this.integrations) {
+          this.integrations = new Map<string, ApplicationIntegrationViewModel>();
+          this.appservice.getApplicationIntegrationsById(params['id']).subscribe(a => {
+            for (var i in a) {
+              this.integrations[a[i].code] = a[i];
+            }
+
+            this.data.store.set("integrations", this.integrations);
+          });
+        }
+      }
+    });
+  }
 
   ngOnInit() {
     this.allIntegrations.push({
@@ -78,7 +98,7 @@ export class ViewApplicationComponent implements OnInit {
 
     this.allIntegrationsOriginal = this.allIntegrations;
 
-    this.loadingService.loading$.subscribe(a => {this.loading = a;});
+    this.loadingService.loading$.subscribe(a => { this.loading = a; });
     this.hide = true;
     this.route.params.subscribe(params => {
       if (params['id']) {
@@ -92,12 +112,6 @@ export class ViewApplicationComponent implements OnInit {
           this.loadingService.loading(false);
         });
 
-        this.appservice.getApplicationIntegrationsById(params['id']).subscribe(a => {
-          a.forEach(value => {
-            this.integrations[value.code] = value;
-          });
-        });
-
         this.route.queryParams.subscribe(query => {
           if (query['new']) {
             this.notify.success("Application created!");
@@ -107,7 +121,7 @@ export class ViewApplicationComponent implements OnInit {
     });
   }
 
-  filterList(){
+  filterList() {
     var text = this.filter.toLowerCase();
     this.allIntegrations = this.allIntegrationsOriginal.filter(a => a['title'].toLowerCase().indexOf(text) !== -1);
   }

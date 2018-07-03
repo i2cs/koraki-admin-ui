@@ -17,5 +17,10 @@ export const environment = {
     namespace: 'http://koraki.io',
     autoRenewToken: true,
     dynamicRedirect: true
+  },
+  integrations: {
+    mailchimp: {
+      clientId: "708985200989"
+    }
   }
 };
