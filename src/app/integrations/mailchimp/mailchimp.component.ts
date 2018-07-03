@@ -85,7 +85,7 @@ export class MailchimpComponent implements OnInit {
   login() {
     var redirect = environment.baseUrl + "/integrations/mailchimp/" + this.appId;
     //redirect = redirect.replace("http://", "https://");
-    window.location.href = this.mcUrl + "?response_type=code&client_id=708985200989&redirect_uri=" + redirect;
+    window.location.href = this.mcUrl + "?response_type=code&client_id=592621747124&redirect_uri=" + redirect;
   }
 
   subscribe() {
