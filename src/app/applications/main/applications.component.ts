@@ -37,13 +37,10 @@ export class ApplicationsComponent implements OnInit, AfterViewInit, OnDestroy {
   load(): any {
     if (this.loading) return;
     this.loading = true;
-    //this.loadingService.loading(true);
     this.appservice.getAllApplications().subscribe(a => {
       this.applications = a.items;
-      //this.loadingService.loading(false);
       this.cache.store.set("applications", this.applications);
     }, e => {
-      //this.loadingService.loading(false);
       this.notify.error("Error loading applications");
     });
   }

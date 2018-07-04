@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { APP_BASE_HREF } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import {
@@ -10,9 +9,9 @@ import {
   MatButtonToggleModule,
   MatCardModule,
   MatCheckboxModule,
-  MatChipsModule,
+  //MatChipsModule,
   MatDialogModule,
-  MatExpansionModule,
+  //MatExpansionModule,
   MatGridListModule,
   MatIconModule,
   MatInputModule,
@@ -25,16 +24,16 @@ import {
   MatRadioModule,
   MatRippleModule,
   MatSelectModule,
-  MatSidenavModule,
-  MatSliderModule,
+  //MatSidenavModule,
+  //MatSliderModule,
   MatSlideToggleModule,
-  MatSnackBarModule,
-  MatSortModule,
-  MatTableModule,
+  //MatSnackBarModule,
+  //MatSortModule,
+  //MatTableModule,
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule,
-  MatStepperModule,
+  //MatStepperModule,
 } from '@angular/material';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 
@@ -66,11 +65,11 @@ import { RequestInterceptor } from './interceptors/http.interceptor';
     MatButtonToggleModule,
     MatCardModule,
     MatCheckboxModule,
-    MatChipsModule,
-    MatStepperModule,
+    //MatChipsModule,
+    //MatStepperModule,
     MatDatepickerModule,
     MatDialogModule,
-    MatExpansionModule,
+    //MatExpansionModule,
     MatGridListModule,
     MatIconModule,
     MatInputModule,
@@ -83,12 +82,12 @@ import { RequestInterceptor } from './interceptors/http.interceptor';
     MatRadioModule,
     MatRippleModule,
     MatSelectModule,
-    MatSidenavModule,
-    MatSliderModule,
+    //MatSidenavModule,
+    //MatSliderModule,
     MatSlideToggleModule,
-    MatSnackBarModule,
-    MatSortModule,
-    MatTableModule,
+    //MatSnackBarModule,
+    //MatSortModule,
+    //MatTableModule,
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule

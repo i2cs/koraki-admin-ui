@@ -90,13 +90,10 @@ export class FacebookComponent implements OnInit {
   }
 
   private loadApplication(id: any) {
-    //this.loadingService.loading(true);
     this.appservice.getApplicationById(id).subscribe(a => {
-      //this.loadingService.loading(false);
       this.application = a;
       this.status = a.status == "Active";
     }, e => {
-      //this.loadingService.loading(false);
       this.router.navigate(['/applications']);
     });
   }
@@ -108,17 +105,12 @@ export class FacebookComponent implements OnInit {
   }
 
   loadPages() {
-    //this.loadingService.loading(true);
     this.client.get(this.fbGraphUrl + "me/accounts?access_token=" + this.accessToken).subscribe(a => {
-      this.pages = a['data'];
-      //this.loadingService.loading(false);
-    }, e => {
-      //this.loadingService.loading(false);
+      this.pages = a['data']; 
     });
   }
 
   subscribe() {
-    //this.loadingService.loading(true);
     this.client.post(this.fbGraphUrl + this.page.id + "/subscribed_apps", { access_token: this.page.access_token }).subscribe(a => {
       if (a['success']) {
         //send to server for registration
@@ -127,18 +119,13 @@ export class FacebookComponent implements OnInit {
           applicationId: this.application.id
         };
         this.fbService.subscribe(subscribeRequest).subscribe(b => {
-          //this.loadingService.loading(false);
           this.notify.success("Successfully subscribed " + this.page.name + " to Koraki");
           this.router.navigate(['/applications/' + this.appId]);
         }, e => {
-          //this.loadingService.loading(false);
           this.notify.error("Error occured while subscribing " + this.page.name + " to Koraki<br/>" + e.error.message);
         })
-      } else {
-        //this.loadingService.loading(false);
       }
     }, e => {
-      //this.loadingService.loading(false);
       this.notify.error("Permission error occured while subscribing " + this.page.name + " from Facebook");
     });
   }

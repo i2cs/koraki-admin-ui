@@ -41,8 +41,8 @@
 @import "core/badges";
 @import "dashboard/alerts";
 @import "core/pagination";
-@import "core/pills";
-@import "core/info-areas";
+//@import "core/pills";
+//@import "core/info-areas";
 @import "core/type";
 @import "core/tabs";
 @import "core/footers";
@@ -51,36 +51,36 @@
 @import "core/modal";
 @import "core/dropdown";
 @import "core/headers";
-@import "core/drawer";
+//@import "core/drawer";
 @import "core/progress";
 @import "core/togglebutton";
 @import "core/ripples";
 @import "dashboard/rtl";
 @import "dashboard/sidebar-and-main-panel";
-@import "dashboard/timeline";
+//@import "dashboard/timeline";
 @import "dashboard/fixed-plugin";
 @import "dashboard/tables";
 @import "dashboard/misc";
-@import "dashboard/pages";
+//@import "dashboard/pages";
 
  // Components for PRO
  @import "dashboard/social-buttons";
- @import "dashboard/fileupload";
+ //@import "dashboard/fileupload";
 
  //plugin css
- @import "plugins/plugin-nouislider";
+ //@import "plugins/plugin-nouislider";
  @import "plugins/animate";
- @import "plugins/sweetalert2";
- @import "plugins/datatables.net";
- @import "plugins/jquery.jvectormap";
+ //@import "plugins/sweetalert2";
+ //@import "plugins/datatables.net";
+ //@import "plugins/jquery.jvectormap";
  @import "plugins/plugin-datetime-picker";
- @import "plugins/fullcalendar";
- @import "plugins/wizard-card";
- @import "plugins/chartist";
- @import "~chartist/dist/scss/chartist";
+ //@import "plugins/fullcalendar";
+ //@import "plugins/wizard-card";
+ //@import "plugins/chartist";
+ //@import "~chartist/dist/scss/chartist";
  @import "plugins/select-bootstrap";
- @import "plugins/perfect-scrollbar";
- @import "plugins/plugin-tagsinput";
+ //@import "plugins/perfect-scrollbar";
+ //@import "plugins/plugin-tagsinput";
 
 
 

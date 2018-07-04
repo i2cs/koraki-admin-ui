@@ -39,7 +39,6 @@ export class MailchimpComponent implements OnInit {
 
   ngOnInit() {
     this.loadingService.loading$.subscribe(a => { this.loading = a; });
-
     if (this.route.snapshot.params['id']) {
       this.appId = this.route.snapshot.params['id'];
     }
@@ -68,12 +67,9 @@ export class MailchimpComponent implements OnInit {
       }
 
       this.loadApplication(this.appId).subscribe(a => {
-        ////this.loadingService.loading(true);
         let params: Params = this.route.snapshot.queryParams;
         if (params != null && params['code']) {
           this.loadLists(params['code']);
-        } else {
-          ////this.loadingService.loading(false);
         }
       });
     } else {
@@ -82,13 +78,11 @@ export class MailchimpComponent implements OnInit {
   }
 
   private loadApplication(id: any): Observable<ApplicationViewDataModel> {
-    ////this.loadingService.loading(true);
     var obs = this.appservice.getApplicationById(id);
     obs.subscribe(a => {
       this.application = a;
       this.status = a.status == "Active";
     }, e => {
-      ////this.loadingService.loading(false);
       this.router.navigate(['/applications']);
     });
 
@@ -96,15 +90,13 @@ export class MailchimpComponent implements OnInit {
   }
 
   loadLists(code) {
-    ////this.loadingService.loading(true);
     this.mcService.lists(code, environment.baseUrl + "/integrations/mailchimp/" + this.appId).subscribe(a => {
-      ////this.loadingService.loading(false);
       this.lists = a.lists;
       this.accessToken = a.accessToken,
         this.mcDataCenter = a.url,
         this.mcLoggedIn = true;
     }, e => {
-      ////this.loadingService.loading(false);
+      
     })
   }
 
@@ -116,7 +108,6 @@ export class MailchimpComponent implements OnInit {
   }
 
   subscribe() {
-    ////this.loadingService.loading(true);
     //send to server for registration
     var subscribeRequest: MailChimpSubscriptionDataCreateModel = {
       listId: this.list.id,
@@ -126,26 +117,21 @@ export class MailchimpComponent implements OnInit {
       webId: this.list['web_id']
     };
     this.mcService.subscribe(subscribeRequest).subscribe(b => {
-      ////this.loadingService.loading(false);
       this.data.store.set("integrations", null);
       this.notify.success("Successfully subscribed " + this.list.name + " to Koraki");
       this.router.navigate(['/applications/view/' + this.appId]);
     }, e => {
-      ////this.loadingService.loading(false);
       this.notify.error("Error occured while subscribing " + this.list.name + " to Koraki");
     })
   }
 
   disconnect() {
-    ////this.loadingService.loading(true);
     let id = Number(this.appId);
     this.mcService.unsubscribe(id).subscribe(a => {
-      ////this.loadingService.loading(false);
       this.data.store.set("integrations", null);
       this.notify.success("Successfully unsubscribed from MailChimp list");
       this.router.navigate(['/applications/view/' + this.appId]);
     }, e => {
-      ////this.loadingService.loading(false);
       this.notify.error("Unsubscribe was not success");
     })
   }

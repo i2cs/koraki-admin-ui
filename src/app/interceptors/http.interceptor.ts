@@ -20,7 +20,7 @@ export class RequestInterceptor implements HttpInterceptor {
       private error: ErrorService,
       private loadingService: LoadingServiceService
   ) {}
- 
+
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.loadingService.loading(true);
 
