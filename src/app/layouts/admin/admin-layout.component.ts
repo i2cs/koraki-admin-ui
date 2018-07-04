@@ -7,6 +7,7 @@ import 'rxjs/add/operator/filter';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import PerfectScrollbar from 'perfect-scrollbar';
 import { LoadingServiceService } from '../../services/loading-service.service';
+import { NotificationService } from '../../services/notification.service';
 
 declare const $: any;
 
@@ -22,23 +23,36 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit {
     url: string;
     location: Location;
     loading: boolean;
+    slow: boolean;
 
     @ViewChild('sidebar') sidebar: any;
     @ViewChild(NavbarComponent) navbar: NavbarComponent;
     constructor(private router: Router,
         location: Location,
         loadingService: LoadingServiceService,
-        private cdRef: ChangeDetectorRef) {
+        private cdRef: ChangeDetectorRef,
+        notification: NotificationService
+    ) {
         this.location = location;
 
         loadingService.loading$.subscribe(
             a => {
                 this.loading = a;
-            });
+            }
+        );
+
+        loadingService.slow$.subscribe(
+            a => {
+                if(!this.slow && a){
+                    notification.warning("Slow network connection detected. We will keep trying!");
+                }
+                this.slow = a;
+            }
+        );
     }
-    
-    ngAfterViewChecked(){
-      this.cdRef.detectChanges();
+
+    ngAfterViewChecked() {
+        this.cdRef.detectChanges();
     }
 
     ngOnInit() {

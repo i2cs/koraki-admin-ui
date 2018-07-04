@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { AnalyticsService } from 'koraki-angular-client';
+import { ErrorService } from '../../../services/error.service';
 
 @Component({
   selector: 'app-app-count',

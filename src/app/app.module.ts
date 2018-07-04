@@ -47,7 +47,7 @@ import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 
 import { AppRoutes } from './app.routing';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiModule, Configuration } from 'koraki-angular-client';
 import { AuthService } from './services/auth.service';
 import { AngularWebStorageModule } from 'angular-web-storage';
@@ -57,6 +57,7 @@ import { LoadingServiceService } from './services/loading-service.service';
 import { MomentModule } from 'ngx-moment';
 import { MemoryDataHolderServiceService } from './services/memory-data-holder-service.service';
 import { NotificationService } from './services/notification.service';
+import { RequestInterceptor } from './interceptors/http.interceptor';
 
 @NgModule({
   exports: [
@@ -123,6 +124,11 @@ export class MaterialModule { }
     useFactory: (authSvc: AuthService) => authSvc.getAuthConfig(),
     deps: [AuthService],
     multi: false
+  },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: RequestInterceptor,
+    multi: true,
   },
     AuthGuardService,
     NoAuthGuardService,

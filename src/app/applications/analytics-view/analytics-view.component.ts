@@ -29,6 +29,11 @@ export class AnalyticsViewComponent implements OnInit {
     });
 
     this.widgets.push({
+      url : "/index.php?module=Widgetize&action=iframe&widget=1&moduleToWidgetize=UserCountry&actionToWidgetize=getCity&period=day&date=yesterday&disableLink=1&widget=1",
+      class : "col-md-6"
+    });
+
+    this.widgets.push({
       url : "/index.php?module=Widgetize&action=iframe&widget=1&moduleToWidgetize=UserCountryMap&actionToWidgetize=realtimeMap&period=day&date=yesterday&disableLink=1&widget=1",
       class : "col-md-12"
     });

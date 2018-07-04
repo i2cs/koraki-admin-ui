@@ -16,7 +16,7 @@
 
         </div>
         <mat-divider></mat-divider>
-        <div class="card-body">
+        <div class="card-body" [ngClass]="{'loading':loading}">
           <div *ngIf="fbLoggedIn">
             <mat-form-field>
               <mat-select placeholder="Select your Facebook page" [(ngModel)]="page">

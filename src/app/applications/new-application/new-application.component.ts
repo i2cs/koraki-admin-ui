@@ -45,10 +45,10 @@ export class NewApplicationComponent implements OnInit {
             return;
         }
 
-        this.loadingService.loading(true);
+        //this.loadingService.loading(true);
 
         this.appservice.createApplication(this.model).subscribe(a => {
-            this.loadingService.loading(false);
+            //this.loadingService.loading(false);
             if (!a.token) {
                 this.notify.error("Could not create the application");
             } else {
@@ -57,7 +57,7 @@ export class NewApplicationComponent implements OnInit {
                 this.router.navigate(['applications/view', this.appCreatedResponse.id], { queryParams: { new: true } });
             }
         }, e => {
-            this.loadingService.loading(false);
+            //this.loadingService.loading(false);
             this.notify.error("<b>" + e.error.message);
         });
     }
