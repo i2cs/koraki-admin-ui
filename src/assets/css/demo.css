@@ -130,3 +130,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', end
     50%{background-position:100% 50%}
     100%{background-position:0% 50%}
 }
+
+@media (max-width: 480px) {
+    .main-content {
+      padding-right: 5px!important;
+      padding-left: 5px!important;
+    }
+
+    .container-fluid {
+        padding-right: 0px!important;
+        padding-left: 0px!important;
+      }
+  }

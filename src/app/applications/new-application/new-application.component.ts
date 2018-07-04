@@ -51,7 +51,7 @@ export class NewApplicationComponent implements OnInit {
             } else {
                 this.appCreated = true;
                 this.appCreatedResponse = a;
-                this.router.navigate(['applications/view', this.appCreatedResponse.id], { queryParams: { new: true } });
+                this.router.navigate(['applications/view', this.appCreatedResponse.id], { fragment: "new=true" });
             }
         }, e => {
             this.notify.error("<b>" + e.error.message);

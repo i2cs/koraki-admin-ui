@@ -1,0 +1,27 @@
+<div class="main-content">
+  <div class="container-fluid">
+
+    <div class="col-md-8 mr-auto ml-auto">
+
+
+      <div class="card ">
+        <div class="card-header">
+          <h3 class="card-title">
+            Privy Integration
+          </h3>
+          <div class="text-center">
+            <img src="assets/img/integrations/privy.png" class="integration-image" />
+          </div>
+          <h5 class="card-description">Privy</h5>
+
+        </div>
+        <mat-divider></mat-divider>
+        <div class="card-body" [ngClass]="{'loading':loading}">
+
+          <p>{{webhook}}</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

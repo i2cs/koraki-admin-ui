@@ -82,7 +82,7 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
     this.allIntegrations.push({
       code: "facebook",
       title: "Facebook Page",
-      description: "Module contains notification widget. This module can be installed from OpenCart admin panel",
+      description: "You can connect your Facebook fanpage to generate notifications on new user like and new user review events.",
       capable: "This integration can <b>Write</b> notifications",
       buttonTitle: "Integrate",
       ecommerce: false
@@ -91,7 +91,16 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
     this.allIntegrations.push({
       code: "mailchimp",
       title: "MailChimp Integration",
-      description: "Module contains notification widget. This module can be installed from OpenCart admin panel",
+      description: "This integration can generate notifications when subscriber is added to one of your email lists of MailChimp.",
+      capable: "This integration can <b>Write</b> notifications",
+      buttonTitle: "Integrate",
+      ecommerce: false
+    });
+
+    this.allIntegrations.push({
+      code: "privy",
+      title: "Privy Webhooks",
+      description: "Generate notifications when someone subscribe for a campaign on Privy.",
       capable: "This integration can <b>Write</b> notifications",
       buttonTitle: "Integrate",
       ecommerce: false
@@ -109,9 +118,12 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
           this.script = "<script>window.sparkleSettings = { app_id: \"" + a.clientId + "\" }; !function(){function t(){var t=a.createElement(\"script\"); t.type=\"text/javascript\", t.async=!0,t.src=\"\/\/api.koraki.io//widget/v1.0/js\"; var e=a.getElementsByTagName(\"script\")[0];e.parentNode.insertBefore(t,e)} var e=window,a=document;e.attachEvent?e.attachEvent(\"onload\",t):e.addEventListener(\"load\",t,!1)}();</script>"
         });
 
-        this.route.queryParams.subscribe(query => {
-          if (query['new']) {
+        this.route.fragment.subscribe(query => {
+          if (this.getFragmentParameter(query, "new")) {
             this.notify.success("Application created!");
+            
+            //clear hash
+            window.location.hash = '';
           }
         });
       }
@@ -156,4 +168,13 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
     }
   }
 
+  private getFragmentParameter(fragment: string, param: string) {
+    var parts = fragment.split("&");
+    if (parts.length > 0) {
+      var access_token_parts = parts.filter(a => a.indexOf(param + "=") !== -1);
+      if (access_token_parts.length > 0) {
+        return access_token_parts[0].replace(param + "=", "");
+      }
+    }
+  }
 }
