@@ -14,7 +14,7 @@ export class LoadingServiceService {
 
   constructor(){
     setInterval(a => {
-      if(Date.now() - this._lastChange > 60000){
+      if(Date.now() - this._lastChange > 60000 && this._count > 0){
         this._count = 0;
         this._loading.next(false);
         console.log("60 seconds passed since last request. Probably offline");
