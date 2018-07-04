@@ -1,5 +1,5 @@
 <div class="row">
   <div [class]="a.class" *ngFor="let a of widgets">
-    <iframe width="100%" sandbox="allow-scripts allow-forms" height="350" [src]="addTokenAuthAndSiteId(a.url)" scrolling="no" frameborder="0" marginheight="0" marginwidth="0"></iframe>
+    <iframe width="100%" sandbox="allow-scripts allow-forms allow-same-origin allow-pointer-lock allow-popups" height="350" [src]="addTokenAuthAndSiteId(a.url)" scrolling="no" frameborder="0" marginheight="0" marginwidth="0"></iframe>
   </div>
 </div>
