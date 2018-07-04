@@ -16,13 +16,7 @@ export class AnalyticsViewComponent implements OnInit {
   @Input() analyticsid: string;
   @Input() analyticstoken: string;
 
-  constructor(private sanitizer: DomSanitizer) { }
-
-  ngOnInit() {
-    if(!this.analyticsid || !this.analyticstoken){
-      alert("error");
-    }
-
+  constructor(private sanitizer: DomSanitizer) { 
     this.widgets.push({
       url : "/index.php?module=Widgetize&action=iframe&widget=1&moduleToWidgetize=Live&actionToWidgetize=getSimpleLastVisitCount&period=day&date=yesterday&disableLink=1&widget=1",
       class : "col-md-6"
@@ -42,6 +36,12 @@ export class AnalyticsViewComponent implements OnInit {
       url : "/index.php?module=Widgetize&action=iframe&widget=1&moduleToWidgetize=Actions&actionToWidgetize=getPageTitles&period=day&date=yesterday&disableLink=1&widget=1",
       class : "col-md-12"
     });
+  }
+
+  ngOnInit() {
+    if(!this.analyticsid || !this.analyticstoken){
+      alert("error");
+    }
   }
 
   addTokenAuthAndSiteId(url: string){
