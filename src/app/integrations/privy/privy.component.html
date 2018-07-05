@@ -12,8 +12,8 @@
           <div class="text-center">
             <img src="assets/img/integrations/privy.png" class="integration-image" />
           </div>
-          <h5 class="card-description">Privy</h5>
-
+          <h5 class="card-description">This integrations lets you generate notifications from your Privy campaign related events. At the moment Koraki
+            can generate notifications when a lead signs up for a campaign.</h5>
         </div>
         <mat-divider></mat-divider>
         <div class="card-body" [ngClass]="{'loading':loading}">
@@ -24,6 +24,20 @@
             </mat-form-field>
           </p>
 
+          <div>
+            <h4>Instructions</h4>
+            Log in to your Privy account and go to
+            <b>Settings</b> >
+            <b>Integrations</b>. Select
+            <b>Webhooks</b> on the left side navigation, click
+            <b>Custom</b> then change the Method dropdown to "POST". Copy the above unique URL (don't share it with anyone)
+            and paste on "URL" field. Select
+            <b>Signups</b> checkbox from the Triggers and Save.
+
+            <div class="text-center">
+              <img src="https://raw.githubusercontent.com/i2cs/koraki-static/master/privy-tutorial.gif" />
+            </div>
+          </div>
         </div>
       </div>
     </div>

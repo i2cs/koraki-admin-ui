@@ -119,7 +119,7 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
         });
 
         this.route.fragment.subscribe(query => {
-          if (this.getFragmentParameter(query, "new")) {
+          if (query && this.getFragmentParameter(query, "new")) {
             this.notify.success("Application created!");
             
             //clear hash
