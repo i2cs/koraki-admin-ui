@@ -18,7 +18,11 @@
         <mat-divider></mat-divider>
         <div class="card-body" [ngClass]="{'loading':loading}">
 
-          <p>{{webhook}}</p>
+          <p>
+            <mat-form-field appearance="outline" hintLabel="Copy and Paste this URL on your Privy webhook" class="example-full-width">
+              <textarea readonly rows=3 matInput>{{webhook}}</textarea>
+            </mat-form-field>
+          </p>
 
         </div>
       </div>
