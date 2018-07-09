@@ -91,31 +91,30 @@
                   <input type="text" placeholder="Search for an integration: ex., OpenCart" [(ngModel)]="filter" (change)="filterList()" class="form-control form-control-lg"
                   />
                 </div>
-
                 <div class="col-md-6" *ngFor="let i of allIntegrations">
-                  <div class="card card-chart">
+                  <div class="card card-chart" [ngClass]="{'disabled-integration' : !i.ecommerce && !allowedIntegrations[i.code]}">
                     <div class="card-body">
                       <h3 class="card-title">{{i.title}}</h3>
                       <div class="integration-images">
                         <img [src]="'/assets/img/integrations/' + i.code + '.png'" />
-                        <div>
-                          +
-                        </div>
-                        <img src="/assets/img/koraki-logo-sq.png" />
                       </div>
                       <div class="pull-right app-notify-count" *ngIf="integrations[i.code]">
                         Integrated
                       </div>
                       <p [innerHTML]="i.description"></p>
                       <p [innerHTML]="i.capable"></p>
-                      <div *ngIf="!integrations[i.code]">
-                        <a mat-raised-button class="btn btn-twitter" routerLink="/integrations/{{i.code}}/{{application.id}}">{{i.buttonTitle}}</a>
-                      </div>
-                      <div *ngIf="integrations[i.code]">
-                        <div>You have successfully integrated this</div>
-
-                        <a mat-raised-button class="btn btn-warning" routerLink="/integrations/{{i.code}}/{{application.id}}">Manage</a>
-                      </div>
+                    </div>
+                    <div class="card-footer">
+                        <div *ngIf="!integrations[i.code]">
+                            <a mat-raised-button class="btn" routerLink="/subscription" *ngIf="!i.ecommerce && !allowedIntegrations[i.code]"><i class="material-icons text-danger">warning</i> Upgrade your Koraki plan to use this</a>
+                            <a mat-raised-button *ngIf="i.ecommerce || allowedIntegrations[i.code]" class="btn btn-twitter" routerLink="/integrations/{{i.code}}/{{application.id}}">{{i.buttonTitle}}</a>
+                          </div>
+                          <div *ngIf="integrations[i.code]">
+                            <div>You have successfully integrated this</div>
+    
+                            <a mat-raised-button class="btn" routerLink="/subscription" *ngIf="!i.ecommerce && !allowedIntegrations[i.code]"><i class="material-icons text-danger">warning</i> Upgrade your Koraki plan to use this</a>
+                            <a mat-raised-button *ngIf="i.ecommerce || allowedIntegrations[i.code]" class="btn btn-warning" routerLink="/integrations/{{i.code}}/{{application.id}}">Manage</a>
+                          </div>
                     </div>
                   </div>
                 </div>
@@ -137,7 +136,7 @@
                   </div>
                 </div>
 
-                <div class="divider"></div>
+                <!-- <div class="divider"></div>
 
                 <div class="col-md-12 mr-auto">
                   <legend>Display on mobile devices</legend>
@@ -148,7 +147,7 @@
                       {{mobile?"Display":"Don't display"}} Koraki widget on mobile devices
                     </label>
                   </div>
-                </div>
+                </div> -->
 
                 <div class="divider"></div>
 
@@ -173,7 +172,7 @@
                     class="example-full-width has-label">
 
                     <mat-select [disabled]="updatingSettings" [(ngModel)]="application.notificationMaximumDurationDays" (selectionChange)="updateApplicationSettings()">
-                      <mat-option *ngFor="let day of [2, 3, 5, 8, 13, 21, 34, 55]" [value]="day">
+                      <mat-option *ngFor="let day of possibleDays" [value]="day">
                         {{ day }}
                       </mat-option>
                     </mat-select>

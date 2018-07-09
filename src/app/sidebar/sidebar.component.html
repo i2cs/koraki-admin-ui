@@ -1,7 +1,6 @@
 <div class="logo">
     <a href="https://app.koraki.io" class="simple-text logo-normal logo-koraki">
-        <img src="./assets/img/koraki-logo.png" />
-        Beta
+        <img src="./assets/img/koraki-logo.png" /> Beta
     </a>
 </div>
 
@@ -78,6 +77,12 @@
                     <a class="dropdown-item" href="#">Another One</a>
                   </div>
                 </li> -->
+            <li class="nav-item hl" *ngIf="trialEndsIn > 0">
+                <a routerLink="/subscription" class="nav-link">Trial ends in {{trialEndsIn}} Days</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/subscription" class="nav-link">{{plan}}</a>
+            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="material-icons">person</i>

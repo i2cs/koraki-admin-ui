@@ -25,6 +25,9 @@ export const AppRoutes: Routes = [
     }, {
       path: 'integrations',
       loadChildren: './integrations/integrations.module#IntegrationsModule'
+    }, {
+      path: 'subscription',
+      loadChildren: './subscription/subscription.module#SubscriptionModule'
     }
     ]
   }, {

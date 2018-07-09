@@ -8,6 +8,7 @@ import { MaterialModule } from '../app.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MailchimpComponent } from './mailchimp/mailchimp.component';
 import { PrivyComponent } from './privy/privy.component';
+import { OpencartComponent } from './opencart/opencart.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { PrivyComponent } from './privy/privy.component';
     ReactiveFormsModule,
     MaterialModule
   ],
-  declarations: [FacebookComponent, MainComponent, MailchimpComponent, PrivyComponent]
+  declarations: [FacebookComponent, MainComponent, MailchimpComponent, PrivyComponent, OpencartComponent]
 })
 export class IntegrationsModule { }

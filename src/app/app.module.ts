@@ -47,7 +47,7 @@ import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 
 import { AppRoutes } from './app.routing';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ApiModule, Configuration } from 'koraki-angular-client';
+import { ApiModule, Configuration, SubscriptionsService } from 'koraki-angular-client';
 import { AuthService } from './services/auth.service';
 import { AngularWebStorageModule } from 'angular-web-storage';
 import { AuthGuardService, NoAuthGuardService } from './services/auth-gurads.service';
@@ -57,6 +57,7 @@ import { MomentModule } from 'ngx-moment';
 import { MemoryDataHolderServiceService } from './services/memory-data-holder-service.service';
 import { NotificationService } from './services/notification.service';
 import { RequestInterceptor } from './interceptors/http.interceptor';
+import { SubscriptionService } from './services/subscription.service';
 
 @NgModule({
   exports: [
@@ -133,7 +134,8 @@ export class MaterialModule { }
     NoAuthGuardService,
     LoadingServiceService,
     MemoryDataHolderServiceService,
-    NotificationService
+    NotificationService,
+    SubscriptionService
   ],
   bootstrap: [AppComponent]
 })

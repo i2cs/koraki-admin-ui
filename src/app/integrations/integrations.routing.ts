@@ -3,6 +3,7 @@ import { FacebookComponent } from './facebook/facebook.component';
 import { MainComponent } from './main/main.component';
 import { MailchimpComponent } from './mailchimp/mailchimp.component';
 import { PrivyComponent } from './privy/privy.component';
+import { OpencartComponent } from './opencart/opencart.component';
 
 export const IntegrationsRoutes: Routes = [
     {
@@ -22,6 +23,9 @@ export const IntegrationsRoutes: Routes = [
     }, {
         path: 'privy/:id',
         component: PrivyComponent
+    }, {
+        path: 'opencart/:id',
+        component: OpencartComponent
     }]
 }
 ];

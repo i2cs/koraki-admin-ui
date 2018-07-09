@@ -23,9 +23,11 @@
 
             <h3 *ngIf="appCount == -1">Hi there!</h3>
             <h3 *ngIf="appCount == 0">Looks like you don't have any Koraki widget yet. Click on + button to get started with Koraki</h3>
-            <h3 *ngIf="appCount > 0">Add Koraki widget to another website</h3>
+            <h3 *ngIf="maxAllowedApps > appCount && appCount > 0">Add Koraki widget to another website</h3>
+            <h3 *ngIf="maxAllowedApps <= appCount">Looks like you are full with applications!</h3>
 
-            <div class="card-icon new-app" data-hover="Add new application" routerLink="/applications/new"></div>
+            <div *ngIf="maxAllowedApps > appCount" class="card-icon new-app" data-hover="Add new application" routerLink="/applications/new"></div>
+            <div *ngIf="maxAllowedApps <= appCount" class="card-icon new-app" data-hover="Upgrade plan to add new application" routerLink="/subscription"></div>
 
             <p class="card-description">
               Create a new application to add koraki notification widget to your website

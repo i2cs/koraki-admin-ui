@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import PerfectScrollbar from 'perfect-scrollbar';
 import { AuthService } from '../services/auth.service';
 
@@ -34,7 +34,7 @@ export const ROUTES: RouteInfo[] = [{
     icontype: 'cloud'
 
 }, {
-    path: '/plan',
+    path: '/subscription',
     title: 'Pricing Plan',
     type: 'link',
     icontype: 'table_chart'
@@ -48,6 +48,8 @@ export const ROUTES: RouteInfo[] = [{
 
 export class SidebarComponent implements OnInit {
     public menuItems: any[];
+    @Input() plan: string;
+    @Input() trialEndsIn: number;
 
     constructor(private auth: AuthService) { }
 

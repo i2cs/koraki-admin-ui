@@ -2,11 +2,11 @@
     <mat-progress-bar color="primary" style="position: fixed;z-index: 10000;" mode="indeterminate" *ngIf="loading"></mat-progress-bar>
     
     <div class="sidebar" data-background-color="white" data-color="orange">
-        <app-sidebar-cmp></app-sidebar-cmp>
+        <app-sidebar-cmp [plan]="plan" [trialEndsIn]="trialEndsIn"></app-sidebar-cmp>
         <div class="sidebar-background"></div>
     </div>
     <div class="main-panel">
-        <app-navbar-cmp></app-navbar-cmp>
+        <app-navbar-cmp [plan]="plan" [trialEndsIn]="trialEndsIn"></app-navbar-cmp>
         <router-outlet></router-outlet>
         <app-footer-cmp></app-footer-cmp>
     </div>

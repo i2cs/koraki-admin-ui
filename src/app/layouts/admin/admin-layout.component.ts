@@ -2,12 +2,13 @@ import { Component, OnInit, OnDestroy, ViewChild, HostListener, AfterViewInit, C
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 //import { NavItem, NavItemType } from '../../md/md.module';
 import { Subscription } from 'rxjs/Subscription';
-import { Location, LocationStrategy, PathLocationStrategy, PopStateEvent } from '@angular/common';
+import { Location, LocationStrategy, PathLocationStrategy, PopStateEvent, formatCurrency } from '@angular/common';
 import 'rxjs/add/operator/filter';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import PerfectScrollbar from 'perfect-scrollbar';
 import { LoadingServiceService } from '../../services/loading-service.service';
 import { NotificationService } from '../../services/notification.service';
+import { SubscriptionService } from '../../services/subscription.service';
 
 declare const $: any;
 
@@ -16,7 +17,9 @@ declare const $: any;
     templateUrl: './admin-layout.component.html'
 })
 export class AdminLayoutComponent implements OnInit, AfterViewInit {
-
+    @ViewChild('sidebar') sidebar: any;
+    @ViewChild(NavbarComponent) navbar: NavbarComponent;
+    
     private _router: Subscription;
     private lastPoppedUrl: string;
     private yScrollStack: number[] = [];
@@ -24,14 +27,15 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit {
     location: Location;
     loading: boolean;
     slow: boolean;
-
-    @ViewChild('sidebar') sidebar: any;
-    @ViewChild(NavbarComponent) navbar: NavbarComponent;
+    plan: string;
+    trialEndsIn: number;
+    
     constructor(private router: Router,
         location: Location,
         loadingService: LoadingServiceService,
         private cdRef: ChangeDetectorRef,
-        notification: NotificationService
+        notification: NotificationService,
+        private subscription: SubscriptionService
     ) {
         this.location = location;
 
@@ -56,6 +60,11 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit() {
+        this.subscription.permissions().subscribe(a => {
+            this.plan = a.planName + " (" + formatCurrency(a.cost, "en-US", "$") + ")";
+            this.trialEndsIn = a.trialEndsIn;
+        });
+
         const elemMainPanel = <HTMLElement>document.querySelector('.main-panel');
         const elemSidebar = <HTMLElement>document.querySelector('.sidebar .sidebar-wrapper');
         this.location.subscribe((ev: PopStateEvent) => {

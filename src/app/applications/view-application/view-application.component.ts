@@ -4,7 +4,7 @@ import { ApplicationsService, ApplicationViewDataModel, ApplicationUpdateDataMod
 import { LoadingServiceService } from '../../services/loading-service.service';
 import { NotificationService } from '../../services/notification.service';
 import { MemoryDataHolderServiceService } from '../../services/memory-data-holder-service.service';
-import { ErrorService } from '../../services/error.service';
+import { SubscriptionService } from '../../services/subscription.service';
 
 declare const $: any;
 
@@ -38,8 +38,10 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
   mobile: boolean;
   updatingSettings: boolean;
   allIntegrations: any[] = Array();
+  allowedIntegrations: any = {};
   allIntegrationsOriginal: any[] = Array();
   possibleCounts: number[] = _Array.range(8, 100, 1);
+  possibleDays: number[] = _Array.range(1, 100, 1);
   filter: string;
 
   constructor(
@@ -48,8 +50,9 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
     private loadingService: LoadingServiceService,
     private router: Router,
     private notify: NotificationService,
-    private data: MemoryDataHolderServiceService
-  ) { }
+    private data: MemoryDataHolderServiceService,
+    private subscription: SubscriptionService
+  ) {}
 
   ngAfterViewInit(){
     this.route.params.subscribe(params => {
@@ -67,15 +70,21 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
         }
       }
     });
+
+    this.subscription.permissions().subscribe(a => {
+      a.integrations.forEach(a => {
+        this.allowedIntegrations[a.code] = true;
+      });
+    });
   }
 
   ngOnInit() {
     this.allIntegrations.push({
       code: "opencart",
-      title: "OpenCart 2.x",
+      title: "OpenCart",
       description: "Module contains notification widget. This module can be installed from OpenCart admin panel",
       capable: "This integration can <b>Read</b> and <b>Write</b> notifications",
-      buttonTitle: "Download",
+      buttonTitle: "Install",
       ecommerce: true
     });
 
@@ -91,7 +100,7 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
     this.allIntegrations.push({
       code: "mailchimp",
       title: "MailChimp Integration",
-      description: "This integration can generate notifications when subscriber is added to one of your email lists of MailChimp.",
+      description: "This integration can generate notifications when subscriber is added to email lists.",
       capable: "This integration can <b>Write</b> notifications",
       buttonTitle: "Integrate",
       ecommerce: false

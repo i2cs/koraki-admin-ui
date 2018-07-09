@@ -1,10 +1,11 @@
 
 import { Injectable } from '@angular/core';
-import { Configuration, ConfigurationParameters } from 'koraki-angular-client';
+import { Configuration, ConfigurationParameters, SubscriptionsDataViewModel, SubscriptionsService } from 'koraki-angular-client';
 import { environment } from 'environments/environment';
 import { LocalStorageService } from 'angular-web-storage';
 import * as auth0 from 'auth0-js';
 import { Router } from '@angular/router';
+import { Subject, Observable } from 'rxjs';
 
 (window as any).global = window;
 
@@ -22,8 +23,12 @@ export class AuthService {
     redirectUri: environment.auth.redirect,
     scope: environment.auth.scope
   });
+  
 
-  constructor(public local: LocalStorageService, private router: Router) { }
+  constructor(
+    private local: LocalStorageService,
+    private router: Router
+  ) {}
 
   private getAccessToken(): string {
     if (this.local.get("access-token")) {

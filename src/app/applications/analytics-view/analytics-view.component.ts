@@ -21,7 +21,7 @@ export class AnalyticsViewComponent implements OnInit {
 
   ngOnInit() {
     if(!this.analyticsid || !this.analyticstoken){
-      alert("error");
+      return;
     }
 
     this.widgets.push({

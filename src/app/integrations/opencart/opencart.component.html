@@ -1,0 +1,43 @@
+<div class="main-content">
+  <div class="container-fluid">
+
+    <div class="col-md-8 mr-auto ml-auto">
+
+
+      <div class="card ">
+        <div class="card-header">
+          <h3 class="card-title">
+            OpenCart Integration
+          </h3>
+          <div class="text-center">
+            <img src="assets/img/integrations/opencart.png" class="integration-image" />
+          </div>
+          <h5 class="card-description">Add Koraki widget to your OpenCart website. Check <a href="https://github.com/i2cs/koraki-opencart-integration" target="_blank">Github project</a> for more</h5>
+
+        </div>
+        <mat-divider></mat-divider>
+        <div class="card-body">
+          <div>
+            This integration can generate notifications for following events.
+            <ul>
+              <li>Generates notification when customers complete a checkout</li>
+              <li>Generates notification when customer makes a review</li>
+              <li>Generates notification when customer registers</li>
+              <li>Generates notification when customer subscribes for newsletters</li>
+              <li>Show live visitor anlytics notifications</li>
+              <li>Show historical visitor analytics notifications</li>
+            </ul>
+
+            <div class="divider"></div>
+            
+            <div class="col-md-12" *ngFor="let release of releases">
+            <a href="{{release.url}}"  target="_blank" mat-raised-button class="btn btn-facebook">
+              <i class="fa"></i> {{release.name}}
+            </a>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
