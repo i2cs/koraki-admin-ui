@@ -8,7 +8,7 @@ import { SubscriptionService } from '../../services/subscription.service';
 })
 export class DashboardComponent implements OnInit {
   appCount: number = -1;
-  maxAllowedApps: string;
+  maxAllowedApps: number = 1;
 
   constructor(
     private subscription: SubscriptionService
@@ -16,7 +16,9 @@ export class DashboardComponent implements OnInit {
 
   public ngOnInit() {
     this.subscription.permissions().subscribe(a => {
-      this.maxAllowedApps = a.permissons["applications.maximum"];
+      if (a.permissons["applications.maximum"]) {
+        this.maxAllowedApps = Number.parseInt(a.permissons["applications.maximum"]);
+      }
     });
   }
 
