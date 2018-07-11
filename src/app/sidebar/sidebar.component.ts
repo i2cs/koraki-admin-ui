@@ -35,7 +35,7 @@ export const ROUTES: RouteInfo[] = [{
 
 }, {
     path: '/subscription',
-    title: 'Pricing Plan',
+    title: 'Subscription',
     type: 'link',
     icontype: 'table_chart'
 

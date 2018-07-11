@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { SubscriptionMainComponent } from './subscription-main/subscription-main.component';
+import { SubscriptionCreateComponent } from './subscription-create/subscription-create.component';
 
 export const SubscriptionRoutes: Routes = [
     {
@@ -7,6 +8,9 @@ export const SubscriptionRoutes: Routes = [
       children: [ {
         path: '',
         component: SubscriptionMainComponent
+    }, {
+        path: 'add',
+        component: SubscriptionCreateComponent
     }]
 }
 ];

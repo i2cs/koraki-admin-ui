@@ -20,7 +20,7 @@ export class LoadingServiceService {
         console.log("60 seconds passed since last request. Probably offline");
       }
 
-      if(Date.now() - this._lastChange > 5000 && this._count > 0){
+      if(Date.now() - this._lastChange > 10000 && this._count > 0){
         this._slow.next(true);
         console.log("5 seconds passed since last request. Slow network connection");
       }

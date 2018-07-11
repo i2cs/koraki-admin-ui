@@ -16,6 +16,10 @@ export class SubscriptionService {
     this.loadSubscriptionData();
   }
 
+  public clear(){
+    this._subscriptionsLoaded = false;
+  }
+
   public permissions(): Observable<SubscriptionsDataViewModel> {
     if (!this._subscriptionsLoaded) {
       this.loadSubscriptionData();
@@ -23,7 +27,6 @@ export class SubscriptionService {
     }else{
       return Observable.create((observer) => {  
         observer.next(this._subs); 
-        observer.complete();
       });
     }
   }
@@ -31,7 +34,6 @@ export class SubscriptionService {
   private loadSubscriptionData() {
     this.subscriptionService.getPermissions().subscribe(a => {
       this._subscription.next(a);
-      this._subscription.complete();
       this._subs = a;
       this._subscriptionsLoaded = true;
     }, e => {
