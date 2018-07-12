@@ -1,22 +1,29 @@
 <div class="table-responsive">
-    <div *ngIf="invoices && invoices.length == 0" class="text-center">
-      Woops! No invoices yet
-    </div>
-    <table class="table" *ngIf="invoices && invoices.length > 0">
-        <thead>
-            <tr>
-                <th>Invoice number</th>
-                <th>Billing date</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let invoice of invoices">
-                <td>{{invoice['id']}}</td>
-                <td>{{invoice['date']}}</td>
-                <td><a class="btn btn-primary" routerLink="/subscription/add">Download PDF</a></td>
-            </tr>
-        </tbody>
+  <div *ngIf="invoices && invoices.length == 0" class="text-center">
+    Woops! No invoices yet
+  </div>
+  <div class="table-responsive" *ngIf="invoices && invoices.length > 0">
+    <table class="table table-sm">
+      <thead>
+        <tr>
+          <th>Invoice number</th>
+          <th>Billing date</th>
+          <th>Amount</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let invoice of invoices">
+          <td>{{invoice['id']}}</td>
+          <td>{{invoice['billingDate'] | amUtc | amDateFormat:'LL'}}</td>
+          <td>{{format(invoice['amount'])}}</td>
+          <td>{{invoice['status']}}</td>
+          <td>
+            <a href="{{invoice['pdfUrl']}}" target="_blank">Download PDF</a>
+          </td>
+        </tr>
+      </tbody>
     </table>
-
+  </div>
 </div>

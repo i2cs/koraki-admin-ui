@@ -90,6 +90,7 @@ export class SubscriptionCreateComponent implements OnInit {
           country: address_country
         })
         .subscribe(result => {
+          this.notification.success("Please wait");
           if (result.token && result.token.card) {
             this.subscriptions.subscribe(<SubscriptionCreateDataViewModel>{
               name: name,
@@ -112,6 +113,7 @@ export class SubscriptionCreateComponent implements OnInit {
 
             console.log(result);
           } else if (result.error) {
+            this.notification.success("Error returned from payment gateway. Please choose another card");
             console.log(result.error.message);
           }
         });

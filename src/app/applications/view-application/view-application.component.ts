@@ -145,11 +145,15 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
   }
 
   updateApplicationStatus() {
-    
     let status: ApplicationUpdateDataModel.StatusEnum = this.status ? ApplicationUpdateDataModel.StatusEnum.Active : ApplicationUpdateDataModel.StatusEnum.Disabled;
     this.appservice.updateApplication(this.application.id, <ApplicationUpdateDataModel>{ status: status }).subscribe(a => {
       this.application = a;
       this.notify.success("Application is " + status.toString());
+    }, e => {
+      this.application.status = status == ApplicationUpdateDataModel.StatusEnum.Active ? 
+        ApplicationUpdateDataModel.StatusEnum.Disabled : ApplicationUpdateDataModel.StatusEnum.Active;
+      this.status = this.application.status == ApplicationUpdateDataModel.StatusEnum.Active;
+      this.notify.error(e.error.message);
     });
   }
 

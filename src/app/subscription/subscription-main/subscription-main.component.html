@@ -32,10 +32,9 @@
                                     <div class="col-md-4 col-sm-12">
                                         <p class="card-category" *ngIf="!isFree">Next billing date : {{nextBillingDate | amUtc | amDateFormat:'LL'}}</p>
                                         <h3 class="card-title">{{planHeader}}</h3>
-                                        <div class="stats">
-                                            <a *ngIf="upgradeAvailable" routerLink="/subscription/add">Click here to upgrade</a>
-                                        </div>
-                                        <a href="#" (click)="cancelSubscription(subscriptionId)" *ngIf="!isFree" onclick="return false;" class="btn btn-rose pull-right">Cancel Subscription</a>
+                                        
+                                        <a *ngIf="upgradeAvailable" class="btn btn-primary pull-right" routerLink="/subscription/add">Click here to upgrade</a>
+                                        <a *ngIf="!isFree" href="#" class="btn btn-rose pull-right" (click)="cancelSubscription(subscriptionId)" onclick="return false;" >Cancel Subscription</a>
                                     </div>
                                 </div>
                             </div>

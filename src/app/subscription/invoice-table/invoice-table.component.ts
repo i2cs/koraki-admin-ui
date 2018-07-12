@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { InvoicesService } from 'koraki-angular-client';
+import { formatCurrency } from '@angular/common';
 
 @Component({
   selector: 'app-invoice-table',
@@ -8,10 +10,17 @@ import { Component, OnInit } from '@angular/core';
 export class InvoiceTableComponent implements OnInit {
   invoices: any[];
 
-  constructor() { }
+  constructor(
+    private invoiceService: InvoicesService
+  ) { }
 
   ngOnInit() {
-    this.invoices = [];
+    this.invoiceService.getInvoicesList().subscribe(a => {
+      this.invoices = a; 
+    });
   }
 
+  format(cost){
+    return formatCurrency(cost / 100, "en-US", "$")
+  }
 }
