@@ -148,3 +148,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', end
     border-radius: 5px!important;
     padding: 5px 8px!important;
 }
+
+.vertical-middle {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}

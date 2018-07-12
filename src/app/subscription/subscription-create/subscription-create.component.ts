@@ -2,10 +2,12 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
 
 import { StripeService, StripeCardComponent, ElementOptions, ElementsOptions } from "ngx-stripe";
-import { SubscriptionsService, SubscriptionCreateDataViewModel } from 'koraki-angular-client';
+import { SubscriptionsService, SubscriptionCreateDataViewModel, AjaxService } from 'koraki-angular-client';
 import { LoadingServiceService } from '../../services/loading-service.service';
 import { SubscriptionService } from '../../services/subscription.service';
 import { NotificationService } from '../../services/notification.service';
+import { Router } from '@angular/router';
+import { environment } from 'environments/environment.prod';
 
 @Component({
   selector: 'app-subscription-create',
@@ -46,41 +48,25 @@ export class SubscriptionCreateComponent implements OnInit {
     private notification: NotificationService,
     private stripeService: StripeService,
     private subscriptions: SubscriptionsService,
+    private ajax: AjaxService,
     private loadingService: LoadingServiceService,
-    private subs: SubscriptionService
+    private subs: SubscriptionService,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.loadingService.loading$.subscribe(a => { this.loading = a; });
-    this.subscriptions.getAllSubscriptions().subscribe(a => {
+    this.ajax.getAllSubscriptions().subscribe(a => {
       this.plans = a.filter(b => b.code != "free");
 
       this.subs.permissions().subscribe(b => {
         this.plans = this.plans.filter(c => c.code != b.plan);
         this.form['plan'] = this.plans[0];
+        this.planFeatures = environment.plans;
       });
     });
 
     this.countries = this.getCountries();
-
-    this.planFeatures = {
-      tier1: [
-        "3 websites",
-        "Unlimited active notifications",
-        "10K sessions per website",
-        "Live analytics",
-        "All premium integrations",
-        "14 days free trial"
-      ],
-      tier2: [
-        "Unlimited websites",
-        "Unlimited active notifications",
-        "Unlimited sessions per website",
-        "Live analytics",
-        "All premium integrations",
-        "14 days free trial"
-      ]
-    };
   }
 
   subscribe() {
@@ -121,6 +107,7 @@ export class SubscriptionCreateComponent implements OnInit {
             }).subscribe(a => {
               this.subs.clear();
               this.notification.success("Subscribed to " + plan.name);
+              this.router.navigate(['/subscription']);
             });
 
             console.log(result);

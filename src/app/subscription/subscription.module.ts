@@ -8,6 +8,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxStripeModule } from 'ngx-stripe';
 import { MaterialModule } from '../app.module';
 import { SubscriptionCreateComponent } from './subscription-create/subscription-create.component';
+import { InvoiceTableComponent } from './invoice-table/invoice-table.component';
+import { MomentModule } from 'ngx-moment';
 
 @NgModule({
   imports: [
@@ -16,8 +18,9 @@ import { SubscriptionCreateComponent } from './subscription-create/subscription-
     ReactiveFormsModule,
     NgxStripeModule.forRoot('pk_test_JMl4h4YIUrGfy66IluaI5dJo'),
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    MomentModule
   ],
-  declarations: [SubscriptionMainComponent, SubscriptionMainComponent, SubscriptionCreateComponent]
+  declarations: [SubscriptionMainComponent, SubscriptionMainComponent, SubscriptionCreateComponent, InvoiceTableComponent]
 })
 export class SubscriptionModule { }

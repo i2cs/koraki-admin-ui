@@ -1,0 +1,22 @@
+<div class="table-responsive">
+    <div *ngIf="invoices && invoices.length == 0" class="text-center">
+      Woops! No invoices yet
+    </div>
+    <table class="table" *ngIf="invoices && invoices.length > 0">
+        <thead>
+            <tr>
+                <th>Invoice number</th>
+                <th>Billing date</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let invoice of invoices">
+                <td>{{invoice['id']}}</td>
+                <td>{{invoice['date']}}</td>
+                <td><a class="btn btn-primary" routerLink="/subscription/add">Download PDF</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

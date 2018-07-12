@@ -18,5 +18,35 @@ export const environment = {
     mailchimp: {
       clientId: "592621747124"
     }
+  },
+  plans: {
+    free: [
+      "1 website",
+      "8 active notifications",
+      "1K sessions per website",
+      "Basic integrations",
+      "!Live analytics",
+    ],
+    tier1: [
+      "3 websites",
+      "Unlimited active notifications",
+      "10K sessions per website",
+      "Live analytics",
+      "All premium integrations",
+      "~14 days free trial"
+    ],
+    tier2: [
+      "Unlimited websites",
+      "Unlimited active notifications",
+      "Unlimited sessions per website",
+      "Live analytics",
+      "All premium integrations",
+      "~14 days free trial"
+    ]
+  },
+  planIcons: {
+    free: "https://s3.us-east-2.amazonaws.com/koraki-adminui-assets/basic-plan.png",
+    tier1: "https://s3.us-east-2.amazonaws.com/koraki-adminui-assets/personal-plan.png",
+    tier2: "https://s3.us-east-2.amazonaws.com/koraki-adminui-assets/enterprise-plan.png",
   }
 };

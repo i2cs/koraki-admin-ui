@@ -4,12 +4,54 @@
             <div class="card" data-color="orange">
                 <div class="card-header text-center">
                     <h3 class="card-title">
-                        Subscribe to a plan
+                        Your subscription
                     </h3>
-                    <h5 class="card-description">You won’t be charged if you cancel before your trial ends.</h5>
+                    <h5 class="card-description" *ngIf="isFree">
+                        Want to get more out of Koraki? Try
+                        <a routerLink="/subscription/add">Personal plan</a>
+                    </h5>
+                    <h5 class="card-description" *ngIf="isTier1">
+                        Want to get more out of Koraki?
+                        <a routerLink="/subscription/add">Upgrade</a>
+                    </h5>
+                </div>
+                <div class="card-body" [ngClass]="{'loading':loading}">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="card card-stats">
+                                <div class="card-body row">
+                                    <div class="col-md-2 col-sm-6 text-left">
+                                        <img width="120px" class="vertical-middle" [src]="planIcon" style="display: none;" onload="this.style.display = 'block';"
+                                        />
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 text-left">
+                                        <ul class="vertical-middle">
+                                            <li *ngFor="let item of currentPlanFeatures" [ngClass]="{'no' : item.startsWith('!')}">{{item.replace('!', '')}}</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12">
+                                        <p class="card-category" *ngIf="!isFree">Next billing date : {{nextBillingDate | amUtc | amDateFormat:'LL'}}</p>
+                                        <h3 class="card-title">{{planHeader}}</h3>
+                                        <div class="stats">
+                                            <a *ngIf="upgradeAvailable" routerLink="/subscription/add">Click here to upgrade</a>
+                                        </div>
+                                        <a href="#" (click)="cancelSubscription(subscriptionId)" *ngIf="!isFree" onclick="return false;" class="btn btn-rose pull-right">Cancel Subscription</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-color="orange">
+                <div class="card-header text-center">
+                    <h3 class="card-title">
+                        Invoices
+                    </h3>
                 </div>
                 <div class="card-body">
-<a routerLink="/subscription/add">create</a>
+                    <app-invoice-table></app-invoice-table>
                 </div>
             </div>
         </div>
