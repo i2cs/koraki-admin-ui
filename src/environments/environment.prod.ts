@@ -1,5 +1,5 @@
 export const environment = {
-  version: "0.1.0",
+  version: "0.2.0",
   production: true,
   apiBaseUrl: "https://api.koraki.io",
   baseUrl: "https://app.koraki.io",
@@ -17,6 +17,9 @@ export const environment = {
   integrations: {
     mailchimp: {
       clientId: "592621747124"
+    },
+    facebook: {
+      clientId: "1710573302367584"
     }
   },
   plans: {
@@ -48,5 +51,6 @@ export const environment = {
     free: "https://s3.us-east-2.amazonaws.com/koraki-adminui-assets/basic-plan.png",
     tier1: "https://s3.us-east-2.amazonaws.com/koraki-adminui-assets/personal-plan.png",
     tier2: "https://s3.us-east-2.amazonaws.com/koraki-adminui-assets/enterprise-plan.png",
-  }
+  },
+  stripePublicKey : "pk_test_JMl4h4YIUrGfy66IluaI5dJo"
 };

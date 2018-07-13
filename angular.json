@@ -24,8 +24,8 @@
               "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
               "node_modules/angular-calendar/scss/angular-calendar.scss",
               "node_modules/sweetalert2/src/sweetalert2.scss",
-              "src/assets/css/demo.css",
-              "src/assets/scss/material-dashboard.scss"
+              "src/assets/scss/material-dashboard.scss",
+              "src/assets/css/demo.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
@@ -126,8 +126,8 @@
               "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
               "node_modules/angular-calendar/scss/angular-calendar.scss",
               "node_modules/sweetalert2/src/sweetalert2.scss",
-              "src/assets/css/demo.css",
-              "src/assets/scss/material-dashboard.scss"
+              "src/assets/scss/material-dashboard.scss",
+              "src/assets/css/demo.css"
             ],
             "assets": [
               "src/assets",

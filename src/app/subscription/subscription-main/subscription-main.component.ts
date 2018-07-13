@@ -1,14 +1,11 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
-
-import { StripeService, StripeCardComponent, ElementOptions, ElementsOptions } from "ngx-stripe";
-import { SubscriptionsService, SubscriptionCreateDataViewModel } from 'koraki-angular-client';
+import { Component, OnInit } from '@angular/core';
+import { SubscriptionsService } from 'koraki-angular-client';
 import { LoadingServiceService } from '../../services/loading-service.service';
 import { SubscriptionService } from '../../services/subscription.service';
 import { formatCurrency } from '@angular/common';
-import { Moment } from 'moment';
 import { environment } from 'environments/environment';
 import { NotificationService } from '../../services/notification.service';
+import { BreadcrumbService } from '../../services/breadcrumb.service';
 
 @Component({
   selector: 'app-subscription-main',
@@ -31,11 +28,16 @@ export class SubscriptionMainComponent implements OnInit {
   constructor(
     private notification: NotificationService,
     private subscriptions: SubscriptionsService,
+    private breadcrumbService: BreadcrumbService,
     private loadingService: LoadingServiceService,
     private subs: SubscriptionService
   ) { }
 
   ngOnInit() {
+    this.breadcrumbService.show([
+      { title: "Subscription", url: "/subscription" }
+    ]);
+
     this.loadingService.loading$.subscribe(a => { this.loading = a; });
     this.loadData();
   }

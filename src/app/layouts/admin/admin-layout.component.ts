@@ -9,6 +9,7 @@ import PerfectScrollbar from 'perfect-scrollbar';
 import { LoadingServiceService } from '../../services/loading-service.service';
 import { NotificationService } from '../../services/notification.service';
 import { SubscriptionService } from '../../services/subscription.service';
+import { BreadcrumbService } from '../../services/breadcrumb.service';
 
 declare const $: any;
 
@@ -28,6 +29,7 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit {
     loading: boolean;
     slow: boolean;
     plan: string;
+    breadcrumb: any[];
     trialEndsIn: number;
     
     constructor(private router: Router,
@@ -35,16 +37,13 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit {
         loadingService: LoadingServiceService,
         private cdRef: ChangeDetectorRef,
         notification: NotificationService,
+        breadcrumbService: BreadcrumbService,
         private subscription: SubscriptionService
     ) {
         this.location = location;
 
-        loadingService.loading$.subscribe(
-            a => {
-                this.loading = a;
-            }
-        );
-
+        loadingService.loading$.subscribe(a => this.loading = a);
+        breadcrumbService.breadcrumb$.subscribe(a => this.breadcrumb = a);
         loadingService.slow$.subscribe(
             a => {
                 if(!this.slow && a){

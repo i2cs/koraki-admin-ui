@@ -5,6 +5,7 @@ import { LoadingServiceService } from '../../services/loading-service.service';
 import { NotificationService } from '../../services/notification.service';
 import { MemoryDataHolderServiceService } from '../../services/memory-data-holder-service.service';
 import { SubscriptionService } from '../../services/subscription.service';
+import { BreadcrumbService } from '../../services/breadcrumb.service';
 
 declare const $: any;
 
@@ -47,6 +48,7 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
   constructor(
     private route: ActivatedRoute,
     private appservice: ApplicationsService,
+    private breadcrumbService: BreadcrumbService,
     private loadingService: LoadingServiceService,
     private router: Router,
     private notify: NotificationService,
@@ -79,6 +81,10 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.breadcrumbService.show([
+      {title: "Applications", url: "/applications"}
+    ]);
+
     this.allIntegrations.push({
       code: "opencart",
       title: "OpenCart",
@@ -125,6 +131,10 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
           this.application = a;
           this.status = a.status == "Active";
           this.script = "<script>window.sparkleSettings = { app_id: \"" + a.clientId + "\" }; !function(){function t(){var t=a.createElement(\"script\"); t.type=\"text/javascript\", t.async=!0,t.src=\"\/\/api.koraki.io//widget/v1.0/js\"; var e=a.getElementsByTagName(\"script\")[0];e.parentNode.insertBefore(t,e)} var e=window,a=document;e.attachEvent?e.attachEvent(\"onload\",t):e.addEventListener(\"load\",t,!1)}();</script>"
+          this.breadcrumbService.show([
+            {title: "Applications", url: "/applications"},
+            {title: a.applicationName, url: "/applications/view/" + a.id}
+          ]);
         });
 
         this.route.fragment.subscribe(query => {

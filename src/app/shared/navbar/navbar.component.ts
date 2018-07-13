@@ -26,6 +26,7 @@ export class NavbarComponent implements OnInit {
     private _router: Subscription;
     @Input() plan: string;
     @Input() trialEndsIn: number;
+    @Input() breadcrumb: any[];
 
     @ViewChild('app-navbar-cmp') button: any;
 
@@ -189,25 +190,6 @@ export class NavbarComponent implements OnInit {
         }
     }
 
-    getTitle() {
-        let titlee: any = this.location.prepareExternalUrl(this.location.path());
-        for (let i = 0; i < this.listTitles.length; i++) {
-            if (this.listTitles[i].type === "link" && this.listTitles[i].path === titlee) {
-                return this.listTitles[i].title;
-            } else if (this.listTitles[i].type === "sub") {
-                for (let j = 0; j < this.listTitles[i].children.length; j++) {
-                    let subtitle = this.listTitles[i].path + '/' + this.listTitles[i].children[j].path;
-                    if (subtitle === titlee) {
-                        return this.listTitles[i].children[j].title;
-                    }
-                }
-            }
-        }
-        return 'Dashboard';
-    }
-    getPath() {
-        return this.location.prepareExternalUrl(this.location.path());
-    }
     logout() {
         this.auth.logout()
     }

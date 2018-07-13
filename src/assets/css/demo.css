@@ -154,3 +154,25 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', end
     top: 50%;
     transform: translateY(-50%);
 }
+
+.bc-item span{
+    padding: 8px!important;
+    line-height: 16px!important;
+    height: 32px!important;
+}
+
+.bc-item::after { 
+    content: "/";
+    font-size: 18px;
+    color: #eee;
+  }
+
+  .bc-item:last-child::after {
+    display: none;
+  }
+
+  @media (max-width: 480px) {
+    .bc-item:not(:last-child){
+        display: none;
+    }
+}

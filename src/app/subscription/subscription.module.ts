@@ -10,13 +10,14 @@ import { MaterialModule } from '../app.module';
 import { SubscriptionCreateComponent } from './subscription-create/subscription-create.component';
 import { InvoiceTableComponent } from './invoice-table/invoice-table.component';
 import { MomentModule } from 'ngx-moment';
+import { environment } from 'environments/environment.prod';
 
 @NgModule({
   imports: [
     RouterModule.forChild(SubscriptionRoutes),
     FormsModule,
     ReactiveFormsModule,
-    NgxStripeModule.forRoot('pk_test_JMl4h4YIUrGfy66IluaI5dJo'),
+    NgxStripeModule.forRoot(environment.stripePublicKey),
     CommonModule,
     MaterialModule,
     MomentModule

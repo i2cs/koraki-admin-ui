@@ -6,16 +6,19 @@ import { ViewApplicationComponent } from './view-application/view-application.co
 
 export const ApplicationsRoutes: Routes = [
     {
-      path: '',
-      children: [ {
         path: '',
-        component: ApplicationsComponent
-    }, {
-        path: 'new',
-        component: NewApplicationComponent
-    }, {
-        path: 'view/:id',
-        component: ViewApplicationComponent
-    }]
-}
+        children: [{
+            path: '',
+            component: ApplicationsComponent
+        }, {
+            path: 'new',
+            component: NewApplicationComponent
+        }, {
+            path: 'view/:id',
+            component: ViewApplicationComponent
+        }, {
+            path: 'view/:id/integrations',
+            loadChildren: '../integrations/integrations.module#IntegrationsModule'
+        }]
+    }
 ];

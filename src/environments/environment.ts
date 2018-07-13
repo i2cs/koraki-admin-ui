@@ -4,7 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  version: "0.1.0",
+  version: "0.2.0",
   production: false,
   apiBaseUrl: "http://localhost:5000",
   baseUrl: "http://127.0.0.1:4200",
@@ -22,6 +22,9 @@ export const environment = {
   integrations: {
     mailchimp: {
       clientId: "708985200989"
+    },
+    facebook: {
+      clientId: "1710573302367584"
     }
   },
   plans: {
@@ -53,5 +56,6 @@ export const environment = {
     free: "https://s3.us-east-2.amazonaws.com/koraki-adminui-assets/basic-plan.png",
     tier1: "https://s3.us-east-2.amazonaws.com/koraki-adminui-assets/personal-plan.png",
     tier2: "https://s3.us-east-2.amazonaws.com/koraki-adminui-assets/enterprise-plan.png",
-  }
+  },
+  stripePublicKey : "pk_test_JMl4h4YIUrGfy66IluaI5dJo"
 };

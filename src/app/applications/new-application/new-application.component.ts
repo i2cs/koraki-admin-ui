@@ -7,6 +7,7 @@ import { ApplicationsService, ApplicationCreateDataModel, ApplicationViewDataMod
 import { Router } from '@angular/router';
 import { LoadingServiceService } from '../../services/loading-service.service';
 import { NotificationService } from '../../services/notification.service';
+import { BreadcrumbService } from '../../services/breadcrumb.service';
 
 declare const $: any;
 
@@ -24,6 +25,7 @@ export class NewApplicationComponent implements OnInit {
     constructor(
         private appservice: ApplicationsService,
         private formBuilder: FormBuilder,
+        private breadcrumbService: BreadcrumbService,
         private router: Router,
         private loadingService: LoadingServiceService,
         public notify: NotificationService
@@ -45,7 +47,7 @@ export class NewApplicationComponent implements OnInit {
             return;
         }
 
-        this.appservice.createApplication(this.model).subscribe(a => {    
+        this.appservice.createApplication(this.model).subscribe(a => {
             if (!a.token) {
                 this.notify.error("Could not create the application");
             } else {
@@ -59,6 +61,11 @@ export class NewApplicationComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.breadcrumbService.show([
+            { title: "Applications", url: "/applications" },
+            { title: "New" }
+        ]);
+
         this.type = this.formBuilder.group({
             appName: [null, [Validators.required]],
             url: [null, [Validators.required, Validators.pattern("^(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,})$")]],

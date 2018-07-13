@@ -3,6 +3,7 @@ import { ApplicationsService, ApplicationViewDataModel } from 'koraki-angular-cl
 import { LoadingServiceService } from '../../services/loading-service.service';
 import { MemoryDataHolderServiceService } from '../../services/memory-data-holder-service.service';
 import { NotificationService } from '../../services/notification.service';
+import { BreadcrumbService } from '../../services/breadcrumb.service';
 
 declare const $: any;
 
@@ -21,13 +22,18 @@ export class ApplicationsComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private appservice: ApplicationsService,
     private loadingService: LoadingServiceService,
+    private breadcrumbService: BreadcrumbService,
     private cache: MemoryDataHolderServiceService,
     public notify: NotificationService
   ) { }
 
   ngOnInit() {
-    this.loadingService.loading$.subscribe(a => {this.loading = a;});
-    if(this.cache.store.has("applications")){
+    this.breadcrumbService.show([
+      { title: "Applications", url: "/applications" }
+    ]);
+
+    this.loadingService.loading$.subscribe(a => { this.loading = a; });
+    if (this.cache.store.has("applications")) {
       this.applications = <Array<ApplicationViewDataModel>>(this.cache.store.get("applications"));
     }
     this.load();

@@ -15,16 +15,13 @@ export const IntegrationsRoutes: Routes = [
         path: 'facebook',
         component: FacebookComponent
     }, {
-        path: 'facebook/:id',
-        component: FacebookComponent
-    }, {
-        path: 'mailchimp/:id',
+        path: 'mailchimp',
         component: MailchimpComponent
     }, {
-        path: 'privy/:id',
+        path: 'privy',
         component: PrivyComponent
     }, {
-        path: 'opencart/:id',
+        path: 'opencart',
         component: OpencartComponent
     }]
 }

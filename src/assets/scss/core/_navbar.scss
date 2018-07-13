@@ -114,11 +114,13 @@
         position: relative;
         color: inherit;
         height: 50px;
-        font-size: $navbar-brand-font-size - 0.125;
+        font-size: $navbar-brand-font-size - 0.225;
         line-height: 30px;
         padding: $padding-general-y 0;
         font-weight: 300;
-        margin-left: 1rem;
+        margin-right: 8px;
+        margin-left: 8px;
+        font-size: 15px;
     }
 
     &.bg-primary{

@@ -6,6 +6,7 @@ import { LoadingServiceService } from '../../services/loading-service.service';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 import { MemoryDataHolderServiceService } from '../../services/memory-data-holder-service.service';
+import { BreadcrumbService } from '../../services/breadcrumb.service';
 
 @Component({
   selector: 'app-mailchimp',
@@ -30,6 +31,7 @@ export class MailchimpComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private appservice: ApplicationsService,
+    private breadcrumbService: BreadcrumbService,
     private mcService: MailChimpService,
     private notify: NotificationService,
     private loadingService: LoadingServiceService,
@@ -82,6 +84,12 @@ export class MailchimpComponent implements OnInit {
     obs.subscribe(a => {
       this.application = a;
       this.status = a.status == "Active";
+      this.breadcrumbService.show([
+        {title: "Applications", url: "/applications"},
+        {title: a.applicationName, url: "/applications/view/" + a.id},
+        {title: "Integrations"},
+        {title: "Facebook"}
+      ]);
     }, e => {
       this.router.navigate(['/applications']);
     });

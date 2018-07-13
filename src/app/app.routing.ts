@@ -22,10 +22,12 @@ export const AppRoutes: Routes = [
     }, {
       path: 'applications',
       loadChildren: './applications/applications.module#ApplicationsModule'
-    }, {
-      path: 'integrations',
-      loadChildren: './integrations/integrations.module#IntegrationsModule'
-    }, {
+    }
+    // , {
+    //   path: 'integrations',
+    //   loadChildren: './integrations/integrations.module#IntegrationsModule'
+    // }
+    , {
       path: 'subscription',
       loadChildren: './subscription/subscription.module#SubscriptionModule'
     }

@@ -6,6 +6,7 @@ import { environment } from 'environments/environment';
 import { ApplicationsService, ApplicationViewDataModel, FacebookService, FacebookPageSubscriptionDataCreateModel, ApplicationIntegrationViewModel } from 'koraki-angular-client';
 import { NotificationService } from '../../services/notification.service';
 import { MemoryDataHolderServiceService } from '../../services/memory-data-holder-service.service';
+import { BreadcrumbService } from '../../services/breadcrumb.service';
 
 @Component({
   selector: 'app-facebook',
@@ -30,6 +31,7 @@ export class FacebookComponent implements OnInit {
     private route: ActivatedRoute,
     private client: HttpClient,
     private appservice: ApplicationsService,
+    private breadcrumbService: BreadcrumbService,
     private fbService: FacebookService,
     private notify: NotificationService,
     private loadingService: LoadingServiceService,
@@ -40,7 +42,7 @@ export class FacebookComponent implements OnInit {
   ngOnInit() {
     this.loadingService.loading$.subscribe(a => { this.loading = a; });
     
-    if (this.route.snapshot.params['id']) {
+    if (this.route.snapshot.params['id'] && this.route.snapshot.params['id'] != "~") {
       this.appId = this.route.snapshot.params['id'];
 
       this.integrations = <Map<string, ApplicationIntegrationViewModel>>this.data.store.get("integrations");
@@ -93,15 +95,22 @@ export class FacebookComponent implements OnInit {
     this.appservice.getApplicationById(id).subscribe(a => {
       this.application = a;
       this.status = a.status == "Active";
+      this.breadcrumbService.show([
+        {title: "Applications", url: "/applications"},
+        {title: a.applicationName, url: "/applications/view/" + a.id},
+        {title: "Integrations"},
+        {title: "Facebook"}
+      ]);
     }, e => {
       this.router.navigate(['/applications']);
     });
   }
 
   login() {
-    var redirect = environment.baseUrl + "/integrations/facebook";
+    let redirect = environment.baseUrl + "/applications/~/integrations/facebook";
+    let clientId = environment.integrations.facebook.clientId;
     redirect = redirect.replace("http://", "https://");
-    window.location.href = this.fbUrl + "dialog/oauth?state=" + this.appId + "&client_id=1710573302367584&response_type=token&scope=manage_pages&redirect_uri=" + redirect;
+    window.location.href = this.fbUrl + "dialog/oauth?state=" + this.appId + "&client_id=" + clientId + "&response_type=token&scope=manage_pages&redirect_uri=" + redirect;
   }
 
   loadPages() {

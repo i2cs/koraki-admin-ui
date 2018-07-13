@@ -107,13 +107,13 @@
                     <div class="card-footer">
                         <div *ngIf="!integrations[i.code]">
                             <a mat-raised-button class="btn" routerLink="/subscription" *ngIf="!i.ecommerce && !allowedIntegrations[i.code]"><i class="material-icons text-danger">warning</i> Upgrade your Koraki plan to use this</a>
-                            <a mat-raised-button *ngIf="i.ecommerce || allowedIntegrations[i.code]" class="btn btn-twitter" routerLink="/integrations/{{i.code}}/{{application.id}}">{{i.buttonTitle}}</a>
+                            <a mat-raised-button *ngIf="i.ecommerce || allowedIntegrations[i.code]" class="btn btn-twitter" routerLink="/applications/view/{{application.id}}/integrations/{{i.code}}">{{i.buttonTitle}}</a>
                           </div>
                           <div *ngIf="integrations[i.code]">
                             <div>You have successfully integrated this</div>
     
                             <a mat-raised-button class="btn" routerLink="/subscription" *ngIf="!i.ecommerce && !allowedIntegrations[i.code]"><i class="material-icons text-danger">warning</i> Upgrade your Koraki plan to use this</a>
-                            <a mat-raised-button *ngIf="i.ecommerce || allowedIntegrations[i.code]" class="btn btn-warning" routerLink="/integrations/{{i.code}}/{{application.id}}">Manage</a>
+                            <a mat-raised-button *ngIf="i.ecommerce || allowedIntegrations[i.code]" class="btn btn-warning" routerLink="/applications/view/{{application.id}}/integrations/{{i.code}}">Manage</a>
                           </div>
                     </div>
                   </div>
