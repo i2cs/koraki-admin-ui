@@ -98,7 +98,7 @@ export class MailchimpComponent implements OnInit {
   }
 
   loadLists(code) {
-    this.mcService.lists(code, environment.baseUrl + "/integrations/mailchimp/" + this.appId).subscribe(a => {
+    this.mcService.lists(code, environment.baseUrl + "/applications/view/" + this.appId + "/integrations/mailchimp").subscribe(a => {
       this.lists = a.lists;
       this.accessToken = a.accessToken,
         this.mcDataCenter = a.url,
@@ -110,7 +110,7 @@ export class MailchimpComponent implements OnInit {
 
   login() {
     var clientId = environment.integrations.mailchimp.clientId;
-    var redirect = environment.baseUrl + "/integrations/mailchimp/" + this.appId;
+    var redirect = environment.baseUrl + "/applications/view/" + this.appId + "/integrations/mailchimp";
     //redirect = redirect.replace("http://", "https://");
     window.location.href = this.mcUrl + "?response_type=code&client_id=" + clientId + "&redirect_uri=" + redirect;
   }
