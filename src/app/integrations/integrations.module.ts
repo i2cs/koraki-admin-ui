@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MailchimpComponent } from './mailchimp/mailchimp.component';
 import { PrivyComponent } from './privy/privy.component';
 import { OpencartComponent } from './opencart/opencart.component';
+import { IntercomComponent } from './intercom/intercom.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,6 @@ import { OpencartComponent } from './opencart/opencart.component';
     ReactiveFormsModule,
     MaterialModule
   ],
-  declarations: [FacebookComponent, MainComponent, MailchimpComponent, PrivyComponent, OpencartComponent]
+  declarations: [FacebookComponent, MainComponent, MailchimpComponent, PrivyComponent, OpencartComponent, IntercomComponent]
 })
 export class IntegrationsModule { }

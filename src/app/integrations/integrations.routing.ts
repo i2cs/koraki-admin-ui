@@ -4,6 +4,7 @@ import { MainComponent } from './main/main.component';
 import { MailchimpComponent } from './mailchimp/mailchimp.component';
 import { PrivyComponent } from './privy/privy.component';
 import { OpencartComponent } from './opencart/opencart.component';
+import { IntercomComponent } from './intercom/intercom.component';
 
 export const IntegrationsRoutes: Routes = [
     {
@@ -23,6 +24,9 @@ export const IntegrationsRoutes: Routes = [
     }, {
         path: 'opencart',
         component: OpencartComponent
+    }, {
+        path: 'intercom',
+        component: IntercomComponent
     }]
 }
 ];

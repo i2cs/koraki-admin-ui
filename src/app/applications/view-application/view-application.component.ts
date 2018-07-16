@@ -104,6 +104,15 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
     });
 
     this.allIntegrations.push({
+      code: "intercom",
+      title: "Intercom",
+      description: "Connect your Intercom account with Koraki and show social notifications about your leads and users.",
+      capable: "This integration can <b>Write</b> notifications",
+      buttonTitle: "Integrate",
+      ecommerce: false
+    });
+
+    this.allIntegrations.push({
       code: "mailchimp",
       title: "MailChimp Integration",
       description: "This integration can generate notifications when subscriber is added to email lists.",

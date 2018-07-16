@@ -55,7 +55,7 @@
     "jquery": "3.2.1",
     "jquery-validation": "1.17.0",
     "jqvmap": "1.5.1",
-    "koraki-angular-client": "0.0.50",
+    "koraki-angular-client": "0.0.51",
     "moment": "^2.22.2",
     "moment-timezone": "0.4.0",
     "ng2-nouislider": "1.7.11",
