@@ -19,6 +19,7 @@ export class SubscriptionCreateComponent implements OnInit {
 
   @ViewChild(StripeCardComponent) card: StripeCardComponent;
   loading: boolean;
+  planIcons = environment.planIcons;
   cardOptions: ElementOptions = {
     hidePostalCode: true,
     style: {
@@ -42,8 +43,8 @@ export class SubscriptionCreateComponent implements OnInit {
 
   plans: any[] = [];
   countries: any[] = [];
-  planFeatures: any;
-  form: any = {};
+  planFeatures: any = {};
+  form: any = { plan : { code : ""}};
 
   constructor(
     private notification: NotificationService,

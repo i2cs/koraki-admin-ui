@@ -176,3 +176,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', end
         display: none;
     }
 }
+
+.mat-select-value-text{
+    font-size: 14px;
+}
+
+.mat-select-placeholder{
+    font-size: 14px;
+}
