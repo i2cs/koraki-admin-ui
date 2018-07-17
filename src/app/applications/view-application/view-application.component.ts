@@ -114,7 +114,7 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
 
     this.allIntegrations.push({
       code: "mailchimp",
-      title: "MailChimp Integration",
+      title: "MailChimp",
       description: "This integration can generate notifications when subscriber is added to email lists.",
       capable: "This integration can <b>Write</b> notifications",
       buttonTitle: "Integrate",
@@ -123,7 +123,7 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
 
     this.allIntegrations.push({
       code: "privy",
-      title: "Privy Webhooks",
+      title: "Privy",
       description: "Generate notifications when someone subscribe for a campaign on Privy.",
       capable: "This integration can <b>Write</b> notifications",
       buttonTitle: "Integrate",

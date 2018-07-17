@@ -1,6 +1,6 @@
 <div class="main-content">
   <div class="container-fluid">
-    <div class="col-md-10 col-sm-12 mr-auto ml-auto">
+    <div class="col-md-12 col-sm-12 mr-auto ml-auto">
       <div class="card ">
         <div class="card-header">
           <div class="pull-right app-notify-status" *ngIf="application.status!='Active'">
@@ -91,10 +91,10 @@
                   <input type="text" placeholder="Search for an integration: ex., OpenCart" [(ngModel)]="filter" (change)="filterList()" class="form-control form-control-lg"
                   />
                 </div>
-                <div class="col-md-6" *ngFor="let i of allIntegrations">
+                <div class="col-md-4" *ngFor="let i of allIntegrations">
                   <div class="card card-chart" [ngClass]="{'disabled-integration' : !i.ecommerce && !allowedIntegrations[i.code]}">
                     <div class="card-body">
-                      <h3 class="card-title">{{i.title}}</h3>
+                      <h4 class="card-title">{{i.title}}</h4>
                       <div class="integration-images">
                         <img [src]="'/assets/img/integrations/' + i.code + '.png'" />
                       </div>
@@ -110,8 +110,6 @@
                             <a mat-raised-button *ngIf="i.ecommerce || allowedIntegrations[i.code]" class="btn btn-twitter" routerLink="/applications/view/{{application.id}}/integrations/{{i.code}}">{{i.buttonTitle}}</a>
                           </div>
                           <div *ngIf="integrations[i.code]">
-                            <div>You have successfully integrated this</div>
-    
                             <a mat-raised-button class="btn" routerLink="/subscription" *ngIf="!i.ecommerce && !allowedIntegrations[i.code]"><i class="material-icons text-danger">warning</i> Upgrade your Koraki plan to use this</a>
                             <a mat-raised-button *ngIf="i.ecommerce || allowedIntegrations[i.code]" class="btn btn-warning" routerLink="/applications/view/{{application.id}}/integrations/{{i.code}}">Manage</a>
                           </div>
