@@ -40,8 +40,7 @@
 
           </div>
 
-          <div *ngIf="!fbLoggedIn">
-
+          <div *ngIf="!fbLoggedIn && !integrations['facebook']">
             <p>
               This integration can generate notifications on your Koraki widget. It will create notifications upon positive ratings (4
               or 5 starts) made on your page and daily or hourly updates of increase of like count.
@@ -52,10 +51,22 @@
             </p>
             <div class="divider"></div>
 
-            <a href="#" mat-raised-button class="btn btn-facebook" onclick="return false" (click)="login()">
+            <a href="#" mat-raised-button class="btn btn-facebook" onclick="return false" (click)="login('add:' + appId)">
               <i class="fa fa-facebook"></i> Connect
             </a>
           </div>
+
+          <div *ngIf="integrations['facebook']">
+            <p>
+              Koraki is connected to Facebook page <a href="https://www.facebook.com/{{configurations['page_id']}}" target="_blank">{{configurations['page_id']}}</a>
+            </p>
+            <div class="divider"></div>
+
+            <a href="#" mat-raised-button class="btn btn-default" onclick="return false" (click)="disconnect()">
+              <i class="fa"></i> Disconnect
+            </a>
+          </div>
+
         </div>
       </div>
     </div>

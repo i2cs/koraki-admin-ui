@@ -40,47 +40,67 @@ export class FacebookComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    let needToUnsubscribe = false;
     this.loadingService.loading$.subscribe(a => { this.loading = a; });
-    
+
     if (this.route.snapshot.params['id'] && this.route.snapshot.params['id'] != "~") {
       this.appId = this.route.snapshot.params['id'];
-
-      this.integrations = <Map<string, ApplicationIntegrationViewModel>>this.data.store.get("integrations");
-      if (!this.integrations) {
-        this.integrations = new Map<string, ApplicationIntegrationViewModel>();
-        let id = Number(this.appId);
-        this.appservice.getApplicationIntegrationsById(id).subscribe(a => {
-          for (var i in a) {
-            this.integrations[a[i].code] = a[i];
-          }
-
-          this.data.store.set("integrations", this.integrations);
-          if (this.integrations['facebook'] && this.integrations['facebook'].configurations) {
-            this.integrations['facebook'].configurations.forEach(a => {
-              this.configurations[a.key] = a.value;
-            })
-          }
-        });
-      } else if (this.integrations && this.integrations['facebook'] && this.integrations['facebook'].configurations) {
-        this.integrations['facebook'].configurations.forEach(a => {
-          this.configurations[a.key] = a.value;
-        })
-      }
-
     } else {
       let fragment: string = this.route.snapshot.fragment;
       if (fragment != null) {
         this.accessToken = this.getFragmentParameter(fragment, "access_token");
         if (this.accessToken) {
-          this.appId = this.getFragmentParameter(fragment, "state");
-          if (this.appId) {
-            this.fbLoggedIn = true;
-            this.loadPages();
+          let state = decodeURIComponent(this.getFragmentParameter(fragment, "state"));
+          if (state.indexOf(":") >= 0) {
 
-            //clear hash
-            window.location.hash = '';
+            let stateParts = state.split(":");
+
+            this.appId = stateParts[1];
+            if (this.appId) {
+              this.fbLoggedIn = true;
+
+              if (stateParts[0] == "add") {
+                this.loadPages();
+              }
+
+              if (stateParts[0] == "remove") {
+                needToUnsubscribe = true;
+              }
+
+              //clear hash
+              window.location.hash = '';
+            }
           }
         }
+      }
+    }
+
+    this.integrations = <Map<string, ApplicationIntegrationViewModel>>this.data.store.get("integrations");
+    if (!this.integrations) {
+      this.integrations = new Map<string, ApplicationIntegrationViewModel>();
+      let id = Number(this.appId);
+      this.appservice.getApplicationIntegrationsById(id).subscribe(a => {
+        for (var i in a) {
+          this.integrations[a[i].code] = a[i];
+        }
+
+        this.data.store.set("integrations", this.integrations);
+        if (this.integrations['facebook'] && this.integrations['facebook'].configurations) {
+          this.integrations['facebook'].configurations.forEach(a => {
+            this.configurations[a.key] = a.value;
+          })
+        }
+        if (needToUnsubscribe) {
+          this.unsubscribe();
+        }
+      });
+    } else if (this.integrations && this.integrations['facebook'] && this.integrations['facebook'].configurations) {
+      this.integrations['facebook'].configurations.forEach(a => {
+        this.configurations[a.key] = a.value;
+      });
+
+      if (needToUnsubscribe) {
+        this.unsubscribe();
       }
     }
 
@@ -96,26 +116,26 @@ export class FacebookComponent implements OnInit {
       this.application = a;
       this.status = a.status == "Active";
       this.breadcrumbService.show([
-        {title: "Applications", url: "/applications"},
-        {title: a.applicationName, url: "/applications/view/" + a.id},
-        {title: "Integrations"},
-        {title: "Facebook"}
+        { title: "Applications", url: "/applications" },
+        { title: a.applicationName, url: "/applications/view/" + a.id },
+        { title: "Integrations" },
+        { title: "Facebook" }
       ]);
     }, e => {
       this.router.navigate(['/applications']);
     });
   }
 
-  login() {
+  login(state) {
     let redirect = environment.baseUrl + "/applications/view/~/integrations/facebook";
     let clientId = environment.integrations.facebook.clientId;
     redirect = redirect.replace("http://", "https://");
-    window.location.href = this.fbUrl + "dialog/oauth?state=" + this.appId + "&client_id=" + clientId + "&response_type=token&scope=manage_pages&redirect_uri=" + redirect;
+    window.location.href = this.fbUrl + "dialog/oauth?state=" + state + "&client_id=" + clientId + "&response_type=token&scope=manage_pages&redirect_uri=" + redirect;
   }
 
   loadPages() {
     this.client.get(this.fbGraphUrl + "me/accounts?access_token=" + this.accessToken).subscribe(a => {
-      this.pages = a['data']; 
+      this.pages = a['data'];
     });
   }
 
@@ -129,13 +149,57 @@ export class FacebookComponent implements OnInit {
         };
         this.fbService.subscribe(subscribeRequest).subscribe(b => {
           this.notify.success("Successfully subscribed " + this.page.name + " to Koraki");
-          this.router.navigate(['/applications/' + this.appId]);
+          this.router.navigate(['/applications/view/' + this.appId]);
+          this.data.store.set("integrations", null);
         }, e => {
           this.notify.error("Error occured while subscribing " + this.page.name + " to Koraki<br/>" + e.error.message);
         })
       }
     }, e => {
       this.notify.error("Permission error occured while subscribing " + this.page.name + " from Facebook");
+    });
+  }
+
+  disconnect() {
+    this.login("remove:" + this.appId);
+  }
+
+  unsubscribe() {
+    let id = Number(this.appId);
+    let sending: boolean = false;
+    let interval = setInterval(a => {
+      if (this.configurations['page_id']) {
+        if (!sending) {
+          sending = true;
+          this.client.get(this.fbGraphUrl + "/me/accounts?fields=access_token&limit=10000&access_token=" + this.accessToken).subscribe(response => {
+            let data = response['data'].filter(a => a.id == this.configurations['page_id']);
+            if (data.length > 0) {
+              this.client.delete(this.fbGraphUrl + this.configurations['page_id'] + "/subscribed_apps?access_token=" + data[0]['access_token']).subscribe(a => {
+                if (a['success']) {
+                  this.notify.success("Successfully unsubscribed from Facebook page");
+                  clearInterval(interval);
+                }
+
+                sending = false;
+              }, e => {
+                sending = false
+              });
+            }else{
+              sending = false;
+            }
+          }, e => {
+            sending = false;
+          });
+        }
+      }
+    }, 1000);
+
+    this.fbService.unsubscribe(id).subscribe(a => {
+      this.data.store.set("integrations", null);
+      this.notify.success("Successully removed from integrations");
+      this.router.navigate(['/applications/view/' + this.appId]);
+    }, e => {
+      this.notify.error("Unsubscribe was not success");
     });
   }
 

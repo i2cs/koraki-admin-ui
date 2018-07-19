@@ -43,7 +43,8 @@
           <div *ngIf="!mcLoggedIn && !integrations['mailchimp']">
 
             <p>
-            This integration can create notifications when subscriber is added to your list. Koraki will create a webhook on your MailChimp account so we get subscriber activities.
+              This integration can create notifications when subscriber is added to your list. Koraki will create a webhook on your MailChimp
+              account so we get subscriber activities.
             </p>
 
             <p>
@@ -57,15 +58,17 @@
           </div>
 
           <div *ngIf="integrations['mailchimp']">
-              <p>
-                Koraki is connected to MailChimp list <a [href]="convertUrl(configurations['mc_dc_url']) + '/lists/dashboard/overview?id=' + configurations['mc_web_id']" target="_blank">{{configurations['mc_web_id']}}</a>
-              </p>
-              <div class="divider"></div>
-  
-              <a href="#" mat-raised-button class="btn btn-default" onclick="return false" (click)="disconnect()">
-                <i class="fa"></i> Disconnect
-              </a>
-            </div>
+            <p>
+              Koraki is connected to MailChimp list
+              <a [href]="convertUrl(configurations['mc_dc_url']) + '/lists/dashboard/overview?id=' + configurations['mc_web_id']"
+                target="_blank">{{configurations['mc_web_id']}}</a>
+            </p>
+            <div class="divider"></div>
+
+            <a href="#" mat-raised-button class="btn btn-default" onclick="return false" (click)="disconnect()">
+              <i class="fa"></i> Disconnect
+            </a>
+          </div>
 
         </div>
       </div>
