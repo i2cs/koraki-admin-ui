@@ -46,6 +46,7 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
   filter: string;
   updated: { name: string } = { name : ""};
   nameEditing: boolean;
+  paid: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -79,6 +80,13 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
       a.integrations.forEach(a => {
         this.allowedIntegrations[a.code] = true;
       });
+
+      let number = Number.parseInt(a.permissons['notifications_active_per_app.maximum']);
+      this.possibleCounts = _Array.range(1, Math.min(number, 100), 1);
+      if(number > 100){
+        this.possibleCounts.push(1000);
+      }
+      this.paid = a.permissons['paid'] === "true";
     });
   }
 

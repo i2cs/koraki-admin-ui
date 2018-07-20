@@ -184,3 +184,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', end
 .mat-select-placeholder{
     font-size: 14px;
 }
+
+.upgrade-right{
+    float: right;
+    border: 1px solid #ffd79d;
+    border-radius: 3px;
+    padding: 3px;
+}

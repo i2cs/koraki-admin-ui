@@ -164,13 +164,14 @@
                 <div class="divider"></div>
 
                 <div class="col-md-12 mr-auto">
-                  <legend>Active notifications count</legend>
+                  <a *ngIf="!paid" routerLink="/subscription" class="upgrade-right">Upgrade to change</a>
+                  <legend>Active notifications count</legend> 
                   <mat-form-field hintLabel="Maximum active notification count before it repeats. Koraki will keep {{application.notificationMaximumActiveCount}} most recent notifications and archive the older ones."
                     class="example-full-width has-label">
 
-                    <mat-select [disabled]="updatingSettings" [(ngModel)]="application.notificationMaximumActiveCount" (selectionChange)="updateApplicationSettings()">
+                    <mat-select [disabled]="updatingSettings || !paid" [(ngModel)]="application.notificationMaximumActiveCount" (selectionChange)="updateApplicationSettings()">
                       <mat-option *ngFor="let c of possibleCounts" [value]="c">
-                        {{ c }}
+                        {{ (c == 1000) ? "Unlimited" : c }}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
@@ -179,11 +180,12 @@
                 <div class="divider"></div>
 
                 <div class="col-md-12 mr-auto">
+                  <a *ngIf="!paid" routerLink="/subscription" class="upgrade-right">Upgrade to change</a>
                   <legend>Active notifications duration</legend>
                   <mat-form-field hintLabel="Lifetime of a notification before it expired. Koraki shows notifications created last {{application.notificationMaximumDurationDays}} days."
                     class="example-full-width has-label">
 
-                    <mat-select [disabled]="updatingSettings" [(ngModel)]="application.notificationMaximumDurationDays" (selectionChange)="updateApplicationSettings()">
+                    <mat-select [disabled]="updatingSettings || !paid" [(ngModel)]="application.notificationMaximumDurationDays" (selectionChange)="updateApplicationSettings()">
                       <mat-option *ngFor="let day of possibleDays" [value]="day">
                         {{ day }}
                       </mat-option>
