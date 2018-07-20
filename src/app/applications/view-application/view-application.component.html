@@ -10,11 +10,25 @@
             {{application.activeNotificationsCount==0?'No':application.activeNotificationsCount}} Active notifications
           </div>
           <h3 class="card-title">
-            {{application.applicationName}}
+            <span *ngIf="!nameEditing">{{application.applicationName}}</span>
+            <span *ngIf="nameEditing">
+              <form (submit)="updateName($event)">
+                <input type="text" id="update_name" name="update_name" [readonly]="updatingSettings" #nameInput matInput [(ngModel)]="updated.name" />
+              </form>
+              {{nameInput.focus()}}
+            </span>
+            <a title="Edit application name" href="#" *ngIf="!nameEditing" onclick="return false;" (click)="nameEditing = true; updated.name = application.applicationName">
+              <i class="material-icons">edit</i>
+            </a>
+            <a title="Save changes" *ngIf="nameEditing" href="#" onclick="return false" (click)="updateName()">
+              <i class="material-icons">save</i>
+            </a>
+            <a title="Discard changes" *ngIf="nameEditing" href="#" onclick="return false" (click)="nameEditing = false">
+              <i class="material-icons">cancel</i>
+            </a>
           </h3>
 
-          <h5 class="card-description">{{application.url}}
-          </h5>
+          <h5 *ngIf="!nameEditing" class="card-description">{{application.url}}</h5>
 
         </div>
         <mat-divider></mat-divider>
@@ -105,14 +119,14 @@
                       <p [innerHTML]="i.capable"></p>
                     </div>
                     <div class="card-footer">
-                        <div *ngIf="!integrations[i.code]">
-                            <a mat-raised-button class="btn" routerLink="/subscription" *ngIf="!i.ecommerce && !allowedIntegrations[i.code]">Upgrade your plan to use this</a>
-                            <a mat-raised-button *ngIf="i.ecommerce || allowedIntegrations[i.code]" class="btn btn-twitter" routerLink="/applications/view/{{application.id}}/integrations/{{i.code}}">{{i.buttonTitle}}</a>
-                          </div>
-                          <div *ngIf="integrations[i.code]">
-                            <a mat-raised-button class="btn" routerLink="/subscription" *ngIf="!i.ecommerce && !allowedIntegrations[i.code]">Upgrade your plan to use this</a>
-                            <a mat-raised-button *ngIf="i.ecommerce || allowedIntegrations[i.code]" class="btn btn-warning" routerLink="/applications/view/{{application.id}}/integrations/{{i.code}}">Manage</a>
-                          </div>
+                      <div *ngIf="!integrations[i.code]">
+                        <a mat-raised-button class="btn" routerLink="/subscription" *ngIf="!i.ecommerce && !allowedIntegrations[i.code]">Upgrade your plan to use this</a>
+                        <a mat-raised-button *ngIf="i.ecommerce || allowedIntegrations[i.code]" class="btn btn-twitter" routerLink="/applications/view/{{application.id}}/integrations/{{i.code}}">{{i.buttonTitle}}</a>
+                      </div>
+                      <div *ngIf="integrations[i.code]">
+                        <a mat-raised-button class="btn" routerLink="/subscription" *ngIf="!i.ecommerce && !allowedIntegrations[i.code]">Upgrade your plan to use this</a>
+                        <a mat-raised-button *ngIf="i.ecommerce || allowedIntegrations[i.code]" class="btn btn-warning" routerLink="/applications/view/{{application.id}}/integrations/{{i.code}}">Manage</a>
+                      </div>
                     </div>
                   </div>
                 </div>

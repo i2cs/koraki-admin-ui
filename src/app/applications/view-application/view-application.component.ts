@@ -44,6 +44,8 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
   possibleCounts: number[] = _Array.range(8, 100, 1);
   possibleDays: number[] = _Array.range(1, 100, 1);
   filter: string;
+  updated: { name: string } = { name : ""};
+  nameEditing: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -198,6 +200,22 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
         this.router.navigate(['/applications']);
       });
     }
+  }
+
+  updateName(){
+    this.updatingSettings = true;
+    this.appservice.updateApplication(this.application.id, <ApplicationUpdateDataModel>{
+      applicationName: this.updated.name
+    }).subscribe(a => {
+      this.updatingSettings = false;
+      this.application = a;
+      this.nameEditing = false;
+      this.notify.success("Application name updated");
+    }, e => {
+      this.updatingSettings = false;
+      this.nameEditing = false;
+      this.notify.error("Could not update the application name");
+    });
   }
 
   private getFragmentParameter(fragment: string, param: string) {
