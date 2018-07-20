@@ -97,7 +97,7 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
     this.allIntegrations.push({
       code: "facebook",
       title: "Facebook Page",
-      description: "You can connect your Facebook fanpage to generate notifications on new user like and new user review events.",
+      description: "You can connect your Facebook fanpage to generate notifications on user comments, user posts on wall and new user review events.",
       capable: "This integration can <b>Write</b> notifications",
       buttonTitle: "Integrate",
       ecommerce: false
