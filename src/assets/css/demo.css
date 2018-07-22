@@ -191,3 +191,21 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', end
     border-radius: 3px;
     padding: 3px;
 }
+
+.login-footer ul li a:first{
+    padding-left: 4px;
+}
+
+@media (max-width: 799px) {
+    .text-center-sm{
+        text-align: center!important;
+    }
+
+    .text-center-sm > ul{
+        padding-left: 25px;
+    }
+
+    .text-center-sm > .copyright{
+        margin-left: 16px;
+    }
+}
