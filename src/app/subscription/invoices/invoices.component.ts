@@ -14,7 +14,7 @@ export class InvoicesComponent implements OnInit {
 
   ngOnInit() {
     this.breadcrumbService.show([
-      { title: "Subscription", url: "/subscription" },
+      { title: "Subscription", url: "/subscription/plans" },
       { title: "Invoices", url: "/subscription/invoices" }
     ]);
   }

@@ -27,7 +27,7 @@
             <h3 *ngIf="maxAllowedApps <= appCount">Looks like you are full with applications!</h3>
 
             <div *ngIf="maxAllowedApps > appCount" class="card-icon new-app" data-hover="Add new application" routerLink="/applications/new"></div>
-            <div *ngIf="maxAllowedApps <= appCount" class="card-icon new-app" data-hover="Upgrade plan to add new application" routerLink="/subscription"></div>
+            <div *ngIf="maxAllowedApps <= appCount" class="card-icon new-app" data-hover="Upgrade plan to add new application" routerLink="/subscription/plans"></div>
 
             <p class="card-description">
               Create a new application to add koraki notification widget to your website

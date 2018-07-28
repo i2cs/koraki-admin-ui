@@ -38,7 +38,7 @@
 
               <div class="col-sm-6">
                 <mat-form-field floatLabel="always">
-                  <mat-select required [(ngModel)]="form.source" name="source" #source="ngModel" placeholder="Select a payment source">
+                  <mat-select required [disabled]="sources.length == 1" [(ngModel)]="form.source" name="source" #source="ngModel" placeholder="Select a payment source">
                     <mat-option *ngFor="let source of sources" [value]="source.id" [innerHtml]="source.name">
                     </mat-option>
                   </mat-select>
@@ -50,7 +50,7 @@
           </form>
         </div>
         <div class="card-footer">
-          <a mat-raised-button class="btn btn btn-fill" routerLink="/subscription/plans">Cancel</a>
+          <a mat-raised-button class="btn btn btn-fill" *ngIf="!loading" routerLink="/subscription/plans">Cancel</a>
           <button [disabled]="subsForm.invalid" *ngIf="!loading" mat-raised-button type="submit" class="btn btn-primary btn-fill" (click)="subsForm.ngSubmit.emit()">Subscribe</button>
         </div>
       </div>

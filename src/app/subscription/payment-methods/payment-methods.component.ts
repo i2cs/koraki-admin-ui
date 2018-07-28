@@ -25,7 +25,7 @@ export class PaymentMethodsComponent implements OnInit {
 
   ngOnInit() {
     this.breadcrumbService.show([
-      { title: "Subscription", url: "/subscription" },
+      { title: "Subscription", url: "/subscription/plans" },
       { title: "Payment methods", url: "/subscription/cards" }
     ]);
 
@@ -46,7 +46,7 @@ export class PaymentMethodsComponent implements OnInit {
     };
 
     this.paymentService.setDefaultCard(this.primary, model).subscribe(a => {
-      this.notification.success("Defualt card changed");
+      this.notification.success("Primary card changed");
       this.loadData();
     });
   }

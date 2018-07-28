@@ -38,7 +38,7 @@ export class SubscriptionCreateComponent implements OnInit {
 
   ngOnInit() {
     this.breadcrumbService.show([
-      { title: "Subscription", url: "/subscription" },
+      { title: "Subscription", url: "/subscription/plans" },
       { title: "New" }
     ]);
 
@@ -54,11 +54,14 @@ export class SubscriptionCreateComponent implements OnInit {
     });
 
     this.sources.push({ id: "new", name: "Add new card" });
+    this.form['source'] = "new";
 
     this.paymentService.getAllCards().subscribe(a => {
-      a.forEach(b => {
-        this.sources.unshift({ id: b.id, name: "<img src='" + this.cardUrl + b.brand + ".png' /> " + b.brand + " " + b.funding + " card ending with " + b.last4 });
-      })
+      var primary = a.filter(a => a.primary);
+      if(primary.length > 0){
+        this.form['source'] = primary[0].id;
+        this.sources.unshift({ id: primary[0].id, name: "<img src='" + this.cardUrl + primary[0].brand + ".png' /> " + primary[0].brand + " " + primary[0].funding + " card ending with " + primary[0].last4 + " (Primary Card)"});
+      }
     });
   }
 
@@ -79,6 +82,8 @@ export class SubscriptionCreateComponent implements OnInit {
         this.subs.clear();
         this.notification.success("Subscribed to " + plan.name);
         this.router.navigate(['/subscription/plans']);
+      }, e => {
+        this.notification.error(e.error.message);
       });
     } else {
       if (name && address_line1 && address_city && address_state && address_country) {
@@ -107,11 +112,13 @@ export class SubscriptionCreateComponent implements OnInit {
               this.subs.clear();
               this.notification.success("Subscribed to " + plan.name);
               this.router.navigate(['/subscription/plans']);
+            }, e => {
+              this.notification.error(e.error.message);
             });
 
             console.log(result);
           } else if (result.error) {
-            this.notification.success("Error returned from payment gateway. Please choose another card");
+            this.notification.error("Error returned from payment gateway. Please choose another card");
             console.log(result.error.message);
           }
         });

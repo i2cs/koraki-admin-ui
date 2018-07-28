@@ -120,11 +120,11 @@
                     </div>
                     <div class="card-footer">
                       <div *ngIf="!integrations[i.code]">
-                        <a mat-raised-button class="btn" routerLink="/subscription" *ngIf="!i.ecommerce && !allowedIntegrations[i.code]">Upgrade your plan to use this</a>
+                        <a mat-raised-button class="btn" routerLink="/subscription/plans" *ngIf="!i.ecommerce && !allowedIntegrations[i.code]">Upgrade your plan to use this</a>
                         <a mat-raised-button *ngIf="i.ecommerce || allowedIntegrations[i.code]" class="btn btn-twitter" routerLink="/applications/view/{{application.id}}/integrations/{{i.code}}">{{i.buttonTitle}}</a>
                       </div>
                       <div *ngIf="integrations[i.code]">
-                        <a mat-raised-button class="btn" routerLink="/subscription" *ngIf="!i.ecommerce && !allowedIntegrations[i.code]">Upgrade your plan to use this</a>
+                        <a mat-raised-button class="btn" routerLink="/subscription/plans" *ngIf="!i.ecommerce && !allowedIntegrations[i.code]">Upgrade your plan to use this</a>
                         <a mat-raised-button *ngIf="i.ecommerce || allowedIntegrations[i.code]" class="btn btn-warning" routerLink="/applications/view/{{application.id}}/integrations/{{i.code}}">Manage</a>
                       </div>
                     </div>
@@ -164,7 +164,7 @@
                 <div class="divider"></div>
 
                 <div class="col-md-12 mr-auto">
-                  <a *ngIf="!paid" routerLink="/subscription" class="upgrade-right">Upgrade to change</a>
+                  <a *ngIf="!paid" routerLink="/subscription/plans" class="upgrade-right">Upgrade to change</a>
                   <legend>Active notifications count</legend> 
                   <mat-form-field hintLabel="Maximum active notification count before it repeats. Koraki will keep {{application.notificationMaximumActiveCount}} most recent notifications and archive the older ones."
                     class="example-full-width has-label">
@@ -180,7 +180,7 @@
                 <div class="divider"></div>
 
                 <div class="col-md-12 mr-auto">
-                  <a *ngIf="!paid" routerLink="/subscription" class="upgrade-right">Upgrade to change</a>
+                  <a *ngIf="!paid" routerLink="/subscription/plans" class="upgrade-right">Upgrade to change</a>
                   <legend>Active notifications duration</legend>
                   <mat-form-field hintLabel="Lifetime of a notification before it expired. Koraki shows notifications created last {{application.notificationMaximumDurationDays}} days."
                     class="example-full-width has-label">

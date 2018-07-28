@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AddCardComponent } from '../add-card/add-card.component';
 import { NotificationService } from '../../services/notification.service';
 import { PaymentService, PaymentCardDataCreateModel } from 'koraki-angular-client';
+import { BreadcrumbService } from '../../services/breadcrumb.service';
 
 @Component({
   selector: 'app-create-payment-method',
@@ -18,12 +19,19 @@ export class CreatePaymentMethodComponent implements OnInit {
   constructor(
     private notification: NotificationService,
     private loadingService: LoadingServiceService,
+    private breadcrumbService: BreadcrumbService,
     private paymentService: PaymentService,
     private router: Router
   ) { }
 
   ngOnInit() {
     this.loadingService.loading$.subscribe(a => { this.loading = a; });
+
+    this.breadcrumbService.show([
+      { title: "Subscription", url: "/subscription/plans" },
+      { title: "Payment methods", url: "/subscription/cards" },
+      { title: "New" }
+    ]);
   }
 
   addCard() {

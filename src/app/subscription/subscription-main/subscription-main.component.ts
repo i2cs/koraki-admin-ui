@@ -35,7 +35,7 @@ export class SubscriptionMainComponent implements OnInit {
 
   ngOnInit() {
     this.breadcrumbService.show([
-      { title: "Subscription", url: "/subscription" }
+      { title: "Subscription", url: "/subscription/plans" }
     ]);
 
     this.loadingService.loading$.subscribe(a => { this.loading = a; });
