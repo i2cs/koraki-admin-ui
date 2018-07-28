@@ -17,7 +17,7 @@ export interface RouteInfo {
 export interface ChildrenItems {
     path: string;
     title: string;
-    ab: string;
+    icontype: string;
     type?: string;
 }
 
@@ -31,14 +31,19 @@ export const ROUTES: RouteInfo[] = [{
     path: '/applications',
     title: 'Applications',
     type: 'link',
-    icontype: 'cloud'
+    icontype: 'cloud_queue'
 
 }, {
     path: '/subscription',
     title: 'Subscription',
-    type: 'link',
-    icontype: 'table_chart'
-
+    type: 'sub',
+    icontype: 'subscriptions',
+    collapse: 'subscription',
+    children: [
+        {path: 'plans', title: 'Plan', icontype:'table_chart'},
+        {path: 'cards', title: 'Payment Methods', icontype:'credit_card'},
+        {path: 'invoices', title: 'Invoices', icontype:'subtitles'}
+    ]
 }
 ];
 @Component({

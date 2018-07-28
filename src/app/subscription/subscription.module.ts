@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SubscriptionMainComponent } from './subscription-main/subscription-main.component';
 import { RouterModule } from '@angular/router';
-import { SubscriptionRoutes } from './applications.routing';
+import { SubscriptionRoutes } from './subscription.routing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgxStripeModule } from 'ngx-stripe';
@@ -11,6 +11,10 @@ import { SubscriptionCreateComponent } from './subscription-create/subscription-
 import { InvoiceTableComponent } from './invoice-table/invoice-table.component';
 import { MomentModule } from 'ngx-moment';
 import { environment } from 'environments/environment.prod';
+import { InvoicesComponent } from './invoices/invoices.component';
+import { PaymentMethodsComponent } from './payment-methods/payment-methods.component';
+import { AddCardComponent } from './add-card/add-card.component';
+import { CreatePaymentMethodComponent } from './create-payment-method/create-payment-method.component';
 
 @NgModule({
   imports: [
@@ -22,6 +26,6 @@ import { environment } from 'environments/environment.prod';
     MaterialModule,
     MomentModule
   ],
-  declarations: [SubscriptionMainComponent, SubscriptionMainComponent, SubscriptionCreateComponent, InvoiceTableComponent]
+  declarations: [SubscriptionMainComponent, SubscriptionMainComponent, SubscriptionCreateComponent, InvoiceTableComponent, InvoicesComponent, PaymentMethodsComponent, AddCardComponent, CreatePaymentMethodComponent]
 })
 export class SubscriptionModule { }
