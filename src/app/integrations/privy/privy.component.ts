@@ -17,7 +17,7 @@ export class PrivyComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private appservice: ApplicationsService,
-    private privy: PrivyService,
+    private privyService: PrivyService,
     private loadingService: LoadingServiceService,
     private breadcrumbService: BreadcrumbService
   ) { }
@@ -35,7 +35,7 @@ export class PrivyComponent implements OnInit {
           { title: "Privy" }
         ]);
 
-        this.privy.getWebhookUrl(this.appId).subscribe(b => {
+        this.privyService.getWebhookUrl(this.appId).subscribe(b => {
           this.webhook = b;
         });
       });

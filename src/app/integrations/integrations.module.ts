@@ -10,6 +10,8 @@ import { MailchimpComponent } from './mailchimp/mailchimp.component';
 import { PrivyComponent } from './privy/privy.component';
 import { OpencartComponent } from './opencart/opencart.component';
 import { IntercomComponent } from './intercom/intercom.component';
+import { TwitterComponent } from './twitter/twitter.component';
+import { MomentModule } from 'ngx-moment';
 
 @NgModule({
   imports: [
@@ -17,8 +19,9 @@ import { IntercomComponent } from './intercom/intercom.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    MomentModule
   ],
-  declarations: [FacebookComponent, MainComponent, MailchimpComponent, PrivyComponent, OpencartComponent, IntercomComponent]
+  declarations: [FacebookComponent, MainComponent, MailchimpComponent, PrivyComponent, OpencartComponent, IntercomComponent, TwitterComponent]
 })
 export class IntegrationsModule { }

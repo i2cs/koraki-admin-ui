@@ -114,6 +114,15 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
     });
 
     this.allIntegrations.push({
+      code: "twitter",
+      title: "Twitter",
+      description: "Twitter integration generates notifications hourly indicating how many new followers were added to the provided Twitter account.",
+      capable: "This integration can <b>Write</b> notifications",
+      buttonTitle: "Integrate",
+      ecommerce: false
+    });
+
+    this.allIntegrations.push({
       code: "intercom",
       title: "Intercom",
       description: "Connect your Intercom account with Koraki and show social notifications about your leads and users.",

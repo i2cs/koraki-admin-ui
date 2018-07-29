@@ -88,7 +88,7 @@ export class MailchimpComponent implements OnInit {
         {title: "Applications", url: "/applications"},
         {title: a.applicationName, url: "/applications/view/" + a.id},
         {title: "Integrations"},
-        {title: "Facebook"}
+        {title: "MailChimp"}
       ]);
     }, e => {
       this.router.navigate(['/applications']);
