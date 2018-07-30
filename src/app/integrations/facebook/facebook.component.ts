@@ -107,7 +107,7 @@ export class FacebookComponent implements OnInit {
     if (this.appId) {
       this.loadApplication(this.appId);
     } else {
-      this.router.navigate(['/applications']);
+      this.router.navigate(['/applications/view/' + this.appId]);
     }
   }
 
@@ -122,7 +122,7 @@ export class FacebookComponent implements OnInit {
         { title: "Facebook" }
       ]);
     }, e => {
-      this.router.navigate(['/applications']);
+      this.router.navigate(['/applications/view/' + this.appId]);
     });
   }
 

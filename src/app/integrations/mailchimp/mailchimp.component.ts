@@ -75,7 +75,7 @@ export class MailchimpComponent implements OnInit {
         }
       });
     } else {
-      this.router.navigate(['/applications']);
+      this.router.navigate(['/applications/view/' + this.appId]);
     }
   }
 
@@ -91,7 +91,7 @@ export class MailchimpComponent implements OnInit {
         {title: "MailChimp"}
       ]);
     }, e => {
-      this.router.navigate(['/applications']);
+      this.router.navigate(['/applications/view/' + this.appId]);
     });
 
     return obs;

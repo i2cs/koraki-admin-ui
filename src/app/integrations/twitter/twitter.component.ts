@@ -33,6 +33,10 @@ export class TwitterComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    setInterval(a => {
+      this.data.store.set("integrations", null);
+    }, 120000);
+
     this.loadingService.loading$.subscribe(a => { this.loading = a; });
     if (this.route.snapshot.params['id']) {
       this.appId = this.route.snapshot.params['id'];
@@ -63,7 +67,7 @@ export class TwitterComponent implements OnInit {
 
       this.loadApplication(this.appId);
     } else {
-      this.router.navigate(['/applications']);
+      this.router.navigate(['/applications/view/' + this.appId]);
     }
   }
 
@@ -79,7 +83,7 @@ export class TwitterComponent implements OnInit {
         {title: "Twitter"}
       ]);
     }, e => {
-      this.router.navigate(['/applications']);
+      this.router.navigate(['/applications/view/' + this.appId]);
     });
 
     return obs;
@@ -93,7 +97,7 @@ export class TwitterComponent implements OnInit {
     this.twitterService.subscribe(model).subscribe(a => {
       this.data.store.set("integrations", null);
       this.notify.success("Successfully subscribed to @" + this.username);
-      this.router.navigate(['/applications']);
+      this.router.navigate(['/applications/view/' + this.appId]);
     }, e => {
       this.notify.error(e.error.message);
     })
@@ -103,7 +107,7 @@ export class TwitterComponent implements OnInit {
     this.twitterService.unsubscribe(this.appId).subscribe(a => {
       this.data.store.set("integrations", null);
       this.notify.success("Successfully unsubscribed from @" + this.configurations['username']);
-      this.router.navigate(['/applications']);
+      this.router.navigate(['/applications/view/' + this.appId]);
     });
   }
 }
