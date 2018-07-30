@@ -107,7 +107,7 @@
                 </div>
                 <div class="col-md-4" *ngFor="let i of allIntegrations">
                   <div class="card card-chart" [ngClass]="{'disabled-integration' : !i.ecommerce && !allowedIntegrations[i.code]}">
-                    <div class="card-body">
+                    <div class="card-body integration-card">
                       <h4 class="card-title">{{i.title}}</h4>
                       <div class="integration-images">
                         <img [src]="'/assets/img/integrations/' + i.code + '.png'" />
@@ -116,16 +116,18 @@
                         Integrated
                       </div>
                       <p [innerHTML]="i.description"></p>
-                      <p [innerHTML]="i.capable"></p>
+                      <!-- <p [innerHTML]="i.capable"></p> -->
                     </div>
                     <div class="card-footer">
                       <div *ngIf="!integrations[i.code]">
                         <a mat-raised-button class="btn" routerLink="/subscription/plans" *ngIf="!i.ecommerce && !allowedIntegrations[i.code]">Upgrade your plan to use this</a>
                         <a mat-raised-button *ngIf="i.ecommerce || allowedIntegrations[i.code]" class="btn btn-twitter" routerLink="/applications/view/{{application.id}}/integrations/{{i.code}}">{{i.buttonTitle}}</a>
+                        <a mat-raised-button href="https://koraki.io/integrations/{{i.code}}" target="_blank" class="btn btn-link pull-right">Samples</a>
                       </div>
                       <div *ngIf="integrations[i.code]">
-                        <a mat-raised-button class="btn" routerLink="/subscription/plans" *ngIf="!i.ecommerce && !allowedIntegrations[i.code]">Upgrade your plan to use this</a>
+                        <a mat-raised-button class="btn" routerLink="/subscription/plans" *ngIf="!i.ecommerce && !allowedIntegrations[i.code]">Upgrade</a>
                         <a mat-raised-button *ngIf="i.ecommerce || allowedIntegrations[i.code]" class="btn btn-warning" routerLink="/applications/view/{{application.id}}/integrations/{{i.code}}">Manage</a>
+                        <a mat-raised-button href="https://koraki.io/integrations/{{i.code}}" target="_blank" class="btn btn-link pull-right">Samples</a>
                       </div>
                     </div>
                   </div>

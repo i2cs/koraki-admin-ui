@@ -134,8 +134,11 @@ export class FacebookComponent implements OnInit {
   }
 
   loadPages() {
-    this.client.get(this.fbGraphUrl + "me/accounts?access_token=" + this.accessToken).subscribe(a => {
-      this.pages = a['data'];
+    //exchange for a long live token
+    this.fbService.exchangeToken(this.accessToken).subscribe(token => {
+      this.client.get(this.fbGraphUrl + "me/accounts?access_token=" + token).subscribe(a => {
+        this.pages = a['data'];
+      });
     });
   }
 
@@ -145,7 +148,8 @@ export class FacebookComponent implements OnInit {
         //send to server for registration
         var subscribeRequest: FacebookPageSubscriptionDataCreateModel = {
           pageId: this.page.id,
-          applicationId: this.application.id
+          applicationId: this.application.id,
+          accessToken: this.page.access_token
         };
         this.fbService.subscribe(subscribeRequest).subscribe(b => {
           this.notify.success("Successfully subscribed " + this.page.name + " to Koraki");
@@ -184,7 +188,7 @@ export class FacebookComponent implements OnInit {
               }, e => {
                 sending = false
               });
-            }else{
+            } else {
               sending = false;
             }
           }, e => {
