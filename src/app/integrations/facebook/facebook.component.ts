@@ -165,46 +165,30 @@ export class FacebookComponent implements OnInit {
   }
 
   disconnect() {
-    this.login("remove:" + this.appId);
+    var confirmed = confirm("Are you sure you want to remove Facebook integration?");
+    if(confirmed){
+      this.unsubscribe();
+    }
   }
 
   unsubscribe() {
     let id = Number(this.appId);
-    let sending: boolean = false;
-    let interval = setInterval(a => {
-      if (this.configurations['page_id']) {
-        if (!sending) {
-          sending = true;
-          this.client.get(this.fbGraphUrl + "/me/accounts?fields=access_token&limit=10000&access_token=" + this.accessToken).subscribe(response => {
-            let data = response['data'].filter(a => a.id == this.configurations['page_id']);
-            if (data.length > 0) {
-              this.client.delete(this.fbGraphUrl + this.configurations['page_id'] + "/subscribed_apps?access_token=" + data[0]['access_token']).subscribe(a => {
-                if (a['success']) {
-                  this.notify.success("Successfully unsubscribed from Facebook page");
-                  clearInterval(interval);
-                }
 
-                sending = false;
-              }, e => {
-                sending = false
-              });
-            } else {
-              sending = false;
-            }
+    if (this.configurations['fb_long_token']) {
+      this.client.delete(this.fbGraphUrl + this.configurations['page_id'] + "/subscribed_apps?access_token=" + this.configurations['fb_long_token']).subscribe(a => {
+        if (a['success']) {
+          this.notify.success("Successfully unsubscribed from Facebook page");
+
+          this.fbService.unsubscribe(id).subscribe(a => {
+            this.data.store.set("integrations", null);
+            this.notify.success("Successully removed from integrations");
+            this.router.navigate(['/applications/view/' + this.appId]);
           }, e => {
-            sending = false;
+            this.notify.error("Unsubscribe was not success");
           });
         }
-      }
-    }, 1000);
-
-    this.fbService.unsubscribe(id).subscribe(a => {
-      this.data.store.set("integrations", null);
-      this.notify.success("Successully removed from integrations");
-      this.router.navigate(['/applications/view/' + this.appId]);
-    }, e => {
-      this.notify.error("Unsubscribe was not success");
-    });
+      });
+    }
   }
 
   private getFragmentParameter(fragment: string, param: string) {
