@@ -141,6 +141,15 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
     });
 
     this.allIntegrations.push({
+      code: "zapier",
+      title: "Zapier",
+      description: "Integrate Koraki with more than 1000 apps! You can use Zap editor to create new notifications.",
+      capable: "This integration can <b>Write</b> notifications",
+      buttonTitle: "Integrate",
+      ecommerce: false
+    });
+    
+    this.allIntegrations.push({
       code: "privy",
       title: "Privy",
       description: "Generate notifications when someone subscribe for a campaign on Privy.",

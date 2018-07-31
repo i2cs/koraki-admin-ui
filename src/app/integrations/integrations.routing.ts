@@ -6,6 +6,7 @@ import { PrivyComponent } from './privy/privy.component';
 import { OpencartComponent } from './opencart/opencart.component';
 import { IntercomComponent } from './intercom/intercom.component';
 import { TwitterComponent } from './twitter/twitter.component';
+import { ZapierComponent } from './zapier/zapier.component';
 
 export const IntegrationsRoutes: Routes = [
     {
@@ -31,6 +32,9 @@ export const IntegrationsRoutes: Routes = [
     }, {
         path: 'twitter',
         component: TwitterComponent
+    }, {
+        path: 'zapier',
+        component: ZapierComponent
     }]
 }
 ];

@@ -12,6 +12,7 @@ import { OpencartComponent } from './opencart/opencart.component';
 import { IntercomComponent } from './intercom/intercom.component';
 import { TwitterComponent } from './twitter/twitter.component';
 import { MomentModule } from 'ngx-moment';
+import { ZapierComponent } from './zapier/zapier.component';
 
 @NgModule({
   imports: [
@@ -22,6 +23,6 @@ import { MomentModule } from 'ngx-moment';
     MaterialModule,
     MomentModule
   ],
-  declarations: [FacebookComponent, MainComponent, MailchimpComponent, PrivyComponent, OpencartComponent, IntercomComponent, TwitterComponent]
+  declarations: [FacebookComponent, MainComponent, MailchimpComponent, PrivyComponent, OpencartComponent, IntercomComponent, TwitterComponent, ZapierComponent]
 })
 export class IntegrationsModule { }
