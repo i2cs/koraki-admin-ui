@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApplicationsService, ApplicationViewDataModel, ApplicationIntegrationViewModel } from 'koraki-angular-client';
+import { ApplicationsService, ApplicationViewDataModel, ApplicationIntegrationViewModel, ZapierService } from 'koraki-angular-client';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MemoryDataHolderServiceService } from '../../services/memory-data-holder-service.service';
 import { BreadcrumbService } from '../../services/breadcrumb.service';
@@ -22,7 +22,7 @@ export class ZapierComponent implements OnInit {
   integrations: Map<string, ApplicationIntegrationViewModel> = new Map<string, ApplicationIntegrationViewModel>();
   configurations: any = {};
   loading: boolean;
-  
+
   constructor(
     private route: ActivatedRoute,
     private appservice: ApplicationsService,
@@ -30,7 +30,8 @@ export class ZapierComponent implements OnInit {
     private loadingService: LoadingServiceService,
     private breadcrumbService: BreadcrumbService,
     private router: Router,
-    private data: MemoryDataHolderServiceService
+    private data: MemoryDataHolderServiceService,
+    private zapierService: ZapierService
   ) { }
 
   ngOnInit() {
@@ -68,8 +69,14 @@ export class ZapierComponent implements OnInit {
     }
   }
 
-  disconnect(){
-
+  disconnect() {
+    var confirmed = confirm("Are you sure you want to disconnect Zapier?");
+    if (confirmed) {
+      this.zapierService.unsubscribe(Number.parseInt(this.appId)).subscribe(a => {
+        this.notify.success("Successfuly disconnected from Zapier");
+        this.router.navigate(['/applications/view/' + this.appId]);
+      })
+    }
   }
 
   private loadApplication(id: any): Observable<ApplicationViewDataModel> {
@@ -80,10 +87,10 @@ export class ZapierComponent implements OnInit {
       this.clientSecret = a.clientSecret;
       this.status = a.status == "Active";
       this.breadcrumbService.show([
-        {title: "Applications", url: "/applications"},
-        {title: a.applicationName, url: "/applications/view/" + a.id},
-        {title: "Integrations"},
-        {title: "Zapier"}
+        { title: "Applications", url: "/applications" },
+        { title: a.applicationName, url: "/applications/view/" + a.id },
+        { title: "Integrations" },
+        { title: "Zapier" }
       ]);
     }, e => {
       this.router.navigate(['/applications/view/' + this.appId]);
