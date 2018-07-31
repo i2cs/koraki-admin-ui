@@ -73,6 +73,7 @@ export class ZapierComponent implements OnInit {
     var confirmed = confirm("Are you sure you want to disconnect Zapier?");
     if (confirmed) {
       this.zapierService.unsubscribe(Number.parseInt(this.appId)).subscribe(a => {
+        this.data.store.set("integrations", null);
         this.notify.success("Successfuly disconnected from Zapier");
         this.router.navigate(['/applications/view/' + this.appId]);
       })

@@ -33,7 +33,7 @@ export class TwitterComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    setInterval(a => {
+    setTimeout(a => {
       this.data.store.set("integrations", null);
     }, 120000);
 
