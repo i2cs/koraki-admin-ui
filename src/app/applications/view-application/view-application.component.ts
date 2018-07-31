@@ -6,6 +6,7 @@ import { NotificationService } from '../../services/notification.service';
 import { MemoryDataHolderServiceService } from '../../services/memory-data-holder-service.service';
 import { SubscriptionService } from '../../services/subscription.service';
 import { BreadcrumbService } from '../../services/breadcrumb.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 declare const $: any;
 
@@ -56,7 +57,8 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
     private router: Router,
     private notify: NotificationService,
     private data: MemoryDataHolderServiceService,
-    private subscription: SubscriptionService
+    private subscription: SubscriptionService,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngAfterViewInit(){
@@ -101,6 +103,7 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
       description: "Module contains notification widget. This module can be installed from OpenCart admin panel",
       capable: "This integration can <b>Read</b> and <b>Write</b> notifications",
       buttonTitle: "Install",
+      help: "https://koraki.io/how-to-add-koraki-to-opencart/",
       ecommerce: true
     });
 
@@ -146,6 +149,7 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
       description: "Integrate Koraki with more than 1000 apps! You can use Zap editor to create new notifications.",
       capable: "This integration can <b>Write</b> notifications",
       buttonTitle: "Integrate",
+      help: "https://koraki.io/zapier-koraki-to-enable-more-than-1000-integrations/",
       ecommerce: false
     });
     
@@ -242,6 +246,10 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
       this.nameEditing = false;
       this.notify.error("Could not update the application name");
     });
+  }
+
+  sanitize(url: string){
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
   private getFragmentParameter(fragment: string, param: string) {
