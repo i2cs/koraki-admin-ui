@@ -120,7 +120,7 @@
                     </div>
                     <div class="card-footer">
                       <div *ngIf="!integrations[i.code]">
-                        <a mat-raised-button class="btn" routerLink="/subscription/plans" *ngIf="!i.ecommerce && !allowedIntegrations[i.code]">Upgrade your plan to use this</a>
+                        <a mat-raised-button class="btn" routerLink="/subscription/plans" *ngIf="!i.ecommerce && !allowedIntegrations[i.code]">Upgrade</a>
                         <a mat-raised-button *ngIf="i.ecommerce || allowedIntegrations[i.code]" class="btn btn-twitter" routerLink="/applications/view/{{application.id}}/integrations/{{i.code}}">{{i.buttonTitle}}</a>
                         <a mat-raised-button href="https://koraki.io/integrations/{{i.code}}" target="_blank" class="btn btn-link pull-right">Samples</a>
                       </div>
