@@ -9,6 +9,7 @@ import { NewApplicationComponent } from './new-application/new-application.compo
 import { ViewApplicationComponent } from './view-application/view-application.component';
 import { MomentModule } from 'ngx-moment';
 import { AnalyticsViewComponent } from './analytics-view/analytics-view.component';
+import { NotificationsViewComponent } from './notifications-view/notifications-view.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,6 @@ import { AnalyticsViewComponent } from './analytics-view/analytics-view.componen
     MaterialModule,
     MomentModule
   ],
-  declarations: [ApplicationsComponent, NewApplicationComponent, ViewApplicationComponent, AnalyticsViewComponent]
+  declarations: [ApplicationsComponent, NewApplicationComponent, ViewApplicationComponent, AnalyticsViewComponent, NotificationsViewComponent]
 })
 export class ApplicationsModule { }

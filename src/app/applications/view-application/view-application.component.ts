@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApplicationsService, ApplicationViewDataModel, ApplicationUpdateDataModel, ApplicationIntegrationViewModel } from 'koraki-angular-client';
 import { LoadingServiceService } from '../../services/loading-service.service';
@@ -7,6 +7,7 @@ import { MemoryDataHolderServiceService } from '../../services/memory-data-holde
 import { SubscriptionService } from '../../services/subscription.service';
 import { BreadcrumbService } from '../../services/breadcrumb.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { environment } from 'environments/environment';
 
 declare const $: any;
 
@@ -30,9 +31,10 @@ class _Array<T> extends Array<T> {
 })
 
 export class ViewApplicationComponent implements OnInit, AfterViewInit {
-
+  @ViewChild('iframe') iframe: ElementRef;
   loading: boolean;
   hide: boolean;
+  appId: string;
   application: ApplicationViewDataModel = <ApplicationViewDataModel>{};
   integrations: Map<string, ApplicationIntegrationViewModel> = new Map<string, ApplicationIntegrationViewModel>();
   script: string;
@@ -48,6 +50,7 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
   updated: { name: string } = { name : ""};
   nameEditing: boolean;
   paid: boolean = false;
+  url: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -168,8 +171,11 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
     this.hide = true;
     this.route.params.subscribe(params => {
       if (params['id']) {
+        this.appId = params['id'];
         this.appservice.getApplicationById(params['id']).subscribe(a => {
           this.application = a;
+          this.url = environment.apiBaseUrl + "/widget.html?_i=" + a.clientId;
+          this.iframe.nativeElement["src"] = this.url;
           this.status = a.status == "Active";
           this.script = "<script>window.sparkleSettings = { app_id: \"" + a.clientId + "\" }; !function(){function t(){var t=a.createElement(\"script\"); t.type=\"text/javascript\", t.async=!0,t.src=\"\/\/api.koraki.io//widget/v1.0/js\"; var e=a.getElementsByTagName(\"script\")[0];e.parentNode.insertBefore(t,e)} var e=window,a=document;e.attachEvent?e.attachEvent(\"onload\",t):e.addEventListener(\"load\",t,!1)}();</script>"
           this.breadcrumbService.show([
@@ -188,6 +194,10 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
         });
       }
     });
+  }
+
+  refreshPreview(){
+    this.iframe.nativeElement["src"] = this.url;
   }
 
   filterList() {
@@ -250,6 +260,10 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
 
   sanitize(url: string){
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+
+  trackByFn(index, item) {
+    return item;
   }
 
   private getFragmentParameter(fragment: string, param: string) {

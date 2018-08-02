@@ -1,7 +1,7 @@
 export const environment = {
   version: "0.2.0",
   production: true,
-  apiBaseUrl: "https://api.koraki.io",
+  apiBaseUrl: "http://localhost:5000",
   baseUrl: "https://app.koraki.io",
   analytics: "https://analytics.koraki.io",
   auth: {
