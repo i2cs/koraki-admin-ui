@@ -1,13 +1,14 @@
 // IMPORTANT: this is a plugin which requires jQuery for initialisation and data manipulation
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Validators, FormGroup } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
-import { ApplicationsService, ApplicationCreateDataModel, ApplicationViewDataModel } from 'koraki-angular-client';
+import { ApplicationsService, ApplicationCreateDataModel, ApplicationViewDataModel, SubscriptionsService } from 'koraki-angular-client';
 import { Router } from '@angular/router';
 import { LoadingServiceService } from '../../services/loading-service.service';
 import { NotificationService } from '../../services/notification.service';
 import { BreadcrumbService } from '../../services/breadcrumb.service';
+import { SubscriptionService } from '../../services/subscription.service';
 
 declare const $: any;
 
@@ -17,10 +18,11 @@ declare const $: any;
     styleUrls: ['./new-application.component.scss']
 })
 
-export class NewApplicationComponent implements OnInit {
+export class NewApplicationComponent implements OnInit, AfterViewInit {
     appCreatedResponse: ApplicationViewDataModel;
     appCreated: boolean;
     type: FormGroup;
+    canAdd: boolean = true;
     model: ApplicationCreateDataModel = <ApplicationCreateDataModel>{};
     constructor(
         private appservice: ApplicationsService,
@@ -28,8 +30,13 @@ export class NewApplicationComponent implements OnInit {
         private breadcrumbService: BreadcrumbService,
         private router: Router,
         private loadingService: LoadingServiceService,
+        private subscriptionsService: SubscriptionsService,
         public notify: NotificationService
     ) { }
+
+    ngAfterViewInit(){
+    
+    }
 
     isFieldValid(form: FormGroup, field: string) {
         return !form.get(field).valid && form.get(field).touched;
@@ -61,6 +68,10 @@ export class NewApplicationComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.subscriptionsService.getPermissions().subscribe(b => {
+            this.canAdd = b.canAddMoreApps;
+          });
+
         this.breadcrumbService.show([
             { title: "Applications", url: "/applications" },
             { title: "New" }

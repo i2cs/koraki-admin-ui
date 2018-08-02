@@ -54,6 +54,7 @@ export const ROUTES: RouteInfo[] = [{
 export class SidebarComponent implements OnInit {
     public menuItems: any[];
     @Input() plan: string;
+    @Input() email: string;
     @Input() trialEndsIn: number;
 
     constructor(private auth: AuthService) { }

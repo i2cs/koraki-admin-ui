@@ -32,7 +32,7 @@ export class SubscriptionCreateComponent implements OnInit {
     private paymentService: PaymentService,
     private ajax: AjaxService,
     private loadingService: LoadingServiceService,
-    private subs: SubscriptionService,
+    private subscriptionService: SubscriptionService,
     private router: Router
   ) { }
 
@@ -46,7 +46,7 @@ export class SubscriptionCreateComponent implements OnInit {
     this.ajax.getAllSubscriptions().subscribe(a => {
       this.plans = a.filter(b => b.code != "free");
 
-      this.subs.permissions().subscribe(b => {
+      this.subscriptionService.permissions().subscribe(b => {
         this.plans = this.plans.filter(c => c.code != b.plan);
         this.form['plan'] = this.plans[0];
         this.planFeatures = environment.plans;
@@ -79,7 +79,7 @@ export class SubscriptionCreateComponent implements OnInit {
         cardId : this.form['source'],
         subscriptionCode: plan['code']
       }).subscribe(a => {
-        this.subs.clear();
+        this.subscriptionService.clear();
         this.notification.success("Subscribed to " + plan.name);
         this.router.navigate(['/subscription/plans']);
       }, e => {
@@ -109,7 +109,7 @@ export class SubscriptionCreateComponent implements OnInit {
               card: card,
               subscriptionCode: plan['code']
             }).subscribe(a => {
-              this.subs.clear();
+              this.subscriptionService.clear();
               this.notification.success("Subscribed to " + plan.name);
               this.router.navigate(['/subscription/plans']);
             }, e => {

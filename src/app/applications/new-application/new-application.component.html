@@ -1,7 +1,26 @@
 <div class="main-content">
   <div class="container-fluid">
+
+
+
     <div class="col-md-12 col-sm-12 mr-auto ml-auto">
-      <div class="card card-wizard" data-color="orange">
+      <div *ngIf="!canAdd">
+        <div class="alert alert-rose alert-with-icon" data-notify="container">
+          <i class="material-icons" data-notify="icon">notifications</i>
+          <span data-notify="icon" class="now-ui-icons ui-1_bell-53"></span>
+          <span data-notify="message">Sorry, you can't add more applications with the current subscription plan. You can take one of the following actions and create more applications
+            <br/>
+            <br/>
+            <ul>
+              <li>Remove one of your existing applications</li>
+              <li><a routerLink="/subscription/plans">Upgrade your Koraki account <i class="material-icons">link</i></a></li>
+            </ul>
+            
+          </span>
+        </div>
+      </div>
+
+      <div class="card" data-color="orange">
         <div class="card-header text-center">
           <h3 class="card-title">
             Create a new application
@@ -10,40 +29,26 @@
         </div>
 
         <form [formGroup]="type" action="" method="">
-          <div class="card-body active" id="about">
+          <div class="card-body" id="about">
             <h5 class="info-text">Let's start with application name and website URL</h5>
-            <div class="row justify-content-center">
+            <div class="row">
               <div class="col-sm-12">
-                <div class="input-group form-control-lg">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="material-icons">sms</i>
-                    </span>
-                  </div>
-                  <mat-form-field hintLabel="Max 15 characters" class="example-full-width has-label" [ngClass]="displayFieldCss(type, 'appName')">
-                    <input type="text" name="appname" matInput #appname [(ngModel)]="model.applicationName" required="required" maxlength="15"
-                      placeholder="Application name" formControlName="appName">
-                    <mat-hint align="end">{{appname.value?.length || 0}}/15</mat-hint>
-                  </mat-form-field>
-                </div>
-                <div class="input-group form-control-lg">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="material-icons">language</i>
-                    </span>
-                  </div>
-                  <mat-form-field hintLabel="URL of your website. Just to use as a description" class="example-full-width has-label" [ngClass]="displayFieldCss(type, 'url')">
-                    <input type="url" name="url" required="required" [(ngModel)]="model.url" matInput placeholder="Website URL" formControlName="url">
-                  </mat-form-field>
-                </div>
-              </div>
-              <div>
-                <mat-divider></mat-divider>
-              </div>
-              <div>
-                <button mat-stroked-button (click)="createApp()">Create</button>
+                <mat-form-field hintLabel="Max 15 characters" class="example-full-width has-label" [ngClass]="displayFieldCss(type, 'appName')">
+                  <input [readonly]="!canAdd" type="text" name="appname" matInput #appname [(ngModel)]="model.applicationName" required="required"
+                    maxlength="15" placeholder="Application name" formControlName="appName">
+                  <mat-hint align="end">{{appname.value?.length || 0}}/15</mat-hint>
+                </mat-form-field>
+
+                <mat-form-field hintLabel="URL of your website. Just to use as a description" class="example-full-width has-label" [ngClass]="displayFieldCss(type, 'url')">
+                  <input [readonly]="!canAdd" type="url" name="url" required="required" [(ngModel)]="model.url" matInput placeholder="Website URL"
+                    formControlName="url">
+                </mat-form-field>
               </div>
             </div>
+          </div>
+          <div class="card-footer">
+            <a mat-raised-button class="btn btn btn-fill" routerLink="/applications">Cancel</a>
+            <button [disabled]="!canAdd" mat-raised-button class="btn btn-primary" (click)="createApp()">Create</button>
           </div>
         </form>
       </div>

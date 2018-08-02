@@ -29,6 +29,7 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit {
     loading: boolean;
     slow: boolean;
     plan: string;
+    email: string;
     breadcrumb: any[];
     trialEndsIn: number;
     
@@ -62,6 +63,7 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit {
         this.subscription.permissions().subscribe(a => {
             this.plan = a.planName + " (" + formatCurrency(a.cost, "en-US", "$") + ")";
             this.trialEndsIn = a.trialEndsIn;
+            this.email = a.email;
         });
 
         const elemMainPanel = <HTMLElement>document.querySelector('.main-panel');

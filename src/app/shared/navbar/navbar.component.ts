@@ -25,6 +25,7 @@ export class NavbarComponent implements OnInit {
     private sidebarVisible: boolean;
     private _router: Subscription;
     @Input() plan: string;
+    @Input() email: string;
     @Input() trialEndsIn: number;
     @Input() breadcrumb: any[];
 
