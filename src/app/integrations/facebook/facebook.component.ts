@@ -187,6 +187,16 @@ export class FacebookComponent implements OnInit {
             this.notify.error("Unsubscribe was not success");
           });
         }
+      }, e => {
+        if(e.code == 100){
+          this.fbService.unsubscribe(id).subscribe(a => {
+            this.data.store.set("integrations", null);
+            this.notify.success("Successully removed from integrations");
+            this.router.navigate(['/applications/view/' + this.appId]);
+          }, e => {
+            this.notify.error("Unsubscribe was not success");
+          });
+        }
       });
     }
   }
