@@ -6,7 +6,7 @@
           <div class="pull-right app-notify-status" *ngIf="application.status!='Active'">
             <i class="material-icons" style="vertical-align: middle;">warning</i> Not Active
           </div>
-          <div class="pull-right app-notify-count" *ngIf="application.status=='Active'">
+          <div class="pull-right app-notify-count d-none d-md-block" *ngIf="application.status=='Active'">
             {{application.activeNotificationsCount==0?'No':application.activeNotificationsCount}} Active notifications
           </div>
           <h3 class="card-title">
@@ -35,33 +35,33 @@
         <mat-divider></mat-divider>
         <div class="card-body" [ngClass]="{'loading':loading}">
 
-          <ul class="nav nav-pills nav-pills-warning justify-content-center" role="tablist">
-            <li class="nav-item">
+          <ul class="nav nav-pills nav-pills-warning justify-content-center flex-column flex-sm-row" role="tablist">
+            <li class="flex-sm-fill text-sm-center nav-item">
               <a class="nav-link active" data-toggle="tab" href="#link1" role="tablist">
                 Details
               </a>
             </li>
-            <li class="nav-item">
+            <li class="flex-sm-fill text-sm-center nav-item">
               <a class="nav-link" data-toggle="tab" href="#link2" role="tablist">
                 Integrations
               </a>
             </li>
-            <li class="nav-item">
+            <li class="flex-sm-fill text-sm-center nav-item">
               <a class="nav-link" data-toggle="tab" href="#notifications-v" role="tablist">
                 Notifications
               </a>
             </li>
-            <li class="nav-item">
+            <li class="flex-sm-fill text-sm-center nav-item">
               <a class="nav-link" data-toggle="tab" href="#preview" role="tablist">
                 Preview
               </a>
             </li>
-            <li class="nav-item">
+            <li class="flex-sm-fill text-sm-center nav-item">
               <a class="nav-link" data-toggle="tab" href="#link3" role="tablist">
                 Settings
               </a>
             </li>
-            <li class="nav-item">
+            <li class="flex-sm-fill text-sm-center nav-item">
               <a class="nav-link" data-toggle="tab" href="#link4" role="tablist">
                 Analytics
               </a>

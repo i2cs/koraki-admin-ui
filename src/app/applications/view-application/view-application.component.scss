@@ -63,3 +63,7 @@
 .nav-pills .nav-item .nav-link{
     border-radius: 0.25rem;
 }
+
+.nav-pills.flex-column .nav-item + .nav-item{
+    margin-top: 0px;
+}

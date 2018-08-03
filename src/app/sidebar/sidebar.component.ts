@@ -44,6 +44,11 @@ export const ROUTES: RouteInfo[] = [{
         {path: 'cards', title: 'Payment Methods', icontype:'credit_card'},
         {path: 'invoices', title: 'Invoices', icontype:'subtitles'}
     ]
+}, {
+    path: 'https://koraki.freshdesk.com/support/tickets/new',
+    title: 'Report an Issue',
+    type: 'outlink',
+    icontype: 'live_help'
 }
 ];
 @Component({
