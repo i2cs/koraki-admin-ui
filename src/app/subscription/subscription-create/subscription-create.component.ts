@@ -83,7 +83,7 @@ export class SubscriptionCreateComponent implements OnInit {
         this.notification.success("Subscribed to " + plan.name);
         this.router.navigate(['/subscription/plans']);
       }, e => {
-        this.notification.error(e.error.message);
+        this.notification.error("Your card was not accepted from the payment server");
       });
     } else {
       if (name && address_line1 && address_city && address_state && address_country) {

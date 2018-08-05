@@ -52,6 +52,6 @@ export const environment = {
     tier1: "https://s3.us-east-2.amazonaws.com/koraki-adminui-assets/personal-plan.png",
     tier2: "https://s3.us-east-2.amazonaws.com/koraki-adminui-assets/enterprise-plan.png",
   },
-  stripePublicKey : "pk_test_JMl4h4YIUrGfy66IluaI5dJo",
+  stripePublicKey : "pk_live_TXj3ceup0EX871fvvPkGNIJz",
   ccIconPath : "https://s3.us-east-2.amazonaws.com/koraki-adminui-assets/"
 };
