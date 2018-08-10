@@ -175,6 +175,7 @@ export class FacebookComponent implements OnInit {
     let id = Number(this.appId);
 
     if (this.configurations['fb_long_token']) {
+      debugger;
       this.client.delete(this.fbGraphUrl + this.configurations['page_id'] + "/subscribed_apps?access_token=" + this.configurations['fb_long_token']).subscribe(a => {
         if (a['success']) {
           this.notify.success("Successfully unsubscribed from Facebook page");
@@ -188,7 +189,6 @@ export class FacebookComponent implements OnInit {
           });
         }
       }, e => {
-        debugger;
         if(e && e.error && e.error.error){
           this.fbService.unsubscribe(id).subscribe(a => {
             this.data.store.set("integrations", null);
