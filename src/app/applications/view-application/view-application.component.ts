@@ -67,7 +67,7 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(){
     this.route.params.subscribe(params => {
       if (params['id']) {
-        this.integrations = <Map<string, ApplicationIntegrationViewModel>>this.data.store.get("integrations");
+        this.integrations = <Map<string, ApplicationIntegrationViewModel>>this.data.store.get("integrations_" + params['id']);
         if (!this.integrations) {
           this.integrations = new Map<string, ApplicationIntegrationViewModel>();
           this.appservice.getApplicationIntegrationsById(params['id']).subscribe(a => {
@@ -75,7 +75,7 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
               this.integrations[a[i].code] = a[i];
             }
 
-            this.data.store.set("integrations", this.integrations);
+            this.data.store.set("integrations_" + params['id'], this.integrations);
           });
         }
       }

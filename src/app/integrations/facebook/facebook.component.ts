@@ -75,16 +75,16 @@ export class FacebookComponent implements OnInit {
       }
     }
 
-    this.integrations = <Map<string, ApplicationIntegrationViewModel>>this.data.store.get("integrations");
+    let id = Number(this.appId);
+    this.integrations = <Map<string, ApplicationIntegrationViewModel>>this.data.store.get("integrations_" + id);
     if (!this.integrations) {
       this.integrations = new Map<string, ApplicationIntegrationViewModel>();
-      let id = Number(this.appId);
       this.appservice.getApplicationIntegrationsById(id).subscribe(a => {
         for (var i in a) {
           this.integrations[a[i].code] = a[i];
         }
 
-        this.data.store.set("integrations", this.integrations);
+        this.data.store.set("integrations_" + id, this.integrations);
         if (this.integrations['facebook'] && this.integrations['facebook'].configurations) {
           this.integrations['facebook'].configurations.forEach(a => {
             this.configurations[a.key] = a.value;
