@@ -125,7 +125,7 @@ export class MailchimpComponent implements OnInit {
       webId: this.list['web_id']
     };
     this.mcService.subscribe(subscribeRequest).subscribe(b => {
-      this.data.store.set("integrations", null);
+      this.data.store.set("integrations_" + this.appId, null);
       this.notify.success("Successfully subscribed " + this.list.name + " to Koraki");
       this.router.navigate(['/applications/view/' + this.appId]);
     }, e => {
@@ -136,7 +136,7 @@ export class MailchimpComponent implements OnInit {
   disconnect() {
     let id = Number(this.appId);
     this.mcService.unsubscribe(id).subscribe(a => {
-      this.data.store.set("integrations", null);
+      this.data.store.set("integrations_" + this.appId, null);
       this.notify.success("Successfully unsubscribed from MailChimp list");
       this.router.navigate(['/applications/view/' + this.appId]);
     }, e => {
