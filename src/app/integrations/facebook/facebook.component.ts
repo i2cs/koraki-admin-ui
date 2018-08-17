@@ -154,7 +154,7 @@ export class FacebookComponent implements OnInit {
         this.fbService.subscribe(subscribeRequest).subscribe(b => {
           this.notify.success("Successfully subscribed " + this.page.name + " to Koraki");
           this.router.navigate(['/applications/view/' + this.appId]);
-          this.data.store.set("integrations", null);
+          this.data.store.set("integrations_" + this.appId, null);
         }, e => {
           this.notify.error("Error occured while subscribing " + this.page.name + " to Koraki<br/>" + e.error.message);
         })

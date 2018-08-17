@@ -59,10 +59,10 @@ export class ShopifyComponent implements OnInit {
               this.shopifyService.subscribe(model).subscribe(a => {
                 this.notify.success("Successfully subscribed");
                 this.router.navigate(['/applications/view/' + this.appId]);
-                this.data.store.set("integrations", null);
+                this.data.store.set("integrations_" + this.appId, null);
               }, e => {
                 this.notify.error(e.error.message);
-                this.data.store.set("integrations", null);
+                this.data.store.set("integrations_" + this.appId, null);
               });
             }
           }
@@ -140,7 +140,7 @@ export class ShopifyComponent implements OnInit {
     this.shopifyService.unsubscribe(this.appId).subscribe(a => {
       this.notify.success("Successfully unsubscribed");
       this.router.navigate(['/applications/view/' + this.appId]);
-      this.data.store.set("integrations", null);
+      this.data.store.set("integrations_" + this.appId, null);
     }, e => {
       this.notify.error("Error returned - " + e.error.message);
     })
