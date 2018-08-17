@@ -7,6 +7,7 @@ import { OpencartComponent } from './opencart/opencart.component';
 import { IntercomComponent } from './intercom/intercom.component';
 import { TwitterComponent } from './twitter/twitter.component';
 import { ZapierComponent } from './zapier/zapier.component';
+import { ShopifyComponent } from './shopify/shopify.component';
 
 export const IntegrationsRoutes: Routes = [
     {
@@ -35,6 +36,9 @@ export const IntegrationsRoutes: Routes = [
     }, {
         path: 'zapier',
         component: ZapierComponent
+    }, {
+        path: 'shopify',
+        component: ShopifyComponent
     }]
 }
 ];

@@ -111,6 +111,15 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
     });
 
     this.allIntegrations.push({
+      code: "shopify",
+      title: "Shopify",
+      description: "Connect your Shopify store with Koraki. This provides Shopify customer interaction notifications and add Koraki widget on Shopify store",
+      capable: "This integration can <b>Read</b> and <b>Write</b> notifications",
+      buttonTitle: "Integrate",
+      ecommerce: false
+    });
+
+    this.allIntegrations.push({
       code: "facebook",
       title: "Facebook Page",
       description: "You can connect your Facebook fanpage to generate notifications on user comments, user posts on wall and new user review events.",
