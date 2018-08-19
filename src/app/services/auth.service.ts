@@ -23,12 +23,12 @@ export class AuthService {
     redirectUri: environment.auth.redirect,
     scope: environment.auth.scope
   });
-  
+
 
   constructor(
     private local: LocalStorageService,
     private router: Router
-  ) {}
+  ) { }
 
   private getAccessToken(): string {
     if (this.local.get("access-token")) {
@@ -62,7 +62,13 @@ export class AuthService {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
-        this.router.navigate(['/dashboard']);
+        var redirect = this.local.get("redirect");
+        if (redirect) {
+          this.local.remove("redirect");
+          window.location.href = redirect;
+        } else {
+          this.router.navigate(['/dashboard']);
+        }
       } else if (err) {
         this.router.navigate(['/']);
         console.log(err);

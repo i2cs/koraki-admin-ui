@@ -6,6 +6,7 @@ import { LoadingServiceService } from '../../services/loading-service.service';
 import { NotificationService } from '../../services/notification.service';
 import { BreadcrumbService } from '../../services/breadcrumb.service';
 import { ShopifySubscribeCreateViewModel } from 'koraki-angular-client/model/shopifySubscribeCreateViewModel';
+import { LocalStorageService } from 'angular-web-storage';
 
 @Component({
   selector: 'app-shopify',
@@ -31,11 +32,13 @@ export class ShopifyComponent implements OnInit {
     private shopifyService: ShopifyService,
     private notify: NotificationService,
     private loadingService: LoadingServiceService,
+    private local: LocalStorageService,
     private router: Router,
     private data: MemoryDataHolderServiceService
   ) { }
 
   ngOnInit() {
+    let dontRedirect = false;
     this.loadingService.loading$.subscribe(a => { this.loading = a; });
 
     if (this.route.snapshot.params['id'] && this.route.snapshot.params['id'] != "~") {
@@ -46,25 +49,30 @@ export class ShopifyComponent implements OnInit {
         let code = queryParams.get("code");
         let shop = queryParams.get("shop");
         if (code) {
+          dontRedirect = true;
           let state = queryParams.get("state");;
-          if (state.indexOf(":") >= 0) {
+          if (state && state.indexOf(":") >= 0) {
             let stateParts = state.split(":");
-            this.appId = stateParts[1];
-            if (this.appId) {
-              let model: ShopifySubscribeCreateViewModel = {
-                applicationId: this.appId,
-                code: code,
-                shopUrl: shop
-              }
-              this.shopifyService.subscribe(model).subscribe(a => {
-                this.notify.success("Successfully subscribed");
+            this.appId = stateParts[1] || 0;
+            let model: ShopifySubscribeCreateViewModel = {
+              applicationId: this.appId,
+              code: code,
+              shopUrl: shop
+            }
+            this.shopifyService.subscribe(model).subscribe(a => {
+              this.notify.success("Successfully subscribed and fetching recent events");
+              if (this.appId > 0) {
                 this.router.navigate(['/applications/view/' + this.appId]);
                 this.data.store.set("integrations_" + this.appId, null);
-              }, e => {
-                this.notify.error(e.error.message);
-                this.data.store.set("integrations_" + this.appId, null);
-              });
-            }
+              } else {
+                this.router.navigate(['/applications/']);
+              }
+            }, e => {
+              this.notify.error(e.error.message);
+              this.data.store.set("integrations_" + this.appId, null);
+            });
+          }else{
+            this.notify.error("Invalid state. Please try logging in to Shopify again");
           }
         }
       }
@@ -94,10 +102,12 @@ export class ShopifyComponent implements OnInit {
       });
     }
 
-    if (this.appId) {
-      this.loadApplication(this.appId);
-    } else {
-      this.router.navigate(['/applications/view/' + this.appId]);
+    if (!dontRedirect) {
+      if (this.appId) {
+        this.loadApplication(this.appId);
+      } else {
+        this.router.navigate(['/applications/view/' + this.appId]);
+      }
     }
   }
 
