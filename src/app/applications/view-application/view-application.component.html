@@ -3,10 +3,10 @@
     <div class="col-md-12 col-sm-12 mr-auto ml-auto">
       <div class="card ">
         <div class="card-header">
-          <div class="pull-right app-notify-status" *ngIf="application.status!='Active'">
+          <div class="pull-right app-notify-status" *ngIf="!loading && application.status!='Active'">
             <i class="material-icons" style="vertical-align: middle;">warning</i> Not Active
           </div>
-          <div class="pull-right app-notify-count d-none d-md-block" *ngIf="application.status=='Active'">
+          <div class="pull-right app-notify-count d-none d-md-block" *ngIf="!loading && application.status=='Active'">
             {{application.activeNotificationsCount==0?'No':application.activeNotificationsCount}} Active notifications
           </div>
           <h3 class="card-title">
