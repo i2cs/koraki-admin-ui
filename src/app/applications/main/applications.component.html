@@ -31,6 +31,7 @@
                     <div class="card-body">
                         <p class="card-category">{{app.url}}</p>
                         <h3 class="card-title">{{app.applicationName}}</h3>
+                        <div title="Unique user sessions are updated every hour">{{!app.uniqueVisitors ? "0" : app.uniqueVisitors}}/{{allowedSessionCount > 90000 ? "∞" : allowedSessionCount}} user sessions</div>
                     </div>
 
                     <div class="card-footer">

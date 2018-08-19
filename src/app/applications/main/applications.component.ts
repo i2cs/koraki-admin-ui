@@ -4,6 +4,7 @@ import { LoadingServiceService } from '../../services/loading-service.service';
 import { MemoryDataHolderServiceService } from '../../services/memory-data-holder-service.service';
 import { NotificationService } from '../../services/notification.service';
 import { BreadcrumbService } from '../../services/breadcrumb.service';
+import { SubscriptionService } from '../../services/subscription.service';
 
 declare const $: any;
 
@@ -18,13 +19,15 @@ export class ApplicationsComponent implements OnInit, AfterViewInit, OnDestroy {
   applications: Array<ApplicationViewDataModel>;
   loading: boolean;
   interval: any;
+  allowedSessionCount: number = 1000;
 
   constructor(
     private appservice: ApplicationsService,
     private loadingService: LoadingServiceService,
     private breadcrumbService: BreadcrumbService,
     private cache: MemoryDataHolderServiceService,
-    public notify: NotificationService
+    public notify: NotificationService,
+    private subscription: SubscriptionService
   ) { }
 
   ngOnInit() {
@@ -38,6 +41,12 @@ export class ApplicationsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.load();
     this.interval = setInterval(() => { this.load() }, 60000);
+
+    this.subscription.permissions().subscribe(a => {
+      if (a.permissons["unique_sessions.maximum"]) {
+        this.allowedSessionCount = Number.parseInt(a.permissons["unique_sessions.maximum"]);
+      }
+    });
   }
 
   load(): any {

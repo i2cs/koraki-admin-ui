@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
 import { LoadingServiceService } from '../../services/loading-service.service';
 import { NotificationService } from '../../services/notification.service';
 import { BreadcrumbService } from '../../services/breadcrumb.service';
-import { SubscriptionService } from '../../services/subscription.service';
 
 declare const $: any;
 
