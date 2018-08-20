@@ -38,7 +38,7 @@ export const environment = {
     tier1: [
       "3 websites",
       "Unlimited active notifications",
-      "10K sessions per website",
+      "5K sessions per website",
       "Live analytics",
       "All premium integrations",
       "~14 days free trial"
