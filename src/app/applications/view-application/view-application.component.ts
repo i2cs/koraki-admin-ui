@@ -51,6 +51,8 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
   nameEditing: boolean;
   paid: boolean = false;
   url: string;
+  allowedSessionCount: number;
+  sessions: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -85,6 +87,11 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
       a.integrations.forEach(a => {
         this.allowedIntegrations[a.code] = true;
       });
+
+      if (a.permissons["unique_sessions.maximum"]) {
+        this.allowedSessionCount = Number.parseInt(a.permissons["unique_sessions.maximum"]);
+        this.setProgress();
+      }
 
       let number = Number.parseInt(a.permissons['notifications_active_per_app.maximum']);
       this.possibleCounts = _Array.range(1, Math.min(number, 100), 1);
@@ -191,6 +198,8 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
             {title: "Applications", url: "/applications"},
             {title: a.applicationName, url: "/applications/view/" + a.id}
           ]);
+
+          this.setProgress();
         });
 
         this.route.fragment.subscribe(query => {
@@ -203,6 +212,15 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
         });
       }
     });
+  }
+
+  setProgress(){
+    if(this.application.uniqueVisitors && this.allowedSessionCount){
+      this.sessions = Number((this.application.uniqueVisitors / this.allowedSessionCount) * 100);
+      if(this.sessions > 100){
+        this.sessions = 100;
+      }
+    }
   }
 
   refreshPreview(){

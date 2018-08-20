@@ -2,6 +2,13 @@
   <div class="container-fluid">
     <div class="col-md-12 col-sm-12 mr-auto ml-auto">
       <div class="card ">
+        <div id="session-count" *ngIf="application.uniqueVisitors" title="Unique user sessions are updated every hour">
+          <div id="session-count-bar" [style.width.%]="sessions"></div>
+          <span>{{!application.uniqueVisitors ? "0" : application.uniqueVisitors}}/{{allowedSessionCount > 90000 ? "∞" : allowedSessionCount}}
+            user sessions
+            <a class="pull-right d-none d-md-block" routerLink="/subscription/add">Upgrade</a>
+          </span>
+        </div>
         <div class="card-header">
           <div class="pull-right app-notify-status" *ngIf="!loading && application.status!='Active'">
             <i class="material-icons" style="vertical-align: middle;">warning</i> Not Active
@@ -9,7 +16,7 @@
           <div class="pull-right app-notify-count d-none d-md-block" *ngIf="!loading && application.status=='Active'">
             {{application.activeNotificationsCount==0?'No':application.activeNotificationsCount}} Active notifications
           </div>
-          <h3 class="card-title">
+          <h3 class="card-title" *ngIf="application.applicationName">
             <span *ngIf="!nameEditing">{{application.applicationName}}</span>
             <span *ngIf="nameEditing">
               <form (submit)="updateName($event)">
@@ -30,7 +37,6 @@
           </h3>
 
           <h5 *ngIf="!nameEditing" class="card-description">{{application.url}}</h5>
-
         </div>
         <mat-divider></mat-divider>
         <div class="card-body" [ngClass]="{'loading':loading}">
