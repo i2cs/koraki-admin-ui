@@ -16,20 +16,49 @@
         <mat-divider></mat-divider>
         <div class="card-body" [ngClass]="{'loading':loading}">
           <div *ngIf="!integrated">
-            <p>
-              Please enter your Shopify domain and click Connect button
+            <p *ngIf="!knownStore && knownApp">
+              Click
+              <b>Authenticate</b> button to visit Shopify apps page.
+              <br/>
+              <small>You will be redirected to Shopify apps page and will be asked to log in to your Shopify store.</small>
+            </p>
+            <p *ngIf="knownStore && !knownApp">
+              Please select a Koraki app to integrate with
+              <b>{{store}}</b> and click
+              <b>Connect</b> button
+            </p>
+            <p *ngIf="knownStore && knownApp">
+              Click
+              <b>Connect</b> button integrate
+              <b>{{store}}</b> to
+              <b>{{appName}}</b> Koraki app
             </p>
             <div class="row">
-              <div class="col-md-6 col-sm-12">
+              <!-- <div class="col-md-6 col-sm-12" *ngIf="!knownStore">
                 <mat-form-field floatLabel="never">
                   <input type="text" placeholder="https://mystorename.myshopify.com" [(ngModel)]="store" matInput #storeId/>
-                  <!-- <span matPrefix>https://</span>
-                  <span matSuffix>.myshopify.com</span> -->
+                </mat-form-field>
+              </div> -->
+
+              <div class="col-md-6 col-sm-12" *ngIf="!knownApp">
+                <mat-form-field>
+                  <mat-select placeholder="Select your Koraki app" [(ngModel)]="appId">
+                    <mat-option value="0">
+                      Create new
+                    </mat-option>
+                    <mat-option *ngFor="let a of applicationList" [value]="a.id">
+                      {{a.applicationName}} ({{a.url}})
+                    </mat-option>
+                  </mat-select>
                 </mat-form-field>
               </div>
+
               <div class="col-md-6 col-sm-12">
-                <a href="#" mat-raised-button class="btn btn-facebook" onclick="return false" (click)="subscribe()">
+                <a *ngIf="knownStore" [disabled]="subscribeClicked" href="#" mat-raised-button class="btn btn-facebook" onclick="return false" (click)="subscribe()">
                   Connect
+                </a>
+                <a *ngIf="!knownStore" href="#" mat-raised-button class="btn btn-facebook" onclick="return false" (click)="forwardToShopify()">
+                  Authenticate
                 </a>
               </div>
             </div>
@@ -39,8 +68,8 @@
               <a href="https://{{configurations['shopify_shop_url']}}" target="_blank">{{configurations['shopify_shop_url']}}</a> is successfully integrated
             </p>
             <a href="#" mat-raised-button class="btn" onclick="return false" (click)="disconnect()">
-                Disconnect
-              </a>
+              Disconnect
+            </a>
           </div>
         </div>
       </div>

@@ -25,6 +25,9 @@ export const environment = {
     },
     facebook: {
       clientId: "1710573302367584"
+    },
+    shopify: {
+      appInstallUrl: "https://apps.shopify.com/koraki-io"
     }
   },
   plans: {

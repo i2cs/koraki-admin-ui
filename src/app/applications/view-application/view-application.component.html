@@ -6,7 +6,7 @@
           <div id="session-count-bar" [style.width.%]="sessions"></div>
           <span>{{!application.uniqueVisitors ? "0" : application.uniqueVisitors}}/{{allowedSessionCount > 90000 ? "∞" : allowedSessionCount}}
             user sessions
-            <a class="pull-right d-none d-md-block" routerLink="/subscription/add">Upgrade</a>
+            <a *ngIf="allowedSessionCount < 90000" class="pull-right d-none d-md-block" routerLink="/subscription/add">Upgrade</a>
           </span>
         </div>
         <div class="card-header">
