@@ -8,8 +8,10 @@ import { RouterModule } from '@angular/router';
 import { NewApplicationComponent } from './new-application/new-application.component';
 import { ViewApplicationComponent } from './view-application/view-application.component';
 import { MomentModule } from 'ngx-moment';
+import { ColorPickerModule } from 'ngx-color-picker';
 import { AnalyticsViewComponent } from './analytics-view/analytics-view.component';
 import { NotificationsViewComponent } from './notifications-view/notifications-view.component';
+import { NotificationPreviewComponent } from './notification-preview/notification-preview.component';
 
 @NgModule({
   imports: [
@@ -18,8 +20,9 @@ import { NotificationsViewComponent } from './notifications-view/notifications-v
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    MomentModule
+    MomentModule,
+    ColorPickerModule
   ],
-  declarations: [ApplicationsComponent, NewApplicationComponent, ViewApplicationComponent, AnalyticsViewComponent, NotificationsViewComponent]
+  declarations: [ApplicationsComponent, NewApplicationComponent, ViewApplicationComponent, AnalyticsViewComponent, NotificationsViewComponent, NotificationPreviewComponent]
 })
 export class ApplicationsModule { }

@@ -31,7 +31,6 @@ class _Array<T> extends Array<T> {
 })
 
 export class ViewApplicationComponent implements OnInit, AfterViewInit {
-  @ViewChild('iframe') iframe: ElementRef;
   loading: boolean;
   hide: boolean;
   appId: string;
@@ -50,9 +49,9 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
   updated: { name: string } = { name : ""};
   nameEditing: boolean;
   paid: boolean = false;
-  url: string;
   allowedSessionCount: number;
   sessions: number;
+  configs: any = {};
 
   constructor(
     private route: ActivatedRoute,
@@ -190,9 +189,14 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
         this.appId = params['id'];
         this.appservice.getApplicationById(params['id']).subscribe(a => {
           this.application = a;
-          this.url = environment.apiBaseUrl + "/widget.html?_i=" + a.clientId;
-          this.iframe.nativeElement["src"] = this.url;
           this.status = a.status == "Active";
+          if(a.customData){
+            try{
+              this.configs = JSON.parse(a.customData);
+            }catch(Error){
+              console.log("Error trying to parse custom data : " + a.customData);
+            }
+          }
           this.script = "<script>window.sparkleSettings = { app_id: \"" + a.clientId + "\" }; !function(){function t(){var t=a.createElement(\"script\"); t.type=\"text/javascript\", t.async=!0,t.src=\"\/\/api.koraki.io//widget/v1.0/js\"; var e=a.getElementsByTagName(\"script\")[0];e.parentNode.insertBefore(t,e)} var e=window,a=document;e.attachEvent?e.attachEvent(\"onload\",t):e.addEventListener(\"load\",t,!1)}();</script>"
           this.breadcrumbService.show([
             {title: "Applications", url: "/applications"},
@@ -221,10 +225,6 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
         this.sessions = 100;
       }
     }
-  }
-
-  refreshPreview(){
-    this.iframe.nativeElement["src"] = this.url;
   }
 
   filterList() {
@@ -256,6 +256,16 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
       this.notify.success("Application settings saved");
     }, e => {
       this.updatingSettings = false;
+    });
+  }
+
+  updateApplicationCustomization() {
+    let cusomizations = JSON.stringify(this.configs);
+    this.appservice.updateApplication(this.application.id, <ApplicationUpdateDataModel>{ customData : cusomizations }).subscribe(a => {
+      this.application = a;
+      this.notify.success("Notification customization saved");
+    }, e => {
+      this.notify.error(e.error.message);
     });
   }
 
