@@ -148,40 +148,36 @@
             </div>
 
             <div class="tab-pane" id="customize">
+
               <div class="row">
+
                 <div class="col-md-6 mr-auto">
+                  <h3>Customize the look of your notification widget. This is how it will appear on your website</h3>
                   <app-notification-preview [appId]="appId" [configs]="configs"></app-notification-preview>
                 </div>
                 <div class="col-md-6 mr-auto customization-settings">
                   <div>
                     <input [(colorPicker)]="configs.notification_bg_color" [style.background]="configs.notification_bg_color" /> Notification background color
                   </div>
-
                   <div>
                     <input [(colorPicker)]="configs.notification_text_color" [style.background]="configs.notification_text_color" /> Notification text color
                   </div>
-
                   <div>
                     <input [(colorPicker)]="configs.notification_link_color" [style.background]="configs.notification_link_color" /> Notification link color
                   </div>
-
                   <div>
                     <input [(colorPicker)]="configs.notification_footer_color" [style.background]="configs.notification_footer_color" /> Notification footer text color
                   </div>
-
                   <div>
                     <input [(colorPicker)]="configs.notification_border_color" [style.background]="configs.notification_border_color" /> Notification border color
                   </div>
-
                   <div>
                     <input [(colorPicker)]="configs.notification_close_color" [style.background]="configs.notification_close_color" /> Close icon color
                   </div>
-
                   <div>
                     <input type="number" min="0" max="40" [(ngModel)]="configs.notification_border_radius" name="notification_border_radius"
                     /> Notification border radius
                   </div>
-
 
                   <div>
                     <input type="number" min="0" max="40" [(ngModel)]="configs.notification_image_radius" name="notification_image_radius" /> Thumbnail border radius
