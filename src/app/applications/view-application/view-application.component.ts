@@ -269,6 +269,10 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
     });
   }
 
+  resetToDefault() {
+    this.configs = { "notification_bg_color": "rgb(255,255,255)", "notification_text_color": "rgb(95,95,95)", "notification_link_color": "rgb(156,169,183)", "notification_footer_color": "rgb(161,161,161)", "notification_border_color": "rgb(255,255,255)", "notification_close_color": "rgb(132,132,132)", "notification_border_radius": 5, "notification_image_radius": 0 } 
+  }
+
   deleteApplication() {
     var result = confirm("Are you sure you want to delete this application? This action is not reversible");
     if (result) {
