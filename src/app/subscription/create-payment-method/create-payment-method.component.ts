@@ -52,6 +52,10 @@ export class CreatePaymentMethodComponent implements OnInit {
           }, e => {
             this.notification.error(e.error.message);
           });
+        } else if (result.error) {
+          this.notification.error("Error returned from payment gateway. Please choose another card");
+          this.notification.error(result.error.message);
+          console.log(result.error.message);
         }
       });
     }
