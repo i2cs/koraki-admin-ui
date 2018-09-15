@@ -78,6 +78,8 @@ export class AuthService {
       }
     });
 
+    this.lock.logout
+
     this.lock.on('authorization_error', error => {
       this.router.navigate(['/']);
         console.log(error);
@@ -115,8 +117,18 @@ export class AuthService {
   public logout(): void {
     this.unsetAccessToken();
 
+    this.lock = new Auth0Lock(
+      environment.auth.clientID,
+      environment.auth.domain,
+      this.auth0Options
+    );
+
+    this.lock.logout({
+      returnTo: environment.baseUrl
+    });
+
     // Go back to the home route
-    this.router.navigate(['/']);
+    //this.router.navigate(['/']);
   }
 
   public isAuthenticated(): boolean {
