@@ -130,7 +130,7 @@ export class FacebookComponent implements OnInit {
     let redirect = environment.baseUrl + "/applications/view/~/integrations/facebook";
     let clientId = environment.integrations.facebook.clientId;
     redirect = redirect.replace("http://", "https://");
-    window.location.href = this.fbUrl + "dialog/oauth?state=" + state + "&client_id=" + clientId + "&response_type=token&scope=manage_pages,read_insights&redirect_uri=" + redirect;
+    window.location.href = this.fbUrl + "dialog/oauth?state=" + state + "&client_id=" + clientId + "&response_type=token&scope=manage_pages&redirect_uri=" + redirect;
   }
 
   loadPages() {

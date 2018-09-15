@@ -120,7 +120,8 @@
               "node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js",
               "node_modules/jqvmap/dist/jquery.vmap.min.js",
               "node_modules/jqvmap/dist/maps/jquery.vmap.world.js",
-              "node_modules/jquery-validation/dist/jquery.validate.min.js"
+              "node_modules/jquery-validation/dist/jquery.validate.min.js",
+              "node_modules/auth0-js/build/auth0.js"
             ],
             "styles": [
               "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",

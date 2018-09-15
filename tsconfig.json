@@ -15,6 +15,9 @@
     "lib": [
       "es2017",
       "dom"
-    ]
+    ],
+    "paths": {
+      "auth0-js": ["node_modules/auth0-js/build/auth0.js"]
+    }
   }
 }

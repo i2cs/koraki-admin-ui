@@ -4,6 +4,7 @@ import { Configuration, ConfigurationParameters, SubscriptionsDataViewModel, Sub
 import { environment } from 'environments/environment';
 import { LocalStorageService } from 'angular-web-storage';
 import * as auth0 from 'auth0-js';
+import Auth0Lock from 'auth0-lock';
 import { Router } from '@angular/router';
 import { Subject, Observable } from 'rxjs';
 
@@ -15,20 +16,33 @@ import { Subject, Observable } from 'rxjs';
 })
 export class AuthService {
   userProfile: any;
-  auth0 = new auth0.WebAuth({
-    clientID: environment.auth.clientID,
-    domain: environment.auth.domain,
-    responseType: 'token id_token',
-    audience: environment.auth.audience,
-    redirectUri: environment.auth.redirect,
-    scope: environment.auth.scope
-  });
-
+  auth0Options: any;
+  lock: Auth0Lock;
 
   constructor(
     private local: LocalStorageService,
     private router: Router
-  ) { }
+  ) { 
+    this.auth0Options = {
+      theme: {
+        logo: '/assets/img/koraki-logo.png',
+        primaryColor: '#f2a133'
+      },
+      auth: {
+        redirectUrl: environment.auth.redirect,
+        responseType: 'token id_token',
+        audience: environment.auth.audience,
+        params: {
+          scope: environment.auth.scope
+        }
+      },
+      container: 'hiw-login-container',
+      autoclose: true,
+      languageDictionary: {
+        title: ""
+      },
+    };
+  }
 
   private getAccessToken(): string {
     if (this.local.get("access-token")) {
@@ -37,7 +51,39 @@ export class AuthService {
   }
 
   public login() {
-    this.auth0.authorize();
+    var emailPrefill = this.local.get("email_prefill");
+    if(emailPrefill){
+      this.auth0Options.prefill = {
+        email: emailPrefill
+      }
+      this.local.remove("email_prefill");
+    }
+  
+    this.lock = new Auth0Lock(
+      environment.auth.clientID,
+      environment.auth.domain,
+      this.auth0Options
+    );
+
+    this.lock.on('authenticated', (authResult: any) => {
+      if (authResult && authResult.accessToken && authResult.idToken) {
+        this.setSession(authResult);
+        var redirect = this.local.get("redirect");
+        if (redirect) {
+          this.local.remove("redirect");
+          window.location.href = redirect;
+        } else {
+          this.router.navigate(['/dashboard']);
+        }
+      }
+    });
+
+    this.lock.on('authorization_error', error => {
+      this.router.navigate(['/']);
+        console.log(error);
+    });
+
+    this.lock.show();
   }
 
   public setAccessToken(token: string) {
@@ -59,21 +105,7 @@ export class AuthService {
   }
 
   public handleAuthentication(): void {
-    this.auth0.parseHash((err, authResult) => {
-      if (authResult && authResult.accessToken && authResult.idToken) {
-        this.setSession(authResult);
-        var redirect = this.local.get("redirect");
-        if (redirect) {
-          this.local.remove("redirect");
-          window.location.href = redirect;
-        } else {
-          this.router.navigate(['/dashboard']);
-        }
-      } else if (err) {
-        this.router.navigate(['/']);
-        console.log(err);
-      }
-    });
+    // depricated
   }
 
   private setSession(authResult): void {

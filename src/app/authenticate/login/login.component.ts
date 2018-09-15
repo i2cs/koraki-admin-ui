@@ -12,18 +12,13 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    const body = document.getElementsByTagName('body')[0];
-    body.classList.add('register-page');
-    body.classList.add('off-canvas-sidebar');
+    this.authService.login();
   }
 
   ngOnDestroy() {
-    const body = document.getElementsByTagName('body')[0];
-    body.classList.remove('register-page');
-    body.classList.remove('off-canvas-sidebar');
   }
 
   redirectToLogin() {
-    this.authService.login();
+    //this.authService.login();
   }
 }
