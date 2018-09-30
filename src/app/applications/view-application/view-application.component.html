@@ -41,43 +41,8 @@
         <mat-divider></mat-divider>
         <div class="card-body" [ngClass]="{'loading':loading}">
 
-          <ul class="nav nav-pills nav-pills-warning justify-content-center flex-column flex-sm-row" role="tablist">
-            <li class="flex-sm-fill text-sm-center nav-item">
-              <a class="nav-link active" data-toggle="tab" href="#link1" role="tablist">
-                Details
-              </a>
-            </li>
-            <li class="flex-sm-fill text-sm-center nav-item">
-              <a class="nav-link" data-toggle="tab" href="#link2" role="tablist">
-                Integrations
-              </a>
-            </li>
-            <li class="flex-sm-fill text-sm-center nav-item">
-              <a class="nav-link" data-toggle="tab" href="#notifications-v" role="tablist">
-                Notifications
-              </a>
-            </li>
-            <li class="flex-sm-fill text-sm-center nav-item">
-              <a class="nav-link" data-toggle="tab" href="#customize" role="tablist">
-                Customize
-              </a>
-            </li>
-            <li class="flex-sm-fill text-sm-center nav-item">
-              <a class="nav-link" data-toggle="tab" href="#link3" role="tablist">
-                Settings
-              </a>
-            </li>
-            <li class="flex-sm-fill text-sm-center nav-item">
-              <a class="nav-link" data-toggle="tab" href="#link4" role="tablist">
-                Analytics
-              </a>
-            </li>
-          </ul>
-          <div class="tab-content tab-space">
-            <div class="tab-pane active row" id="link1">
-
-              <!-- <div class="row justify-content-center"> -->
-              <div class="col-sm-12">
+          <mat-tab-group [(selectedIndex)]="selectedTab" disableRipple="true" color="primary" class="md-no-animation" [@.disabled]="true" dynamicHeight="false">
+            <mat-tab label="Details">
                 <p>
                   <mat-form-field appearance="outline" hintLabel="Client id or the app key" class="example-full-width has-label">
                     <mat-label>Client Id</mat-label>
@@ -88,17 +53,16 @@
                 <p>
                   <mat-form-field appearance="outline" hintLabel="Click on eye icon to see the client secret">
                     <mat-label>Secret</mat-label>
-                    <input matInput readonly [(ngModel)]="application.clientSecret" [type]="hide ? 'password' : 'text'">
+                    <input (click)="hide = false" matInput readonly [(ngModel)]="application.clientSecret" [type]="hide ? 'password' : 'text'">
                     <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                   </mat-form-field>
                 </p>
 
-              </div>
-              <!-- </div> -->
-            </div>
-
-            <div class="tab-pane" id="link2">
-
+                <button (click)="setTab(1)" mat-raised-button class="btn btn-primary">
+                  Next step : Get the widget code
+                </button>
+            </mat-tab>
+            <mat-tab label="Integrations">
               <p>You can copy/paste following code snippet into your website. Otherwise you can use one or more of the following
                 integrations to add Koraki to your site</p>
 
@@ -141,14 +105,11 @@
                 </div>
 
               </div>
-            </div>
-
-            <div class="tab-pane" id="notifications-v">
+            </mat-tab>
+            <mat-tab label="Notifications">
               <app-notifications-view [appId]="appId"></app-notifications-view>
-            </div>
-
-            <div class="tab-pane" id="customize">
-
+            </mat-tab>
+            <mat-tab label="Customize">
               <div class="row">
 
                 <div class="col-md-6 mr-auto">
@@ -187,9 +148,8 @@
                   <button mat-raised-button class="btn" (click)="resetToDefault()">Reset to default</button>
                 </div>
               </div>
-            </div>
-
-            <div class="tab-pane" id="link3">
+            </mat-tab>
+            <mat-tab label="Settings">
               <div class="row">
                 <div class="col-md-12 mr-auto">
                   <legend>Status is {{status?'active':'deactivated'}}</legend>
@@ -203,17 +163,17 @@
                 </div>
 
                 <!-- <div class="divider"></div>
-
-                  <div class="col-md-12 mr-auto">
-                    <legend>Display on mobile devices</legend>
-                    <div class="togglebutton">
-                      <label>
-                        <input type="checkbox" [(ngModel)]="mobile" (change)="updateApplicationSettings()">
-                        <span class="toggle"></span>
-                        {{mobile?"Display":"Don't display"}} Koraki widget on mobile devices
-                      </label>
-                    </div>
-                  </div> -->
+    
+                      <div class="col-md-12 mr-auto">
+                        <legend>Display on mobile devices</legend>
+                        <div class="togglebutton">
+                          <label>
+                            <input type="checkbox" [(ngModel)]="mobile" (change)="updateApplicationSettings()">
+                            <span class="toggle"></span>
+                            {{mobile?"Display":"Don't display"}} Koraki widget on mobile devices
+                          </label>
+                        </div>
+                      </div> -->
 
                 <div class="divider"></div>
 
@@ -259,17 +219,12 @@
                     </label>
                   </div>
                 </div>
-
-
               </div>
-            </div>
-
-            <div class="tab-pane" id="link4">
-
+            </mat-tab>
+            <mat-tab label="Analytics">
               <app-analytics-view *ngIf="application.analyticsId" [analyticsid]="application.analyticsId" [analyticstoken]="application.analyticsToken"></app-analytics-view>
-
-            </div>
-          </div>
+            </mat-tab>
+          </mat-tab-group>
         </div>
       </div>
     </div>

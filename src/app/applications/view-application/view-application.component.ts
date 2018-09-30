@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApplicationsService, ApplicationViewDataModel, ApplicationUpdateDataModel, ApplicationIntegrationViewModel } from 'koraki-angular-client';
 import { LoadingServiceService } from '../../services/loading-service.service';
@@ -27,7 +27,8 @@ class _Array<T> extends Array<T> {
 @Component({
   selector: 'app-view-application',
   templateUrl: './view-application.component.html',
-  styleUrls: ['./view-application.component.scss']
+  styleUrls: ['./view-application.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class ViewApplicationComponent implements OnInit, AfterViewInit {
@@ -52,6 +53,8 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
   allowedSessionCount: number;
   sessions: number;
   configs: any = {};
+  selectedTab: number;
+  defautConfigs = { "notification_bg_color": "rgb(255,255,255)", "notification_text_color": "rgb(95,95,95)", "notification_link_color": "rgb(156,169,183)", "notification_footer_color": "rgb(161,161,161)", "notification_border_color": "rgb(255,255,255)", "notification_close_color": "rgb(132,132,132)", "notification_border_radius": 5, "notification_image_radius": 0 } 
 
   constructor(
     private route: ActivatedRoute,
@@ -193,6 +196,13 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
           if(a.customData){
             try{
               this.configs = JSON.parse(a.customData);
+              if(this.configs){
+                for(var i in this.defautConfigs){
+                  if(!this.configs[i]){
+                    this.configs[i] = this.defautConfigs[i];
+                  }
+                }
+              }
             }catch(Error){
               console.log("Error trying to parse custom data : " + a.customData);
             }
@@ -216,6 +226,10 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
         });
       }
     });
+  }
+
+  setTab(tab: number){
+    this.selectedTab = tab;
   }
 
   setProgress(){
@@ -270,7 +284,7 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
   }
 
   resetToDefault() {
-    this.configs = { "notification_bg_color": "rgb(255,255,255)", "notification_text_color": "rgb(95,95,95)", "notification_link_color": "rgb(156,169,183)", "notification_footer_color": "rgb(161,161,161)", "notification_border_color": "rgb(255,255,255)", "notification_close_color": "rgb(132,132,132)", "notification_border_radius": 5, "notification_image_radius": 0 } 
+    this.configs = this.defautConfigs; 
   }
 
   deleteApplication() {
