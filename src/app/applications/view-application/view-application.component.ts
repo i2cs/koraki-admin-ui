@@ -39,7 +39,6 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
   integrations: Map<string, ApplicationIntegrationViewModel> = new Map<string, ApplicationIntegrationViewModel>();
   script: string;
   status: boolean;
-  mobile: boolean;
   updatingSettings: boolean;
   allIntegrations: any[] = Array();
   allowedIntegrations: any = {};
@@ -47,14 +46,14 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
   possibleCounts: number[] = _Array.range(8, 100, 1);
   possibleDays: number[] = _Array.range(1, 100, 1);
   filter: string;
-  updated: { name: string } = { name : ""};
+  updated: { name: string } = { name: "" };
   nameEditing: boolean;
   paid: boolean = false;
   allowedSessionCount: number;
   sessions: number;
   configs: any = {};
   selectedTab: number;
-  defautConfigs = { "notification_bg_color": "rgb(255,255,255)", "notification_text_color": "rgb(95,95,95)", "notification_link_color": "rgb(156,169,183)", "notification_footer_color": "rgb(161,161,161)", "notification_border_color": "rgb(255,255,255)", "notification_close_color": "rgb(132,132,132)", "notification_border_radius": 5, "notification_image_radius": 0 } 
+  defautConfigs = { "notification_bg_color": "rgb(255,255,255)", "notification_text_color": "rgb(95,95,95)", "notification_link_color": "rgb(156,169,183)", "notification_footer_color": "rgb(161,161,161)", "notification_border_color": "rgb(255,255,255)", "notification_close_color": "rgb(132,132,132)", "notification_border_radius": 5, "notification_image_radius": 0, "position": "bottom-left", "mobile_position": "bottom", "show_on_mobile" : true }
 
   constructor(
     private route: ActivatedRoute,
@@ -66,9 +65,9 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
     private data: MemoryDataHolderServiceService,
     private subscription: SubscriptionService,
     private sanitizer: DomSanitizer
-  ) {}
+  ) { }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     this.route.params.subscribe(params => {
       if (params['id']) {
         this.integrations = <Map<string, ApplicationIntegrationViewModel>>this.data.store.get("integrations_" + params['id']);
@@ -97,7 +96,7 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
 
       let number = Number.parseInt(a.permissons['notifications_active_per_app.maximum']);
       this.possibleCounts = _Array.range(1, Math.min(number, 100), 1);
-      if(number > 100){
+      if (number > 100) {
         this.possibleCounts.push(1000);
       }
       this.paid = a.permissons['paid'] === "true";
@@ -106,7 +105,7 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.breadcrumbService.show([
-      {title: "Applications", url: "/applications"}
+      { title: "Applications", url: "/applications" }
     ]);
 
     this.allIntegrations.push({
@@ -173,7 +172,7 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
       help: "https://koraki.io/zapier-koraki-to-enable-more-than-1000-integrations/",
       ecommerce: false
     });
-    
+
     this.allIntegrations.push({
       code: "privy",
       title: "Privy",
@@ -185,7 +184,7 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
 
     this.allIntegrationsOriginal = this.allIntegrations;
 
-    this.loadingService.loading$.subscribe(a => { this.loading = a; });
+    //this.loadingService.loading$.subscribe(a => { this.loading = a; });
     this.hide = true;
     this.route.params.subscribe(params => {
       if (params['id']) {
@@ -193,24 +192,11 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
         this.appservice.getApplicationById(params['id']).subscribe(a => {
           this.application = a;
           this.status = a.status == "Active";
-          if(a.customData){
-            try{
-              this.configs = JSON.parse(a.customData);
-              if(this.configs){
-                for(var i in this.defautConfigs){
-                  if(!this.configs[i]){
-                    this.configs[i] = this.defautConfigs[i];
-                  }
-                }
-              }
-            }catch(Error){
-              console.log("Error trying to parse custom data : " + a.customData);
-            }
-          }
+          this.parseCustomData(a);
           this.script = "<script>window.sparkleSettings = { app_id: \"" + a.clientId + "\" }; !function(){function t(){var t=a.createElement(\"script\"); t.type=\"text/javascript\", t.async=!0,t.src=\"\/\/api.koraki.io//widget/v1.0/js\"; var e=a.getElementsByTagName(\"script\")[0];e.parentNode.insertBefore(t,e)} var e=window,a=document;e.attachEvent?e.attachEvent(\"onload\",t):e.addEventListener(\"load\",t,!1)}();</script>"
           this.breadcrumbService.show([
-            {title: "Applications", url: "/applications"},
-            {title: a.applicationName, url: "/applications/view/" + a.id}
+            { title: "Applications", url: "/applications" },
+            { title: a.applicationName, url: "/applications/view/" + a.id }
           ]);
 
           this.setProgress();
@@ -219,7 +205,7 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
         this.route.fragment.subscribe(query => {
           if (query && this.getFragmentParameter(query, "new")) {
             this.notify.success("Application created!");
-            
+
             //clear hash
             window.location.hash = '';
           }
@@ -228,14 +214,14 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
     });
   }
 
-  setTab(tab: number){
+  setTab(tab: number) {
     this.selectedTab = tab;
   }
 
-  setProgress(){
-    if(this.application.uniqueVisitors && this.allowedSessionCount){
+  setProgress() {
+    if (this.application.uniqueVisitors && this.allowedSessionCount) {
       this.sessions = Number((this.application.uniqueVisitors / this.allowedSessionCount) * 100);
-      if(this.sessions > 100){
+      if (this.sessions > 100) {
         this.sessions = 100;
       }
     }
@@ -250,9 +236,10 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
     let status: ApplicationUpdateDataModel.StatusEnum = this.status ? ApplicationUpdateDataModel.StatusEnum.Active : ApplicationUpdateDataModel.StatusEnum.Disabled;
     this.appservice.updateApplication(this.application.id, <ApplicationUpdateDataModel>{ status: status }).subscribe(a => {
       this.application = a;
+      this.parseCustomData(a);
       this.notify.success("Application is " + status.toString());
     }, e => {
-      this.application.status = status == ApplicationUpdateDataModel.StatusEnum.Active ? 
+      this.application.status = status == ApplicationUpdateDataModel.StatusEnum.Active ?
         ApplicationUpdateDataModel.StatusEnum.Disabled : ApplicationUpdateDataModel.StatusEnum.Active;
       this.status = this.application.status == ApplicationUpdateDataModel.StatusEnum.Active;
       this.notify.error(e.error.message);
@@ -263,10 +250,16 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
     this.updatingSettings = true;
     this.appservice.updateApplication(this.application.id, <ApplicationUpdateDataModel>{
       notificationMaximumActiveCount: this.application.notificationMaximumActiveCount,
-      notificationMaximumDurationDays: this.application.notificationMaximumDurationDays
+      notificationMaximumDurationDays: this.application.notificationMaximumDurationDays,
+      customData: JSON.stringify({ 
+        show_on_mobile: this.configs.show_on_mobile,
+        position: this.configs.position,
+        mobile_position: this.configs.mobile_position
+       })
     }).subscribe(a => {
       this.updatingSettings = false;
       this.application = a;
+      this.parseCustomData(a);
       this.notify.success("Application settings saved");
     }, e => {
       this.updatingSettings = false;
@@ -275,8 +268,9 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
 
   updateApplicationCustomization() {
     let cusomizations = JSON.stringify(this.configs);
-    this.appservice.updateApplication(this.application.id, <ApplicationUpdateDataModel>{ customData : cusomizations }).subscribe(a => {
+    this.appservice.updateApplication(this.application.id, <ApplicationUpdateDataModel>{ customData: cusomizations }).subscribe(a => {
       this.application = a;
+      this.parseCustomData(a);
       this.notify.success("Notification customization saved");
     }, e => {
       this.notify.error(e.error.message);
@@ -284,7 +278,7 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
   }
 
   resetToDefault() {
-    this.configs = this.defautConfigs; 
+    this.configs = this.defautConfigs;
   }
 
   deleteApplication() {
@@ -297,7 +291,7 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
     }
   }
 
-  updateName(){
+  updateName() {
     this.updatingSettings = true;
     this.appservice.updateApplication(this.application.id, <ApplicationUpdateDataModel>{
       applicationName: this.updated.name
@@ -305,6 +299,7 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
       this.updatingSettings = false;
       this.application = a;
       this.nameEditing = false;
+      this.parseCustomData(a);
       this.notify.success("Application name updated");
     }, e => {
       this.updatingSettings = false;
@@ -313,7 +308,28 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
     });
   }
 
-  sanitize(url: string){
+  private parseCustomData(a: ApplicationViewDataModel) {
+    if (a.customData) {
+      try {
+        this.configs = JSON.parse(a.customData);
+      
+        if (this.configs) {
+          for (var i in this.defautConfigs) {
+            if (!this.configs[i]) {
+              this.configs[i] = this.defautConfigs[i];
+            }
+          }
+
+          this.configs.show_on_mobile = this.configs.show_on_mobile === "true";
+        }
+      }
+      catch (Error) {
+        console.log("Error trying to parse custom data : " + a.customData);
+      }
+    }
+  }
+
+  sanitize(url: string) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 

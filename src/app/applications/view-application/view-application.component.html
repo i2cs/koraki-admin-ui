@@ -41,26 +41,27 @@
         <mat-divider></mat-divider>
         <div class="card-body" [ngClass]="{'loading':loading}">
 
-          <mat-tab-group [(selectedIndex)]="selectedTab" disableRipple="true" color="primary" class="md-no-animation" [@.disabled]="true" dynamicHeight="false">
+          <mat-tab-group [(selectedIndex)]="selectedTab" disableRipple="true" color="primary" class="md-no-animation" [@.disabled]="true"
+            dynamicHeight="false">
             <mat-tab label="Details">
-                <p>
-                  <mat-form-field appearance="outline" hintLabel="Client id or the app key" class="example-full-width has-label">
-                    <mat-label>Client Id</mat-label>
-                    <input type="text" [(ngModel)]="application.clientId" matInput readonly>
-                  </mat-form-field>
-                </p>
+              <p>
+                <mat-form-field appearance="outline" hintLabel="Client id or the app key" class="example-full-width has-label">
+                  <mat-label>Client Id</mat-label>
+                  <input type="text" [(ngModel)]="application.clientId" matInput readonly>
+                </mat-form-field>
+              </p>
 
-                <p>
-                  <mat-form-field appearance="outline" hintLabel="Click on eye icon to see the client secret">
-                    <mat-label>Secret</mat-label>
-                    <input (click)="hide = false" matInput readonly [(ngModel)]="application.clientSecret" [type]="hide ? 'password' : 'text'">
-                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                  </mat-form-field>
-                </p>
+              <p>
+                <mat-form-field appearance="outline" hintLabel="Click on eye icon to see the client secret">
+                  <mat-label>Secret</mat-label>
+                  <input (click)="hide = false" matInput readonly [(ngModel)]="application.clientSecret" [type]="hide ? 'password' : 'text'">
+                  <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </mat-form-field>
+              </p>
 
-                <button (click)="setTab(1)" mat-raised-button class="btn btn-primary">
-                  Next step : Get the widget code
-                </button>
+              <button (click)="setTab(1)" mat-raised-button class="btn btn-primary">
+                Next step : Get the widget code
+              </button>
             </mat-tab>
             <mat-tab label="Integrations">
               <p>You can copy/paste following code snippet into your website. Otherwise you can use one or more of the following
@@ -162,21 +163,56 @@
                   </div>
                 </div>
 
-                <!-- <div class="divider"></div>
-    
-                      <div class="col-md-12 mr-auto">
-                        <legend>Display on mobile devices</legend>
-                        <div class="togglebutton">
-                          <label>
-                            <input type="checkbox" [(ngModel)]="mobile" (change)="updateApplicationSettings()">
-                            <span class="toggle"></span>
-                            {{mobile?"Display":"Don't display"}} Koraki widget on mobile devices
-                          </label>
-                        </div>
-                      </div> -->
+                <div class="divider"></div>
+                <div class="col-md-12 mr-auto">
+                  <legend>Widget position on websites</legend>
+                  <mat-form-field hintLabel="Set notification widget position" class="example-full-width has-label">
+                    <mat-select [disabled]="updatingSettings" [(ngModel)]="configs.position" (selectionChange)="updateApplicationSettings()">
+                      <mat-option value="bottom-left">
+                        Bottom Left
+                      </mat-option>
+                      <mat-option value="bottom-right">
+                        Bottom Right
+                      </mat-option>
+                      <mat-option value="top-left">
+                        Top Left
+                      </mat-option>
+                      <mat-option value="top-right">
+                        Top Right
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
 
                 <div class="divider"></div>
+                <div class="col-md-12 mr-auto">
+                  <legend>Display on mobile devices</legend>
+                  <div class="togglebutton">
+                    <label>
+                      <input type="checkbox" [(ngModel)]="configs.show_on_mobile" (change)="updateApplicationSettings()">
+                      <span class="toggle"></span>
+                      {{configs.show_on_mobile?"Display":"Don't display"}} Koraki widget on mobile devices
+                    </label>
+                  </div>
+                </div>
 
+                <div class="divider" *ngIf="configs.show_on_mobile"></div>
+                <div class="col-md-12 mr-auto" *ngIf="configs.show_on_mobile">
+                  <legend>Widget position on mobile</legend>
+                  <mat-form-field hintLabel="Set notification widget position when displaying on mobile" class="example-full-width has-label">
+
+                    <mat-select [disabled]="updatingSettings" [(ngModel)]="configs.mobile_position" (selectionChange)="updateApplicationSettings()">
+                      <mat-option value="bottom">
+                        Bottom
+                      </mat-option>
+                      <mat-option value="top">
+                        Top
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="divider"></div>
                 <div class="col-md-12 mr-auto">
                   <a *ngIf="!paid" routerLink="/subscription/plans" class="upgrade-right">Upgrade to change</a>
                   <legend>Active notifications count</legend>
