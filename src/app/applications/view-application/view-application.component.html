@@ -65,9 +65,9 @@
             </mat-tab>
             <mat-tab label="Integrations">
               <p>You can copy/paste following code snippet into your website. Otherwise you can use one or more of the following
-                integrations to add Koraki to your site</p>
+                integrations to add Koraki to your site. <a target="_blank"href='https://docs.koraki.io/project/getting-started/adding-koraki-to-a-site'>Learn how to add this script to your website</a></p>
 
-              <mat-form-field appearance="outline" hintLabel="Learn how to add this script to your website" class="example-full-width">
+              <mat-form-field appearance="outline" class="example-full-width">
                 <textarea readonly rows=5 matInput>{{script}}</textarea>
               </mat-form-field>
 
@@ -140,9 +140,19 @@
                     <input type="number" min="0" max="40" [(ngModel)]="configs.notification_border_radius" name="notification_border_radius"
                     /> Notification border radius
                   </div>
-
+              
                   <div>
                     <input type="number" min="0" max="40" [(ngModel)]="configs.notification_image_radius" name="notification_image_radius" /> Thumbnail border radius
+                  </div>
+
+                  <div>
+                    Animate widget from 
+                    <select [(ngModel)]="configs.animate">
+                      <option value="up">Up</option>
+                      <option value="down">Down</option>
+                      <option value="right">Left to right</option>
+                      <option value="left">Right to left</option>
+                    </select>
                   </div>
 
                   <button mat-raised-button class="btn btn-primary" (click)="updateApplicationCustomization()">Save changes</button>

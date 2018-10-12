@@ -19,7 +19,7 @@ export class NotificationsViewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
+    this.loadNotifications();
   }
 
   ngAfterViewInit() {
