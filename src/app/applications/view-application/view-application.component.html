@@ -44,28 +44,37 @@
           <mat-tab-group [(selectedIndex)]="selectedTab" disableRipple="true" color="primary" class="md-no-animation" [@.disabled]="true"
             dynamicHeight="false">
             <mat-tab label="Details">
-              <p>
-                <mat-form-field appearance="outline" hintLabel="Client id or the app key" class="example-full-width has-label">
-                  <mat-label>Client Id</mat-label>
-                  <input type="text" [(ngModel)]="application.clientId" matInput readonly>
-                </mat-form-field>
-              </p>
+              <div class="row">
+                <div class="col-md-6">
+                  <p>
+                    <mat-form-field appearance="outline" hintLabel="Client id or the app key" class="example-full-width has-label">
+                      <mat-label>Client Id</mat-label>
+                      <input type="text" [(ngModel)]="application.clientId" matInput readonly>
+                    </mat-form-field>
+                  </p>
 
-              <p>
-                <mat-form-field appearance="outline" hintLabel="Click on eye icon to see the client secret">
-                  <mat-label>Secret</mat-label>
-                  <input (click)="hide = false" matInput readonly [(ngModel)]="application.clientSecret" [type]="hide ? 'password' : 'text'">
-                  <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                </mat-form-field>
-              </p>
-
-              <button (click)="setTab(1)" mat-raised-button class="btn btn-primary">
-                Next step : Get the widget code
-              </button>
+                  <p>
+                    <mat-form-field appearance="outline" hintLabel="Click on eye icon to see the client secret">
+                      <mat-label>Secret</mat-label>
+                      <input (click)="hide = false" matInput readonly [(ngModel)]="application.clientSecret" [type]="hide ? 'password' : 'text'">
+                      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </mat-form-field>
+                  </p>
+                  <button (click)="setTab(1)" mat-raised-button class="btn btn-primary">
+                      Next step : Get the widget code
+                    </button>
+                </div>
+                <div class="col-md-6">
+                  <iframe width="400" height="270" src="https://www.youtube.com/embed/0KETlEn-8mw?start=44" frameborder="0" allow="autoplay; encrypted-media"
+                    allowfullscreen></iframe>
+                </div>
+              </div>
             </mat-tab>
             <mat-tab label="Integrations">
               <p>You can copy/paste following code snippet into your website. Otherwise you can use one or more of the following
-                integrations to add Koraki to your site. <a target="_blank"href='https://docs.koraki.io/project/getting-started/adding-koraki-to-a-site'>Learn how to add this script to your website</a></p>
+                integrations to add Koraki to your site.
+                <a target="_blank" href='https://docs.koraki.io/project/getting-started/adding-koraki-to-a-site'>Learn how to add this script to your website</a>
+              </p>
 
               <mat-form-field appearance="outline" class="example-full-width">
                 <textarea readonly rows=5 matInput>{{script}}</textarea>
@@ -140,13 +149,13 @@
                     <input type="number" min="0" max="40" [(ngModel)]="configs.notification_border_radius" name="notification_border_radius"
                     /> Notification border radius
                   </div>
-              
+
                   <div>
                     <input type="number" min="0" max="40" [(ngModel)]="configs.notification_image_radius" name="notification_image_radius" /> Thumbnail border radius
                   </div>
 
                   <div>
-                    Animate widget from 
+                    Animate widget from
                     <select [(ngModel)]="configs.animate">
                       <option value="up">Up</option>
                       <option value="down">Down</option>
