@@ -22,7 +22,15 @@
                 <td>
                   <img [src]="row['thumbnailUrl']" height="60" />
                 </td>
-                <td [innerHtml]="row['notificationText']"></td>
+                <td>
+                  <div *ngIf="isLocalizedNotification(row['notificationText'])">
+                    <div *ngFor="let s of parse(row['notificationText']);trackBy: trackByFn">
+                      <span class="no-key">{{s.key}}</span>
+                      <span class="no-text" title="Notification of {{s.key}} locale">{{s.value}}</span>
+                    </div>
+                  </div>
+                  <div *ngIf="!isLocalizedNotification(row['notificationText'])" [innerHtml]="row['notificationText']"></div>
+                </td>
                 <td title="{{row['createdOn']}}">{{row['createdOn'] | amFromUtc | amTimeAgo}}</td>
                 <td class="text-right">
                   <a href="#" onclick="return false;" (click)="remove(row['id'])" class="btn btn-link btn-danger btn-just-icon" title="Remove this">

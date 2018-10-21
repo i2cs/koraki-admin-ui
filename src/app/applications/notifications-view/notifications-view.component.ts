@@ -42,4 +42,22 @@ export class NotificationsViewComponent implements OnInit {
       })
     }
   }
+
+  isLocalizedNotification(text) {
+    return text.match("^{(.+:[^,]+)+}$");
+  }
+
+  parse(json) {
+    var arr = [];
+    var object = JSON.parse(json);
+    var keys = Object.keys(object);
+    for(var i in keys){
+      arr.push({ key : keys[i], value : object[keys[i]]});
+    }
+    return arr;
+  }
+
+  trackByFn(index, item) {
+    return item;
+  }
 }
