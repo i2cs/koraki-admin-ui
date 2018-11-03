@@ -36,6 +36,11 @@ export class OpencartComponent implements OnInit {
       name: "OpenCart 2.3.x",
       url: "https://github.com/i2cs/koraki-opencart-integration/archive/OC-2.3-v1.0.zip"
     });
+
+    this.releases.push({
+      name: "OpenCart 3.x",
+      url: "https://github.com/i2cs/koraki-opencart-integration/archive/OC-3.0-v1.0.zip"
+    });
   }
 
 }
