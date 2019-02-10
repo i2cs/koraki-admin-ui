@@ -53,7 +53,7 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
   sessions: number;
   configs: any = {};
   selectedTab: number;
-  defautConfigs = { "notification_bg_color": "rgb(255,255,255)", "notification_text_color": "rgb(95,95,95)", "notification_link_color": "rgb(156,169,183)", "notification_footer_color": "rgb(161,161,161)", "notification_border_color": "rgb(255,255,255)", "notification_close_color": "rgb(132,132,132)", "notification_border_radius": 5, "notification_image_radius": 0, "position": "bottom-left", "mobile_position": "bottom", "show_on_mobile" : "true", "animate" : "up" }
+  defautConfigs = { "notification_bg_color": "rgb(255,255,255)", "notification_text_color": "rgb(95,95,95)", "notification_link_color": "rgb(156,169,183)", "notification_footer_color": "rgb(161,161,161)", "notification_border_color": "rgb(255,255,255)", "notification_close_color": "rgb(132,132,132)", "notification_border_radius": 5, "notification_image_radius": 0, "position": "bottom-left", "mobile_position": "bottom", "show_on_mobile" : "true", "animate" : "up", "start_delay": 2000, "roll_delay": 3000, "display_duration": 9500 }
 
   constructor(
     private route: ActivatedRoute,
@@ -254,7 +254,10 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
       customData: JSON.stringify({ 
         show_on_mobile: this.configs.show_on_mobile,
         position: this.configs.position,
-        mobile_position: this.configs.mobile_position
+        mobile_position: this.configs.mobile_position,
+        start_delay: this.configs.start_delay,
+        roll_delay: this.configs.roll_delay,
+        display_duration: this.configs.display_duration
        })
     }).subscribe(a => {
       this.updatingSettings = false;

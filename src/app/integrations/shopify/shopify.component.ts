@@ -10,6 +10,7 @@ import { LocalStorageService } from 'angular-web-storage';
 import { not } from '@angular/compiler/src/output/output_ast';
 import { environment } from 'environments/environment.prod';
 import { MAT_CHIPS_DEFAULT_OPTIONS } from '@angular/material';
+import { INTERNAL_BROWSER_DYNAMIC_PLATFORM_PROVIDERS } from '@angular/platform-browser-dynamic/src/platform_providers';
 
 @Component({
   selector: 'app-shopify',
@@ -58,22 +59,41 @@ export class ShopifyComponent implements OnInit {
     }
 
     let queryParams = this.route.snapshot.queryParamMap;
+    let shopifyToken = this.local.get("shopify_token");
+    let appIdCached = this.local.get("app_id_shopify");
     if (queryParams != null) {
       let code = queryParams.get("code");
       let shop = queryParams.get("shop");
-      if (code) {
+      if (code || shopifyToken) {
         dontRedirect = true;
         let state = queryParams.get("state");;
-        if (state && state.indexOf(":") >= 0) {
-          let stateParts = state.split(":");
-          this.appId = stateParts[1] || "0";
-          this.knownApp = true;
+        if ((state && state.indexOf(":") >= 0) || appIdCached) {
+          if(state && state.indexOf(":") >= 0){
+            let stateParts = state.split(":");
+            this.appId = stateParts[1] || "0";
+            this.knownApp = true;
+            this.local.set("app_id_shopify", this.appId);
+          }else if(appIdCached){
+            this.appId = appIdCached;
+          }
+          
           let model: ShopifySubscribeCreateViewModel = {
             applicationId: Number(this.appId),
             code: code,
             shopUrl: shop
           }
+
+          if(shopifyToken){
+            model.token = shopifyToken;
+          }
+
           this.shopifyService.subscribe(model).subscribe(a => {
+            if(a.result == "redirect"){
+              this.local.set("shopify_token", a.token);
+              window.location.href = a.redirectUrl;
+              return;
+            }
+
             this.notify.success("Successfully subscribed and fetching recent events");
             if (Number(this.appId) > 0) {
               this.router.navigate(['/applications/view/' + this.appId]);

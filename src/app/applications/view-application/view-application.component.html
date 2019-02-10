@@ -184,6 +184,36 @@
 
                 <div class="divider"></div>
                 <div class="col-md-12 mr-auto">
+                  <legend>Widget start delay</legend>
+                  <div class="togglebutton">
+                      <mat-form-field hintLabel="Widget will appear after {{configs.start_delay}} milliseconds" class="example-full-width has-label">
+                        <input type="number" matInput [(ngModel)]="configs.start_delay" (blur)="updateApplicationSettings()">
+                      </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="divider"></div>
+                <div class="col-md-12 mr-auto">
+                  <legend>Delay between two notifications</legend>
+                  <div class="togglebutton">
+                      <mat-form-field hintLabel="{{configs.roll_delay}} milliseconds delay between two notifications" class="example-full-width has-label">
+                        <input type="number" matInput [(ngModel)]="configs.roll_delay" (blur)="updateApplicationSettings()">
+                      </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="divider"></div>
+                <div class="col-md-12 mr-auto">
+                  <legend>Notification display time</legend>
+                  <div class="togglebutton">
+                      <mat-form-field hintLabel="A notification will visible for {{configs.display_duration}} milliseconds" class="example-full-width has-label">
+                        <input type="number" matInput [(ngModel)]="configs.display_duration" (blur)="updateApplicationSettings()">
+                      </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="divider"></div>
+                <div class="col-md-12 mr-auto">
                   <legend>Widget position on websites</legend>
                   <mat-form-field hintLabel="Set notification widget position" class="example-full-width has-label">
                     <mat-select [disabled]="updatingSettings" [(ngModel)]="configs.position" (selectionChange)="updateApplicationSettings()">

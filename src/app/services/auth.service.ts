@@ -39,8 +39,10 @@ export class AuthService {
       container: 'hiw-login-container',
       autoclose: true,
       languageDictionary: {
-        title: ""
+        title: "",
+        signUpTerms: "I agree with Koraki.io T&C"
       },
+      mustAcceptTerms: true
     };
   }
 
@@ -51,10 +53,13 @@ export class AuthService {
   }
 
   public login() {
-    var emailPrefill = this.local.get("email_prefill");
-    if(emailPrefill){
+    let email = this.getParameterByName('email');
+    if(!email){
+      email = this.local.get("email_prefill");
+    }
+    if(email){
       this.auth0Options.prefill = {
-        email: emailPrefill
+        email: email
       }
       this.local.remove("email_prefill");
     }
@@ -134,5 +139,15 @@ export class AuthService {
   public isAuthenticated(): boolean {
     //todo: implement jwt parse
     return this.local.get("access-token");
+  }
+
+  getParameterByName(name) {
+    var url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
   }
 }
