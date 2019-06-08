@@ -312,23 +312,23 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
   }
 
   private parseCustomData(a: ApplicationViewDataModel) {
-    if (a.customData) {
-      try {
-        this.configs = JSON.parse(a.customData);
-      
-        if (this.configs) {
-          for (var i in this.defautConfigs) {
-            if (!this.configs[i]) {
-              this.configs[i] = this.defautConfigs[i];
-            }
-          }
+    a.customData = a.customData || "{}";
 
-          this.configs.show_on_mobile = this.configs.show_on_mobile === "true";
+    try {
+      this.configs = JSON.parse(a.customData);
+    
+      if (this.configs) {
+        for (var i in this.defautConfigs) {
+          if (!this.configs[i]) {
+            this.configs[i] = this.defautConfigs[i];
+          }
         }
+
+        this.configs.show_on_mobile = this.configs.show_on_mobile === "true";
       }
-      catch (Error) {
-        console.log("Error trying to parse custom data : " + a.customData);
-      }
+    }
+    catch (Error) {
+      console.log("Error trying to parse custom data : " + a.customData);
     }
   }
 

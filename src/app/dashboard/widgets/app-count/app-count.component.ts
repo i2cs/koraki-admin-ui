@@ -1,6 +1,7 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { AnalyticsService } from 'koraki-angular-client';
 import { ErrorService } from '../../../services/error.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-app-count',
@@ -10,9 +11,11 @@ import { ErrorService } from '../../../services/error.service';
 export class AppCountComponent implements OnInit {
   count: number = -1;
   @Output() countLoaded = new EventEmitter<number>();
+  @Input() maxAllowedApps: number;
   
   constructor(
-    private analyticsservice: AnalyticsService
+    private analyticsservice: AnalyticsService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -29,4 +32,11 @@ export class AppCountComponent implements OnInit {
     );
   }
 
+  subscribePage(){
+    this.router.navigate(['/subscription/plans']);
+  }
+
+  createApp(){
+    this.router.navigate(['/applications/new']);
+  }
 }

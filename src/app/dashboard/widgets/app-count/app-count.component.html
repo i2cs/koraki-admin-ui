@@ -8,8 +8,10 @@
   </div>
   <div class="card-footer">
     <div class="stats">
-      <i class="material-icons text-danger">warning</i>
-      <a href="#pablo">Upgrade to create more</a>
+      <i onclick="return false;" *ngIf="maxAllowedApps <= count" class="material-icons text-danger">warning</i>
+      <a onclick="return false;" href="#" *ngIf="maxAllowedApps <= count" (click)="subscribePage()">Upgrade to create more</a>
+      <a onclick="return false;" href="#" *ngIf="0 == count" (click)="createApp()">Create your first application</a>
+      <a *ngIf="maxAllowedApps > count">&nbsp;</a>
       <div class="refresh">
         <a href="#" onclick="return false;" (click)="load()"><i class="material-icons">refresh</i></a>
       </div>
