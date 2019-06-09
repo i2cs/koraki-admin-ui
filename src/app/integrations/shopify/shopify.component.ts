@@ -64,7 +64,7 @@ export class ShopifyComponent implements OnInit {
     if (queryParams != null) {
       let code = queryParams.get("code");
       let shop = queryParams.get("shop");
-      if (code || shopifyToken) {
+      if (code != "" || shopifyToken) {
         dontRedirect = true;
         let state = queryParams.get("state");;
         if ((state && state.indexOf(":") >= 0) || appIdCached) {
