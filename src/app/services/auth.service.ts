@@ -99,6 +99,7 @@ export class AuthService {
 
   public unsetAccessToken() {
     this.local.remove("access-token");
+    this.local.clear();
   }
 
   public getAuthConfig(): Configuration {
