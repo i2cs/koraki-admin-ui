@@ -4,7 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  version: "0.2.0",
+  version: "0.3.0",
   production: false,
   apiBaseUrl: "http://localhost:5000",
   baseUrl: "http://localhost:4200",
@@ -36,7 +36,8 @@ export const environment = {
       "8 active notifications",
       "1K sessions per website",
       "Basic integrations",
-      "!Live analytics",
+      "All premium integrations",
+      "Live analytics",
     ],
     tier1: [
       "3 websites",

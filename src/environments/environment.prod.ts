@@ -1,5 +1,5 @@
 export const environment = {
-  version: "0.2.0",
+  version: "0.3.0",
   production: true,
   apiBaseUrl: "https://api.koraki.io",
   baseUrl: "https://app.koraki.io",
@@ -31,7 +31,8 @@ export const environment = {
       "8 active notifications",
       "1K sessions per website",
       "Basic integrations",
-      "!Live analytics",
+      "All premium integrations",
+      "Live analytics",
     ],
     tier1: [
       "3 websites",
@@ -55,6 +56,6 @@ export const environment = {
     tier1: "https://s3.us-east-2.amazonaws.com/koraki-adminui-assets/personal-plan.png",
     tier2: "https://s3.us-east-2.amazonaws.com/koraki-adminui-assets/enterprise-plan.png",
   },
-  stripePublicKey : "pk_test_JMl4h4YIUrGfy66IluaI5dJo",
+  stripePublicKey : "pk_live_TXj3ceup0EX871fvvPkGNIJz",
   ccIconPath : "https://s3.us-east-2.amazonaws.com/koraki-adminui-assets/"
 };
