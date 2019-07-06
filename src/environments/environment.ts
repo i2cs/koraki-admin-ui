@@ -64,4 +64,3 @@ export const environment = {
   stripePublicKey : "pk_test_JMl4h4YIUrGfy66IluaI5dJo",
   ccIconPath : "https://s3.us-east-2.amazonaws.com/koraki-adminui-assets/"
 };
-
