@@ -40,4 +40,3 @@ Output package will be available on ```/dist``` location
 ### Jenkins build server
 
 Added jenkins build triggers 
-
