@@ -64,7 +64,7 @@ export class ShopifyComponent implements OnInit {
     if (queryParams != null) {
       let code = queryParams.get("code");
       let shop = queryParams.get("shop");
-      if (code || shopifyToken) {
+      if ((code || shopifyToken) && shop) {
         dontRedirect = true;
         let state = queryParams.get("state");;
         if ((state && state.indexOf(":") >= 0) || appIdCached) {
@@ -90,6 +90,7 @@ export class ShopifyComponent implements OnInit {
           this.shopifyService.subscribe(model).subscribe(a => {
             if(a.result == "redirect"){
               this.local.set("shopify_token", a.token);
+              this.loadingService.loading(true);
               window.location.href = a.redirectUrl;
               return;
             }
@@ -187,6 +188,7 @@ export class ShopifyComponent implements OnInit {
   forwardToShopify() {
     this.local.set("appId", this.appId);
     let loginUrl = environment.integrations.shopify.appInstallUrl;
+    this.loadingService.loading(true);
     window.location.href = loginUrl;
   }
 
@@ -199,6 +201,7 @@ export class ShopifyComponent implements OnInit {
     } else {
       this.shopifyService.getMetadata(Number(this.appId), this.store).subscribe(a => {
         var url = a.authUrl + "&state=add:" + this.appId;
+        this.loadingService.loading(true);
         window.location.href = url;
       }, e => {
         this.notify.error(e.error.message);
