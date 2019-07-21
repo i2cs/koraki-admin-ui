@@ -116,10 +116,9 @@ export class SubscriptionCreateComponent implements OnInit {
               this.notification.error(e.error.message);
             });
 
-            console.log(result);
           } else if (result.error) {
             this.notification.error("Error returned from payment gateway. Please choose another card");
-            console.log(result.error.message);
+            console.error(result.error.message);
           }
         });
       }

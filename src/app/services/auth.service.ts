@@ -40,7 +40,7 @@ export class AuthService {
       autoclose: true,
       languageDictionary: {
         title: "",
-        signUpTerms: "I agree with Koraki.io T&C"
+        signUpTerms: "I agree with terms of Koraki.io"
       },
       mustAcceptTerms: true
     };
@@ -87,7 +87,7 @@ export class AuthService {
 
     this.lock.on('authorization_error', error => {
       this.router.navigate(['/']);
-        console.log(error);
+        console.error(error);
     });
 
     this.lock.show();

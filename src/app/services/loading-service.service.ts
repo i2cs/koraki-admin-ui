@@ -17,12 +17,12 @@ export class LoadingServiceService {
       if(Date.now() - this._lastChange > 60000 && this._count > 0){
         this._count = 0;
         this._loading.next(false);
-        console.log("60 seconds passed since last request. Probably offline");
+        console.error("60 seconds passed since last request. Probably offline");
       }
 
       if(Date.now() - this._lastChange > 10000 && this._count > 0){
         this._slow.next(true);
-        console.log("5 seconds passed since last request. Slow network connection");
+        console.error("5 seconds passed since last request. Slow network connection");
       }
 
       if(this._count == 0){

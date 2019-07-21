@@ -36,7 +36,9 @@ export class PaymentMethodsComponent implements OnInit {
   loadData() {
     this.paymentService.getAllCards().subscribe(a => {
       this.cards = a;
-      this.primary = a.filter(a => a.primary)[0].id;
+      let x = a.filter(a => a.primary);
+      if(x.length > 0)
+        this.primary = x[0].id;
     });
   }
 

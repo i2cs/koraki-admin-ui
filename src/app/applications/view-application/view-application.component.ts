@@ -328,7 +328,7 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
       }
     }
     catch (Error) {
-      console.log("Error trying to parse custom data : " + a.customData);
+      console.error("Error trying to parse custom data : " + a.customData);
     }
   }
 

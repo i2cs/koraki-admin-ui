@@ -9,4 +9,8 @@ import { environment } from 'environments/environment';
 export class FooterComponent {
     date: Date = new Date();
     version: string = environment.version;
+
+    constructor(){
+        console.log("Koraki app version : " + environment.version);
+    }
 }

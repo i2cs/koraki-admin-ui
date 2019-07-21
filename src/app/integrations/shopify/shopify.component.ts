@@ -11,6 +11,7 @@ import { not } from '@angular/compiler/src/output/output_ast';
 import { environment } from 'environments/environment.prod';
 import { MAT_CHIPS_DEFAULT_OPTIONS } from '@angular/material';
 import { INTERNAL_BROWSER_DYNAMIC_PLATFORM_PROVIDERS } from '@angular/platform-browser-dynamic/src/platform_providers';
+import { AuthService } from 'app/services/auth.service';
 
 @Component({
   selector: 'app-shopify',
@@ -43,7 +44,8 @@ export class ShopifyComponent implements OnInit {
     private loadingService: LoadingServiceService,
     private local: LocalStorageService,
     private router: Router,
-    private data: MemoryDataHolderServiceService
+    private data: MemoryDataHolderServiceService,
+    private auth: AuthService
   ) { }
 
   ngOnInit() {
@@ -90,6 +92,9 @@ export class ShopifyComponent implements OnInit {
           this.shopifyService.subscribe(model).subscribe(a => {
             if(a.result == "redirect"){
               this.local.set("shopify_token", a.token);
+              if(a.userAccessToken){
+                this.auth.setAccessToken(a.userAccessToken);
+              }
               this.loadingService.loading(true);
               window.location.href = a.redirectUrl;
               return;

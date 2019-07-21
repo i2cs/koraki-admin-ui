@@ -21,7 +21,6 @@ export class NotificationPreviewComponent implements OnInit, OnChanges, DoCheck 
   }
 
   ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
-    console.log(changes)
   }
   
   ngDoCheck() {

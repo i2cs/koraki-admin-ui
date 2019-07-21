@@ -133,7 +133,9 @@ export class NavbarComponent implements OnInit {
         const body = document.getElementsByTagName('body')[0];
         //this.toggleButton.classList.remove('toggled');
         this.sidebarVisible = false;
-        body.classList.remove('nav-open');
+        setTimeout(function(){
+            if(body && body.classList && body.classList.length > 0) body.classList.remove('nav-open');
+        }, 500);
     };
     sidebarToggle() {
         if (this.sidebarVisible === false) {

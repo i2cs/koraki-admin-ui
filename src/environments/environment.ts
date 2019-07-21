@@ -45,7 +45,7 @@ export const environment = {
       "5K sessions per website",
       "Live analytics",
       "All premium integrations",
-      "~14 days free trial"
+      "~14 days free trial for new users"
     ],
     tier2: [
       "Unlimited websites",
@@ -53,7 +53,7 @@ export const environment = {
       "Unlimited sessions per website",
       "Live analytics",
       "All premium integrations",
-      "~14 days free trial"
+      "~14 days free trial for new users"
     ]
   },
   planIcons: {
