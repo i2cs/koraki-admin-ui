@@ -11,7 +11,7 @@ export class ErrorService {
   }
 
   handle(error: any): any {
-    if(error && error.status == 401){
+    if(error && error.status == 401 && window.location.href.indexOf("integrations/shopify") === -1){
       this.auth.logout();
     }
   }

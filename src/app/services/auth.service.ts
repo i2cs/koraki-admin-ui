@@ -46,7 +46,7 @@ export class AuthService {
     };
   }
 
-  private getAccessToken(): string {
+  public getAccessToken(): string {
     if (this.local.get("access-token")) {
       return this.local.get("access-token");
     }

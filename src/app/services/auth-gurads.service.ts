@@ -24,7 +24,6 @@ export class AuthGuardService implements CanActivate {
   }
 
   canActivate(): boolean {
-    debugger;
     if (!this.auth.isAuthenticated() && window.location.href.indexOf("integrations/shopify") === -1) {
       this.local.set("redirect", window.location.href);
       let email = this.getParameterByName('email');

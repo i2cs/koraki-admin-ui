@@ -68,7 +68,7 @@ export class ShopifyComponent implements OnInit {
       let shop = queryParams.get("shop");
       if ((code || shopifyToken) && shop) {
         dontRedirect = true;
-        let state = queryParams.get("state");;
+        let state = queryParams.get("state");
         if ((state && state.indexOf(":") >= 0) || appIdCached) {
           if(state && state.indexOf(":") >= 0){
             let stateParts = state.split(":");
@@ -82,7 +82,8 @@ export class ShopifyComponent implements OnInit {
           let model: ShopifySubscribeCreateViewModel = {
             applicationId: Number(this.appId),
             code: code,
-            shopUrl: shop
+            shopUrl: shop,
+            userAccessToken: this.auth.getAccessToken()
           }
 
           if(shopifyToken){
@@ -92,6 +93,8 @@ export class ShopifyComponent implements OnInit {
           this.shopifyService.subscribe(model).subscribe(a => {
             if(a.result == "redirect"){
               this.local.set("shopify_token", a.token);
+              this.local.set("app_id_shopify", a.appId);
+              
               if(a.userAccessToken){
                 this.auth.setAccessToken(a.userAccessToken);
               }
@@ -119,23 +122,28 @@ export class ShopifyComponent implements OnInit {
         this.knownStore = true;
         this.store = shop;
         dontRedirect = true;
-        this.appservice.getAllApplications("Active", 999).subscribe(a => {
-          this.applicationList = a.items;
-          if(this.applicationList.length == 0){
-            this.appId = "0";
-            this.knownApp = true;
-            this.appName = "a new";
-            if(this.knownStore){
+
+        if(this.auth.isAuthenticated()){
+          this.appservice.getAllApplications("Active", 999).subscribe(a => {
+            this.applicationList = a.items;
+            if(this.applicationList.length == 0){
+              this.appId = "0";
+              this.knownApp = true;
+              this.appName = "a new";
               this.subscribe();
             }
-          }
-        }, e => {
-          this.notify.error("Error loading applications : " + e.error.message);
-        })
+          }, e => {
+            this.notify.error("Error loading applications : " + e.error.message);
+          });
+        }else{
+          this.appId = "0";
+          this.knownApp = true;
+          this.appName = "a new";
+        }
       }
     }
 
-    if (this.appId) {
+    if (this.appId && this.appId != "0") {
       let id = Number(this.appId);
       this.integrations = <Map<string, ApplicationIntegrationViewModel>>this.data.store.get("integrations_" + id);
       if (!this.integrations) {
@@ -165,7 +173,7 @@ export class ShopifyComponent implements OnInit {
       this.subscribe();
     }
 
-    if (!dontRedirect) {
+    if (!dontRedirect && this.appId != "0") {
       if (this.appId) {
         this.loadApplication(this.appId);
       } else {
