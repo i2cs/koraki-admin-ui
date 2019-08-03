@@ -63,6 +63,10 @@ export class ShopifyComponent implements OnInit {
     let queryParams = this.route.snapshot.queryParamMap;
     let shopifyToken = this.local.get("shopify_token");
     let appIdCached = this.local.get("app_id_shopify");
+    if(shopifyToken){
+      this.local.remove("shopify_token");
+    }
+
     if (queryParams != null) {
       let code = queryParams.get("code");
       let shop = queryParams.get("shop");
@@ -91,13 +95,13 @@ export class ShopifyComponent implements OnInit {
           }
 
           this.shopifyService.subscribe(model).subscribe(a => {
+            if(a.userAccessToken){
+              this.auth.setAccessToken(a.userAccessToken);
+            }
+            
             if(a.result == "redirect"){
               this.local.set("shopify_token", a.token);
-              this.local.set("app_id_shopify", a.appId);
               
-              if(a.userAccessToken){
-                this.auth.setAccessToken(a.userAccessToken);
-              }
               this.loadingService.loading(true);
               window.location.href = a.redirectUrl;
               return;
