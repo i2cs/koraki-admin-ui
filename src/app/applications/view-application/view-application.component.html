@@ -296,7 +296,23 @@
                     </mat-select>
                     <span matSuffix> days</span>
                   </mat-form-field>
+                </div>
 
+                <div class="divider"></div>
+
+                <div class="col-md-12 mr-auto">
+                  <legend>Notification triggers</legend>
+                  <mat-form-field hintLabel=""
+                    class="example-full-width has-label">
+
+                    <select [(ngModel)]="application.notificationMaximumDurationDays" (selectionChange)="updateApplicationSettings()">
+                        <option value="up">Up</option>
+                        <option value="down">Down</option>
+                        <option value="right">Left to right</option>
+                        <option value="left">Right to left</option>
+                    </select>
+                    <span matSuffix> days</span>
+                  </mat-form-field>
                 </div>
 
                 <div class="divider"></div>

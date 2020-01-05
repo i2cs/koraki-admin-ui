@@ -70,6 +70,7 @@ export class ShopifyComponent implements OnInit {
     if (queryParams != null) {
       let code = queryParams.get("code");
       let shop = queryParams.get("shop");
+      let mode = "";
       if ((code || shopifyToken) && shop) {
         dontRedirect = true;
         let state = queryParams.get("state");
@@ -79,6 +80,8 @@ export class ShopifyComponent implements OnInit {
             this.appId = stateParts[1] || "0";
             this.knownApp = true;
             this.local.set("app_id_shopify", this.appId);
+            if(stateParts[0] == "auth") 
+              mode = "auth";
           }else if(appIdCached){
             this.appId = appIdCached;
           }
@@ -87,7 +90,8 @@ export class ShopifyComponent implements OnInit {
             applicationId: Number(this.appId),
             code: code,
             shopUrl: shop,
-            userAccessToken: this.auth.getAccessToken()
+            userAccessToken: this.auth.getAccessToken(),
+            mode: mode
           }
 
           if(shopifyToken){
