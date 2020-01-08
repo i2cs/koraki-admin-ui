@@ -12,6 +12,7 @@ import { environment } from 'environments/environment.prod';
 import { MAT_CHIPS_DEFAULT_OPTIONS } from '@angular/material';
 import { INTERNAL_BROWSER_DYNAMIC_PLATFORM_PROVIDERS } from '@angular/platform-browser-dynamic/src/platform_providers';
 import { AuthService } from 'app/services/auth.service';
+import { debug } from 'util';
 
 @Component({
   selector: 'app-shopify',
@@ -70,8 +71,19 @@ export class ShopifyComponent implements OnInit {
     if (queryParams != null) {
       let code = queryParams.get("code");
       let shop = queryParams.get("shop");
+      let hmac = queryParams.get("hmac");
       let mode = "";
-      if ((code || shopifyToken) && shop) {
+      if(hmac && shop && !code){
+        this.shopifyService.getMetadata(0, shop).subscribe(a => {
+          var url = a.authUrl + "&state=auth:0";
+          this.loadingService.loading(true);
+          window.top.location.href = url;
+        }, e => {
+          this.notify.error(e.error.message);
+        });
+
+        return;
+      } else if ((code || shopifyToken) && shop) {
         dontRedirect = true;
         let state = queryParams.get("state");
         if ((state && state.indexOf(":") >= 0) || appIdCached) {
@@ -107,7 +119,8 @@ export class ShopifyComponent implements OnInit {
               this.local.set("shopify_token", a.token);
               
               this.loadingService.loading(true);
-              window.location.href = a.redirectUrl;
+              //in case showing charge auth window
+              window.top.location.href = a.redirectUrl;
               return;
             }
 
