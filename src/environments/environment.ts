@@ -63,7 +63,7 @@ export const environment = {
       "All premium integrations",
       "~14 days free trial"
     ],
-    tier22shopify: [
+    tier2shopify: [
       "Unlimited shopify stores",
       "Unlimited active notifications",
       "Unlimited sessions per website",
@@ -73,12 +73,12 @@ export const environment = {
     ]
   },
   planIcons: {
-    free: "https://s3.us-east-2.amazonaws.com/koraki-adminui-assets/basic-plan.png",
-    tier1: "https://s3.us-east-2.amazonaws.com/koraki-adminui-assets/personal-plan.png",
-    tier2: "https://s3.us-east-2.amazonaws.com/koraki-adminui-assets/enterprise-plan.png",
-    tier1shopify: "https://s3.us-east-2.amazonaws.com/koraki-adminui-assets/personal-plan.png",
-    tier22shopify: "https://s3.us-east-2.amazonaws.com/koraki-adminui-assets/enterprise-plan.png"
+    free: "https://koraki-adminui-assets.s3.us-east-2.amazonaws.com/basic-plan.png",
+    tier1: "https://koraki-adminui-assets.s3.us-east-2.amazonaws.com/personal-plan.png",
+    tier2: "https://koraki-adminui-assets.s3.us-east-2.amazonaws.com/enterprise-plan.png",
+    tier1shopify: "https://koraki-adminui-assets.s3.us-east-2.amazonaws.com/personal-plan-shopify.png",
+    tier2shopify: "https://koraki-adminui-assets.s3.us-east-2.amazonaws.com/enterprise-plan-shopify.png"
   },
   stripePublicKey : "pk_test_JMl4h4YIUrGfy66IluaI5dJo",
-  ccIconPath : "https://s3.us-east-2.amazonaws.com/koraki-adminui-assets/"
+  ccIconPath : "https://koraki-adminui-assets.s3.us-east-2.amazonaws.com/"
 };
