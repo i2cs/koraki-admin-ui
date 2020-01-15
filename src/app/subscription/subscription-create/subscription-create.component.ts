@@ -44,7 +44,7 @@ export class SubscriptionCreateComponent implements OnInit {
 
     this.loadingService.loading$.subscribe(a => { this.loading = a; });
     this.ajax.getAllSubscriptions().subscribe(a => {
-      this.plans = a.filter(b => b.code != "free");
+      this.plans = a.filter(b => b.code != "free" && b.code.indexOf('shopify')==-1);
 
       this.subscriptionService.permissions().subscribe(b => {
         this.plans = this.plans.filter(c => c.code != b.plan);

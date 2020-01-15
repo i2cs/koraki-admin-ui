@@ -10,7 +10,7 @@
                         Want to get more out of Koraki? Try
                         <a routerLink="/subscription/add">Personal plan</a>
                     </h5>
-                    <h5 class="card-description" *ngIf="isTier1">
+                    <h5 class="card-description" *ngIf="!isFree && isTier1">
                         Want to get more out of Koraki?
                         <a routerLink="/subscription/add">Upgrade</a>
                     </h5>

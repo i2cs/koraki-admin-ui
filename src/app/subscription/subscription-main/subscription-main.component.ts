@@ -64,7 +64,7 @@ export class SubscriptionMainComponent implements OnInit {
       this.planName = a.planName;
       this.nextBillingDate = a.nextBilling;
       this.isFree = a.cost == 0;
-      this.upgradeAvailable = a.plan != "tier2";
+      this.upgradeAvailable = a.plan != "tier2" && a.plan.indexOf("shopify")==-1;
       this.isTier1 = a.plan == "tier1";
       this.planFeatures = environment.plans;
       this.currentPlanFeatures = this.planFeatures[a.plan].filter(a => !a.startsWith('~'));

@@ -49,12 +49,30 @@ export const environment = {
       "Live analytics",
       "All premium integrations",
       "~14 days free trial"
+    ],
+    tier1shopify: [
+      "1 shopify store",
+      "Unlimited active notifications",
+      "Unlimited sessions per website",
+      "Live analytics",
+      "All premium integrations",
+      "~14 days free trial"
+    ],
+    tier22shopify: [
+      "Unlimited shopify stores",
+      "Unlimited active notifications",
+      "Unlimited sessions per website",
+      "Live analytics",
+      "All premium integrations",
+      "~14 days free trial"
     ]
   },
   planIcons: {
     free: "https://s3.us-east-2.amazonaws.com/koraki-adminui-assets/basic-plan.png",
     tier1: "https://s3.us-east-2.amazonaws.com/koraki-adminui-assets/personal-plan.png",
     tier2: "https://s3.us-east-2.amazonaws.com/koraki-adminui-assets/enterprise-plan.png",
+    tier1shopify: "https://s3.us-east-2.amazonaws.com/koraki-adminui-assets/personal-plan.png",
+    tier22shopify: "https://s3.us-east-2.amazonaws.com/koraki-adminui-assets/enterprise-plan.png"
   },
   stripePublicKey : "pk_test_JMl4h4YIUrGfy66IluaI5dJo",
   ccIconPath : "https://s3.us-east-2.amazonaws.com/koraki-adminui-assets/"
