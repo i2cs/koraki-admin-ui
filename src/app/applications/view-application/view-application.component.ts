@@ -32,6 +32,7 @@ class _Array<T> extends Array<T> {
 })
 
 export class ViewApplicationComponent implements OnInit, AfterViewInit {
+  showClientId: boolean;
   loading: boolean;
   hide: boolean;
   appId: string;
