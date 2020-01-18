@@ -6,7 +6,8 @@
           <div id="session-count-bar" [style.width.%]="sessions"></div>
           <span>{{!application.uniqueVisitors ? "0" : application.uniqueVisitors}}/{{allowedSessionCount > 90000 ? "∞" : allowedSessionCount}}
             user sessions
-            <a *ngIf="allowedSessionCount < 90000" class="pull-right d-none d-md-block" routerLink="/subscription/add">Upgrade</a>
+            <a *ngIf="allowedSessionCount < 90000" class="pull-right d-none d-md-block"
+              routerLink="/subscription/add">Upgrade</a>
           </span>
         </div>
         <div class="card-header">
@@ -20,18 +21,20 @@
             <span *ngIf="!nameEditing">{{application.applicationName}}</span>
             <span *ngIf="nameEditing">
               <form (submit)="updateName($event)">
-                <input type="text" id="update_name" name="update_name" [readonly]="updatingSettings" #nameInput matInput [(ngModel)]="updated.name"
-                />
+                <input type="text" id="update_name" name="update_name" [readonly]="updatingSettings" #nameInput matInput
+                  [(ngModel)]="updated.name" />
               </form>
               {{nameInput.focus()}}
             </span>
-            <a title="Edit application name" href="#" *ngIf="!nameEditing" onclick="return false;" (click)="nameEditing = true; updated.name = application.applicationName">
+            <a title="Edit application name" href="#" *ngIf="!nameEditing" onclick="return false;"
+              (click)="nameEditing = true; updated.name = application.applicationName">
               <i class="material-icons">edit</i>
             </a>
             <a title="Save changes" *ngIf="nameEditing" href="#" onclick="return false" (click)="updateName()">
               <i class="material-icons">save</i>
             </a>
-            <a title="Discard changes" *ngIf="nameEditing" href="#" onclick="return false" (click)="nameEditing = false">
+            <a title="Discard changes" *ngIf="nameEditing" href="#" onclick="return false"
+              (click)="nameEditing = false">
               <i class="material-icons">cancel</i>
             </a>
           </h3>
@@ -41,53 +44,73 @@
         <mat-divider></mat-divider>
         <div class="card-body" [ngClass]="{'loading':loading}">
 
-          <mat-tab-group [(selectedIndex)]="selectedTab" disableRipple="true" color="primary" class="md-no-animation" [@.disabled]="true"
-            dynamicHeight="false">
+          <mat-tab-group [(selectedIndex)]="selectedTab" disableRipple="true" color="primary" class="md-no-animation"
+            [@.disabled]="true" dynamicHeight="false">
             <mat-tab label="Details">
               <div class="row">
                 <div class="col-md-6">
-                  <p>
-                    <mat-form-field appearance="outline" hintLabel="Client id or the app key" class="example-full-width has-label">
+
+                  <p>You can copy/paste following code snippet into your website. Otherwise you can check next tab for an existing
+                    integrations to add Koraki to your site.
+                    <a target="_blank"
+                      href='https://docs.koraki.io/project/getting-started/adding-koraki-to-a-site'>Learn how to add
+                      this script to your website</a>
+                  </p>
+
+                  <mat-form-field appearance="outline" class="example-full-width">
+                    <textarea readonly rows=5 matInput>{{script}}</textarea>
+                  </mat-form-field>
+<!-- 
+                  <button (click)="setTab(1)" mat-raised-button class="btn btn-primary">
+                    Go to Integrations
+                  </button> -->
+
+                  <div class="togglebutton" *ngIf="!showClientId">
+                      <label>
+                        <a mat-raised-button class="btn btn-primary" href="#" (click)="showClientId = true"
+                          onclick="return false;">Show Client Id and Secret</a>
+                      </label>
+                    </div>
+  
+                  <div class="col-md-12" *ngIf="showClientId">
+  
+                    <mat-form-field appearance="outline" hintLabel="Client id or the app key"
+                      class="example-full-width has-label">
                       <mat-label>Client Id</mat-label>
                       <input type="text" [(ngModel)]="application.clientId" matInput readonly>
                     </mat-form-field>
-                  </p>
-
-                  <p>
+                  
+                    <br/>
+  
                     <mat-form-field appearance="outline" hintLabel="Click on eye icon to see the client secret">
                       <mat-label>Secret</mat-label>
-                      <input (click)="hide = false" matInput readonly [(ngModel)]="application.clientSecret" [type]="hide ? 'password' : 'text'">
+                      <input (click)="hide = false" matInput readonly [(ngModel)]="application.clientSecret"
+                        [type]="hide ? 'password' : 'text'">
                       <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </mat-form-field>
-                  </p>
-                  <button (click)="setTab(1)" mat-raised-button class="btn btn-primary">
-                      Next step : Get the widget code
-                    </button>
+                    <div class="divider"></div>
+                  
+                  </div>
+
+
+
+
                 </div>
                 <div class="col-md-6">
-                  <iframe width="400" height="270" src="https://www.youtube.com/embed/0KETlEn-8mw?start=44" frameborder="0" allow="autoplay; encrypted-media"
-                    allowfullscreen></iframe>
+                  <iframe width="400" height="270" src="https://www.youtube.com/embed/0KETlEn-8mw?start=44"
+                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                 </div>
               </div>
             </mat-tab>
             <mat-tab label="Integrations">
-              <p>You can copy/paste following code snippet into your website. Otherwise you can use one or more of the following
-                integrations to add Koraki to your site.
-                <a target="_blank" href='https://docs.koraki.io/project/getting-started/adding-koraki-to-a-site'>Learn how to add this script to your website</a>
-              </p>
-
-              <mat-form-field appearance="outline" class="example-full-width">
-                <textarea readonly rows=5 matInput>{{script}}</textarea>
-              </mat-form-field>
-
               <div class="row">
-                <div class="divider"></div>
                 <div class="col-md-12">
-                  <input type="text" placeholder="Search for an integration: ex., OpenCart" [(ngModel)]="filter" (change)="filterList()" class="form-control form-control-lg"
-                  />
+                  <input type="text" placeholder="Search for an integration: ex., OpenCart" [(ngModel)]="filter"
+                    (change)="filterList()" class="form-control form-control-lg" />
                 </div>
                 <div class="col-md-4" *ngFor="let i of allIntegrations">
-                  <div class="card card-chart" [ngClass]="{'disabled-integration' : !i.ecommerce && !allowedIntegrations[i.code]}">
+                  <div class="card card-chart"
+                    [ngClass]="{'disabled-integration' : !i.ecommerce && !allowedIntegrations[i.code]}">
                     <div class="card-body integration-card">
                       <h4 class="card-title">{{i.title}}</h4>
                       <div class="integration-images">
@@ -101,14 +124,20 @@
                     </div>
                     <div class="card-footer">
                       <div *ngIf="!integrations[i.code]">
-                        <a mat-raised-button class="btn" routerLink="/subscription/add" *ngIf="!i.ecommerce && !allowedIntegrations[i.code]">Upgrade</a>
-                        <a mat-raised-button *ngIf="i.ecommerce || allowedIntegrations[i.code]" class="btn btn-twitter" routerLink="/applications/view/{{application.id}}/integrations/{{i.code}}">{{i.buttonTitle}}</a>
-                        <a mat-raised-button *ngIf="i.help" href="{{i.help}}" target="_blank" class="btn btn-link pull-right">Samples</a>
+                        <a mat-raised-button class="btn" routerLink="/subscription/add"
+                          *ngIf="!i.ecommerce && !allowedIntegrations[i.code]">Upgrade</a>
+                        <a mat-raised-button *ngIf="i.ecommerce || allowedIntegrations[i.code]" class="btn btn-twitter"
+                          routerLink="/applications/view/{{application.id}}/integrations/{{i.code}}">{{i.buttonTitle}}</a>
+                        <a mat-raised-button *ngIf="i.help" href="{{i.help}}" target="_blank"
+                          class="btn btn-link pull-right">Samples</a>
                       </div>
                       <div *ngIf="integrations[i.code]">
-                        <a mat-raised-button class="btn" routerLink="/subscription/add" *ngIf="!i.ecommerce && !allowedIntegrations[i.code]">Upgrade</a>
-                        <a mat-raised-button *ngIf="i.ecommerce || allowedIntegrations[i.code]" class="btn btn-warning" routerLink="/applications/view/{{application.id}}/integrations/{{i.code}}">Manage</a>
-                        <a mat-raised-button *ngIf="i.help" href="{{i.help}}" target="_blank" class="btn btn-link pull-right">Samples</a>
+                        <a mat-raised-button class="btn" routerLink="/subscription/add"
+                          *ngIf="!i.ecommerce && !allowedIntegrations[i.code]">Upgrade</a>
+                        <a mat-raised-button *ngIf="i.ecommerce || allowedIntegrations[i.code]" class="btn btn-warning"
+                          routerLink="/applications/view/{{application.id}}/integrations/{{i.code}}">Manage</a>
+                        <a mat-raised-button *ngIf="i.help" href="{{i.help}}" target="_blank"
+                          class="btn btn-link pull-right">Samples</a>
                       </div>
                     </div>
                   </div>
@@ -128,30 +157,37 @@
                 </div>
                 <div class="col-md-6 mr-auto customization-settings">
                   <div>
-                    <input [(colorPicker)]="configs.notification_bg_color" [style.background]="configs.notification_bg_color" /> Notification background color
+                    <input [(colorPicker)]="configs.notification_bg_color"
+                      [style.background]="configs.notification_bg_color" /> Notification background color
                   </div>
                   <div>
-                    <input [(colorPicker)]="configs.notification_text_color" [style.background]="configs.notification_text_color" /> Notification text color
+                    <input [(colorPicker)]="configs.notification_text_color"
+                      [style.background]="configs.notification_text_color" /> Notification text color
                   </div>
                   <div>
-                    <input [(colorPicker)]="configs.notification_link_color" [style.background]="configs.notification_link_color" /> Notification link color
+                    <input [(colorPicker)]="configs.notification_link_color"
+                      [style.background]="configs.notification_link_color" /> Notification link color
                   </div>
                   <div>
-                    <input [(colorPicker)]="configs.notification_footer_color" [style.background]="configs.notification_footer_color" /> Notification footer text color
+                    <input [(colorPicker)]="configs.notification_footer_color"
+                      [style.background]="configs.notification_footer_color" /> Notification footer text color
                   </div>
                   <div>
-                    <input [(colorPicker)]="configs.notification_border_color" [style.background]="configs.notification_border_color" /> Notification border color
+                    <input [(colorPicker)]="configs.notification_border_color"
+                      [style.background]="configs.notification_border_color" /> Notification border color
                   </div>
                   <div>
-                    <input [(colorPicker)]="configs.notification_close_color" [style.background]="configs.notification_close_color" /> Close icon color
+                    <input [(colorPicker)]="configs.notification_close_color"
+                      [style.background]="configs.notification_close_color" /> Close icon color
                   </div>
                   <div>
-                    <input type="number" min="0" max="40" [(ngModel)]="configs.notification_border_radius" name="notification_border_radius"
-                    /> Notification border radius
+                    <input type="number" min="0" max="40" [(ngModel)]="configs.notification_border_radius"
+                      name="notification_border_radius" /> Notification border radius
                   </div>
 
                   <div>
-                    <input type="number" min="0" max="40" [(ngModel)]="configs.notification_image_radius" name="notification_image_radius" /> Thumbnail border radius
+                    <input type="number" min="0" max="40" [(ngModel)]="configs.notification_image_radius"
+                      name="notification_image_radius" /> Thumbnail border radius
                   </div>
 
                   <div>
@@ -164,7 +200,8 @@
                     </select>
                   </div>
 
-                  <button mat-raised-button class="btn btn-primary" (click)="updateApplicationCustomization()">Save changes</button>
+                  <button mat-raised-button class="btn btn-primary" (click)="updateApplicationCustomization()">Save
+                    changes</button>
                   <button mat-raised-button class="btn" (click)="resetToDefault()">Reset to default</button>
                 </div>
               </div>
@@ -172,7 +209,8 @@
             <mat-tab label="Settings">
               <div class="row">
                 <div class="col-md-12 mr-auto">
-                    <a href="https://docs.koraki.io/project/getting-started/application-settings" target="_blank">Click  here</a> to read more about these setting parameters.
+                  <a href="https://docs.koraki.io/project/getting-started/application-settings" target="_blank">Click
+                    here</a> to read more about these setting parameters.
                 </div>
                 <div class="divider"></div>
 
@@ -191,9 +229,11 @@
                 <div class="col-md-12 mr-auto">
                   <legend>Widget start delay</legend>
                   <div class="togglebutton">
-                      <mat-form-field hintLabel="Widget will appear after {{configs.start_delay}} milliseconds" class="example-full-width has-label">
-                        <input type="number" matInput [(ngModel)]="configs.start_delay" (change)="updateApplicationSettings()">
-                      </mat-form-field>
+                    <mat-form-field hintLabel="Widget will appear after {{configs.start_delay}} milliseconds"
+                      class="example-full-width has-label">
+                      <input type="number" matInput [(ngModel)]="configs.start_delay"
+                        (change)="updateApplicationSettings()">
+                    </mat-form-field>
                   </div>
                 </div>
 
@@ -201,9 +241,11 @@
                 <div class="col-md-12 mr-auto">
                   <legend>Delay between two notifications</legend>
                   <div class="togglebutton">
-                      <mat-form-field hintLabel="{{configs.roll_delay}} milliseconds delay between two notifications" class="example-full-width has-label">
-                        <input type="number" matInput [(ngModel)]="configs.roll_delay" (change)="updateApplicationSettings()">
-                      </mat-form-field>
+                    <mat-form-field hintLabel="{{configs.roll_delay}} milliseconds delay between two notifications"
+                      class="example-full-width has-label">
+                      <input type="number" matInput [(ngModel)]="configs.roll_delay"
+                        (change)="updateApplicationSettings()">
+                    </mat-form-field>
                   </div>
                 </div>
 
@@ -211,9 +253,12 @@
                 <div class="col-md-12 mr-auto">
                   <legend>Notification display time</legend>
                   <div class="togglebutton">
-                      <mat-form-field hintLabel="A notification will visible for {{configs.display_duration}} milliseconds" class="example-full-width has-label">
-                        <input type="number" matInput [(ngModel)]="configs.display_duration" (change)="updateApplicationSettings()">
-                      </mat-form-field>
+                    <mat-form-field
+                      hintLabel="A notification will visible for {{configs.display_duration}} milliseconds"
+                      class="example-full-width has-label">
+                      <input type="number" matInput [(ngModel)]="configs.display_duration"
+                        (change)="updateApplicationSettings()">
+                    </mat-form-field>
                   </div>
                 </div>
 
@@ -221,7 +266,8 @@
                 <div class="col-md-12 mr-auto">
                   <legend>Widget position on websites</legend>
                   <mat-form-field hintLabel="Set notification widget position" class="example-full-width has-label">
-                    <mat-select [disabled]="updatingSettings" [(ngModel)]="configs.position" (selectionChange)="updateApplicationSettings()">
+                    <mat-select [disabled]="updatingSettings" [(ngModel)]="configs.position"
+                      (selectionChange)="updateApplicationSettings()">
                       <mat-option value="bottom-left">
                         Bottom Left
                       </mat-option>
@@ -243,7 +289,8 @@
                   <legend>Display on mobile devices</legend>
                   <div class="togglebutton">
                     <label>
-                      <input type="checkbox" [(ngModel)]="configs.show_on_mobile" (change)="updateApplicationSettings()">
+                      <input type="checkbox" [(ngModel)]="configs.show_on_mobile"
+                        (change)="updateApplicationSettings()">
                       <span class="toggle"></span>
                       {{configs.show_on_mobile?"Display":"Don't display"}} Koraki widget on mobile devices
                     </label>
@@ -253,9 +300,11 @@
                 <div class="divider" *ngIf="configs.show_on_mobile"></div>
                 <div class="col-md-12 mr-auto" *ngIf="configs.show_on_mobile">
                   <legend>Widget position on mobile</legend>
-                  <mat-form-field hintLabel="Set notification widget position when displaying on mobile" class="example-full-width has-label">
+                  <mat-form-field hintLabel="Set notification widget position when displaying on mobile"
+                    class="example-full-width has-label">
 
-                    <mat-select [disabled]="updatingSettings" [(ngModel)]="configs.mobile_position" (selectionChange)="updateApplicationSettings()">
+                    <mat-select [disabled]="updatingSettings" [(ngModel)]="configs.mobile_position"
+                      (selectionChange)="updateApplicationSettings()">
                       <mat-option value="bottom">
                         Bottom
                       </mat-option>
@@ -270,10 +319,13 @@
                 <div class="col-md-12 mr-auto">
                   <a *ngIf="!paid" routerLink="/subscription/plans" class="upgrade-right">Upgrade to change</a>
                   <legend>Active notifications count</legend>
-                  <mat-form-field hintLabel="Maximum active notification count before it repeats. Koraki will keep {{application.notificationMaximumActiveCount}} most recent notifications and archive the older ones."
+                  <mat-form-field
+                    hintLabel="Maximum active notification count before it repeats. Koraki will keep {{application.notificationMaximumActiveCount}} most recent notifications and archive the older ones."
                     class="example-full-width has-label">
 
-                    <mat-select [disabled]="updatingSettings || !paid" [(ngModel)]="application.notificationMaximumActiveCount" (selectionChange)="updateApplicationSettings()">
+                    <mat-select [disabled]="updatingSettings || !paid"
+                      [(ngModel)]="application.notificationMaximumActiveCount"
+                      (selectionChange)="updateApplicationSettings()">
                       <mat-option *ngFor="let c of possibleCounts" [value]="c">
                         {{ (c == 1000) ? "Unlimited" : c }}
                       </mat-option>
@@ -286,10 +338,13 @@
                 <div class="col-md-12 mr-auto">
                   <a *ngIf="!paid" routerLink="/subscription/plans" class="upgrade-right">Upgrade to change</a>
                   <legend>Active notifications duration</legend>
-                  <mat-form-field hintLabel="Lifetime of a notification before it expired. Koraki shows notifications created last {{application.notificationMaximumDurationDays}} days."
+                  <mat-form-field
+                    hintLabel="Lifetime of a notification before it expired. Koraki shows notifications created last {{application.notificationMaximumDurationDays}} days."
                     class="example-full-width has-label">
 
-                    <mat-select [disabled]="updatingSettings || !paid" [(ngModel)]="application.notificationMaximumDurationDays" (selectionChange)="updateApplicationSettings()">
+                    <mat-select [disabled]="updatingSettings || !paid"
+                      [(ngModel)]="application.notificationMaximumDurationDays"
+                      (selectionChange)="updateApplicationSettings()">
                       <mat-option *ngFor="let day of possibleDays" [value]="day">
                         {{ day }}
                       </mat-option>
@@ -300,35 +355,20 @@
 
                 <div class="divider"></div>
 
-                <!-- <div class="col-md-12 mr-auto">
-                  <legend>Notification triggers</legend>
-                  <mat-form-field hintLabel=""
-                    class="example-full-width has-label">
-
-                    <mat-select [(ngModel)]="application.notificationMaximumDurationDays" (selectionChange)="updateApplicationSettings()">
-                        <mat-option value="up">Up</mat-option>
-                        <mat-option value="down">Down</mat-option>
-                        <mat-option value="right">Left to right</mat-option>
-                        <mat-option value="left">Right to left</mat-option>
-                    </mat-select>
-                    <span matSuffix> days</span>
-                  </mat-form-field>
-                </div> -->
-
-                <div class="divider"></div>
-
                 <div class="col-md-12">
                   <legend></legend>
                   <div class="togglebutton">
                     <label>
-                      <a mat-raised-button class="btn btn-danger" href="#" onclick="return false" (click)="deleteApplication()">Delete Application</a>
+                      <a mat-raised-button class="btn btn-danger" href="#" onclick="return false"
+                        (click)="deleteApplication()">Delete Application</a>
                     </label>
                   </div>
                 </div>
               </div>
             </mat-tab>
             <mat-tab label="Analytics">
-              <app-analytics-view *ngIf="application.analyticsId" [analyticsid]="application.analyticsId" [analyticstoken]="application.analyticsToken"></app-analytics-view>
+              <app-analytics-view *ngIf="application.analyticsId" [analyticsid]="application.analyticsId"
+                [analyticstoken]="application.analyticsToken"></app-analytics-view>
             </mat-tab>
           </mat-tab-group>
         </div>

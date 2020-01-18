@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Configuration, ConfigurationParameters, SubscriptionsDataViewModel, SubscriptionsService } from 'koraki-angular-client';
 import { environment } from 'environments/environment';
 import { LocalStorageService } from 'angular-web-storage';
-import * as auth0 from 'auth0-js';
 import Auth0Lock from 'auth0-lock';
+import {Auth0LockPasswordless} from 'auth0-lock';
 import { Router } from '@angular/router';
 import { Subject, Observable } from 'rxjs';
 
@@ -39,10 +39,8 @@ export class AuthService {
       container: 'hiw-login-container',
       autoclose: true,
       languageDictionary: {
-        title: "",
-        signUpTerms: "I agree with terms of Koraki.io"
-      },
-      mustAcceptTerms: true
+        title: ""
+      }
     };
   }
 
@@ -53,7 +51,9 @@ export class AuthService {
   }
 
   public login() {
+
     let email = this.getParameterByName('email');
+    let passwordless = this.getParameterByName('passwordless');
     if(!email){
       email = this.local.get("email_prefill");
     }
@@ -64,11 +64,22 @@ export class AuthService {
       this.local.remove("email_prefill");
     }
   
-    this.lock = new Auth0Lock(
-      environment.auth.clientID,
-      environment.auth.domain,
-      this.auth0Options
-    );
+    if(passwordless){
+      this.auth0Options.allowedConnections = ['email'];
+      this.auth0Options.passwordlessMethod = 'code';
+      
+      this.lock = new Auth0LockPasswordless(
+        environment.auth.clientID,
+        environment.auth.domain,
+        this.auth0Options
+      );
+    }else{
+      this.lock = new Auth0Lock(
+        environment.auth.clientID,
+        environment.auth.domain,
+        this.auth0Options
+      );
+    }
 
     this.lock.on('authenticated', (authResult: any) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
