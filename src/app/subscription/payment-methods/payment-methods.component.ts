@@ -37,7 +37,7 @@ export class PaymentMethodsComponent implements OnInit {
     this.loadData();
 
     this.subs.permissions().subscribe(a => {
-      if(a.plan.indexOf("shopify")==-1){
+      if(a.plan.indexOf("shopify") > -1){
         this.hideStripePayments = true;
         this.noInvoiceMessage = "Log in to Shopify admin panel for your payment methods";
       }
