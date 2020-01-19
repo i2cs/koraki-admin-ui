@@ -1,5 +1,5 @@
 export const environment = {
-  version: "0.3.1",
+  version: "1.0.0",
   production: true,
   apiBaseUrl: "https://api.koraki.io",
   baseUrl: "https://app.koraki.io",
