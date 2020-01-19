@@ -5,6 +5,27 @@
     margin-top: 6px;
 }
 
-.no-text{
+.integrations{
+    padding: 24px;
+    font-size: 20px;
+    background-color: #f7f7f7;
+    cursor: pointer;
+    -webkit-transition: .4s,opacity .6s;
+    -moz-transition: .4s,opacity .6s;
+    -o-transition: .4s,opacity .6s;
+    transition: .4s,opacity .6s;
+}
 
+.integrations:hover{
+    background-color: #aaa;
+    background-color: #f29833;
+    color: #fff;
+}
+
+.integrations:hover:after{
+    content: attr(data-hover);
+}
+
+.integrations:after{
+    content: "+"
 }

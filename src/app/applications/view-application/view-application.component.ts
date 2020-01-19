@@ -53,8 +53,17 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
   allowedSessionCount: number;
   sessions: number;
   configs: any = {};
-  selectedTab: number;
-  defautConfigs = { "notification_bg_color": "rgb(255,255,255)", "notification_text_color": "rgb(95,95,95)", "notification_link_color": "rgb(156,169,183)", "notification_footer_color": "rgb(161,161,161)", "notification_border_color": "rgb(255,255,255)", "notification_close_color": "rgb(132,132,132)", "notification_border_radius": 5, "notification_image_radius": 0, "position": "bottom-left", "mobile_position": "bottom", "show_on_mobile" : "true", "animate" : "up", "start_delay": 2000, "roll_delay": 3000, "display_duration": 9500 }
+  selectedTab: number = 0;
+  defautConfigs = { "notification_bg_color": "rgb(255,255,255)", "notification_text_color": "rgb(95,95,95)", "notification_link_color": "rgb(156,169,183)", "notification_footer_color": "rgb(161,161,161)", "notification_border_color": "rgb(255,255,255)", "notification_close_color": "rgb(132,132,132)", "notification_border_radius": 5, "notification_image_radius": 0, "position": "bottom-left", "mobile_position": "bottom", "show_on_mobile" : true, "animate" : "up", "start_delay": 2000, "roll_delay": 3000, "display_duration": 9500 }
+  tabIndex = {
+    "details": 0,
+    "integrations": 1,
+    "notifications": 2,
+    "customize": 3,
+    "settings": 4,
+    "analytics": 5
+  };
+  statusCustomMessage;
 
   constructor(
     private route: ActivatedRoute,
@@ -70,6 +79,12 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.route.params.subscribe(params => {
+      if (params['page']) {
+        this.selectedTab = this.tabIndex[params['page']]
+      } else {
+        this.selectedTab = 0
+      }
+
       if (params['id']) {
         this.integrations = <Map<string, ApplicationIntegrationViewModel>>this.data.store.get("integrations_" + params['id']);
         if (!this.integrations) {
@@ -213,6 +228,19 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
         });
       }
     });
+
+    this.route.queryParams.subscribe(query => {
+      if(query['status']){
+        try{
+          this.statusCustomMessage = window.atob(query['status']);
+        } catch(e) {}
+      }
+    });
+  }
+
+  selectedTabChanged(){
+    var routeName = Object.keys(this.tabIndex)[this.selectedTab];
+    this.router.navigate(['/applications/view/' + this.appId + '/' + routeName], {queryParamsHandling: "preserve"});
   }
 
   setTab(tab: number) {
@@ -320,12 +348,10 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
     
       if (this.configs) {
         for (var i in this.defautConfigs) {
-          if (!this.configs[i]) {
+          if (!(i in this.configs)) {
             this.configs[i] = this.defautConfigs[i];
           }
         }
-
-        this.configs.show_on_mobile = this.configs.show_on_mobile === "true";
       }
     }
     catch (Error) {

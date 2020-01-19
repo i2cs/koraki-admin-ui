@@ -44,7 +44,7 @@
         <mat-divider></mat-divider>
         <div class="card-body" [ngClass]="{'loading':loading}">
 
-          <mat-tab-group [(selectedIndex)]="selectedTab" disableRipple="true" color="primary" class="md-no-animation"
+          <mat-tab-group (selectedTabChange)="selectedTabChanged()" [(selectedIndex)]="selectedTab" disableRipple="true" color="primary" class="md-no-animation"
             [@.disabled]="true" dynamicHeight="false">
             <mat-tab label="Details">
               <div class="row">
@@ -215,6 +215,12 @@
                 <div class="divider"></div>
 
                 <div class="col-md-12 mr-auto">
+                  <div style="margin-top:0;padding-left: 16px;" *ngIf="!status" class="salert alert alert-primary alert-with-icon" data-notify="container">
+                      <span data-notify="message">
+                        <h4>Koraki is deactivated at the moment. Please use bellow switch to activate it on <a href="{{application.url}}" target="_blank">{{application.url}}</a></h4>
+                        {{statusCustomMessage}}
+                      </span>
+                    </div>
                   <legend>Status is {{status?'active':'deactivated'}}</legend>
                   <div class="togglebutton">
                     <label>

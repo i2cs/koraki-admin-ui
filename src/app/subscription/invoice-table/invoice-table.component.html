@@ -1,7 +1,10 @@
 <div class="table-responsive">
-  <div *ngIf="invoices && invoices.length == 0" class="text-center">
-    Woops! No invoices yet
-  </div>
+    <div class="card" *ngIf="invoices && invoices.length == 0">
+      <div class="card-body text-center">
+        <div class="animal animal4"></div>
+        <h3>No invoices yet!</h3>
+      </div>
+    </div>
   <div class="table-responsive" *ngIf="invoices && invoices.length > 0">
     <table class="table table-sm">
       <thead>

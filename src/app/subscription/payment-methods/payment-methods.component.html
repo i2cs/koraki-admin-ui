@@ -1,13 +1,20 @@
 <div class="main-content">
   <div class="container-fluid">
     <div class="col-md-12 col-sm-12 mr-auto ml-auto">
-      <div class="card" data-color="orange">
+      <div class="card" *ngIf="hideStripePayments">
+        <div class="card-body text-center">
+          <div class="animal animal4"></div>
+          <h3>{{noInvoiceMessage}}</h3>
+        </div>
+      </div>
+      <div class="card" *ngIf="!hideStripePayments" data-color="orange">
         <div class="card-header text-center">
           <h3 class="card-title">
             Credit/Debit Cards
           </h3>
           <h5 class="card-description">
-            <span *ngIf="cards.length > 0">Following are the saved payment sources for your account.</span> You can add a new source for funding Koraki
+            <span *ngIf="cards.length > 0">Following are the saved payment sources for your account.</span> You can add
+            a new source for funding Koraki
             subscription</h5>
           <p>
             <i class="material-icons ic">https</i> All the payment sources are saved in a
@@ -18,16 +25,18 @@
             <div class="col-md-4 cards" *ngFor="let card of cards">
               <div class="card card-chart">
                 <div class="card-body">
-                  <p class="card-category">{{card.brand}} {{card.funding}} card - Exp {{card.exp_month}} / {{card.exp_year}}</p>
+                  <p class="card-category">{{card.brand}} {{card.funding}} card - Exp {{card.exp_month}} /
+                    {{card.exp_year}}</p>
                   <h3 class="card-title">
-                    <img height="20px" style="margin-right: 5px;" src="{{cardUrl}}{{card.brand}}.png" /> <span class="d-none d-md-inline">•••• •••• •••• </span>{{card.last4}}</h3>
+                    <img height="20px" style="margin-right: 5px;" src="{{cardUrl}}{{card.brand}}.png" /> <span
+                      class="d-none d-md-inline">•••• •••• •••• </span>{{card.last4}}</h3>
                   <p>{{card.name}}</p>
                 </div>
 
                 <div class="card-footer">
                   <div class="stats">
-                    <input (change)="updateSource($e)" [(ngModel)]="primary" type="radio" name="primary" value="{{card.id}}" id="r{{card.id}}"
-                    />
+                    <input (change)="updateSource($e)" [(ngModel)]="primary" type="radio" name="primary"
+                      value="{{card.id}}" id="r{{card.id}}" />
                     <label for="r{{card.id}}"> Primary</label>
                   </div>
                   <button class="btn btn-link btn-danger btn-sm" (click)="delete(card.id, card.last4)">
@@ -47,7 +56,7 @@
                     <h3 *ngIf="cards.length > 0" class="card-title">Add another card</h3>
                     <h3 *ngIf="cards.length == 0" class="card-title">Add a new card</h3>
                     <p class="card-description">
-                      
+
                     </p>
                   </div>
                 </a>

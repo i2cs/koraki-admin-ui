@@ -4,6 +4,7 @@ import { LoadingServiceService } from '../../services/loading-service.service';
 import { PaymentService, PaymentCardDataViewModel, PaymentCardDataUpdateModel } from 'koraki-angular-client';
 import { environment } from 'environments/environment';
 import { NotificationService } from '../../services/notification.service';
+import { SubscriptionService } from 'app/services/subscription.service';
 
 @Component({
   selector: 'app-payment-methods',
@@ -15,12 +16,15 @@ export class PaymentMethodsComponent implements OnInit {
   cards: PaymentCardDataViewModel[] = [];
   cardUrl: string = environment.ccIconPath;
   primary: string;
+  noInvoiceMessage: string;
+  hideStripePayments: boolean;
 
   constructor(
     private notification: NotificationService,
     private paymentService: PaymentService,
     private breadcrumbService: BreadcrumbService,
-    private loadingService: LoadingServiceService
+    private loadingService: LoadingServiceService,
+    private subs: SubscriptionService
   ) { }
 
   ngOnInit() {
@@ -31,6 +35,13 @@ export class PaymentMethodsComponent implements OnInit {
 
     this.loadingService.loading$.subscribe(a => { this.loading = a; });
     this.loadData();
+
+    this.subs.permissions().subscribe(a => {
+      if(a.plan.indexOf("shopify")==-1){
+        this.hideStripePayments = true;
+        this.noInvoiceMessage = "Log in to Shopify admin panel for your payment methods";
+      }
+    });
   }
 
   loadData() {

@@ -1,6 +1,8 @@
 <div class="row">
   <div *ngIf="!widgets || widgets.length == 0" style="text-align: center">Loading...</div>
   <div [class]="a.class" *ngFor="let a of widgets;trackBy: trackByFn">
-    <iframe width="100%" sandbox="allow-scripts allow-forms allow-same-origin allow-pointer-lock allow-popups" height="350" [src]="a.url" scrolling="no" frameborder="0" marginheight="0" marginwidth="0"></iframe>
+    <div [ngClass]="{'loading':!loadedIframe[a.id]}" style="height: 350px;margin:5px;">
+      <iframe (load)="iframLoaded(a)" width="100%" sandbox="allow-scripts allow-forms allow-same-origin allow-pointer-lock allow-popups" height="350" [src]="a.url" scrolling="no" frameborder="0" marginheight="0" marginwidth="0"></iframe>
+    </div>
   </div>
 </div>

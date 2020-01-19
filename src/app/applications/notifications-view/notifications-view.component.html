@@ -6,9 +6,22 @@
           <button class="btn btn-primary" (click)="loadNotifications()">Load Notification</button>
         </div>
       </div>
-      <div class="card-body">
-        <div *ngIf="loaded" class="material-datatables table-responsive">
-          <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+      <div class="card-body" [ngClass]="{'loading':loading}">
+
+        <div *ngIf="loaded && table.length == 0" class="card-body text-center">
+          <div class="animal animal6"></div>
+          <h3>You don't have notifications yet!</h3>
+          
+          <div  class="card-icon integrations" data-hover="Add new integration" (click)="integrationsTab()"></div>
+
+          <p class="card-description">
+            Integrate your Koraki application with apps. Read more details <a href="https://docs.koraki.io/project/integrations" target="_blank"> here</a>
+          </p>
+
+        </div>
+        <div *ngIf="loaded && table.length > 0" class="material-datatables table-responsive">
+          <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%"
+            style="width:100%">
             <thead>
               <tr>
                 <th colspan="2">Notification</th>
@@ -29,11 +42,13 @@
                       <span class="no-text" title="Notification of {{s.key}} locale">{{s.value}}</span>
                     </div>
                   </div>
-                  <div *ngIf="!isLocalizedNotification(row['notificationText'])" [innerHtml]="row['notificationText']"></div>
+                  <div *ngIf="!isLocalizedNotification(row['notificationText'])" [innerHtml]="row['notificationText']">
+                  </div>
                 </td>
                 <td title="{{row['createdOn']}}">{{row['createdOn'] | amFromUtc | amTimeAgo}}</td>
                 <td class="text-right">
-                  <a href="#" onclick="return false;" (click)="remove(row['id'])" class="btn btn-link btn-danger btn-just-icon" title="Remove this">
+                  <a href="#" onclick="return false;" (click)="remove(row['id'])"
+                    class="btn btn-link btn-danger btn-just-icon" title="Remove this">
                     <i class="material-icons">close</i>
                   </a>
                 </td>

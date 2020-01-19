@@ -43,7 +43,7 @@
                 </div>
             </div>
 
-            <div class="card" data-color="orange">
+            <div class="card" data-color="orange" *ngIf="!hideStripePayments">
                 <div class="card-body">
                     <a class="btn btn-primary" routerLink="/subscription/cards">Payment methods</a>
                     <a class="btn btn-primary" routerLink="/subscription/invoices">Invoices</a>

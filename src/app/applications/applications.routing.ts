@@ -17,6 +17,9 @@ export const ApplicationsRoutes: Routes = [
             path: 'view/:id',
             component: ViewApplicationComponent
         }, {
+            path: 'view/:id/:page',
+            component: ViewApplicationComponent
+        }, {
             path: 'view/:id/integrations',
             loadChildren: '../integrations/integrations.module#IntegrationsModule'
         }]

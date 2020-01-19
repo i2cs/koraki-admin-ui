@@ -1,7 +1,13 @@
 <div class="main-content">
   <div class="container-fluid">
     <div class="col-md-12 col-sm-12 mr-auto ml-auto">
-      <div class="card" data-color="orange">
+      <div class="card" *ngIf="hideStripePayments">
+        <div class="card-body text-center">
+          <div class="animal animal3"></div>
+          <h3>{{noInvoiceMessage}}</h3>
+        </div>
+      </div>
+      <div class="card" *ngIf="!hideStripePayments" data-color="orange">
         <div class="card-header text-center">
           <h3 class="card-title">
             Invoices

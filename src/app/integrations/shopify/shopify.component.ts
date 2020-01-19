@@ -125,8 +125,12 @@ export class ShopifyComponent implements OnInit {
             }
 
             this.notify.success("Successfully subscribed and fetching recent events");
-            if (Number(this.appId) > 0) {
-              this.router.navigate(['/applications/view/' + this.appId]);
+            if (a.appId > 0) {
+              var statusMessage = "We are fetching data from Shopify store. You should be able to see notifications once Koraki is set to active";
+              try {
+                  statusMessage = window.btoa(statusMessage);
+              } catch(e) {}
+              this.router.navigate(['/applications/view/' + this.appId + '/settings?status=' + statusMessage]);
               this.data.store.set("integrations_" + this.appId, null);
             } else {
               this.router.navigate(['/applications/']);

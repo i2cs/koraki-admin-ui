@@ -24,6 +24,7 @@ export class SubscriptionMainComponent implements OnInit {
   currentPlanFeatures: any;
   planIcon: string;
   loading: boolean;
+  hideStripePayments: boolean;
 
   constructor(
     private notification: NotificationService,
@@ -65,6 +66,7 @@ export class SubscriptionMainComponent implements OnInit {
       this.nextBillingDate = a.nextBilling;
       this.isFree = a.cost == 0;
       this.upgradeAvailable = a.plan != "tier2" && a.plan.indexOf("shopify")==-1;
+      this.hideStripePayments = a.plan.indexOf("shopify")==-1;
       this.isTier1 = a.plan == "tier1";
       this.planFeatures = environment.plans;
       this.currentPlanFeatures = this.planFeatures[a.plan].filter(a => !a.startsWith('~'));

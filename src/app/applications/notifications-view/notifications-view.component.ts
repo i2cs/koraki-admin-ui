@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NotificationsService, NotificationViewDataModel, NotificationCreateDataModel } from 'koraki-angular-client';
 import { NotificationService } from '../../services/notification.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-notifications-view',
@@ -16,6 +17,7 @@ export class NotificationsViewComponent implements OnInit {
   constructor(
     private notifications: NotificationsService,
     private notify: NotificationService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -24,6 +26,10 @@ export class NotificationsViewComponent implements OnInit {
 
   ngAfterViewInit() {
 
+  }
+
+  integrationsTab() {
+    this.router.navigate(['/applications/view/' + this.appId + '/integrations']);
   }
 
   loadNotifications() {

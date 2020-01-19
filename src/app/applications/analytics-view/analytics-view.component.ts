@@ -12,6 +12,7 @@ export class AnalyticsViewComponent implements OnInit {
 
   piwikUrl: string = environment.analytics;
   widgets: object[] = [];
+  loadedIframe = {};
 
   @Input() analyticsid: string;
   @Input() analyticstoken: string;
@@ -26,22 +27,26 @@ export class AnalyticsViewComponent implements OnInit {
 
     this.widgets.push({
       url : this.addTokenAuthAndSiteId("/index.php?module=Widgetize&action=iframe&widget=1&moduleToWidgetize=Live&actionToWidgetize=getSimpleLastVisitCount&period=day&date=yesterday&disableLink=1&widget=1"),
-      class : "col-md-6"
+      class : "col-md-6",
+      id : "1"
     });
 
     this.widgets.push({
       url : this.addTokenAuthAndSiteId("/index.php?module=Widgetize&action=iframe&widget=1&moduleToWidgetize=UserCountry&actionToWidgetize=getCity&period=day&date=yesterday&disableLink=1&widget=1"),
-      class : "col-md-6"
+      class : "col-md-6",
+      id : "2"
     });
 
     this.widgets.push({
       url : this.addTokenAuthAndSiteId("/index.php?module=Widgetize&action=iframe&widget=1&moduleToWidgetize=UserCountryMap&actionToWidgetize=realtimeMap&period=day&date=yesterday&disableLink=1&widget=1"),
-      class : "col-md-12"
+      class : "col-md-12",
+      id : "3"
     });
 
     this.widgets.push({
       url : this.addTokenAuthAndSiteId("/index.php?module=Widgetize&action=iframe&widget=1&moduleToWidgetize=Actions&actionToWidgetize=getPageTitles&period=day&date=yesterday&disableLink=1&widget=1"),
-      class : "col-md-12"
+      class : "col-md-12",
+      id : "4"
     });
   }
 
@@ -51,5 +56,9 @@ export class AnalyticsViewComponent implements OnInit {
 
   trackByFn(index, item) {
     return item.url;
+  }
+
+  iframLoaded(e){
+    this.loadedIframe[e.id] = true;
   }
 }
