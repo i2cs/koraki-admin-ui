@@ -130,8 +130,8 @@ export class ShopifyComponent implements OnInit {
               try {
                   statusMessage = window.btoa(statusMessage);
               } catch(e) {}
-              this.router.navigate(['/applications/view/' + this.appId + '/settings?status=' + statusMessage]);
-              this.data.store.set("integrations_" + this.appId, null);
+              this.router.navigateByUrl('/applications/view/' + a.appId + '/settings?status=' + statusMessage);
+              this.data.store.set("integrations_" + a.appId, null);
             } else {
               this.router.navigate(['/applications/']);
             }
