@@ -36,7 +36,7 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
   loading: boolean;
   hide: boolean;
   appId: string;
-  application: ApplicationViewDataModel = <ApplicationViewDataModel>{};
+  application: ApplicationViewDataModel = <ApplicationViewDataModel>{ applicationName: "Loading..", url: "Loading.." };
   integrations: Map<string, ApplicationIntegrationViewModel> = new Map<string, ApplicationIntegrationViewModel>();
   script: string;
   status: boolean;
@@ -200,7 +200,7 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
 
     this.allIntegrationsOriginal = this.allIntegrations;
 
-    //this.loadingService.loading$.subscribe(a => { this.loading = a; });
+    this.loadingService.loading$.subscribe(a => { this.loading = a; });
     this.hide = true;
     this.route.params.subscribe(params => {
       if (params['id']) {
@@ -357,6 +357,15 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
     catch (Error) {
       console.error("Error trying to parse custom data : " + a.customData);
     }
+  }
+
+  getUrl(url: string){
+    var prefix = 'http://';
+    if (!/^https?:\/\//i.test(url)) {
+      url = prefix + url;
+    }
+
+    return url;
   }
 
   sanitize(url: string) {

@@ -11,10 +11,10 @@
           </span>
         </div>
         <div class="card-header">
-          <div class="pull-right app-notify-status" *ngIf="!loading && application.status!='Active'">
+          <div class="pull-right app-notify-status" *ngIf="application && application.status!='Active'">
             <i class="material-icons" style="vertical-align: middle;">warning</i> Not Active
           </div>
-          <div class="pull-right app-notify-count d-none d-md-block" *ngIf="!loading && application.status=='Active'">
+          <div class="pull-right app-notify-count d-none d-md-block" *ngIf="application && application.status=='Active'">
             {{application.activeNotificationsCount==0?'No':application.activeNotificationsCount}} Active notifications
           </div>
           <h3 class="card-title" *ngIf="application.applicationName">
@@ -42,7 +42,7 @@
           <h5 *ngIf="!nameEditing" class="card-description">{{application.url}}</h5>
         </div>
         <mat-divider></mat-divider>
-        <div class="card-body" [ngClass]="{'loading':loading}">
+        <div class="card-body">
 
           <mat-tab-group (selectedTabChange)="selectedTabChanged()" [(selectedIndex)]="selectedTab" disableRipple="true" color="primary" class="md-no-animation"
             [@.disabled]="true" dynamicHeight="false">
@@ -217,7 +217,7 @@
                 <div class="col-md-12 mr-auto">
                   <div style="margin-top:0;padding-left: 16px;" *ngIf="!status" class="salert alert alert-primary alert-with-icon" data-notify="container">
                       <span data-notify="message">
-                        <h4>Koraki is deactivated at the moment. Please use bellow switch to activate it on <a href="{{application.url}}" target="_blank">{{application.url}}</a></h4>
+                        <h4>Koraki is deactivated at the moment. Please use bellow switch to activate it on <a href="{{getUrl(application.url)}}" target="_blank">{{application.url}} <i class="material-icons">link</i></a></h4>
                         {{statusCustomMessage}}
                       </span>
                     </div>

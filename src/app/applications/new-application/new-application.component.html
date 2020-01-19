@@ -5,7 +5,7 @@
 
     <div class="col-md-12 col-sm-12 mr-auto ml-auto">
       <div *ngIf="!canAdd">
-        <div class="alert alert-rose alert-with-icon" data-notify="container">
+        <div class="salert alert alert-primary alert-with-icon" data-notify="container">
           <i class="material-icons" data-notify="icon">notifications</i>
           <span data-notify="icon" class="now-ui-icons ui-1_bell-53"></span>
           <span data-notify="message">Sorry, you can't add more applications with the current subscription plan. You can take one of the following actions and create more applications
@@ -13,7 +13,7 @@
             <br/>
             <ul>
               <li>Remove one of your existing applications</li>
-              <li><a routerLink="/subscription/plans">Upgrade your Koraki account <i class="material-icons">link</i></a></li>
+              <li>Upgrade your <a routerLink="/subscription/plans">Koraki account <i class="material-icons">link</i></a></li>
             </ul>
             
           </span>
