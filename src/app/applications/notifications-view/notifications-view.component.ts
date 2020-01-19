@@ -13,6 +13,7 @@ export class NotificationsViewComponent implements OnInit {
   notificationsList: any[] = Array();
   table: Array<NotificationViewDataModel> = [];
   loaded: boolean;
+  loading: boolean;
 
   constructor(
     private notifications: NotificationsService,
