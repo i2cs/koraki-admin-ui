@@ -120,7 +120,12 @@ export class ShopifyComponent implements OnInit {
               
               this.loadingService.loading(true);
               //in case showing charge auth window
-              window.top.location.href = a.redirectUrl;
+              if(a.redirectUrl == ""){
+                window.top.location.reload(true);
+              } else {
+                window.top.location.href = a.redirectUrl;
+              }
+
               return;
             }
 
