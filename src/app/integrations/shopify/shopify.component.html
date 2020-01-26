@@ -18,7 +18,7 @@
           <div *ngIf="!integrated">
             <p *ngIf="!knownStore && knownApp">
               Click
-              <b>Authenticate</b> button to visit Shopify apps page.
+              <b>Shopify App Store</b> button to visit Shopify apps page.
               <br/>
               <small>You will be redirected to Shopify apps page and will be asked to log in to your Shopify store.</small>
             </p>
@@ -57,8 +57,8 @@
                 <a *ngIf="knownStore" [disabled]="subscribeClicked" href="#" mat-raised-button class="btn btn-facebook" onclick="return false" (click)="subscribe()">
                   Connect
                 </a>
-                <a *ngIf="!knownStore" href="#" mat-raised-button class="btn btn-facebook" onclick="return false" (click)="forwardToShopify()">
-                  Authenticate
+                <a *ngIf="!knownStore" href="#" onclick="return false" (click)="forwardToShopify()">
+                  <img src="https://koraki-static.s3.ap-southeast-1.amazonaws.com/static.koraki.io/Shopify-App-Store-Badge-Final-White.png" height="40px" />
                 </a>
               </div>
             </div>
