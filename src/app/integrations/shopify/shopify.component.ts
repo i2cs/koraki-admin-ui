@@ -8,7 +8,7 @@ import { BreadcrumbService } from '../../services/breadcrumb.service';
 import { ShopifySubscribeCreateViewModel } from 'koraki-angular-client/model/shopifySubscribeCreateViewModel';
 import { LocalStorageService } from 'angular-web-storage';
 import { not } from '@angular/compiler/src/output/output_ast';
-import { environment } from 'environments/environment.prod';
+import { environment } from 'environments/environment';
 import { MAT_CHIPS_DEFAULT_OPTIONS } from '@angular/material';
 import { INTERNAL_BROWSER_DYNAMIC_PLATFORM_PROVIDERS } from '@angular/platform-browser-dynamic/src/platform_providers';
 import { AuthService } from 'app/services/auth.service';
@@ -135,11 +135,13 @@ export class ShopifyComponent implements OnInit {
               try {
                   statusMessage = window.btoa(statusMessage);
               } catch(e) {}
-              this.router.navigateByUrl('/applications/view/' + a.appId + '/settings?status=' + statusMessage);
               this.data.store.set("integrations_" + a.appId, null);
+              this.router.navigateByUrl('/applications/view/' + a.appId + '/settings?status=' + statusMessage);
             } else {
               this.router.navigate(['/applications/']);
             }
+
+            return;
           }, e => {
             this.notify.error(e.error.message);
             this.data.store.set("integrations_" + this.appId, null);

@@ -5,6 +5,8 @@ import { MemoryDataHolderServiceService } from '../../services/memory-data-holde
 import { NotificationService } from '../../services/notification.service';
 import { BreadcrumbService } from '../../services/breadcrumb.service';
 import { SubscriptionService } from '../../services/subscription.service';
+import { Router } from '@angular/router';
+import { environment } from 'environments/environment';
 
 declare const $: any;
 
@@ -20,6 +22,7 @@ export class ApplicationsComponent implements OnInit, AfterViewInit, OnDestroy {
   loading: boolean;
   interval: any;
   allowedSessionCount: number = 1000;
+  isShopify: boolean;
 
   constructor(
     private appservice: ApplicationsService,
@@ -27,7 +30,8 @@ export class ApplicationsComponent implements OnInit, AfterViewInit, OnDestroy {
     private breadcrumbService: BreadcrumbService,
     private cache: MemoryDataHolderServiceService,
     public notify: NotificationService,
-    private subscription: SubscriptionService
+    private subscription: SubscriptionService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -42,7 +46,9 @@ export class ApplicationsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.load();
     this.interval = setInterval(() => { this.load() }, 60000);
 
+    this.subscription.clear();
     this.subscription.permissions().subscribe(a => {
+      this.isShopify = a.plan.indexOf("shopify") > -1;
       if (a.permissons["unique_sessions.maximum"]) {
         this.allowedSessionCount = Number.parseInt(a.permissons["unique_sessions.maximum"]);
       }
@@ -58,6 +64,14 @@ export class ApplicationsComponent implements OnInit, AfterViewInit, OnDestroy {
     }, e => {
       this.notify.error("Error loading applications");
     });
+  }
+
+  newApplicationButtonClick(){
+    if(this.isShopify){
+      window.location.href = environment.integrations.shopify.appInstallUrl;
+    }else{
+      this.router.navigate(['/applications/new']); 
+    }
   }
 
   ngAfterViewInit() { }

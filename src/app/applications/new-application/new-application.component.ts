@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { LoadingServiceService } from '../../services/loading-service.service';
 import { NotificationService } from '../../services/notification.service';
 import { BreadcrumbService } from '../../services/breadcrumb.service';
+import { environment } from 'environments/environment';
 
 declare const $: any;
 
@@ -34,7 +35,11 @@ export class NewApplicationComponent implements OnInit, AfterViewInit {
     ) { }
 
     ngAfterViewInit(){
-    
+        this.subscriptionsService.getPermissions().subscribe(a => {
+            if(a.plan.indexOf("shopify") > -1){
+                window.location.href = environment.integrations.shopify.appInstallUrl;
+            }
+        });
     }
 
     isFieldValid(form: FormGroup, field: string) {

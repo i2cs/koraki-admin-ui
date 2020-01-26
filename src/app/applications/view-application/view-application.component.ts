@@ -100,6 +100,7 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
       }
     });
 
+    this.subscription.clear();
     this.subscription.permissions().subscribe(a => {
       a.integrations.forEach(a => {
         this.allowedIntegrations[a.code] = true;
