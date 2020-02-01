@@ -7,7 +7,7 @@ import { MemoryDataHolderServiceService } from '../../services/memory-data-holde
 import { SubscriptionService } from '../../services/subscription.service';
 import { BreadcrumbService } from '../../services/breadcrumb.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { environment } from 'environments/environment';
+import { AuthService } from 'app/services/auth.service';
 
 declare const $: any;
 
@@ -74,7 +74,8 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
     private notify: NotificationService,
     private data: MemoryDataHolderServiceService,
     private subscription: SubscriptionService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private auth: AuthService
   ) { }
 
   ngAfterViewInit() {
@@ -85,7 +86,7 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
         this.selectedTab = 0
       }
 
-      if (params['id']) {
+      if (params['id'] && this.auth.isAuthenticated()) {
         this.integrations = <Map<string, ApplicationIntegrationViewModel>>this.data.store.get("integrations_" + params['id']);
         if (!this.integrations) {
           this.integrations = new Map<string, ApplicationIntegrationViewModel>();
@@ -100,24 +101,26 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
       }
     });
 
-    this.subscription.clear();
-    this.subscription.permissions().subscribe(a => {
-      a.integrations.forEach(a => {
-        this.allowedIntegrations[a.code] = true;
+    if(this.auth.isAuthenticated()){
+      this.subscription.clear();
+      this.subscription.permissions().subscribe(a => {
+        a.integrations.forEach(a => {
+          this.allowedIntegrations[a.code] = true;
+        });
+
+        if (a.permissons["unique_sessions.maximum"]) {
+          this.allowedSessionCount = Number.parseInt(a.permissons["unique_sessions.maximum"]);
+          this.setProgress();
+        }
+
+        let number = Number.parseInt(a.permissons['notifications_active_per_app.maximum']);
+        this.possibleCounts = _Array.range(1, Math.min(number, 100), 1);
+        if (number > 100) {
+          this.possibleCounts.push(1000);
+        }
+        this.paid = a.permissons['paid'] === "true";
       });
-
-      if (a.permissons["unique_sessions.maximum"]) {
-        this.allowedSessionCount = Number.parseInt(a.permissons["unique_sessions.maximum"]);
-        this.setProgress();
-      }
-
-      let number = Number.parseInt(a.permissons['notifications_active_per_app.maximum']);
-      this.possibleCounts = _Array.range(1, Math.min(number, 100), 1);
-      if (number > 100) {
-        this.possibleCounts.push(1000);
-      }
-      this.paid = a.permissons['paid'] === "true";
-    });
+    }
   }
 
   ngOnInit() {
@@ -204,7 +207,7 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
     this.loadingService.loading$.subscribe(a => { this.loading = a; });
     this.hide = true;
     this.route.params.subscribe(params => {
-      if (params['id']) {
+      if (params['id'] && this.auth.isAuthenticated()) {
         this.appId = params['id'];
         this.appservice.getApplicationById(params['id']).subscribe(a => {
           this.application = a;

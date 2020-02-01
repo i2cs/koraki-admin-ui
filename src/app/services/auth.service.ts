@@ -6,7 +6,7 @@ import { LocalStorageService } from 'angular-web-storage';
 import Auth0Lock from 'auth0-lock';
 import {Auth0LockPasswordless} from 'auth0-lock';
 import { Router } from '@angular/router';
-import { Subject, Observable } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 (window as any).global = window;
 
@@ -149,8 +149,10 @@ export class AuthService {
   }
 
   public isAuthenticated(): boolean {
-    //todo: implement jwt parse
-    return this.local.get("access-token");
+    const jwt = new JwtHelperService();
+    if(this.local.get("access-token") && !jwt.isTokenExpired(this.local.get("access-token")))
+      return true;
+    return false;
   }
 
   getParameterByName(name) {

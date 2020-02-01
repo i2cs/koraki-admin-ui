@@ -10,6 +10,8 @@ import { LoadingServiceService } from '../../services/loading-service.service';
 import { NotificationService } from '../../services/notification.service';
 import { SubscriptionService } from '../../services/subscription.service';
 import { BreadcrumbService } from '../../services/breadcrumb.service';
+import { AuthService } from 'app/services/auth.service';
+
 
 declare const $: any;
 
@@ -39,7 +41,9 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit {
         private cdRef: ChangeDetectorRef,
         notification: NotificationService,
         breadcrumbService: BreadcrumbService,
-        private subscription: SubscriptionService
+        private subscription: SubscriptionService,
+        private auth: AuthService
+
     ) {
         this.location = location;
 
@@ -105,6 +109,12 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit {
         this.runOnRouteChange();
     }
     runOnRouteChange(): void {
+        this.subscription.permissions().subscribe(a => {
+            this.plan = a.planName + " (" + formatCurrency(a.cost, "en-US", "$") + ")";
+            this.trialEndsIn = a.trialEndsIn;
+            this.email = a.email;
+        });
+        
         if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
             const elemSidebar = <HTMLElement>document.querySelector('.sidebar .sidebar-wrapper');
             const elemMainPanel = <HTMLElement>document.querySelector('.main-panel');
