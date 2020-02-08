@@ -129,6 +129,16 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
     ]);
 
     this.allIntegrations.push({
+      code: "webapi",
+      title: "Koraki REST API",
+      description: "Koraki REST API is available to integrate Koraki notifications with any custom app",
+      capable: "This integration can <b>Read</b> and <b>Write</b> notifications",
+      buttonTitle: "Integrate",
+      help: "https://docs.koraki.io/project/api",
+      ecommerce: false
+    });
+
+    this.allIntegrations.push({
       code: "opencart",
       title: "OpenCart",
       description: "Module contains notification widget. This module can be installed from OpenCart admin panel",
@@ -163,6 +173,16 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
       capable: "This integration can <b>Write</b> notifications",
       buttonTitle: "Integrate",
       ecommerce: false
+    });
+
+    this.allIntegrations.push({
+      code: "wordpress",
+      title: "WP/WooCommerce",
+      description: "Connect your Wordpress site or WooCommerce shop with Koraki",
+      capable: "This integration can <b>Write</b> notifications",
+      buttonTitle: "Install",
+      //help: "https://koraki.io/zapier-koraki-to-enable-more-than-1000-integrations/",
+      ecommerce: true
     });
 
     this.allIntegrations.push({

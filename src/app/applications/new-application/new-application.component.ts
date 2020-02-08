@@ -36,7 +36,7 @@ export class NewApplicationComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit(){
         this.subscriptionsService.getPermissions().subscribe(a => {
-            if(a.plan.indexOf("shopify") > -1){
+            if(a.email.startsWith("shopify|")){
                 window.location.href = environment.integrations.shopify.appInstallUrl;
             }
         });

@@ -56,7 +56,7 @@ export class NotificationsViewComponent implements OnInit {
       }
     });
 
-    if(this.totalNotificationPollCount > 3){
+    if(this.totalNotificationPollCount > 6){
       this.timeSubscription.unsubscribe();
     }
   }

@@ -26,7 +26,7 @@ export class InvoicesComponent implements OnInit {
     ]);
 
     this.subs.permissions().subscribe(a => {
-      if(a.plan.indexOf("shopify") > -1){
+      if(a.email.startsWith("shopify|")){
         this.hideStripePayments = true;
         this.noInvoiceMessage = "Log in to Shopify admin panel for your invocies";
       }

@@ -8,6 +8,7 @@ import { IntercomComponent } from './intercom/intercom.component';
 import { TwitterComponent } from './twitter/twitter.component';
 import { ZapierComponent } from './zapier/zapier.component';
 import { ShopifyComponent } from './shopify/shopify.component';
+import { WordpressComponent } from './wordpress/wordpress.component';
 
 export const IntegrationsRoutes: Routes = [
     {
@@ -39,6 +40,9 @@ export const IntegrationsRoutes: Routes = [
     }, {
         path: 'shopify',
         component: ShopifyComponent
+    }, {
+        path: 'wordpress',
+        component: WordpressComponent
     }]
 }
 ];

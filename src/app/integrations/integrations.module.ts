@@ -14,6 +14,8 @@ import { TwitterComponent } from './twitter/twitter.component';
 import { MomentModule } from 'ngx-moment';
 import { ZapierComponent } from './zapier/zapier.component';
 import { ShopifyComponent } from './shopify/shopify.component';
+import { WordpressComponent } from './wordpress/wordpress.component';
+import { EventConfigViewComponent } from './event-config-view/event-config-view.component';
 
 @NgModule({
   imports: [
@@ -24,6 +26,6 @@ import { ShopifyComponent } from './shopify/shopify.component';
     MaterialModule,
     MomentModule
   ],
-  declarations: [FacebookComponent, MainComponent, MailchimpComponent, PrivyComponent, OpencartComponent, IntercomComponent, TwitterComponent, ZapierComponent, ShopifyComponent]
+  declarations: [FacebookComponent, MainComponent, MailchimpComponent, PrivyComponent, OpencartComponent, IntercomComponent, TwitterComponent, ZapierComponent, ShopifyComponent, WordpressComponent, EventConfigViewComponent]
 })
 export class IntegrationsModule { }

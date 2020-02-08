@@ -1,0 +1,24 @@
+<div class="main-content">
+    <div class="container-fluid">
+      <div class="col-md-12 mr-auto ml-auto">
+        <div class="card ">
+          <div class="card-header">
+            <h3 class="card-title">
+              Wordpress Integration
+            </h3>
+            <div class="text-center">
+              <img src="assets/img/integrations/wordpress.png" class="integration-image" />
+            </div>
+            <h5 class="card-description">Integrate your website with Koraki</h5>
+  
+          </div>
+          <mat-divider></mat-divider>
+          <div class="card-body" [ngClass]="{'loading':loading}">
+            
+            <app-event-config-view code="wordpress" [applicationId]="appId"></app-event-config-view>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
