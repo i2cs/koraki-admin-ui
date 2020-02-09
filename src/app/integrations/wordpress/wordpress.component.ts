@@ -11,7 +11,7 @@ import { ApplicationsService } from 'koraki-angular-client';
 export class WordpressComponent implements OnInit {
   
   appId: string;
-
+  loading: boolean;
   constructor(
     private route: ActivatedRoute,
     private appservice: ApplicationsService,
