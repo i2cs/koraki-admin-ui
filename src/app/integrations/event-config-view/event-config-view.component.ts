@@ -25,11 +25,11 @@ export class EventConfigViewComponent implements OnInit {
     private notify: NotificationService,
     private loadingService: LoadingServiceService,
     private breadcrumbService: BreadcrumbService,
-    private ajaxService: AjaxService
+    private ajax: AjaxService
   ) { }
 
   ngOnInit() {
-    this.ajaxService.getIntegrationConfigs(this.code, this.applicationId).subscribe(a => {
+    this.ajax.getIntegrationConfigs(this.code, this.applicationId).subscribe(a => {
       a.forEach(element => {
         element['configs'] =  {
           sample: JSON.stringify({ 
@@ -63,7 +63,7 @@ export class EventConfigViewComponent implements OnInit {
   }
 
   getRenderedTemplate(template: IntegrationConfigurationsDataViewModel){
-    this.ajaxService.getSampleTemplate(template.templateContent, this.code, template.templateCode, this.applicationId).subscribe(a => {
+    this.ajax.getSampleTemplate(template.templateContent, this.code, template.templateCode, this.applicationId).subscribe(a => {
       template['configs'] =  {
         sample: JSON.stringify({ 
           notificationText: a.template,
@@ -79,7 +79,7 @@ export class EventConfigViewComponent implements OnInit {
   updateIntegrationStatus(config: IntegrationConfigurationsDataViewModel){
     let model:IntegrationConfigurationsUpdateDataModel = {};
     model.enabled = config.enabled;
-    this.ajaxService.updateIntegrationConfigs(model, this.code, config.templateCode, this.applicationId).subscribe(a => {
+    this.ajax.updateIntegrationConfigs(model, this.code, config.templateCode, this.applicationId).subscribe(a => {
       this.notify.success(config.templateName + " is successfully turned " + (model.enabled ? "<b>on</b>" : "<b>off</b>"));
     }, e => {
       this.notify.error(e.error.message);
@@ -89,7 +89,7 @@ export class EventConfigViewComponent implements OnInit {
   updateTemplate(config: IntegrationConfigurationsDataViewModel){
     let model:IntegrationConfigurationsUpdateDataModel = {};
     model.templateContent = config.templateContent;
-    this.ajaxService.updateIntegrationConfigs(model, this.code, config.templateCode, this.applicationId).subscribe(a => {
+    this.ajax.updateIntegrationConfigs(model, this.code, config.templateCode, this.applicationId).subscribe(a => {
       this.notify.success(config.templateName + " template successfully updated");
       config['dirty'] = false;
     }, e => {
