@@ -2,11 +2,11 @@ import { Component, OnInit, ViewChild, ElementRef, Input, OnChanges, SimpleChang
 import { environment } from 'environments/environment';
 
 @Component({
-  selector: 'app-notification-preview',
-  templateUrl: './notification-preview.component.html',
-  styleUrls: ['./notification-preview.component.scss']
+  selector: 'app-event-config-notification-preview',
+  templateUrl: './event-config-notification-preview.component.html',
+  styleUrls: ['./event-config-notification-preview.component.scss']
 })
-export class NotificationPreviewComponent implements OnInit, OnChanges, DoCheck {
+export class EventConfigNotificationPreviewComponent implements OnInit, OnChanges, DoCheck {
   @ViewChild('iframe') iframe: ElementRef;
   @Input() appId: string;
   @Input() configs: any;

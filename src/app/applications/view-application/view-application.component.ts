@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, ViewEncapsulation, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApplicationsService, ApplicationViewDataModel, ApplicationUpdateDataModel, ApplicationIntegrationViewModel } from 'koraki-angular-client';
 import { LoadingServiceService } from '../../services/loading-service.service';
@@ -64,6 +64,7 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
     "analytics": 5
   };
   statusCustomMessage;
+  reloadNotifications: EventEmitter<boolean> = new EventEmitter();
 
   constructor(
     private route: ActivatedRoute,
@@ -265,6 +266,9 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
   selectedTabChanged(){
     var routeName = Object.keys(this.tabIndex)[this.selectedTab];
     this.router.navigate(['/applications/view/' + this.appId + '/' + routeName], {queryParamsHandling: "preserve"});
+    if(routeName == "notifications"){
+      this.reloadNotifications.emit(true);
+    }
   }
 
   setTab(tab: number) {

@@ -1,12 +1,12 @@
 <div class="row">
   <div class="col-md-12">
     <div class="card">
-      <div class="card-header" *ngIf="!loading && !loaded" >
+      <div class="card-header">
         <div class="text-center">
-          <button class="btn btn-primary" (click)="loadNotifications()">Load Notification</button>
+          <button class="btn btn-primary" [disabled]="loading" (click)="loadNotifications()">Refresh</button>
         </div>
       </div>
-      <div class="card-body" [ngClass]="{'loading':loading}">
+      <div class="card-body" [ngClass]="{'loading-transparent':loading}">
 
         <div *ngIf="loaded && table.length == 0" class="card-body text-center">
           <div class="animal animal6"></div>

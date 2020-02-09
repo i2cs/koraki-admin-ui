@@ -2,3 +2,46 @@
     text-transform: initial;
     font-size: 14px;
 }
+.bg-blue {
+    background-color: lightblue;
+  }
+  .bg-yellow {
+    background-color: #fffbd1;
+  }
+.center{
+    display: flex;
+    align-items: center;
+}
+  .text-input-highlight-container {
+    position: relative; }
+    .text-input-highlight-container .text-input-element {
+      background: none;
+      position: relative;
+      z-index: 2; }
+    .text-input-highlight-container .text-highlight-element {
+      overflow: hidden !important;
+      white-space: pre-wrap;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      color: rgba(0, 0, 0, 0);
+      z-index: 1; }
+    .text-input-highlight-container .text-highlight-tag {
+        border-radius: 2px;
+        padding: 1px;
+        margin: 1px -1px;
+      overflow-wrap: break-word; }
+
+      .variable-display{
+        margin-left: 2px;
+        margin-right: 2px;
+        padding: 3px;
+        background-color: #e2e2e2;
+        border-radius: 3px;
+        font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        font-size: 12px;
+        -webkit-touch-callout: all; /* iOS Safari */ -webkit-user-select: all; /* Safari */ -khtml-user-select: all; /* Konqueror HTML */ -moz-user-select: all; /* Firefox */ -ms-user-select: all; /* Internet Explorer/Edge */ user-select: all; /* Chrome and Opera */
+      }

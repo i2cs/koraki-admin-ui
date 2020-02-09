@@ -16,6 +16,8 @@ import { ZapierComponent } from './zapier/zapier.component';
 import { ShopifyComponent } from './shopify/shopify.component';
 import { WordpressComponent } from './wordpress/wordpress.component';
 import { EventConfigViewComponent } from './event-config-view/event-config-view.component';
+import { TextInputHighlightModule } from 'angular-text-input-highlight';
+import { EventConfigNotificationPreviewComponent } from './event-config-notification-preview/event-config-notification-preview.component';
 
 @NgModule({
   imports: [
@@ -24,8 +26,9 @@ import { EventConfigViewComponent } from './event-config-view/event-config-view.
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    MomentModule
+    MomentModule,
+    TextInputHighlightModule
   ],
-  declarations: [FacebookComponent, MainComponent, MailchimpComponent, PrivyComponent, OpencartComponent, IntercomComponent, TwitterComponent, ZapierComponent, ShopifyComponent, WordpressComponent, EventConfigViewComponent]
+  declarations: [FacebookComponent, MainComponent, MailchimpComponent, PrivyComponent, OpencartComponent, IntercomComponent, TwitterComponent, ZapierComponent, ShopifyComponent, WordpressComponent, EventConfigViewComponent, EventConfigNotificationPreviewComponent]
 })
 export class IntegrationsModule { }

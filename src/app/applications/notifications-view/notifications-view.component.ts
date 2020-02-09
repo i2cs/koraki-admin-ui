@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter } from '@angular/core';
 import { NotificationsService, NotificationViewDataModel, NotificationCreateDataModel } from 'koraki-angular-client';
 import { NotificationService } from '../../services/notification.service';
 import { Router } from '@angular/router';
@@ -12,6 +12,7 @@ import { interval, Subscription } from 'rxjs';
 })
 export class NotificationsViewComponent implements OnInit {
   @Input() appId: string;
+  @Input() reloadNotifications: EventEmitter<boolean>;
   notificationsList: any[] = Array();
   table: Array<NotificationViewDataModel> = [];
   loaded: boolean;
@@ -36,6 +37,11 @@ export class NotificationsViewComponent implements OnInit {
     });
     
     this.loadingSubscription = this.loadingService.loading$.subscribe(a => { this.loading = a; });
+    this.reloadNotifications.subscribe(a => {
+      if(a){
+        this.loadNotifications();
+      }
+    })
   }
 
   ngAfterViewInit() {

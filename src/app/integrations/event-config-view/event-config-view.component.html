@@ -1,3 +1,5 @@
+<h4>Integration events</h4>
+<p>Configure events sent to Koraki from this integration. Notification templates follow <a href="https://shopify.github.io/liquid/" target="_blank">liquid</a> syntax. Check this page for <a href="https://docs.koraki.io/project/getting-started/application-settings" target="_blank">learn more about templating</a></p>
 <div class="card" *ngFor="let integration of integrationList;trackBy: trackByFn">
   <div class="card-header">
 
@@ -12,16 +14,40 @@
   </div>
   <div class="card-body">
 
+      <div class="row">
+      <div class="col-md-6 center">
+
     <mat-form-field appearance="outline" class="example-full-width">
-      <textarea rows=3 matInput (ngModelChange)="integration.dirty = true"
-        [(ngModel)]="integration.templateContent"></textarea>
+        <div mwlTextInputHighlightContainer>
+            <textarea matInput
+              (ngModelChange)="tagTemplateContent(integration);integration.dirty = true;"
+              [(ngModel)]="integration.templateContent"
+              (change)="getRenderedTemplate(integration)"
+              mwlTextInputElement
+              #textarea>
+            </textarea>
+            <mwl-text-input-highlight
+              [tags]="integration.tags"
+              [textInputElement]="textarea">
+            </mwl-text-input-highlight>
+          </div>
     </mat-form-field>
+
+    
+
+      </div>
+      <div class="col-md-6">
+          <app-event-config-notification-preview [appId]="applicationId" [configs]="integration.configs"></app-event-config-notification-preview>
+      </div>
+      </div>
 
     <p *ngIf="integration.dirty">
       <a href="#" class="btn btn-primary" onclick="return false" (click)="updateTemplate(integration)">Update</a>
     </p>
 
     <div>
+      Available variables are
+      <span class="variable-display" title="{{variable.description}} Sample: {{variable.sample}}" *ngFor="let variable of integration.variables;trackBy: trackByFn">{{'{{' + variable.variable + '}' + '}'}}</span>
       <a data-toggle="collapse" href="#collapseTable{{integration.templateCode}}" aria-expanded="false"
         aria-controls="collapseExample">
         Details of available variables
@@ -33,6 +59,7 @@
               <th>Variable</th>
               <th>Name</th>
               <th>Description</th>
+              <th>Sample</th>
             </tr>
           </thead>
           <tbody>
@@ -40,6 +67,7 @@
               <td><span class="badge badge-primary">{{ '{{' + variable.variable + '}' + '}' }}</span></td>
               <td>{{variable.name}}</td>
               <td>{{variable.description}}</td>
+              <td><i>{{variable.sample}}</i></td>
             </tr>
           </tbody>
         </table>
