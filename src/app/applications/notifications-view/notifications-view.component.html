@@ -42,10 +42,12 @@
                       <span class="no-text" title="Notification of {{s.key}} locale">{{s.value}}</span>
                     </div>
                   </div>
-                  <div *ngIf="!isLocalizedNotification(row['notificationText'])" [innerHtml]="row['notificationText']">
-                  </div>
+                  <div *ngIf="!isLocalizedNotification(row['notificationText'])" [innerHtml]="row['notificationText']"></div>
                 </td>
-                <td title="{{row['createdOn']}}">{{row['createdOn'] | amFromUtc | amTimeAgo}}</td>
+                <td title="{{row['createdOn']}}">
+                  {{row['createdOn'] | amFromUtc | amTimeAgo}}
+                  <div *ngIf="getIntegrationName(row)">by <a href="#" onclick="return false" (click)="navigateToIntegration(getIntegrationName(row))">{{getIntegrationName(row)}}</a> integration</div>
+                </td>
                 <td class="text-right">
                   <a href="#" onclick="return false;" (click)="remove(row['id'])"
                     class="btn btn-link btn-danger btn-just-icon" title="Remove this">

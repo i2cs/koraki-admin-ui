@@ -91,6 +91,16 @@ export class NotificationsViewComponent implements OnInit {
     return arr;
   }
 
+  getIntegrationName(item: NotificationViewDataModel){
+    if(item.variables){
+      return item.variables['integration'];
+    }
+  }
+
+  navigateToIntegration(integration){
+    this.router.navigate(["/applications/view/" + this.appId + "/integrations/" + integration]);
+  }
+
   trackByFn(index, item) {
     return item;
   }

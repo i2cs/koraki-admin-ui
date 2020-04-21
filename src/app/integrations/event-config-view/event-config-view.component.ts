@@ -38,13 +38,14 @@ export class EventConfigViewComponent implements OnInit {
             createdOnWord: "Few minutes ago"
           })
         };
-        this.integrationList.push(this.tagTemplateContent(element));
+        this.integrationList.push(this.updateElement(element));
       });
     });
   }
 
-  tagTemplateContent(element: IntegrationConfigurationsDataViewModel): IntegrationConfigurationsDataViewModel {
+  updateElement(element: IntegrationConfigurationsDataViewModel): IntegrationConfigurationsDataViewModel {
     element['tags'] = [];
+    element['originalContent'] = element.templateContent;
     let regex = /{{\s*([^{][^}])+\s*}}/g;
     let hashtag;
     // tslint:disable-next-line
@@ -95,6 +96,10 @@ export class EventConfigViewComponent implements OnInit {
     }, e => {
       this.notify.error(e.error.message);
     });
+  }
+
+  reset(element: IntegrationConfigurationsDataViewModel){
+    element.templateContent = element["originalContent"];
   }
 
   trackByFn(index, item) {
