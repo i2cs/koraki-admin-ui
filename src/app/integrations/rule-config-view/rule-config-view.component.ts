@@ -14,6 +14,7 @@ export class RuleConfigViewComponent implements OnInit {
 
   @Input() code: string;
   @Input() applicationId: string;
+  index: number;
   ruleConfigs: Array<RuleConfig>;
   rulesList: Array<IntegrationRules> = [{}];
   rulesListDefault: Array<IntegrationRules> = [{}];

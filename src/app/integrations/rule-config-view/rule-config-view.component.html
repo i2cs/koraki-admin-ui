@@ -1,6 +1,6 @@
 <p class="padding-top">description goes here</p>
 
-<div *ngFor="let rule of rulesList;trackBy: index as i">
+<div *ngFor="let rule of rulesList;trackBy: trackByFn">
   <div class="card">
     <div class="card-header">
       <div class="togglebutton pull-right">
