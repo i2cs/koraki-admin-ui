@@ -20,12 +20,12 @@ export class RuleConfigViewComponent implements OnInit {
   rulesListDefault: Array<IntegrationRules> = [{}];
 
   constructor(
-    private ajaxService: AjaxService,
+    private ajax: AjaxService,
     private notify: NotificationService,
   ) { }
 
   ngOnInit() {
-    this.ajaxService.getIntegrationRules(this.code, this.applicationId).subscribe(a => {
+    this.ajax.getIntegrationRules(this.code, this.applicationId).subscribe(a => {
       this.ruleConfigs = a.ruleConfigs;
       if(a.rules && a.rules.length > 0){
         this.rulesList = a.rules;
@@ -55,7 +55,7 @@ export class RuleConfigViewComponent implements OnInit {
     let model: IntegrationRulesDataModel = {
       rules : this.rulesList
     };
-    this.ajaxService.updateIntegrationRules(model, this.code, this.applicationId).subscribe(a => {
+    this.ajax.updateIntegrationRules(model, this.code, this.applicationId).subscribe(a => {
       this.notify.success("Rules successfully updated");
     }, e => {
       this.notify.error(e.error.message);
