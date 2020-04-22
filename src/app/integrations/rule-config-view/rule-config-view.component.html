@@ -1,10 +1,10 @@
 <p class="padding-top">description goes here</p>
 
-<div *ngFor="let rule of rulesList;trackBy:trackByFn">
+<div *ngFor="let rule of rulesList; index as i">
   <div class="card">
     <div class="card-header">
       <div class="togglebutton pull-right">
-        <a href="#" onclick="return false" (click)="remove(index++)">Remove</a>
+        <a href="#" onclick="return false" (click)="remove(i)">Remove</a>
       </div>
       <div class="pull-left" style="width: 45px;">
         <img src="assets/img/rule.svg" />
