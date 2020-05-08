@@ -31,12 +31,33 @@ export class EventConfigViewComponent implements OnInit {
   ngOnInit() {
     this.ajax.getIntegrationConfigs(this.code, this.applicationId).subscribe(a => {
       a.forEach(element => {
+        var variables = {};
+        if(element.variables && element.variables.length > 0){
+          element.variables.forEach(a => {
+            variables[a.variable] = a.sample;
+          });
+        }
+        var object = { 
+          notificationText: element.sampleNotification,
+          thumbnailUrl: element.image,
+          createdOnWord: "Few minutes ago",
+          variables: variables
+        };
+
+        if(element.notificationType == "AnalyticsLive" 
+        || element.notificationType == "AnalyticsHour"
+        || element.notificationType == "AnalyticsVisitorCity"
+        || element.notificationType == "AnalyticsCountry"){
+          object['analytics'] = true;
+          object['createdOnWord'] = "Live";
+          var number = element.variables.filter(a => a.variable == "count");
+          if(number.length > 0){
+            object['number'] = number[0].sample;
+          }
+        }
+
         element['configs'] =  {
-          sample: JSON.stringify({ 
-            notificationText: element.sampleNotification,
-            thumbnailUrl: element.image,
-            createdOnWord: "Few minutes ago"
-          })
+          sample: JSON.stringify(object)
         };
         this.integrationList.push(this.updateElement(element));
       });
@@ -65,12 +86,12 @@ export class EventConfigViewComponent implements OnInit {
 
   getRenderedTemplate(template: IntegrationConfigurationsDataViewModel){
     this.ajax.getSampleTemplate(template.templateContent, this.code, template.templateCode, this.applicationId).subscribe(a => {
+      var object = JSON.parse(template['configs']['sample']);
+      object['notificationText'] = a.template;
+      object['thumbnailUrl'] = a.image;
+      
       template['configs'] =  {
-        sample: JSON.stringify({ 
-          notificationText: a.template,
-          thumbnailUrl: a.image,
-          createdOnWord: "Few minutes ago"
-        })
+        sample: JSON.stringify(object)
       };
     }, e => {
       this.notify.error(e.error.message);

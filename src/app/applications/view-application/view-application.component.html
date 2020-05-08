@@ -181,13 +181,21 @@
                       [style.background]="configs.notification_close_color" /> Close icon color
                   </div>
                   <div>
+                    <input [(colorPicker)]="configs.notification_live_ripple_color"
+                      [style.background]="configs.notification_live_ripple_color" /> Live notification animated ripple color
+                  </div>
+                  <div>
+                    <input [(colorPicker)]="configs.notification_live_text_color"
+                      [style.background]="configs.notification_live_text_color" /> Live notification number color
+                  </div>  
+                  <div>
                     <input type="number" min="0" max="40" [(ngModel)]="configs.notification_border_radius"
-                      name="notification_border_radius" /> Notification border radius
+                      name="notification_border_radius" /> Notification rounded cornors
                   </div>
 
                   <div>
                     <input type="number" min="0" max="40" [(ngModel)]="configs.notification_image_radius"
-                      name="notification_image_radius" /> Thumbnail border radius
+                      name="notification_image_radius" /> Thumbnail rounded cornors
                   </div>
 
                   <div>

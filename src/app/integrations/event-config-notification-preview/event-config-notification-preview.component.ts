@@ -39,7 +39,7 @@ export class EventConfigNotificationPreviewComponent implements OnInit, OnChange
 
   load(){
     let q = this.serialize(this.configs);
-    this.url = environment.apiBaseUrl + "/widget.html?demo=true&_i=&" + q;
+    this.url = environment.apiBaseUrl + "/widget.html?demo=true&_i=1&" + q;
     this.iframe.nativeElement["src"] = this.url;
   }
 

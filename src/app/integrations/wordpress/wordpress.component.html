@@ -1,35 +1,38 @@
 <div class="main-content">
-    <div class="container-fluid">
-      <div class="col-md-12 mr-auto ml-auto">
-        <div class="card ">
-          <div class="card-header">
+  <div class="container-fluid">
+    <div class="col-md-12 mr-auto ml-auto">
+      <div class="card integration-card">
+        <div class="card-header card bg-dark text-white">
+          <div class="integration-image-wrapper">
+            <img src="assets/img/integrations/wordpress.png" class="integration-image" />
+          </div>
+          <div class="integration-header-wrapper">
             <h3 class="card-title">
               Wordpress Integration
             </h3>
-            <div class="text-center">
-              <img src="assets/img/integrations/wordpress.png" class="integration-image" />
-            </div>
-            <h5 class="card-description">Integrate your Wordpress/WooCommerce website with Koraki</h5>
-  
+            <h5>E Commerce</h5>
+            <h5 class="card-description">Koraki Wordpress/Woocommerce integration seamlessly connects your blog/shop to
+              produce social proof notifications. <br/>Get the <a href="#">Koraki Wordpress plugin</a> now</h5>
           </div>
-          <mat-divider></mat-divider>
-          <div class="card-body" [ngClass]="{'loading':loading}">
-            
-              <mat-tab-group  disableRipple="true" color="primary" class="md-no-animation" [@.disabled]="true" dynamicHeight="false">
-              <mat-tab label="Introduction">
-                Test
-              </mat-tab>
-          <mat-tab label="Events">
+        </div>
+        
+        <div class="card-body" [ngClass]="{'loading':loading}">
+
+          <mat-tab-group disableRipple="true" color="primary" class="md-no-animation" [@.disabled]="true"
+            dynamicHeight="true">
+            <mat-tab label="Events">
               <app-event-config-view code="wordpress" [applicationId]="appId"></app-event-config-view>
-          </mat-tab>
-          <mat-tab label="Triggers">
+            </mat-tab>
+            <mat-tab label="Triggers">
               <app-rule-config-view code="wordpress" [applicationId]="appId"></app-rule-config-view>
-          </mat-tab>
-          
+            </mat-tab>
+            <mat-tab label="Help">
+              <app-wp-content-render slug="content-integration-wordpress"></app-wp-content-render>
+            </mat-tab>
           </mat-tab-group>
-  
-          </div>
+
         </div>
       </div>
     </div>
   </div>
+</div>

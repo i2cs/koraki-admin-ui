@@ -109,8 +109,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', end
 
 .integration-image{
     height: 100px;
+    width: 100px;
     margin-top: 20px;
     margin-bottom: 20px;
+    background-color: #fff;
+    border-radius: 7px;
 }
 
 .logo-koraki{
@@ -221,4 +224,32 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', end
 .salert a{
     background-color: rgba(0, 0, 0, 0.075);
     padding: 4px;
+}
+
+.integration-card > .card-header{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    background-color: #4A90E2 !important;
+}
+
+.integration-card  .card-description{
+    background-color: #31639c;
+    text-align: center;
+    padding: 12px;
+    border-radius: 6px;
+}
+
+.integration-card .integration-image-wrapper{
+    text-align: center;
+}
+
+.integration-card .integration-header-wrapper{
+    text-align: center;
+}
+
+.integration-card .integration-header-wrapper a {
+    color: #ffffff;
+    background-color: #2f4d6f;
+    border-radius: 3px;
+    padding: 2px;
 }

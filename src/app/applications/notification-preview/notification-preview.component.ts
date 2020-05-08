@@ -8,6 +8,7 @@ import { environment } from 'environments/environment';
 })
 export class NotificationPreviewComponent implements OnInit, OnChanges, DoCheck {
   @ViewChild('iframe') iframe: ElementRef;
+  @ViewChild('liveiframe') liveiframe: ElementRef;
   @Input() appId: string;
   @Input() configs: any;
   differ: any;
@@ -41,10 +42,12 @@ export class NotificationPreviewComponent implements OnInit, OnChanges, DoCheck 
     let q = this.serialize(this.configs);
     this.url = environment.apiBaseUrl + "/widget.html?demo=true&_i=&" + q;
     this.iframe.nativeElement["src"] = this.url;
+    this.liveiframe.nativeElement["src"] = this.url + '&sample={"variables": {"country_code":"lk"}, "number":23,"analytics": true, "notificationText":"Twenty three people from Sri Lanka are browsing this page", "createdOnWord": "Live" , "thumbnailUrl":""}';
   }
 
   refreshPreview(){
     this.iframe.nativeElement["src"] = this.url;
+    this.liveiframe.nativeElement["src"] = this.url + '&sample={"variables": {"country_code":"lk"}, "number":23,"analytics": true, "notificationText":"Twenty three people from Sri Lanka are browsing this page", "createdOnWord": "Live" , "thumbnailUrl":""}';
   }
 
   serialize(obj) {

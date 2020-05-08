@@ -9,6 +9,7 @@ import { TwitterComponent } from './twitter/twitter.component';
 import { ZapierComponent } from './zapier/zapier.component';
 import { ShopifyComponent } from './shopify/shopify.component';
 import { WordpressComponent } from './wordpress/wordpress.component';
+import { KorakiliveComponent } from './korakilive/korakilive.component';
 
 export const IntegrationsRoutes: Routes = [
     {
@@ -43,6 +44,9 @@ export const IntegrationsRoutes: Routes = [
     }, {
         path: 'wordpress',
         component: WordpressComponent
+    }, {
+        path: 'korakilive',
+        component: KorakiliveComponent
     }]
 }
 ];
