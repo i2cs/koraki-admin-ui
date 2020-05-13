@@ -74,6 +74,6 @@ export const environment = {
     tier1shopify: "https://koraki-adminui-assets.s3.us-east-2.amazonaws.com/personal-plan-shopify.png",
     tier2shopify: "https://koraki-adminui-assets.s3.us-east-2.amazonaws.com/enterprise-plan-shopify.png"
   },
-  stripePublicKey : "pk_test_JMl4h4YIUrGfy66IluaI5dJo",
+  stripePublicKey : "pk_live_TXj3ceup0EX871fvvPkGNIJz",
   ccIconPath : "https://koraki-adminui-assets.s3.us-east-2.amazonaws.com/"
 };
