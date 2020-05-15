@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter } from '@angular/core';
 import PerfectScrollbar from 'perfect-scrollbar';
 import { AuthService } from '../services/auth.service';
+import { ApplicationViewDataModel } from 'koraki-angular-client';
 
 declare const $: any;
 
@@ -57,7 +58,8 @@ export const ROUTES: RouteInfo[] = [{
 })
 
 export class SidebarComponent implements OnInit {
-    public menuItems: any[];
+    public menuItems: RouteInfo[];
+    @Input() applications:  EventEmitter<ApplicationViewDataModel[]>;
     @Input() plan: string;
     @Input() email: string;
     @Input() trialEndsIn: number;
@@ -73,6 +75,16 @@ export class SidebarComponent implements OnInit {
 
     ngOnInit() {
         this.menuItems = ROUTES.filter(menuItem => menuItem);
+
+        this.applications.subscribe(a => {
+            var items = this.menuItems.filter(x => x.path == '/applications');
+            if(items && items.length > 0){
+                var apps = a.map(x => <RouteInfo>{ icontype: x.activeNotificationsCount == 0 ? "red" : "green", title: x.applicationName, path: 'view/' + x.id})
+                items[0].children = apps;
+                items[0].type = 'apps';
+                items[0].collapse = 'applications';
+            }
+        });
     }
     updatePS(): void {
         if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {

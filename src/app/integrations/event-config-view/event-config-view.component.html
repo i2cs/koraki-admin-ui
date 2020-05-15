@@ -42,36 +42,41 @@
       </div>
     </div>
 
-    <div>
-      Available variables are
-      <span class="variable-display" title="{{variable.description}} Sample: {{variable.sample}}"
-        *ngFor="let variable of integration.variables;trackBy: trackByFn">{{'{{' + variable.variable + '}' + '}'}}</span>
-      <a data-toggle="collapse" href="#collapseTable{{integration.templateCode}}" aria-expanded="false"
-        aria-controls="collapseExample">
-        Details of available variables
-      </a>
-      <div class="collapse" id="collapseTable{{integration.templateCode}}">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Variable</th>
-              <th>Name</th>
-              <th>Description</th>
-              <th>Sample</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let variable of integration.variables">
-              <td><span class="badge badge-primary">{{ '{{' + variable.variable + '}' + '}' }}</span></td>
-              <td>{{variable.name}}</td>
-              <td>{{variable.description}}</td>
-              <td><i>{{variable.sample}}</i></td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="row">
+      <div class="col-md-6">
+        Available variables are
+        <span class="variable-display" title="{{variable.description}} Sample: {{variable.sample}}"
+          *ngFor="let variable of integration.variables;trackBy: trackByFn">{{'{{' + variable.variable + '}' + '}'}}</span>
+        <a data-toggle="collapse" href="#collapseTable{{integration.templateCode}}" aria-expanded="false"
+          aria-controls="collapseExample">
+          Details of available variables
+        </a>
+        <div class="collapse" id="collapseTable{{integration.templateCode}}">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Variable</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Sample</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let variable of integration.variables">
+                <td><span class="badge badge-primary">{{ '{{' + variable.variable + '}' + '}' }}</span></td>
+                <td>{{variable.name}}</td>
+                <td>{{variable.description}}</td>
+                <td><i>{{variable.sample}}</i></td>
+              </tr>
+            </tbody>
+          </table>
 
-        <h6>Sample template</h6>
-        <p>{{integration.templateDefaultContent}}</p>
+          <h6>Sample template</h6>
+          <p>{{integration.templateDefaultContent}}</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+
       </div>
     </div>
 

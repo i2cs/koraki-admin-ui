@@ -11,38 +11,47 @@
       </div>
       <div class="card-title">
         <div class="row">
-            <div class="col-md-4" >
-                <mat-form-field>
-                    <mat-select placeholder="Rule test for" [(ngModel)]="rule.test">
-                      <mat-option value="{{ruleConfig.test.code}}" *ngFor="let ruleConfig of ruleConfigs;trackBy: trackByFn">
-                        {{ruleConfig.test.name}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-            </div>
+          <div class="col-md-4">
+            <mat-form-field>
+              <mat-select (selectionChange)="rule.value = ''; rule.op = ''" placeholder="Rule test for" [(ngModel)]="rule.test">
+                <mat-option value="{{ruleConfig.test.code}}" *ngFor="let ruleConfig of ruleConfigs;trackBy: trackByFn">
+                  {{ruleConfig.test.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
 
-            <div class="col-md-4" >
+          <div class="col-md-4">
+            <span *ngFor="let ruleConfig of ruleConfigs;trackBy: trackByFn">
+              <mat-form-field *ngIf="rule.test == ruleConfig.test.code">
+                <mat-select placeholder="Action" [(ngModel)]="rule.op">
+                  <mat-option value="{{op.code}}" *ngFor="let op of ruleConfig.op;trackBy: trackByFn">
+                    {{op.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </span>
+          </div>
 
-       
-        <span *ngFor="let ruleConfig of ruleConfigs;trackBy: trackByFn">
-          <mat-form-field *ngIf="rule.test == ruleConfig.test.code">
-            <mat-select placeholder="Action" [(ngModel)]="rule.op">
-              <mat-option value="{{op.code}}" *ngFor="let op of ruleConfig.op;trackBy: trackByFn">
-                {{op.name}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </span>
-      </div>
-      <div class="col-md-4" >
+          <div class="col-md-4">
+            <span *ngFor="let ruleConfig of ruleConfigs;trackBy: trackByFn">
+              <mat-form-field *ngIf="rule.test == ruleConfig.test.code && rule.op" class="has-label">
+                <mat-label *ngIf="ruleConfig.value.code == 'text'">Text pattern</mat-label>
+                <mat-label *ngIf="ruleConfig.value.code == 'select'">Select</mat-label>
 
-        <mat-form-field *ngIf="rule.op" class="has-label">
-          <mat-label>Text pattern</mat-label>
-          <input type="text" [(ngModel)]="rule.value" matInput style="padding: 2px;"/>
-        </mat-form-field>
+                <input *ngIf="ruleConfig.value.code == 'text'" type="text" [(ngModel)]="rule.value" matInput
+                  style="padding: 2px;" />
+
+                <mat-select *ngIf="ruleConfig.value.code == 'select'" [(ngModel)]="rule.value">
+                  <mat-option *ngFor="let value of ruleConfig.value.name.split('|')" [value]="value">
+                    {{value}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </span>
+          </div>
+
         </div>
-
-      </div>
       </div>
       <h5 class="card-subtitle mb-2 text-muted"></h5>
     </div>

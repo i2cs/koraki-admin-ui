@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, HostListener, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, HostListener, AfterViewInit, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 //import { NavItem, NavItemType } from '../../md/md.module';
 import { Subscription } from 'rxjs/Subscription';
@@ -11,6 +11,7 @@ import { NotificationService } from '../../services/notification.service';
 import { SubscriptionService } from '../../services/subscription.service';
 import { BreadcrumbService } from '../../services/breadcrumb.service';
 import { AuthService } from 'app/services/auth.service';
+import { ApplicationViewDataModel, ApplicationsService } from 'koraki-angular-client';
 
 
 declare const $: any;
@@ -34,6 +35,7 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit {
     email: string;
     breadcrumb: any[];
     trialEndsIn: number;
+    applications:  EventEmitter<ApplicationViewDataModel[]> = new EventEmitter<ApplicationViewDataModel[]>();
     
     constructor(private router: Router,
         location: Location,
@@ -42,6 +44,7 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit {
         notification: NotificationService,
         breadcrumbService: BreadcrumbService,
         private subscription: SubscriptionService,
+        private applicationService: ApplicationsService,
         private auth: AuthService
 
     ) {
@@ -68,6 +71,10 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit {
             this.plan = a.planName + " (" + formatCurrency(a.cost, "en-US", "$") + ")";
             this.trialEndsIn = a.trialEndsIn;
             this.email = a.email;
+        });
+
+        this.applicationService.getAllApplications().subscribe(a => {
+            this.applications.emit(a.items);
         });
 
         const elemMainPanel = <HTMLElement>document.querySelector('.main-panel');

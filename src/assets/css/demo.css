@@ -253,3 +253,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', end
     border-radius: 3px;
     padding: 2px;
 }
+
+.nav-app .material-icons.red {
+    color:#e91e63;
+}
+.nav-app .material-icons.green {
+    color:#4caf50;
+}
