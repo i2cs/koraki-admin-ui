@@ -76,7 +76,7 @@
         </div>
       </div>
       <div class="col-md-6">
-        <mat-form-field *ngFor="let inputs of integration.inputs" appearance="outline" hintLabel="{{inputs.help}}"
+        <mat-form-field style="margin-top: 15px;" *ngFor="let inputs of integration.inputs" appearance="outline" hintLabel="{{inputs.help}}"
           class="example-full-width has-label">
           <mat-label>{{inputs.label}}</mat-label>
           <input *ngIf="inputs.type == 'text' || inputs.type == 'number'" type="{{inputs.type}}"
