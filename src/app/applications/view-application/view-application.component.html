@@ -111,13 +111,16 @@
                 <div class="col-md-4" *ngFor="let i of allIntegrations">
                   <div class="card card-chart"
                     [ngClass]="{'disabled-integration' : !i.ecommerce && !allowedIntegrations[i.code]}">
-                    <div class="card-body integration-card">
+                    <div class="card-body integration-item-card">
                       <h4 class="card-title">{{i.title}}</h4>
                       <div class="integration-images">
                         <img [src]="'/assets/img/integrations/' + i.code + '.png'" />
                       </div>
-                      <div class="pull-right app-notify-count" *ngIf="integrations[i.code]">
+                      <div class="pull-right app-notify-count" *ngIf="integrations[i.code] && !i.autoactive">
                         Integrated
+                      </div>
+                      <div class="pull-right app-notify-count" *ngIf="allowedIntegrations[i.code] && i.autoactive">
+                        Active
                       </div>
                       <p [innerHTML]="i.description"></p>
                       <!-- <p [innerHTML]="i.capable"></p> -->

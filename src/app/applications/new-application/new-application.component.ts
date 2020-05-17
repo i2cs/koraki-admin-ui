@@ -62,6 +62,7 @@ export class NewApplicationComponent implements OnInit, AfterViewInit {
             if (!a.token) {
                 this.notify.error("Could not create the application");
             } else {
+                this.notify.loadApplications.emit(true);
                 this.appCreated = true;
                 this.appCreatedResponse = a;
                 this.router.navigate(['applications/view', this.appCreatedResponse.id], { fragment: "new=true" });

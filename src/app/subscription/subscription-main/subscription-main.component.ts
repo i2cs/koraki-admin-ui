@@ -6,6 +6,7 @@ import { formatCurrency } from '@angular/common';
 import { environment } from 'environments/environment';
 import { NotificationService } from '../../services/notification.service';
 import { BreadcrumbService } from '../../services/breadcrumb.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-subscription-main',
@@ -25,13 +26,15 @@ export class SubscriptionMainComponent implements OnInit {
   planIcon: string;
   loading: boolean;
   hideStripePayments: boolean;
+  newSubsciption: boolean;
 
   constructor(
     private notification: NotificationService,
     private subscriptions: SubscriptionsService,
     private breadcrumbService: BreadcrumbService,
     private loadingService: LoadingServiceService,
-    private subs: SubscriptionService
+    private subs: SubscriptionService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -39,6 +42,8 @@ export class SubscriptionMainComponent implements OnInit {
       { title: "Subscription", url: "/subscription/plans" }
     ]);
 
+    var params = this.route.snapshot.queryParams;
+    this.newSubsciption = params.new;
     this.loadingService.loading$.subscribe(a => { this.loading = a; });
     this.loadData();
   }

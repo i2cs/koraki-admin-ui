@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
+
 
 declare const $: any;
 
@@ -7,6 +8,7 @@ declare const $: any;
 })
 export class NotificationService {
   
+  public loadApplications: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor() { }
 
   success(message: string){

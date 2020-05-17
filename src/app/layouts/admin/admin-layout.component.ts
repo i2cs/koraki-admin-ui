@@ -41,7 +41,7 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit {
         location: Location,
         loadingService: LoadingServiceService,
         private cdRef: ChangeDetectorRef,
-        notification: NotificationService,
+        private notification: NotificationService,
         breadcrumbService: BreadcrumbService,
         private subscription: SubscriptionService,
         private applicationService: ApplicationsService,
@@ -73,9 +73,11 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit {
             this.email = a.email;
         });
 
-        this.applicationService.getAllApplications().subscribe(a => {
-            this.applications.emit(a.items);
+        this.notification.loadApplications.subscribe(a => {
+            this.loadAppsToSidebar();
         });
+        
+        this.loadAppsToSidebar();
 
         const elemMainPanel = <HTMLElement>document.querySelector('.main-panel');
         const elemSidebar = <HTMLElement>document.querySelector('.sidebar .sidebar-wrapper');
@@ -115,6 +117,13 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit {
     ngAfterViewInit() {
         this.runOnRouteChange();
     }
+    
+    loadAppsToSidebar(){
+        this.applicationService.getAllApplications().subscribe(a => {
+            this.applications.emit(a.items);
+        });
+    }
+    
     runOnRouteChange(): void {
         this.subscription.permissions().subscribe(a => {
             this.plan = a.planName + " (" + formatCurrency(a.cost, "en-US", "$") + ")";

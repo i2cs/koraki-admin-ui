@@ -254,6 +254,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', end
     padding: 2px;
 }
 
+.integration-item-card p {
+    height: 90px;
+}
+
 .nav-app .material-icons.red {
     color:#e91e63;
 }

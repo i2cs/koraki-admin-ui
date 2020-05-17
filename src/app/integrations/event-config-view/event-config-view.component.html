@@ -76,7 +76,17 @@
         </div>
       </div>
       <div class="col-md-6">
-
+        <mat-form-field *ngFor="let inputs of integration.inputs" appearance="outline" hintLabel="{{inputs.help}}"
+          class="example-full-width has-label">
+          <mat-label>{{inputs.label}}</mat-label>
+          <input *ngIf="inputs.type == 'text' || inputs.type == 'number'" type="{{inputs.type}}"
+            pattern="{{inputs.validation}}" (ngModelChange)="integration.dirty = true;" [(ngModel)]="inputs[inputs.code]" matInput>
+          <mat-select *ngIf="inputs.type == 'select'" placeholder="{{inputs.help}}" (ngModelChange)="integration.dirty = true;" [(ngModel)]="inputs[inputs.code]">
+            <mat-option value="{{option.code}}" *ngFor="let option of inputs.options;trackBy: trackByFn">
+              {{option.label}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
     </div>
 

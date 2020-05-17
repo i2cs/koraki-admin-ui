@@ -56,6 +56,12 @@ export class EventConfigViewComponent implements OnInit {
           }
         }
 
+        if(element.inputs){
+          element.inputs.forEach(input => {
+            input[input.code] = input.value;
+          });
+        }
+
         element['configs'] =  {
           sample: JSON.stringify(object)
         };
@@ -67,6 +73,11 @@ export class EventConfigViewComponent implements OnInit {
   updateElement(element: IntegrationConfigurationsDataViewModel): IntegrationConfigurationsDataViewModel {
     element['tags'] = [];
     element['originalContent'] = element.templateContent;
+    if(element['inputs']){
+      element.inputs.forEach(a => {
+        a['_' + a.code] = a.value;
+      })
+    }
     let regex = /{{\s*([^{][^}])+\s*}}/g;
     let hashtag;
     // tslint:disable-next-line
@@ -110,9 +121,14 @@ export class EventConfigViewComponent implements OnInit {
 
   updateTemplate(config: IntegrationConfigurationsDataViewModel){
     let model:IntegrationConfigurationsUpdateDataModel = {};
+    let inputs: any = {};
+    config.inputs.forEach(e => {
+      inputs[e.code] = e[e.code];
+    });
     model.templateContent = config.templateContent;
+    model.inputs = inputs;
     this.ajax.updateIntegrationConfigs(model, this.code, config.templateCode, this.applicationId).subscribe(a => {
-      this.notify.success(config.templateName + " template successfully updated");
+      this.notify.success(config.templateName + " template and settings successfully updated");
       config['dirty'] = false;
     }, e => {
       this.notify.error(e.error.message);
@@ -121,6 +137,11 @@ export class EventConfigViewComponent implements OnInit {
 
   reset(element: IntegrationConfigurationsDataViewModel){
     element.templateContent = element["originalContent"];
+    if(element.inputs){
+      element.inputs.forEach(a => {
+        a[a.code] = a['_' + a.code];
+      });
+    }
   }
 
   trackByFn(index, item) {

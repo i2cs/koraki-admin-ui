@@ -133,8 +133,14 @@
                 <ul class="nav">
                     <li routerLinkActive="active" *ngFor="let childitem of menuitem.children" class="nav-item nav-app">
                         <a routerLink="{{menuitem.path}}/{{childitem.path}}" class="nav-link">
-                            <i title="{{childitem.icontype == 'red' ? 'No new notifications' : 'New notifications available'}}" class="material-icons {{childitem.icontype}}">cloud_queue</i>
+                            <i title="{{childitem.icontype == 'red' ? 'No new notifications' : 'New notifications available'}}" class="material-icons {{childitem.icontype}}">fiber_manual_record</i>
                             <span class="sidebar-normal">{{childitem.title}}</span>
+                        </a>
+                    </li>
+                    <li routerLinkActive="active" class="nav-item nav-app">
+                        <a routerLink="/applications/new" class="nav-link">
+                            <i class="material-icons">add</i>
+                            <span class="sidebar-normal">New</span>
                         </a>
                     </li>
                 </ul>

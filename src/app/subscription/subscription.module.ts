@@ -10,11 +10,12 @@ import { MaterialModule } from '../app.module';
 import { SubscriptionCreateComponent } from './subscription-create/subscription-create.component';
 import { InvoiceTableComponent } from './invoice-table/invoice-table.component';
 import { MomentModule } from 'ngx-moment';
-import { environment } from 'environments/environment.prod';
+import { environment } from 'environments/environment';
 import { InvoicesComponent } from './invoices/invoices.component';
 import { PaymentMethodsComponent } from './payment-methods/payment-methods.component';
 import { AddCardComponent } from './add-card/add-card.component';
 import { CreatePaymentMethodComponent } from './create-payment-method/create-payment-method.component';
+import { WpContentRenderComponent } from 'app/shared/wp-content-render/wp-content-render.component';
 
 @NgModule({
   imports: [
@@ -26,6 +27,6 @@ import { CreatePaymentMethodComponent } from './create-payment-method/create-pay
     MaterialModule,
     MomentModule
   ],
-  declarations: [SubscriptionMainComponent, SubscriptionMainComponent, SubscriptionCreateComponent, InvoiceTableComponent, InvoicesComponent, PaymentMethodsComponent, AddCardComponent, CreatePaymentMethodComponent]
+  declarations: [WpContentRenderComponent, SubscriptionMainComponent, SubscriptionMainComponent, SubscriptionCreateComponent, InvoiceTableComponent, InvoicesComponent, PaymentMethodsComponent, AddCardComponent, CreatePaymentMethodComponent]
 })
 export class SubscriptionModule { }

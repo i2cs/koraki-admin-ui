@@ -155,7 +155,8 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
       description: "Koraki Live is an intellegent automatic notification creator based on your site traffic",
       capable: "This integration can <b>Write</b> notifications",
       buttonTitle: "Manage",
-      help: "https://docs.koraki.io/project/api",
+      //help: "https://docs.koraki.io/project/api",
+      autoactive: true,
       ecommerce: false
     });
 
@@ -372,6 +373,7 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
       this.nameEditing = false;
       this.parseCustomData(a);
       this.notify.success("Application name updated");
+      this.notify.loadApplications.emit(true);
     }, e => {
       this.updatingSettings = false;
       this.nameEditing = false;

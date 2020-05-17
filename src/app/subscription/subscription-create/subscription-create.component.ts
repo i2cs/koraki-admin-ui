@@ -81,7 +81,7 @@ export class SubscriptionCreateComponent implements OnInit {
       }).subscribe(a => {
         this.subscriptionService.clear();
         this.notification.success("Subscribed to " + plan.name);
-        this.router.navigate(['/subscription/plans']);
+        this.router.navigate(['/subscription/plans'], { queryParams: { new: plan.code } });
       }, e => {
         this.notification.error("Your card was not accepted from the payment server");
       });
