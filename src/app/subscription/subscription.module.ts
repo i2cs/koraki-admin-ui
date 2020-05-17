@@ -15,7 +15,7 @@ import { InvoicesComponent } from './invoices/invoices.component';
 import { PaymentMethodsComponent } from './payment-methods/payment-methods.component';
 import { AddCardComponent } from './add-card/add-card.component';
 import { CreatePaymentMethodComponent } from './create-payment-method/create-payment-method.component';
-import { WpContentRenderComponent } from 'app/shared/wp-content-render/wp-content-render.component';
+import { WpContentRenderModule } from 'app/shared/wp-content-render/wp-content-render.module';
 
 @NgModule({
   imports: [
@@ -25,8 +25,9 @@ import { WpContentRenderComponent } from 'app/shared/wp-content-render/wp-conten
     NgxStripeModule.forRoot(environment.stripePublicKey),
     CommonModule,
     MaterialModule,
-    MomentModule
+    MomentModule,
+    WpContentRenderModule
   ],
-  declarations: [WpContentRenderComponent, SubscriptionMainComponent, SubscriptionMainComponent, SubscriptionCreateComponent, InvoiceTableComponent, InvoicesComponent, PaymentMethodsComponent, AddCardComponent, CreatePaymentMethodComponent]
+  declarations: [SubscriptionMainComponent, SubscriptionMainComponent, SubscriptionCreateComponent, InvoiceTableComponent, InvoicesComponent, PaymentMethodsComponent, AddCardComponent, CreatePaymentMethodComponent]
 })
 export class SubscriptionModule { }

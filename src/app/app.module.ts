@@ -58,6 +58,8 @@ import { MemoryDataHolderServiceService } from './services/memory-data-holder-se
 import { NotificationService } from './services/notification.service';
 import { RequestInterceptor } from './interceptors/http.interceptor';
 import { SubscriptionService } from './services/subscription.service';
+import { WpContentRenderComponent } from './shared/wp-content-render/wp-content-render.component';
+import { WpContentRenderModule } from './shared/wp-content-render/wp-content-render.module';
 
 @NgModule({
   exports: [
@@ -108,6 +110,7 @@ export class MaterialModule { }
     SidebarModule,
     NavbarModule,
     FooterModule,
+    WpContentRenderModule,
     HttpClientModule,
     AngularWebStorageModule,
     MomentModule,
