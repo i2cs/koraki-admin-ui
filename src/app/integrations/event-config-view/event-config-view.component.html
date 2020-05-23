@@ -81,8 +81,19 @@
           <mat-label>{{inputs.label}}</mat-label>
           <input *ngIf="inputs.type == 'text' || inputs.type == 'number'" type="{{inputs.type}}"
             pattern="{{inputs.validation}}" (ngModelChange)="integration.dirty = true;" [(ngModel)]="inputs[inputs.code]" matInput>
-          <mat-select *ngIf="inputs.type == 'select'" placeholder="{{inputs.help}}" (ngModelChange)="integration.dirty = true;" [(ngModel)]="inputs[inputs.code]">
+          <mat-select *ngIf="inputs.type == 'select' || inputs.type == 'select-refresh'" placeholder="{{inputs.help}}" (ngModelChange)="integration.dirty = true; inputs.type == 'select-refresh' && getRenderedTemplate(integration)" [(ngModel)]="inputs[inputs.code]">
             <mat-option value="{{option.code}}" *ngFor="let option of inputs.options;trackBy: trackByFn">
+              {{option.label}}
+            </mat-option>
+          </mat-select>
+          <mat-select (ngModelChange)="integration.dirty = true; getRenderedTemplate(integration)" *ngIf="inputs.type == 'icon'"  [(ngModel)]="inputs[inputs.code]">
+            <mat-select-trigger>
+              <img *ngIf="inputs[inputs.code] != 'default'" with="50" height="50" src="{{inputs[inputs.code]}}">
+              <span *ngIf="inputs[inputs.code] == 'default'">Default</span>
+            </mat-select-trigger>
+            <mat-option value="default">Default</mat-option>
+            <mat-option value="{{option.code}}" *ngFor="let option of inputs.options;trackBy: trackByFn">
+              <img with="40" height="40" src="{{option.code}}">
               {{option.label}}
             </mat-option>
           </mat-select>

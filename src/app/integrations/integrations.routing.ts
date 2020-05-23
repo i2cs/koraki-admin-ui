@@ -10,6 +10,7 @@ import { ZapierComponent } from './zapier/zapier.component';
 import { ShopifyComponent } from './shopify/shopify.component';
 import { WordpressComponent } from './wordpress/wordpress.component';
 import { KorakiliveComponent } from './korakilive/korakilive.component';
+import { KorakirecommendationComponent } from './korakirecommendation/korakirecommendation.component';
 
 export const IntegrationsRoutes: Routes = [
     {
@@ -47,6 +48,9 @@ export const IntegrationsRoutes: Routes = [
     }, {
         path: 'korakilive',
         component: KorakiliveComponent
+    },  {
+        path: 'korakirecommendation',
+        component: KorakirecommendationComponent
     }]
 }
 ];

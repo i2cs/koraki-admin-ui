@@ -37,9 +37,22 @@ export class EventConfigViewComponent implements OnInit {
             variables[a.variable] = a.sample;
           });
         }
+
+        var thumbnail = element.image;
+        if(element.inputs){
+          element.inputs.forEach(e => {
+            variables[e.code] = e.value;
+          });
+        
+          var customThumbnail = element.inputs.filter(b => b.code == "thumbnail");
+          if(customThumbnail && customThumbnail.length > 0){
+            thumbnail = customThumbnail[0].value;
+          }
+        }
+
         var object = { 
           notificationText: element.sampleNotification,
-          thumbnailUrl: element.image,
+          thumbnailUrl: thumbnail,
           createdOnWord: "Few minutes ago",
           variables: variables
         };
@@ -99,7 +112,27 @@ export class EventConfigViewComponent implements OnInit {
     this.ajax.getSampleTemplate(template.templateContent, this.code, template.templateCode, this.applicationId).subscribe(a => {
       var object = JSON.parse(template['configs']['sample']);
       object['notificationText'] = a.template;
-      object['thumbnailUrl'] = a.image;
+      var thumbnail = a.image;
+
+      if(template.inputs){
+        var variables = {};
+        template.inputs.forEach(element => {
+          variables[element.code] = element[element.code];
+        });
+
+        if(object.variables){
+          Object.assign(object.variables, variables);
+          Object.assign(template.variables, variables);
+        } else {
+          object.variables = variables;
+        }
+
+        var customThumbnail = template.inputs.filter(b => b.code == "thumbnail");
+        if(customThumbnail && customThumbnail.length > 0){
+          thumbnail = customThumbnail[0]['thumbnail'];
+        }
+      }
+      object['thumbnailUrl'] = thumbnail;
       
       template['configs'] =  {
         sample: JSON.stringify(object)
@@ -122,9 +155,11 @@ export class EventConfigViewComponent implements OnInit {
   updateTemplate(config: IntegrationConfigurationsDataViewModel){
     let model:IntegrationConfigurationsUpdateDataModel = {};
     let inputs: any = {};
-    config.inputs.forEach(e => {
-      inputs[e.code] = e[e.code];
-    });
+    if(config.inputs){
+      config.inputs.forEach(e => {
+        inputs[e.code] = e[e.code];
+      });
+    }
     model.templateContent = config.templateContent;
     model.inputs = inputs;
     this.ajax.updateIntegrationConfigs(model, this.code, config.templateCode, this.applicationId).subscribe(a => {
@@ -142,6 +177,9 @@ export class EventConfigViewComponent implements OnInit {
         a[a.code] = a['_' + a.code];
       });
     }
+
+    element['dirty'] = false;
+    this.getRenderedTemplate(element);
   }
 
   trackByFn(index, item) {

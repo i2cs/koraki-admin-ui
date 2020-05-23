@@ -161,6 +161,17 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
     });
 
     this.allIntegrations.push({
+      code: "korakirecommendation",
+      title: "Koraki Recommendation",
+      description: "Koraki Recommendation is an AI based notification generator",
+      capable: "This integration can <b>Write</b> notifications",
+      buttonTitle: "Manage",
+      //help: "https://docs.koraki.io/project/api",
+      autoactive: true,
+      ecommerce: false
+    });
+
+    this.allIntegrations.push({
       code: "opencart",
       title: "OpenCart",
       description: "Module contains notification widget. This module can be installed from OpenCart admin panel",

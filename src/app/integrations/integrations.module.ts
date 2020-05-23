@@ -22,6 +22,7 @@ import { RuleConfigViewComponent } from './rule-config-view/rule-config-view.com
 import { KorakiwebapiComponent } from './korakiwebapi/korakiwebapi.component';
 import { KorakiliveComponent } from './korakilive/korakilive.component';
 import { WpContentRenderModule } from 'app/shared/wp-content-render/wp-content-render.module';
+import { KorakirecommendationComponent } from './korakirecommendation/korakirecommendation.component';
 
 @NgModule({
   imports: [
@@ -34,6 +35,6 @@ import { WpContentRenderModule } from 'app/shared/wp-content-render/wp-content-r
     TextInputHighlightModule,
     WpContentRenderModule
   ],
-  declarations: [FacebookComponent, MainComponent, MailchimpComponent, PrivyComponent, OpencartComponent, IntercomComponent, TwitterComponent, ZapierComponent, ShopifyComponent, WordpressComponent, EventConfigViewComponent, EventConfigNotificationPreviewComponent, RuleConfigViewComponent, KorakiwebapiComponent, KorakiliveComponent]
+  declarations: [FacebookComponent, MainComponent, MailchimpComponent, PrivyComponent, OpencartComponent, IntercomComponent, TwitterComponent, ZapierComponent, ShopifyComponent, WordpressComponent, EventConfigViewComponent, EventConfigNotificationPreviewComponent, RuleConfigViewComponent, KorakiwebapiComponent, KorakiliveComponent, KorakirecommendationComponent]
 })
 export class IntegrationsModule { }
