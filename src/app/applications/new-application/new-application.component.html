@@ -1,56 +1,94 @@
 <div class="main-content">
-  <div class="container-fluid">
+  <div class="container-fluid" *ngIf="background">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body text-center loading" *ngIf="!appSelectorView">
+          </div>
+          <div class="card-body" *ngIf="appSelectorView">
+            <h4 class="info-text">Select an existing application or create new</h4>
+            <a class="app-link" *ngFor="let app of applications" (click)="redirectToUrl(app)">
+              <div>
+                <div>{{app.applicationName}}</div>
+                <i>{{app.url}}</i>
+              </div>
+            </a>
 
+          <hr/>
 
-
-    <div class="col-md-12 col-sm-12 mr-auto ml-auto">
-      <div *ngIf="!canAdd">
-        <div class="salert alert alert-primary alert-with-icon" data-notify="container">
-          <i class="material-icons" data-notify="icon">notifications</i>
-          <span data-notify="icon" class="now-ui-icons ui-1_bell-53"></span>
-          <span data-notify="message">Sorry, you can't add more applications with the current subscription plan. You can take one of the following actions and create more applications
-            <br/>
-            <br/>
-            <ul>
-              <li>Remove one of your existing applications</li>
-              <li>Upgrade your <a routerLink="/subscription/plans">Koraki account <i class="material-icons">link</i></a></li>
-            </ul>
-            
-          </span>
+            <a mat-raised-button class="btn btn-primary" (click)="createApplication(redirectUrl)">Create new</a>
+          </div>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="container-fluid" *ngIf="!background">
+    <div class="row" *ngIf="showWelcome">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body text-center">
+            <app-wp-content-render slug="content-dashboard-newjoiner"></app-wp-content-render>
+          </div>
+        </div>
+      </div>
+    </div>
 
-      <div class="card" data-color="orange">
-        <div class="card-header text-center">
-          <h3 class="card-title">
-            Create a new application
-          </h3>
-          <h5 class="card-description">Give following basic details to start using koraki</h5>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 mr-auto ml-auto">
+        <div *ngIf="!canAdd">
+          <div class="salert alert alert-primary alert-with-icon" data-notify="container">
+            <i class="material-icons" data-notify="icon">notifications</i>
+            <span data-notify="icon" class="now-ui-icons ui-1_bell-53"></span>
+            <span data-notify="message">Sorry, you can't add more applications with the current subscription plan. You
+              can take one of the following actions and create more applications
+              <br />
+              <br />
+              <ul>
+                <li>Remove one of your existing applications</li>
+                <li>Upgrade your <a routerLink="/subscription/plans">Koraki account <i
+                      class="material-icons">link</i></a></li>
+              </ul>
+
+            </span>
+          </div>
         </div>
 
-        <form [formGroup]="type" action="" method="">
-          <div class="card-body" id="about">
-            <h5 class="info-text">Let's start with application name and website URL</h5>
-            <div class="row">
-              <div class="col-sm-12">
-                <mat-form-field hintLabel="Max 15 characters" class="example-full-width has-label" [ngClass]="displayFieldCss(type, 'appName')">
-                  <input [readonly]="!canAdd" type="text" name="appname" matInput #appname [(ngModel)]="model.applicationName" required="required"
-                    maxlength="15" placeholder="Application name" formControlName="appName">
-                  <mat-hint align="end">{{appname.value?.length || 0}}/15</mat-hint>
-                </mat-form-field>
+        <div class="card" data-color="orange">
+          <div class="card-header text-center">
+            <h3 class="card-title">
+              Create a new application
+            </h3>
+            <h5 class="card-description">Give following basic details to start using koraki</h5>
+          </div>
 
-                <mat-form-field hintLabel="URL of your website. Just to use as a description" class="example-full-width has-label" [ngClass]="displayFieldCss(type, 'url')">
-                  <input [readonly]="!canAdd" type="url" name="url" required="required" [(ngModel)]="model.url" matInput placeholder="Website URL"
-                    formControlName="url">
-                </mat-form-field>
+          <form [formGroup]="type" action="" method="">
+            <div class="card-body" id="about">
+              <h5 class="info-text">Let's start with application name and website URL</h5>
+              <div class="row">
+                <div class="col-sm-12">
+                  <mat-form-field hintLabel="Max 15 characters" class="example-full-width has-label"
+                    [ngClass]="displayFieldCss(type, 'appName')">
+                    <input [readonly]="!canAdd" type="text" name="appname" matInput #appname
+                      [(ngModel)]="model.applicationName" required="required" maxlength="15"
+                      placeholder="Application name" formControlName="appName">
+                    <mat-hint align="end">{{appname.value?.length || 0}}/15</mat-hint>
+                  </mat-form-field>
+
+                  <mat-form-field hintLabel="URL of your website. Just to use as a description"
+                    class="example-full-width has-label" [ngClass]="displayFieldCss(type, 'url')">
+                    <input [readonly]="!canAdd" type="url" name="url" required="required" [(ngModel)]="model.url"
+                      matInput placeholder="Website URL" formControlName="url">
+                  </mat-form-field>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="card-footer">
-            <a mat-raised-button class="btn btn btn-fill" routerLink="/applications">Cancel</a>
-            <button [disabled]="!canAdd" mat-raised-button class="btn btn-primary" (click)="createApp()">Create</button>
-          </div>
-        </form>
+            <div class="card-footer">
+              <a mat-raised-button class="btn btn btn-fill" routerLink="/applications">Cancel</a>
+              <button [disabled]="!canAdd" mat-raised-button class="btn btn-primary"
+                (click)="createApp()">Create</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>

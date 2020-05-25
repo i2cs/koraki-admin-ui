@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SubscriptionService } from '../../services/subscription.service';
 import { BreadcrumbService } from '../../services/breadcrumb.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +14,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private subscription: SubscriptionService,
-    private breadcrumbService: BreadcrumbService
+    private breadcrumbService: BreadcrumbService,
+    private router: Router
   ) { }
 
   public ngOnInit() {
@@ -30,5 +32,8 @@ export class DashboardComponent implements OnInit {
 
   appCountUpdated(e) {
     this.appCount = e;
+    if(e == 0){
+      this.router.navigate(['applications', 'new'], { queryParams: { "forced": true }});
+    }
   }
 }

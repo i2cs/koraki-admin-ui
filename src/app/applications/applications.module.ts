@@ -12,6 +12,7 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { AnalyticsViewComponent } from './analytics-view/analytics-view.component';
 import { NotificationsViewComponent } from './notifications-view/notifications-view.component';
 import { NotificationPreviewComponent } from './notification-preview/notification-preview.component';
+import { WpContentRenderModule } from 'app/shared/wp-content-render/wp-content-render.module';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { NotificationPreviewComponent } from './notification-preview/notificatio
     ReactiveFormsModule,
     MaterialModule,
     MomentModule,
-    ColorPickerModule
+    ColorPickerModule,
+    WpContentRenderModule
   ],
   declarations: [ApplicationsComponent, NewApplicationComponent, ViewApplicationComponent, AnalyticsViewComponent, NotificationsViewComponent, NotificationPreviewComponent]
 })

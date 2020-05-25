@@ -10,6 +10,7 @@ import { NotificationCountComponent } from './widgets/notification-count/notific
 import { TotalViewsComponent } from './widgets/total-views/total-views.component';
 import { LastActivityComponent } from './widgets/last-activity/last-activity.component';
 import { MomentModule } from 'ngx-moment';
+import { WpContentRenderModule } from 'app/shared/wp-content-render/wp-content-render.module';
 
 @NgModule({
     imports: [
@@ -17,7 +18,8 @@ import { MomentModule } from 'ngx-moment';
         RouterModule.forChild(DashboardRoutes),
         FormsModule,
         MaterialModule,
-        MomentModule
+        MomentModule,
+        WpContentRenderModule
     ],
     declarations: [DashboardComponent, AppCountComponent, NotificationCountComponent, TotalViewsComponent, LastActivityComponent]
 })

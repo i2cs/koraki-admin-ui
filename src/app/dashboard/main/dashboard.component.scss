@@ -9,13 +9,13 @@
     transition: .4s,opacity .6s;
 }
 
-.new-app:hover{
+.new-app:hover, .new-app.hover{
     background-color: #aaa;
     background-color: #f29833;
     color: #fff;
 }
 
-.new-app:hover:after{
+.new-app:hover:after, .new-app.hover:after{
     content: attr(data-hover);
 }
 
