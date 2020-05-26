@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { FacebookComponent } from './facebook/facebook.component';
-import { MainComponent } from './main/main.component';
 import { MailchimpComponent } from './mailchimp/mailchimp.component';
 import { PrivyComponent } from './privy/privy.component';
 import { OpencartComponent } from './opencart/opencart.component';
@@ -11,14 +10,15 @@ import { ShopifyComponent } from './shopify/shopify.component';
 import { WordpressComponent } from './wordpress/wordpress.component';
 import { KorakiliveComponent } from './korakilive/korakilive.component';
 import { KorakirecommendationComponent } from './korakirecommendation/korakirecommendation.component';
+import { IntegrationMainComponent } from './integration-main/integration-main.component';
 
 export const IntegrationsRoutes: Routes = [
     {
       path: '',
       children: [ {
-        path: '',
-        component: MainComponent
-    }, {
+        path: ':module',
+        component: IntegrationMainComponent
+    } /*, {
         path: 'facebook',
         component: FacebookComponent
     }, {
@@ -51,6 +51,6 @@ export const IntegrationsRoutes: Routes = [
     },  {
         path: 'korakirecommendation',
         component: KorakirecommendationComponent
-    }]
+    }*/]
 }
 ];

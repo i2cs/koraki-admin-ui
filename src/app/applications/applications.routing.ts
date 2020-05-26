@@ -20,8 +20,9 @@ export const ApplicationsRoutes: Routes = [
             path: 'view/:id/:page',
             component: ViewApplicationComponent
         }, {
-            path: 'view/:id/integrations',
-            loadChildren: '../integrations/integrations.module#IntegrationsModule'
+            path: 'view/:id/:page/:integration',
+            component: ViewApplicationComponent
+            //loadChildren: '../integrations/integrations.module#IntegrationsModule'
         }]
     }
 ];

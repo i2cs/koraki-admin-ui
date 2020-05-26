@@ -1,57 +1,58 @@
-<div class="main-content">
-  <div class="container-fluid">
-    <div class="col-md-12 mr-auto ml-auto">
-      <div class="card ">
-        <div class="card-header">
-          <h3 class="card-title">
-            Intercom Integration
-          </h3>
-          <div class="text-center">
-            <img src="assets/img/integrations/intercom.png" class="integration-image" />
-          </div>
-          <h5 class="card-description">This integrations provides capability to generate social notifications on actions made within intercom
-            app. This integration can show lead and contact sign up events realtime.
-          </h5>
+<div class="container-fluid">
+  <div class="col-md-12 mr-auto ml-auto">
+    <div class="card ">
+      <div class="card-header">
+        <h3 class="card-title">
+          Intercom Integration
+        </h3>
+        <div class="text-center">
+          <img src="assets/img/integrations/intercom.png" class="integration-image" />
         </div>
-        <mat-divider></mat-divider>
-        <div class="card-body" [ngClass]="{'loading':loading}">
+        <h5 class="card-description">This integrations provides capability to generate social notifications on actions
+          made within intercom
+          app. This integration can show lead and contact sign up events realtime.
+        </h5>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="card-body" [ngClass]="{'loading':loading}">
 
-          <p>
-            <mat-form-field appearance="outline" hintLabel="Copy and Paste this URL on intercom webhook URL field" class="example-full-width">
-              <textarea readonly rows=3 matInput>{{webhook.url}}</textarea>
-            </mat-form-field>
-          </p>
+        <p>
+          <mat-form-field appearance="outline" hintLabel="Copy and Paste this URL on intercom webhook URL field"
+            class="example-full-width">
+            <textarea readonly rows=3 matInput>{{webhook.url}}</textarea>
+          </mat-form-field>
+        </p>
 
-          <p>
-            <mat-form-field appearance="outline" hintLabel="Copy and Paste this on intercom Hub secret field" class="example-full-width">
-              <input readonly type="text" matInput value="{{webhook.secret}}"/>
-            </mat-form-field>
-          </p>
+        <p>
+          <mat-form-field appearance="outline" hintLabel="Copy and Paste this on intercom Hub secret field"
+            class="example-full-width">
+            <input readonly type="text" matInput value="{{webhook.secret}}" />
+          </mat-form-field>
+        </p>
 
-          <div>
-            <h4>Instructions</h4>
-            Log in to your Intercom account and go to
-            <a href="https://app.intercom.com/" target="_blank"><b>Intercom app</b></a> >
-            > <b>Settings</b> > <b>Developers</b> > <b>Webhooks</b>.
-            <br>
-            Click on <b>Create webhook</b> button.
-            Copy and paste the above URL on "Webhook URL" field. Copy and paste provided secret (5 letter code)
-            on <b>Hub secret</b> field. Check <b>Lead created</b> and <b>User created</b> checkboxes and click on
-            <b>Create webhook</b> button. After the webhook successfully created, click on <b>Ping</b> button to
-            complete the integration.
-            <div class="text-center">
-              <img width="100%" src="https://raw.githubusercontent.com/i2cs/koraki-static/master/intercom-tutorial.gif" />
-            </div>
+        <div>
+          <h4>Instructions</h4>
+          Log in to your Intercom account and go to
+          <a href="https://app.intercom.com/" target="_blank"><b>Intercom app</b></a> >
+          > <b>Settings</b> > <b>Developers</b> > <b>Webhooks</b>.
+          <br>
+          Click on <b>Create webhook</b> button.
+          Copy and paste the above URL on "Webhook URL" field. Copy and paste provided secret (5 letter code)
+          on <b>Hub secret</b> field. Check <b>Lead created</b> and <b>User created</b> checkboxes and click on
+          <b>Create webhook</b> button. After the webhook successfully created, click on <b>Ping</b> button to
+          complete the integration.
+          <div class="text-center">
+            <img width="100%" src="https://raw.githubusercontent.com/i2cs/koraki-static/master/intercom-tutorial.gif" />
+          </div>
 
-            <div class="divider"></div>
-            <h5>How to uninstall</h5>
-            Log in to your Intercom account and go to
-            <a href="https://app.intercom.com/developers/_" target="_blank"><b>Developer hub</b></a> >
-            <b>Webhooks</b>. Click the delete button of the 
-             webhook which has URL starting with <b>https://api.koraki.io</b>
-            <div class="text-center">
-              <img width="100%" src="https://raw.githubusercontent.com/i2cs/koraki-static/master/intercom-remove.gif" />
-            </div>
+          <div class="divider"></div>
+          <h5>How to uninstall</h5>
+          Log in to your Intercom account and go to
+          <a href="https://app.intercom.com/developers/_" target="_blank"><b>Developer hub</b></a> >
+          <b>Webhooks</b>. Click the delete button of the
+          webhook which has URL starting with <b>https://api.koraki.io</b>
+          <div class="text-center">
+            <img width="100%" src="https://raw.githubusercontent.com/i2cs/koraki-static/master/intercom-remove.gif" />
           </div>
         </div>
       </div>

@@ -17,10 +17,7 @@ export class NotificationsViewComponent implements OnInit {
   table: Array<NotificationViewDataModel> = [];
   loaded: boolean;
   loading: boolean;
-  source = interval(10000);
-  timeSubscription: Subscription;
   loadingSubscription: Subscription;
-  totalNotificationPollCount: number = 0;
 
   constructor(
     private notifications: NotificationsService,
@@ -30,12 +27,6 @@ export class NotificationsViewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadNotifications();
-    this.timeSubscription = this.source.subscribe(a => {
-      this.loadingSubscription.unsubscribe();
-      this.loadNotifications();
-    });
-    
     this.loadingSubscription = this.loadingService.loading$.subscribe(a => { this.loading = a; });
     this.reloadNotifications.subscribe(a => {
       if(a){
@@ -53,18 +44,10 @@ export class NotificationsViewComponent implements OnInit {
   }
 
   loadNotifications() {
-    this.totalNotificationPollCount++;
     this.notifications.getAllNotifications(["Ready"], 999, null, this.appId).subscribe(a => {
       this.table = a.items.filter(a => a.status == "Ready");
       this.loaded = true;
-      if(this.table.length > 0){
-        this.timeSubscription.unsubscribe();
-      }
     });
-
-    if(this.totalNotificationPollCount > 6){
-      this.timeSubscription.unsubscribe();
-    }
   }
 
   remove(id) {
@@ -107,9 +90,6 @@ export class NotificationsViewComponent implements OnInit {
 
   ngOnDestroy() {
     this.loadingSubscription.unsubscribe();
-    if(!this.timeSubscription.closed){
-      this.timeSubscription.unsubscribe();
-    }
   }
 
 }

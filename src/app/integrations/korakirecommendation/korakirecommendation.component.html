@@ -1,36 +1,35 @@
-<div class="main-content">
-  <div class="container-fluid">
-    <div class="col-md-12 mr-auto ml-auto">
-      <div class="card integration-card">
-        <div class="card-header card bg-dark text-white">
-          <div class="integration-image-wrapper">
-            <img src="assets/img/integrations/korakirecommendation.png" class="integration-image" />
-          </div>
-          <div class="integration-header-wrapper">
-            <h3 class="card-title">
-              Koraki Recommendation!
-            </h3>
-            <h5>AI</h5>
-            <h5 class="card-description">Koraki recommendation contains analytics based notifications and AI powered predictive notifications</h5>
-          </div>
+<div class="container-fluid">
+  <div class="col-md-12 mr-auto ml-auto">
+    <div class="card integration-card">
+      <div class="card-header card bg-dark text-white">
+        <div class="integration-image-wrapper">
+          <img src="assets/img/integrations/korakirecommendation.png" class="integration-image" />
         </div>
-        
-        <div class="card-body" [ngClass]="{'loading':loading}">
-
-          <mat-tab-group disableRipple="true" color="primary" class="md-no-animation" [@.disabled]="true"
-            dynamicHeight="true">
-            <mat-tab label="Events">
-              <app-event-config-view code="korakirecommendation" [applicationId]="appId"></app-event-config-view>
-            </mat-tab>
-            <mat-tab label="Triggers">
-              <app-rule-config-view code="korakirecommendation" [applicationId]="appId"></app-rule-config-view>
-            </mat-tab>
-            <mat-tab label="Help">
-              <app-wp-content-render slug="content-integration-korakirecommendation"></app-wp-content-render>
-            </mat-tab>
-          </mat-tab-group>
-
+        <div class="integration-header-wrapper">
+          <h3 class="card-title">
+            Koraki Recommendation!
+          </h3>
+          <h5>AI</h5>
+          <h5 class="card-description">Koraki recommendation contains analytics based notifications and AI powered
+            predictive notifications</h5>
         </div>
+      </div>
+
+      <div class="card-body" [ngClass]="{'loading':loading}">
+
+        <mat-tab-group disableRipple="true" color="primary" class="md-no-animation" [@.disabled]="true"
+          dynamicHeight="true">
+          <mat-tab label="Events">
+            <app-event-config-view code="korakirecommendation" [applicationId]="appId"></app-event-config-view>
+          </mat-tab>
+          <mat-tab label="Triggers">
+            <app-rule-config-view code="korakirecommendation" [applicationId]="appId"></app-rule-config-view>
+          </mat-tab>
+          <mat-tab label="Help">
+            <app-wp-content-render slug="content-integration-korakirecommendation"></app-wp-content-render>
+          </mat-tab>
+        </mat-tab-group>
+
       </div>
     </div>
   </div>

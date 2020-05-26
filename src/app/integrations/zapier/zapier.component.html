@@ -1,54 +1,54 @@
-<div class="main-content">
-  <div class="container-fluid">
-    <div class="col-md-12 mr-auto ml-auto">
-      <div class="card ">
-        <div class="card-header">
-          <h3 class="card-title">
-            Zapier Integration
-          </h3>
-          <div class="text-center">
-            <img src="assets/img/integrations/zapier.png" class="integration-image" />
-          </div>
-          <h5 class="card-description">Integrate Koraki with more than 1000 apps. You can use Zap editor to create new notifications</h5>
+<div class="container-fluid">
+  <div class="col-md-12 mr-auto ml-auto">
+    <div class="card ">
+      <div class="card-header">
+        <h3 class="card-title">
+          Zapier Integration
+        </h3>
+        <div class="text-center">
+          <img src="assets/img/integrations/zapier.png" class="integration-image" />
         </div>
-        <mat-divider></mat-divider>
-        <div class="card-body" [ngClass]="{'loading':loading}">
+        <h5 class="card-description">Integrate Koraki with more than 1000 apps. You can use Zap editor to create new
+          notifications</h5>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="card-body" [ngClass]="{'loading':loading}">
 
-          <div *ngIf="integrations['zapier']">
-            <p>
-              Koraki is currently connected with Zapier
-            </p>
-            <br/>
-            <a href="#" mat-raised-button class="btn btn-default" onclick="return false" (click)="disconnect()">
-              <i class="fa"></i> Disconnect
-            </a>
+        <div *ngIf="integrations['zapier']">
+          <p>
+            Koraki is currently connected with Zapier
+          </p>
+          <br />
+          <a href="#" mat-raised-button class="btn btn-default" onclick="return false" (click)="disconnect()">
+            <i class="fa"></i> Disconnect
+          </a>
 
-            <div class="divider"></div>
+          <div class="divider"></div>
 
-          </div>
+        </div>
 
-          <div>
-            Koraki
-            <b>Zapier</b> integration is available at Zapier apps directory!
+        <div>
+          Koraki
+          <b>Zapier</b> integration is available at Zapier apps directory!
 
-            <pre><a href="https://zapier.com/apps/koraki/" target="_blank">https://zapier.com/apps/koraki/</a>
-              </pre> You will be asked to provide Client Id and Client Secret when integrating Koraki with Zapier. Please use the
-            following credentials for that
-            <p>
-              <mat-form-field appearance="outline" hintLabel="Client Id" class="example-full-width">
-                <input readonly matInput value="{{clientId}}" />
-              </mat-form-field>
-            </p>
+          <pre><a href="https://zapier.com/apps/koraki/" target="_blank">https://zapier.com/apps/koraki/</a>
+              </pre> You will be asked to provide Client Id and Client Secret when integrating Koraki with Zapier.
+          Please use the
+          following credentials for that
+          <p>
+            <mat-form-field appearance="outline" hintLabel="Client Id" class="example-full-width">
+              <input readonly matInput value="{{clientId}}" />
+            </mat-form-field>
+          </p>
 
-            <p>
-              <mat-form-field appearance="outline" hintLabel="Client Secret" class="example-full-width">
-                <input readonly matInput value="{{clientSecret}}" />
-              </mat-form-field>
-            </p>
+          <p>
+            <mat-form-field appearance="outline" hintLabel="Client Secret" class="example-full-width">
+              <input readonly matInput value="{{clientSecret}}" />
+            </mat-form-field>
+          </p>
 
-            <div class="text-center">
-              <img width="100%" src="https://raw.githubusercontent.com/i2cs/koraki-static/master/zapier.gif" />
-            </div>
+          <div class="text-center">
+            <img width="100%" src="https://raw.githubusercontent.com/i2cs/koraki-static/master/zapier.gif" />
           </div>
         </div>
       </div>

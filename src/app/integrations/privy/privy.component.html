@@ -1,52 +1,53 @@
-<div class="main-content">
-  <div class="container-fluid">
-    <div class="col-md-12 mr-auto ml-auto">
-      <div class="card ">
-        <div class="card-header">
-          <h3 class="card-title">
-            Privy Integration
-          </h3>
-          <div class="text-center">
-            <img src="assets/img/integrations/privy.png" class="integration-image" />
-          </div>
-          <h5 class="card-description">This integrations lets you generate notifications from your Privy campaign related events. At the moment Koraki
-            can generate notifications when a lead signs up for a campaign.</h5>
+<div class="container-fluid">
+  <div class="col-md-12 mr-auto ml-auto">
+    <div class="card ">
+      <div class="card-header">
+        <h3 class="card-title">
+          Privy Integration
+        </h3>
+        <div class="text-center">
+          <img src="assets/img/integrations/privy.png" class="integration-image" />
         </div>
-        <mat-divider></mat-divider>
-        <div class="card-body" [ngClass]="{'loading':loading}">
+        <h5 class="card-description">This integrations lets you generate notifications from your Privy campaign related
+          events. At the moment Koraki
+          can generate notifications when a lead signs up for a campaign.</h5>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="card-body" [ngClass]="{'loading':loading}">
 
-          <p>
-            <mat-form-field appearance="outline" hintLabel="Copy and Paste this URL on your Privy webhook" class="example-full-width">
-              <textarea readonly rows=3 matInput>{{webhook}}</textarea>
-            </mat-form-field>
-          </p>
+        <p>
+          <mat-form-field appearance="outline" hintLabel="Copy and Paste this URL on your Privy webhook"
+            class="example-full-width">
+            <textarea readonly rows=3 matInput>{{webhook}}</textarea>
+          </mat-form-field>
+        </p>
 
-          <div>
-            <h4>Instructions</h4>
+        <div>
+          <h4>Instructions</h4>
 
-            <h5>How to install</h5>
-            Log in to your Privy account and go to
-            <b>Settings</b> >
-            <b>Integrations</b>. Select
-            <b>Webhooks</b> on the left side navigation, click
-            <b>Custom</b> then change the Method dropdown to "POST". Copy the above unique URL (don't share it with anyone)
-            and paste on "URL" field. Select
-            <b>Signups</b> checkbox from the Triggers and Save.
-            Click on <b>Test</b> button to register the integration.
-            <div class="text-center">
-              <img width="100%" src="https://raw.githubusercontent.com/i2cs/koraki-static/master/privy-tutorial.gif" />
-            </div>
+          <h5>How to install</h5>
+          Log in to your Privy account and go to
+          <b>Settings</b> >
+          <b>Integrations</b>. Select
+          <b>Webhooks</b> on the left side navigation, click
+          <b>Custom</b> then change the Method dropdown to "POST". Copy the above unique URL (don't share it with
+          anyone)
+          and paste on "URL" field. Select
+          <b>Signups</b> checkbox from the Triggers and Save.
+          Click on <b>Test</b> button to register the integration.
+          <div class="text-center">
+            <img width="100%" src="https://raw.githubusercontent.com/i2cs/koraki-static/master/privy-tutorial.gif" />
+          </div>
 
-            <div class="divider"></div>
-            <h5>How to uninstall</h5>
-            Log in to your Privy account and go to
-            <b>Settings</b> >
-            <b>Integrations</b>. Select
-            <b>Webhooks</b> on the left side navigation. Click on the delete button of the 
-            Custom webhook which has URL starting with <b>https://api.koraki.io</b>
-            <div class="text-center">
-              <img width="100%" src="https://raw.githubusercontent.com/i2cs/koraki-static/master/privy-remove.gif" />
-            </div>
+          <div class="divider"></div>
+          <h5>How to uninstall</h5>
+          Log in to your Privy account and go to
+          <b>Settings</b> >
+          <b>Integrations</b>. Select
+          <b>Webhooks</b> on the left side navigation. Click on the delete button of the
+          Custom webhook which has URL starting with <b>https://api.koraki.io</b>
+          <div class="text-center">
+            <img width="100%" src="https://raw.githubusercontent.com/i2cs/koraki-static/master/privy-remove.gif" />
           </div>
         </div>
       </div>

@@ -1,0 +1,44 @@
+<ng-template #target></ng-template>
+
+<div *ngIf="!componentLoaded" class="row">
+  <div class="col-md-12">
+    <input type="text" placeholder="Search for an integration: ex., OpenCart" [(ngModel)]="filter"
+      (change)="filterList()" class="form-control form-control-lg" />
+  </div>
+  <div class="col-md-4" *ngFor="let i of allIntegrations">
+    <div class="card card-chart" [ngClass]="{'disabled-integration' : !i.ecommerce && !allowedIntegrations[i.code]}">
+      <div class="card-body integration-item-card">
+        <h4 class="card-title">{{i.title}}</h4>
+        <div class="integration-images">
+          <img [src]="'/assets/img/integrations/' + i.code + '.png'" />
+        </div>
+        <div class="pull-right app-notify-count" *ngIf="integrations[i.code] && !i.autoactive">
+          Integrated
+        </div>
+        <div class="pull-right app-notify-count" *ngIf="allowedIntegrations[i.code] && i.autoactive">
+          Active
+        </div>
+        <p [innerHTML]="i.description"></p>
+        <!-- <p [innerHTML]="i.capable"></p> -->
+      </div>
+      <div class="card-footer">
+        <div *ngIf="!integrations[i.code]">
+          <a mat-raised-button class="btn" routerLink="/subscription/add"
+            *ngIf="!i.ecommerce && !allowedIntegrations[i.code]">Upgrade</a>
+          <a mat-raised-button *ngIf="i.ecommerce || allowedIntegrations[i.code]" class="btn btn-twitter"
+            routerLink="/applications/view/{{id}}/integrations/{{i.code}}">{{i.buttonTitle}}</a>
+          <a mat-raised-button *ngIf="i.help" href="{{i.help}}" target="_blank"
+            class="btn btn-link pull-right">Samples</a>
+        </div>
+        <div *ngIf="integrations[i.code]">
+          <a mat-raised-button class="btn" routerLink="/subscription/add"
+            *ngIf="!i.ecommerce && !allowedIntegrations[i.code]">Upgrade</a>
+          <a mat-raised-button *ngIf="i.ecommerce || allowedIntegrations[i.code]" class="btn btn-warning"
+            routerLink="/applications/view/{{id}}/integrations/{{i.code}}">Manage</a>
+          <a mat-raised-button *ngIf="i.help" href="{{i.help}}" target="_blank"
+            class="btn btn-link pull-right">Samples</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

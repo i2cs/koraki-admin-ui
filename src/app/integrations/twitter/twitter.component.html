@@ -1,39 +1,39 @@
-<div class="main-content">
-  <div class="container-fluid">
-    <div class="col-md-12 mr-auto ml-auto">
-      <div class="card ">
-        <div class="card-header">
-          <h3 class="card-title">
-            Twitter Integration
-          </h3>
-          <div class="text-center">
-            <img src="assets/img/integrations/twitter.png" class="integration-image" />
-          </div>
-          <h5 class="card-description">Twitter integration generates notifications hourly indicating how many new followers were added to the provided
-            Twitter account.</h5>
+<div class="container-fluid">
+  <div class="col-md-12 mr-auto ml-auto">
+    <div class="card ">
+      <div class="card-header">
+        <h3 class="card-title">
+          Twitter Integration
+        </h3>
+        <div class="text-center">
+          <img src="assets/img/integrations/twitter.png" class="integration-image" />
         </div>
-        <mat-divider></mat-divider>
-        <div class="card-body" [ngClass]="{'loading':loading}">
+        <h5 class="card-description">Twitter integration generates notifications hourly indicating how many new
+          followers were added to the provided
+          Twitter account.</h5>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="card-body" [ngClass]="{'loading':loading}">
 
-          <div *ngIf="!integrations['twitter']">
+        <div *ngIf="!integrations['twitter']">
 
 
-            <mat-form-field appearance="outline" hintLabel="Enter your Twitter username (screen name) here">
-              <mat-label>Twitter username</mat-label>
-              <input matInput [(ngModel)]="username" />
-            </mat-form-field>
+          <mat-form-field appearance="outline" hintLabel="Enter your Twitter username (screen name) here">
+            <mat-label>Twitter username</mat-label>
+            <input matInput [(ngModel)]="username" />
+          </mat-form-field>
 
-            <a href="#" mat-raised-button class="btn btn-facebook" onclick="return false" (click)="subscribe()">
-              <i class="fa"></i> Subscribe
-            </a>
-          </div>
+          <a href="#" mat-raised-button class="btn btn-facebook" onclick="return false" (click)="subscribe()">
+            <i class="fa"></i> Subscribe
+          </a>
+        </div>
 
-          <div *ngIf="integrations['twitter']">
-            <a href="#" mat-raised-button class="btn" onclick="return false" (click)="unsubscribe()">
-              <i class="fa"></i> Unsubscribe from @{{configurations['username']}}
-            </a>
+        <div *ngIf="integrations['twitter']">
+          <a href="#" mat-raised-button class="btn" onclick="return false" (click)="unsubscribe()">
+            <i class="fa"></i> Unsubscribe from @{{configurations['username']}}
+          </a>
 
-            <div style="float: right;">Last synced with Twitter {{configurations['last_sync'] | amFromUnix | amTimeAgo}}</div>
+          <div style="float: right;">Last synced with Twitter {{configurations['last_sync'] | amFromUnix | amTimeAgo}}
           </div>
         </div>
       </div>

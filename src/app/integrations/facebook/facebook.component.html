@@ -1,73 +1,76 @@
-<div class="main-content">
-  <div class="container-fluid">
-    <div class="col-md-12 mr-auto ml-auto">
-      <div class="card ">
-        <div class="card-header">
-          <h3 class="card-title">
-            Facebook Page Integration
-          </h3>
-          <div class="text-center">
-            <img src="assets/img/integrations/facebook.png" class="integration-image" />
-          </div>
-          <h5 class="card-description">Integrate your page with Koraki</h5>
-
+<div class="container-fluid">
+  <div class="col-md-12 mr-auto ml-auto">
+    <div class="card ">
+      <div class="card-header">
+        <h3 class="card-title">
+          Facebook Page Integration
+        </h3>
+        <div class="text-center">
+          <img src="assets/img/integrations/facebook.png" class="integration-image" />
         </div>
-        <mat-divider></mat-divider>
-        <div class="card-body" [ngClass]="{'loading':loading}">
-          <div *ngIf="fbLoggedIn">
-            <mat-form-field>
-              <mat-select placeholder="Select your Facebook page" [(ngModel)]="page">
-                <mat-option *ngFor="let p of pages" [value]="p">
-                  <img height="20px" src="https://graph.facebook.com/{{p.id}}/picture?type=square" /> {{p.name}}</mat-option>
-              </mat-select>
-            </mat-form-field>
+        <h5 class="card-description">Integrate your page with Koraki</h5>
 
-            <div *ngIf="page">
-              <div class="divider"></div>
-              <div class="fb-page-d">
-                <img src="https://graph.facebook.com/{{page.id}}/picture?width=100" />
-                <div>
-                  <h4>{{page.name}}</h4>
-                  <a href="#" mat-raised-button class="btn btn-primary" onclick="return false" (click)="subscribe()">
-                    Subscribe for notifications
-                  </a>
-                </div>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="card-body" [ngClass]="{'loading':loading}">
+        <div *ngIf="fbLoggedIn">
+          <mat-form-field>
+            <mat-select placeholder="Select your Facebook page" [(ngModel)]="page">
+              <mat-option *ngFor="let p of pages" [value]="p">
+                <img height="20px" src="https://graph.facebook.com/{{p.id}}/picture?type=square" /> {{p.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div *ngIf="page">
+            <div class="divider"></div>
+            <div class="fb-page-d">
+              <img src="https://graph.facebook.com/{{page.id}}/picture?width=100" />
+              <div>
+                <h4>{{page.name}}</h4>
+                <a href="#" mat-raised-button class="btn btn-primary" onclick="return false" (click)="subscribe()">
+                  Subscribe for notifications
+                </a>
               </div>
-              <div class="divider"></div>
-              <p>You are about to subscribe '{{page.name}}' page to Koraki widget. It will create notifications upon positive
-                ratings (4 or 5 starts) made on your page, new posts by fans and comments made on wallposts</p>
             </div>
-
-          </div>
-
-          <div *ngIf="!fbLoggedIn && !integrations['facebook']">
-            <p>
-              This integration can generate notifications on your Koraki widget. It will create notifications upon positive ratings (4
-              or 5 starts) made on your page, new posts by fans and comments made on wallposts.
-            </p>
-
-            <p>
-              First you need to allow Koraki to read Facebook pages updates. We will not publish any content on your pages.
-            </p>
             <div class="divider"></div>
-
-            <a href="#" onclick="return false" (click)="login('add:' + appId)">
-              <img src="assets/img/fbbutton.png" width="220px" >
-            </a>
-          </div>
-
-          <div *ngIf="integrations['facebook']">
-            <p>
-              Koraki is connected to Facebook page <a href="https://www.facebook.com/{{configurations['page_id']}}" target="_blank">{{configurations['name']}}</a>
-            </p>
-            <div class="divider"></div>
-
-            <a href="#" mat-raised-button class="btn btn-default" onclick="return false" (click)="disconnect()">
-              <i class="fa"></i> Disconnect
-            </a>
+            <p>You are about to subscribe '{{page.name}}' page to Koraki widget. It will create notifications upon
+              positive
+              ratings (4 or 5 starts) made on your page, new posts by fans and comments made on wallposts</p>
           </div>
 
         </div>
+
+        <div *ngIf="!fbLoggedIn && !integrations['facebook']">
+          <p>
+            This integration can generate notifications on your Koraki widget. It will create notifications upon
+            positive ratings (4
+            or 5 starts) made on your page, new posts by fans and comments made on wallposts.
+          </p>
+
+          <p>
+            First you need to allow Koraki to read Facebook pages updates. We will not publish any content on your
+            pages.
+          </p>
+          <div class="divider"></div>
+
+          <a href="#" onclick="return false" (click)="login('add:' + appId)">
+            <img src="assets/img/fbbutton.png" width="220px">
+          </a>
+        </div>
+
+        <div *ngIf="integrations['facebook']">
+          <p>
+            Koraki is connected to Facebook page <a href="https://www.facebook.com/{{configurations['page_id']}}"
+              target="_blank">{{configurations['name']}}</a>
+          </p>
+          <div class="divider"></div>
+
+          <a href="#" mat-raised-button class="btn btn-default" onclick="return false" (click)="disconnect()">
+            <i class="fa"></i> Disconnect
+          </a>
+        </div>
+
       </div>
     </div>
   </div>

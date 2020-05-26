@@ -13,6 +13,7 @@ import { AnalyticsViewComponent } from './analytics-view/analytics-view.componen
 import { NotificationsViewComponent } from './notifications-view/notifications-view.component';
 import { NotificationPreviewComponent } from './notification-preview/notification-preview.component';
 import { WpContentRenderModule } from 'app/shared/wp-content-render/wp-content-render.module';
+import { IntegrationsModule } from 'app/integrations/integrations.module';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { WpContentRenderModule } from 'app/shared/wp-content-render/wp-content-r
     MaterialModule,
     MomentModule,
     ColorPickerModule,
-    WpContentRenderModule
+    WpContentRenderModule,
+    IntegrationsModule
   ],
   declarations: [ApplicationsComponent, NewApplicationComponent, ViewApplicationComponent, AnalyticsViewComponent, NotificationsViewComponent, NotificationPreviewComponent]
 })
