@@ -38,6 +38,8 @@ export class AuthService {
       },
       container: 'hiw-login-container',
       autoclose: true,
+      rememberLastLogin: true,
+      loginAfterSignUp: true,
       languageDictionary: {
         title: ""
       }
