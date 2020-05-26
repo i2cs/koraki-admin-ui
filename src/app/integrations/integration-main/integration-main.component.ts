@@ -53,34 +53,35 @@ export class IntegrationMainComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+    if(this.integration){
+      this.integration.subscribe(a => {
+        let map = {
+          "korakilive": KorakiliveComponent,
+          "korakirecommendation": KorakirecommendationComponent,
+          "wordpress": WordpressComponent,
+          "facebook": FacebookComponent,
+          "mailchimp": MailchimpComponent,
+          "privy": PrivyComponent,
+          "opencart": OpencartComponent,
+          "intercom": IntercomComponent,
+          "twitter": TwitterComponent,
+          "zapier": ZapierComponent
+        };
 
-    this.integration.subscribe(a => {
-      let map = {
-        "korakilive": KorakiliveComponent,
-        "korakirecommendation": KorakirecommendationComponent,
-        "wordpress": WordpressComponent,
-        "facebook": FacebookComponent,
-        "mailchimp": MailchimpComponent,
-        "privy": PrivyComponent,
-        "opencart": OpencartComponent,
-        "intercom": IntercomComponent,
-        "twitter": TwitterComponent,
-        "zapier": ZapierComponent
-      };
+        let component = map[a];
+        this.componentLoaded = Boolean(component);
 
-      let component = map[a];
-      this.componentLoaded = Boolean(component);
-
-      this.vcRef.clear();
-      if(this.componentLoaded){
-        const factory = this.resolver.resolveComponentFactory(component);
-        this.componentRef = this.vcRef.createComponent(factory);
-      }else if(a){
-        window.location.href = "/applications/view/" + this.id + "/integrations";
-        return;
-      }
-      
-    });
+        this.vcRef.clear();
+        if(this.componentLoaded){
+          const factory = this.resolver.resolveComponentFactory(component);
+          this.componentRef = this.vcRef.createComponent(factory);
+        }else if(a){
+          window.location.href = "/applications/view/" + this.id + "/integrations";
+          return;
+        }
+        
+      });
+    }
 
     
 

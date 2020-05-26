@@ -13,12 +13,12 @@ import { KorakirecommendationComponent } from './korakirecommendation/korakireco
 import { IntegrationMainComponent } from './integration-main/integration-main.component';
 
 export const IntegrationsRoutes: Routes = [
-    {
+    /*{
       path: '',
       children: [ {
         path: ':module',
         component: IntegrationMainComponent
-    } /*, {
+    } , {
         path: 'facebook',
         component: FacebookComponent
     }, {
@@ -51,6 +51,6 @@ export const IntegrationsRoutes: Routes = [
     },  {
         path: 'korakirecommendation',
         component: KorakirecommendationComponent
-    }*/]
-}
+    }]
+}*/
 ];
