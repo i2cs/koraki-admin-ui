@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AjaxService } from 'koraki-angular-client';
+import { AjaxService, IntegrationConfigurationsDataViewModel } from 'koraki-angular-client';
 import { RuleConfig } from 'koraki-angular-client/model/ruleConfig';
 import { IntegrationRules } from 'koraki-angular-client/model/integrationRules';
 import { IntegrationRulesDataModel } from 'koraki-angular-client/model/integrationRulesDataModel';
 import { NotificationService } from 'app/services/notification.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-rule-config-view',
@@ -18,6 +19,7 @@ export class RuleConfigViewComponent implements OnInit {
   ruleConfigs: Array<RuleConfig>;
   rulesList: Array<IntegrationRules> = [{}];
   rulesListDefault: Array<IntegrationRules> = [{}];
+  events: IntegrationConfigurationsDataViewModel[];
 
   constructor(
     private ajax: AjaxService,
@@ -28,11 +30,20 @@ export class RuleConfigViewComponent implements OnInit {
     this.ajax.getIntegrationRules(this.code, this.applicationId).subscribe(a => {
       this.ruleConfigs = a.ruleConfigs;
       if(a.rules && a.rules.length > 0){
+        a.rules.forEach(b => { 
+          if(!b.event){
+            b.event = "all";
+          }
+        });
         this.rulesList = a.rules;
         this.rulesListDefault = JSON.parse(JSON.stringify(a.rules));
       }
     }, e => {
       this.notify.error(e.error.message);
+    });
+
+    this.ajax.getIntegrationConfigs(this.code, this.applicationId).subscribe(a => {
+      this.events = a;
     });
   }
 
@@ -48,7 +59,7 @@ export class RuleConfigViewComponent implements OnInit {
   }
 
   add(){
-    this.rulesList.push({});
+    this.rulesList.push({ event: "all" });
   }
 
   updateRules(){

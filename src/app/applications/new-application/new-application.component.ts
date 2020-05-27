@@ -29,6 +29,7 @@ export class NewApplicationComponent implements OnInit, AfterViewInit {
     appSelectorView: boolean;
     applications: ApplicationViewDataModel[];
     redirectUrl: string = "";
+    loading: boolean;
     constructor(
         private appservice: ApplicationsService,
         private formBuilder: FormBuilder,
@@ -43,6 +44,7 @@ export class NewApplicationComponent implements OnInit, AfterViewInit {
     ngAfterViewInit() {
         this.subscriptionsService.getPermissions().subscribe(a => {
             if (a.email.startsWith("shopify|")) {
+                this.loading = true;
                 window.location.href = environment.integrations.shopify.appInstallUrl;
             }
         });
@@ -77,17 +79,20 @@ export class NewApplicationComponent implements OnInit, AfterViewInit {
                     redirectUrl.searchParams.append("client_id", a.clientId);
                     redirectUrl.searchParams.append("client_secret", a.clientSecret);
                     redirectUrl.searchParams.append("app_id", a.id.toString());
+                    this.loading = true;
                     document.location.href = redirectUrl.href;
                 } else {
                     this.notify.loadApplications.emit(true);
                     this.appCreated = true;
                     this.appCreatedResponse = a;
+                    this.loading = true;
                     this.router.navigate(['applications/view', this.appCreatedResponse.id], { fragment: "new=true" });
                 }
             }
         }, e => {
             this.notify.error("<b>" + e.error.message);
             if(redirect){
+                this.loading = true;
                 document.location.href = '/subscription/add';
             }
         });
@@ -98,7 +103,7 @@ export class NewApplicationComponent implements OnInit, AfterViewInit {
         redirectUrl.searchParams.append("client_id", app.clientId);
         redirectUrl.searchParams.append("client_secret", app.clientSecret);
         redirectUrl.searchParams.append("app_id", app.id.toString());
-
+        this.loading = true;
         window.location.href = redirectUrl.href;
     }
 

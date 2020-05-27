@@ -1,21 +1,21 @@
 <ng-template #target></ng-template>
 
-<div *ngIf="!componentLoaded" class="row">
+<div *ngIf="!componentLoaded" class="row integration-row">
   <div class="col-md-12">
     <input type="text" placeholder="Search for an integration: ex., OpenCart" [(ngModel)]="filter"
       (change)="filterList()" class="form-control form-control-lg" />
   </div>
-  <div class="col-md-4" *ngFor="let i of allIntegrations">
+  <div class="col-md-3 col-sm-6 col-xs-12 integration-card" *ngFor="let i of allIntegrations">
     <div class="card card-chart" [ngClass]="{'disabled-integration' : !i.ecommerce && !allowedIntegrations[i.code]}">
       <div class="card-body integration-item-card">
         <h4 class="card-title">{{i.title}}</h4>
         <div class="integration-images">
           <img [src]="'/assets/img/integrations/' + i.code + '.png'" />
         </div>
-        <div class="pull-right app-notify-count" *ngIf="integrations[i.code] && !i.autoactive">
+        <div class="status" *ngIf="integrations[i.code] && !i.autoactive">
           Integrated
         </div>
-        <div class="pull-right app-notify-count" *ngIf="allowedIntegrations[i.code] && i.autoactive">
+        <div class="status" *ngIf="allowedIntegrations[i.code] && i.autoactive">
           Active
         </div>
         <p [innerHTML]="i.description"></p>
@@ -23,22 +23,24 @@
       </div>
       <div class="card-footer">
         <div *ngIf="!integrations[i.code]">
-          <a mat-raised-button class="btn" routerLink="/subscription/add"
+          <a mat-raised-button class="btn full-length" routerLink="/subscription/add"
             *ngIf="!i.ecommerce && !allowedIntegrations[i.code]">Upgrade</a>
-          <a mat-raised-button *ngIf="i.ecommerce || allowedIntegrations[i.code]" class="btn btn-twitter"
+          <a mat-raised-button *ngIf="i.ecommerce || allowedIntegrations[i.code]" class="btn btn-twitter full-length"
             routerLink="/applications/view/{{id}}/integrations/{{i.code}}">{{i.buttonTitle}}</a>
-          <a mat-raised-button *ngIf="i.help" href="{{i.help}}" target="_blank"
-            class="btn btn-link pull-right">Samples</a>
         </div>
         <div *ngIf="integrations[i.code]">
-          <a mat-raised-button class="btn" routerLink="/subscription/add"
+          <a mat-raised-button class="btn full-length" routerLink="/subscription/add"
             *ngIf="!i.ecommerce && !allowedIntegrations[i.code]">Upgrade</a>
-          <a mat-raised-button *ngIf="i.ecommerce || allowedIntegrations[i.code]" class="btn btn-warning"
+          <a mat-raised-button *ngIf="i.ecommerce || allowedIntegrations[i.code]" class="btn btn-warning full-length"
             routerLink="/applications/view/{{id}}/integrations/{{i.code}}">Manage</a>
-          <a mat-raised-button *ngIf="i.help" href="{{i.help}}" target="_blank"
-            class="btn btn-link pull-right">Samples</a>
         </div>
       </div>
     </div>
   </div>
+
+  <div class="col-md-12 text-center" style="margin-top: 50px;">
+    <img src="https://static.koraki.io/availablesoon.png" height="300px" />
+  </div>
+
+  
 </div>

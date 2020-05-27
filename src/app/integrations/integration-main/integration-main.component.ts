@@ -127,15 +127,15 @@ export class IntegrationMainComponent implements OnInit {
       ecommerce: false
     });
 
-    this.allIntegrations.push({
-      code: "opencart",
-      title: "OpenCart",
-      description: "Module contains notification widget. This module can be installed from OpenCart admin panel",
-      capable: "This integration can <b>Read</b> and <b>Write</b> notifications",
-      buttonTitle: "Install",
-      help: "https://koraki.io/how-to-add-koraki-to-opencart/",
-      ecommerce: true
-    });
+    // this.allIntegrations.push({
+    //   code: "opencart",
+    //   title: "OpenCart",
+    //   description: "Module contains notification widget. This module can be installed from OpenCart admin panel",
+    //   capable: "This integration can <b>Read</b> and <b>Write</b> notifications",
+    //   buttonTitle: "Install",
+    //   help: "https://koraki.io/how-to-add-koraki-to-opencart/",
+    //   ecommerce: true
+    // });
 
     // this.allIntegrations.push({
     //   code: "shopify",
@@ -146,41 +146,41 @@ export class IntegrationMainComponent implements OnInit {
     //   ecommerce: false
     // });
 
-    this.allIntegrations.push({
-      code: "facebook",
-      title: "Facebook Page",
-      description: "You can connect your Facebook fanpage to generate notifications on user comments, user posts on wall and new user review events.",
-      capable: "This integration can <b>Write</b> notifications",
-      buttonTitle: "Integrate",
-      ecommerce: false
-    });
+    // this.allIntegrations.push({
+    //   code: "facebook",
+    //   title: "Facebook Page",
+    //   description: "You can connect your Facebook fanpage to generate notifications on user comments, user posts on wall and new user review events.",
+    //   capable: "This integration can <b>Write</b> notifications",
+    //   buttonTitle: "Integrate",
+    //   ecommerce: false
+    // });
 
-    this.allIntegrations.push({
-      code: "twitter",
-      title: "Twitter",
-      description: "Twitter integration generates notifications hourly indicating how many new followers were added to the provided Twitter account.",
-      capable: "This integration can <b>Write</b> notifications",
-      buttonTitle: "Integrate",
-      ecommerce: false
-    });
+    // this.allIntegrations.push({
+    //   code: "twitter",
+    //   title: "Twitter",
+    //   description: "Twitter integration generates notifications hourly indicating how many new followers were added to the provided Twitter account.",
+    //   capable: "This integration can <b>Write</b> notifications",
+    //   buttonTitle: "Integrate",
+    //   ecommerce: false
+    // });
 
-    this.allIntegrations.push({
-      code: "intercom",
-      title: "Intercom",
-      description: "Connect your Intercom account with Koraki and show social notifications about your leads and users.",
-      capable: "This integration can <b>Write</b> notifications",
-      buttonTitle: "Integrate",
-      ecommerce: false
-    });
+    // this.allIntegrations.push({
+    //   code: "intercom",
+    //   title: "Intercom",
+    //   description: "Connect your Intercom account with Koraki and show social notifications about your leads and users.",
+    //   capable: "This integration can <b>Write</b> notifications",
+    //   buttonTitle: "Integrate",
+    //   ecommerce: false
+    // });
 
-    this.allIntegrations.push({
-      code: "mailchimp",
-      title: "MailChimp",
-      description: "This integration can generate notifications when subscriber is added to email lists.",
-      capable: "This integration can <b>Write</b> notifications",
-      buttonTitle: "Integrate",
-      ecommerce: false
-    });
+    // this.allIntegrations.push({
+    //   code: "mailchimp",
+    //   title: "MailChimp",
+    //   description: "This integration can generate notifications when subscriber is added to email lists.",
+    //   capable: "This integration can <b>Write</b> notifications",
+    //   buttonTitle: "Integrate",
+    //   ecommerce: false
+    // });
 
     this.allIntegrations.push({
       code: "zapier",
@@ -192,14 +192,14 @@ export class IntegrationMainComponent implements OnInit {
       ecommerce: false
     });
 
-    this.allIntegrations.push({
-      code: "privy",
-      title: "Privy",
-      description: "Generate notifications when someone subscribe for a campaign on Privy.",
-      capable: "This integration can <b>Write</b> notifications",
-      buttonTitle: "Integrate",
-      ecommerce: false
-    });
+    // this.allIntegrations.push({
+    //   code: "privy",
+    //   title: "Privy",
+    //   description: "Generate notifications when someone subscribe for a campaign on Privy.",
+    //   capable: "This integration can <b>Write</b> notifications",
+    //   buttonTitle: "Integrate",
+    //   ecommerce: false
+    // });
 
     this.allIntegrationsOriginal = this.allIntegrations;
     this.permissions.subscribe(b => {

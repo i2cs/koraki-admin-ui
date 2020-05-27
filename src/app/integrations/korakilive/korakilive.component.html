@@ -1,22 +1,29 @@
 <div class="container-fluid">
   <div class="col-md-12 mr-auto ml-auto">
     <div class="card integration-card">
-      <div class="card-header card bg-dark text-white">
-        <div class="integration-image-wrapper">
-          <img src="assets/img/integrations/korakilive.png" class="integration-image" />
-        </div>
-        <div class="integration-header-wrapper">
-          <h3 class="card-title">
-            Koraki Live!
-          </h3>
-          <h5>Analytics</h5>
-          <h5 class="card-description">Koraki live integration will allow you to show dynamic notifications made with
-            live visitor analytics.</h5>
+      <div class="card-header card">
+        <div class="row">
+          <div class="col-md-2">
+            <div class="integration-image-wrapper">
+              <img src="assets/img/integrations/korakilive.png" class="integration-image" />
+            </div>
+          </div>
+          <div class="col-md-10">
+            <div class="integration-header-wrapper">
+              <h3 class="card-title">
+                Koraki Live!
+              </h3>
+              <h5>Analytics</h5>
+              <h5 class="card-description">Koraki live integration will allow you to show dynamic notifications made
+                with
+                live visitor analytics.</h5>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="card-body" [ngClass]="{'loading':loading}">
 
+      <div class="card-body" [ngClass]="{'loading':loading}">
         <mat-tab-group disableRipple="true" color="primary" class="md-no-animation" [@.disabled]="true"
           dynamicHeight="true">
           <mat-tab label="Events">

@@ -1,16 +1,25 @@
 <div class="container-fluid">
   <div class="col-md-12 mr-auto ml-auto">
-    <div class="card ">
-      <div class="card-header">
-        <h3 class="card-title">
-          Zapier Integration
-        </h3>
-        <div class="text-center">
-          <img src="assets/img/integrations/zapier.png" class="integration-image" />
+    <div class="card integration-card">
+      <div class="card-header card">
+        <div class="row">
+          <div class="col-md-2">
+            <div class="integration-image-wrapper">
+              <img src="assets/img/integrations/zapier.png" class="integration-image" />
+            </div>
+          </div>
+          <div class="col-md-10">
+            <div class="integration-header-wrapper">
+              <h3 class="card-title">
+                Zapier
+              </h3>
+              <h5>Integration</h5>
+              <h5 class="card-description">Integrate Koraki with more than 1000 apps. You can use Zap editor to create new notifications. Check how you can connect Zapier with Koraki <a href="https://docs.koraki.io/project/integrations/zapier" target="_blank">here</a></h5>
+            </div>
+          </div>
         </div>
-        <h5 class="card-description">Integrate Koraki with more than 1000 apps. You can use Zap editor to create new
-          notifications</h5>
       </div>
+
       <mat-divider></mat-divider>
       <div class="card-body" [ngClass]="{'loading':loading}">
 
@@ -47,9 +56,6 @@
             </mat-form-field>
           </p>
 
-          <div class="text-center">
-            <img width="100%" src="https://raw.githubusercontent.com/i2cs/koraki-static/master/zapier.gif" />
-          </div>
         </div>
       </div>
     </div>

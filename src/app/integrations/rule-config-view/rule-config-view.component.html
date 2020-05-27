@@ -11,7 +11,19 @@
       </div>
       <div class="card-title">
         <div class="row">
-          <div class="col-md-4">
+
+          <div class="col-md-3">
+            <mat-form-field>
+              <mat-select (selectionChange)="rule.value = ''; rule.op = ''" placeholder="Event" [(ngModel)]="rule.event">
+                <mat-option selected value="all">All</mat-option>
+                <mat-option value="{{event.templateCode}}" *ngFor="let event of events;trackBy: trackByFn">
+                  {{event.templateName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3">
             <mat-form-field>
               <mat-select (selectionChange)="rule.value = ''; rule.op = ''" placeholder="Rule test for" [(ngModel)]="rule.test">
                 <mat-option value="{{ruleConfig.test.code}}" *ngFor="let ruleConfig of ruleConfigs;trackBy: trackByFn">
@@ -21,7 +33,7 @@
             </mat-form-field>
           </div>
 
-          <div class="col-md-4">
+          <div class="col-md-3">
             <span *ngFor="let ruleConfig of ruleConfigs;trackBy: trackByFn">
               <mat-form-field *ngIf="rule.test == ruleConfig.test.code">
                 <mat-select placeholder="Action" [(ngModel)]="rule.op">
@@ -33,7 +45,7 @@
             </span>
           </div>
 
-          <div class="col-md-4">
+          <div class="col-md-3">
             <span *ngFor="let ruleConfig of ruleConfigs;trackBy: trackByFn">
               <mat-form-field *ngIf="rule.test == ruleConfig.test.code && rule.op" class="has-label">
                 <mat-label *ngIf="ruleConfig.value.code == 'text'">Text pattern</mat-label>

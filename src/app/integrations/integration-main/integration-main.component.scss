@@ -33,3 +33,24 @@
 .disabled-integration .card-title{
     color: #b7b7b7;
 }
+
+.status{
+    position: absolute;
+    top: 34px;
+    left: 19px;
+    color: #2fdea5;
+}
+
+.integration-card {
+    padding-right: 6px;
+    padding-left: 6px;
+}
+
+.integration-row{
+    margin-right: -6px;
+    margin-left: -6px;
+}
+
+.full-length{
+    width: 100%;
+}

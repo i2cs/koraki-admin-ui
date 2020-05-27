@@ -233,21 +233,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', end
 .integration-card > .card-header{
     margin-top: 0px;
     margin-bottom: 0px;
-    background-color: #4A90E2 !important;
+    border: none;
 }
 
 .integration-card  .card-description{
-    background-color: #31639c;
-    text-align: center;
-    padding: 12px;
-    border-radius: 6px;
+    padding: 0px;
+    font-size: 15px;
+    color: #545454;
 }
 
 .integration-card .integration-image-wrapper{
-    text-align: center;
-}
-
-.integration-card .integration-header-wrapper{
     text-align: center;
 }
 

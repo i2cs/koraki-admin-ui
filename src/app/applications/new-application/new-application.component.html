@@ -5,7 +5,7 @@
         <div class="card">
           <div class="card-body text-center loading" *ngIf="!appSelectorView">
           </div>
-          <div class="card-body" *ngIf="appSelectorView">
+          <div class="card-body" *ngIf="appSelectorView"  [ngClass]="{'loading':loading}">
             <h4 class="info-text">Select an existing application or create new</h4>
             <a class="app-link" *ngFor="let app of applications" (click)="redirectToUrl(app)">
               <div>

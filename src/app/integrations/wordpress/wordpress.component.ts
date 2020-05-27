@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BreadcrumbService } from 'app/services/breadcrumb.service';
-import { ApplicationsService } from 'koraki-angular-client';
+import { ApplicationsService, IntegrationConfigurationsDataViewModel } from 'koraki-angular-client';
 
 @Component({
   selector: 'app-wordpress',
