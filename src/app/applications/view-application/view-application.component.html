@@ -328,7 +328,36 @@
                 </div>
 
                 <div class="divider"></div>
+                <div class="col-md-12 mr-auto">
+                  <a *ngIf="!whitelabel" routerLink="/subscription/plans" class="upgrade-right">Upgrade to change</a>
+                  <legend>Whitelabel text</legend>
+                  <div class="togglebutton">
+                    <mat-form-field
+                      hintLabel="Use any name instead of Koraki brand at the bottom of notifications"
+                      class="example-full-width has-label">
+                      <input type="text" matInput [(ngModel)]="configs.whitelabel_text"
+                       [disabled]="updatingSettings || !whitelabel"
+                        (change)="updateApplicationSettings()">
+                    </mat-form-field>
+                  </div>
+                </div>
 
+                <div class="divider"></div>
+                <div class="col-md-12 mr-auto">
+                  <a *ngIf="!whitelabel" routerLink="/subscription/plans" class="upgrade-right">Upgrade to change</a>
+                  <legend>Whitelabel URL</legend>
+                  <div class="togglebutton">
+                    <mat-form-field
+                      hintLabel="Link to add to your brand"
+                      class="example-full-width has-label">
+                      <input type="text" matInput [(ngModel)]="configs.whitelabel_url"
+                        [disabled]="updatingSettings || !whitelabel"
+                        (change)="updateApplicationSettings()">
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="divider"></div>
                 <div class="col-md-12">
                   <legend></legend>
                   <div class="togglebutton">

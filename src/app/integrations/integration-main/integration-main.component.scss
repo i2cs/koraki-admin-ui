@@ -25,6 +25,13 @@
     color: #a0a0a0;
 }
 
+.integration-item-card .card-title{
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 16px;
+}
+
 .disabled-integration .card-body{
     background-color: #fdfdfd;
     color: #a5a5a5;

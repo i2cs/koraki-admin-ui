@@ -64,6 +64,7 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
   permissions: Observable<SubscriptionsDataViewModel>;
   subpage: string;
   subpageEmitter: EventEmitter<string> = new EventEmitter<string>();
+  whitelabel: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -95,6 +96,10 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
         if (a.permissons["unique_sessions.maximum"]) {
           this.allowedSessionCount = Number.parseInt(a.permissons["unique_sessions.maximum"]);
           this.setProgress();
+        }
+
+        if (a.permissons["whitelabel"] == "true") {
+          this.whitelabel = true;
         }
 
         let number = Number.parseInt(a.permissons['notifications_active_per_app.maximum']);
@@ -200,7 +205,9 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
         mobile_position: this.configs.mobile_position,
         start_delay: this.configs.start_delay,
         roll_delay: this.configs.roll_delay,
-        display_duration: this.configs.display_duration
+        display_duration: this.configs.display_duration,
+        whitelabel_text: this.configs.whitelabel_text,
+        whitelabel_url: this.configs.whitelabel_url
        })
     }).subscribe(a => {
       this.updatingSettings = false;
