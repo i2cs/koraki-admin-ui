@@ -247,8 +247,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', end
 }
 
 .integration-card .integration-header-wrapper a {
-    color: #ffffff;
-    background-color: #2f4d6f;
+    color: #676767;
+    background-color: #e0e5eb;
     border-radius: 3px;
     padding: 2px;
 }

@@ -46,7 +46,8 @@ export class EventConfigViewComponent implements OnInit {
         
           var customThumbnail = element.inputs.filter(b => b.code == "thumbnail");
           if(customThumbnail && customThumbnail.length > 0){
-            thumbnail = customThumbnail[0].value;
+            if(customThumbnail[0].value != "" && customThumbnail[0].value != "default")
+              thumbnail = customThumbnail[0].value;
           }
         }
 
@@ -129,7 +130,8 @@ export class EventConfigViewComponent implements OnInit {
 
         var customThumbnail = template.inputs.filter(b => b.code == "thumbnail");
         if(customThumbnail && customThumbnail.length > 0){
-          thumbnail = customThumbnail[0]['thumbnail'];
+          if(customThumbnail[0]['thumbnail'] != "default" && customThumbnail[0]['thumbnail'] != "")
+            thumbnail = customThumbnail[0]['thumbnail'];
         }
       }
       object['thumbnailUrl'] = thumbnail;
