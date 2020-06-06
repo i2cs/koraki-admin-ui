@@ -103,7 +103,7 @@
               </div>
             </mat-tab>
             <mat-tab label="Integrations">
-                <app-integration-main [integration]="subpageEmitter" [permissions]="permissions" [id]="appId"></app-integration-main>
+                <app-integration-main [integration]="subpageEmitter" [permissions]="permissions" [id]="appId" [applicationName]="applicationName"></app-integration-main>
             </mat-tab>
             <mat-tab label="Notifications">
               <app-notifications-view [appId]="appId" [reloadNotifications]="reloadNotifications"></app-notifications-view>

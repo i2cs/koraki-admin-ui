@@ -36,6 +36,7 @@ export class IntegrationMainComponent implements OnInit {
   allowedIntegrations: any = {};
   @Input() permissions: Observable<SubscriptionsDataViewModel>;
   @Input() id: number;
+  @Input() applicationName: string;
   @Input() integration: Observable<string>;
   componentLoaded: boolean;
 
@@ -50,10 +51,10 @@ export class IntegrationMainComponent implements OnInit {
     private subscription: SubscriptionService,
     private sanitizer: DomSanitizer,
     private auth: AuthService
-    ) { }
+  ) { }
 
   ngOnInit() {
-    if(this.integration){
+    if (this.integration) {
       this.integration.subscribe(a => {
         let map = {
           "korakilive": KorakiliveComponent,
@@ -72,18 +73,18 @@ export class IntegrationMainComponent implements OnInit {
         this.componentLoaded = Boolean(component);
 
         this.vcRef.clear();
-        if(this.componentLoaded){
+        if (this.componentLoaded) {
           const factory = this.resolver.resolveComponentFactory(component);
           this.componentRef = this.vcRef.createComponent(factory);
-        }else if(a){
+        } else if (a) {
           window.location.href = "/applications/view/" + this.id + "/integrations";
           return;
         }
-        
+
       });
     }
 
-    
+
 
     // this.allIntegrations.push({
     //   code: "korakiwebapi",
@@ -203,26 +204,50 @@ export class IntegrationMainComponent implements OnInit {
 
     this.allIntegrationsOriginal = this.allIntegrations;
     this.permissions.subscribe(b => {
-
-      if (this.id && this.auth.isAuthenticated()) {
-        this.integrations = <Map<string, ApplicationIntegrationViewModel>>this.data.store.get("integrations_" + this.id);
-        if (!this.integrations) {
-          this.integrations = new Map<string, ApplicationIntegrationViewModel>();
-          this.appservice.getApplicationIntegrationsById(this.id).subscribe(a => {
-            for (var i in a) {
-              this.integrations[a[i].code] = a[i];
-            }
-  
-            this.data.store.set("integrations_" + this.id, this.integrations);
-          });
-        }
-      }
-
       b.integrations.forEach(a => {
         this.allowedIntegrations[a.code] = true;
       });
-    })
+    });
 
+    if (this.id && this.auth.isAuthenticated()) {
+      this.integrations = new Map<string, ApplicationIntegrationViewModel>();
+      this.appservice.getApplicationIntegrationsById(this.id).subscribe(a => {
+        for (var i in a) {
+          this.integrations[a[i].code] = a[i];
+
+          var confs = {};
+          var keys = ["create_url", "image", "type"];
+          var configs = a[i].configurations;
+          for (var j in keys) {
+            var temp_value = configs.filter(a => a.key == keys[j]);
+            if (temp_value.length > 0)
+              confs[keys[j]] = temp_value[0].value;
+          }
+
+          if (confs['create_url']) {
+            if (this.allIntegrations.filter(x => x.code == a[i].code).length == 0) {
+              this.allIntegrations.push({
+                code: a[i].code,
+                title: a[i].name,
+                description: a[i].description,
+                capable: "This integration can <b>Write</b> notifications",
+                buttonTitle: "Integrate",
+                url: this.enrichCreateUrl(confs['create_url']),
+                image: confs['image'],
+                type: confs['type'],
+                ecommerce: false
+              });
+
+              this.allowedIntegrations[a[i].code] = true;
+            }
+          }
+        }
+      });
+    }
+  }
+
+  enrichCreateUrl(url) {
+    return url + "?steps__1__params__application_id=" + this.id + "&steps__1__meta__parammap__application_id=" + this.applicationName;
   }
 
   filterList() {

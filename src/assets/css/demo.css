@@ -255,6 +255,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', end
 
 .integration-item-card p {
     height: 90px;
+    overflow: hidden;
 }
 
 .nav-app .material-icons.red {

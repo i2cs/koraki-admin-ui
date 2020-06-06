@@ -90,7 +90,7 @@ export class ZapierComponent implements OnInit {
       this.breadcrumbService.show([
         { title: "Applications", url: "/applications" },
         { title: a.applicationName, url: "/applications/view/" + a.id },
-        { title: "Integrations" },
+        { title: "Integrations", url: "/applications/view/" + a.id + "/integrations"  },
         { title: "Zapier" }
       ]);
     }, e => {

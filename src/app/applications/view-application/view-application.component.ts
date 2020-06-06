@@ -65,6 +65,7 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
   subpage: string;
   subpageEmitter: EventEmitter<string> = new EventEmitter<string>();
   whitelabel: boolean;
+  applicationName: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -124,6 +125,7 @@ export class ViewApplicationComponent implements OnInit, AfterViewInit {
         this.appId = params['id'];
         this.appservice.getApplicationById(params['id']).subscribe(a => {
           this.application = a;
+          this.applicationName = a.applicationName;
           this.status = a.status == "Active";
           this.parseCustomData(a);
           this.script = "<script async=\"true\" src=\"\/\/api.koraki.io/widget/v1.0/js/" + a.clientId + "\"></script>";

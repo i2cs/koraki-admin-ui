@@ -1,3 +1,13 @@
+<div *ngIf="componentLoaded" class="row integration-row">
+  <div class="container-fluid">
+    <div class="col-md-12 mr-auto ml-auto">
+      <div class="card integration-card">
+      <a class="btn btn-warning" routerLink="/applications/view/{{id}}/integrations/"><i class="material-icons">keyboard_backspace</i> Back to integrations</a>
+      </div>
+  </div>
+</div>
+</div>
+
 <ng-template #target></ng-template>
 
 <div *ngIf="!componentLoaded" class="row integration-row">
@@ -10,22 +20,29 @@
       <div class="card-body integration-item-card">
         <h4 class="card-title">{{i.title}}</h4>
         <div class="integration-images">
-          <img [src]="'/assets/img/integrations/' + i.code + '.png'" />
+          <img *ngIf="!i.image" [src]="'/assets/img/integrations/' + i.code + '.png'" />
+          <img *ngIf="i.image" [src]="i.image" />
         </div>
-        <div class="status" *ngIf="integrations[i.code] && !i.autoactive">
-          Integrated
+
+        <div *ngIf="i.type!='zapier'">
+          <div class="status" *ngIf="integrations[i.code] && !i.autoactive">
+            Integrated
+          </div>
+          <div class="status" *ngIf="allowedIntegrations[i.code] && i.autoactive">
+            Active
+          </div>
         </div>
-        <div class="status" *ngIf="allowedIntegrations[i.code] && i.autoactive">
-          Active
+        <div class="status-red" *ngIf="i.type=='zapier'">
+          by <img src="https://static.koraki.io/zapier_logo.svg" height="18px" style="margin-top: -4px;" />
         </div>
         <p [innerHTML]="i.description"></p>
         <!-- <p [innerHTML]="i.capable"></p> -->
       </div>
-      <div class="card-footer">
+      <div class="card-footer" *ngIf="i.type!='zapier'">
         <div *ngIf="!integrations[i.code]">
           <a mat-raised-button class="btn full-length" routerLink="/subscription/add"
             *ngIf="!i.ecommerce && !allowedIntegrations[i.code]">Upgrade</a>
-          <a mat-raised-button *ngIf="i.ecommerce || allowedIntegrations[i.code]" class="btn btn-twitter full-length"
+          <a mat-raised-button *ngIf="i.ecommerce || allowedIntegrations[i.code]" class="btn btn-warning full-length"
             routerLink="/applications/view/{{id}}/integrations/{{i.code}}">{{i.buttonTitle}}</a>
         </div>
         <div *ngIf="integrations[i.code]">
@@ -33,6 +50,12 @@
             *ngIf="!i.ecommerce && !allowedIntegrations[i.code]">Upgrade</a>
           <a mat-raised-button *ngIf="i.ecommerce || allowedIntegrations[i.code]" class="btn btn-warning full-length"
             routerLink="/applications/view/{{id}}/integrations/{{i.code}}">Manage</a>
+        </div>
+      </div>
+
+      <div class="card-footer" *ngIf="i.type=='zapier'">
+        <div>
+          <a mat-raised-button class="btn btn-warning full-length" href="{{i.url}}" target="_blank">Integrate <i class="material-icons">open_in_new</i></a>
         </div>
       </div>
     </div>
