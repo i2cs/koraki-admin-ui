@@ -7,6 +7,7 @@ import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 import { MemoryDataHolderServiceService } from '../../services/memory-data-holder-service.service';
 import { BreadcrumbService } from '../../services/breadcrumb.service';
+import { debug } from 'util';
 
 @Component({
   selector: 'app-mailchimp',
@@ -40,7 +41,7 @@ export class MailchimpComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadingService.loading$.subscribe(a => { this.loading = a; });
+    let loading = this.loadingService.loading$.subscribe(a => { this.loading = a; if(!a) loading.unsubscribe();})
     if (this.route.snapshot.params['id']) {
       this.appId = this.route.snapshot.params['id'];
     }
@@ -101,16 +102,17 @@ export class MailchimpComponent implements OnInit {
     this.mcService.lists(code, environment.baseUrl + "/applications/view/" + this.appId + "/integrations/mailchimp").subscribe(a => {
       this.lists = a.lists;
       this.accessToken = a.accessToken,
-        this.mcDataCenter = a.url,
-        this.mcLoggedIn = true;
+      this.mcDataCenter = a.url,
+      this.mcLoggedIn = true;
     }, e => {
       
     })
   }
 
   login() {
+    debugger
     var clientId = environment.integrations.mailchimp.clientId;
-    var redirect = environment.baseUrl + "/applications/view/" + this.appId + "/integrations/mailchimp";
+    var redirect = environment.baseUrl + this.appId + "/integrations/mailchimp";
     //redirect = redirect.replace("http://", "https://");
     window.location.href = this.mcUrl + "?response_type=code&client_id=" + clientId + "&redirect_uri=" + redirect;
   }
@@ -127,7 +129,7 @@ export class MailchimpComponent implements OnInit {
     this.mcService.subscribe(subscribeRequest).subscribe(b => {
       this.data.store.set("integrations_" + this.appId, null);
       this.notify.success("Successfully subscribed " + this.list.name + " to Koraki");
-      this.router.navigate(['/applications/view/' + this.appId]);
+      window.location.href = "/applications/view/" + this.appId + "/integrations/mailchimp"
     }, e => {
       this.notify.error("Error occured while subscribing " + this.list.name + " to Koraki");
     })
@@ -138,7 +140,7 @@ export class MailchimpComponent implements OnInit {
     this.mcService.unsubscribe(id).subscribe(a => {
       this.data.store.set("integrations_" + this.appId, null);
       this.notify.success("Successfully unsubscribed from MailChimp list");
-      this.router.navigate(['/applications/view/' + this.appId]);
+      window.location.href = "/applications/view/" + this.appId + "/integrations/mailchimp"
     }, e => {
       this.notify.error("Unsubscribe was not success");
     })

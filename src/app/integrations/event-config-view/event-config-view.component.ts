@@ -19,6 +19,7 @@ export class EventConfigViewComponent implements OnInit {
 
   @Input() code: string;
   @Input() applicationId: string;
+  loading: boolean = true;
   integrationList: Array<IntegrationConfigurationsDataViewModel> = [];
   constructor(
     private appservice: ApplicationsService,
@@ -29,6 +30,7 @@ export class EventConfigViewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loadingService.loading$.subscribe(a => { this.loading = a; });
     this.ajax.getIntegrationConfigs(this.code, this.applicationId).subscribe(a => {
       a.forEach(element => {
         var variables = {};

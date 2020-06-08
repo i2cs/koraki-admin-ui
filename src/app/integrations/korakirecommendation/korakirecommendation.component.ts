@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BreadcrumbService } from 'app/services/breadcrumb.service';
 import { ApplicationsService } from 'koraki-angular-client';
+import { LoadingServiceService } from 'app/services/loading-service.service';
 
 @Component({
   selector: 'app-korakirecommendation',
@@ -16,10 +17,12 @@ export class KorakirecommendationComponent implements OnInit {
     private route: ActivatedRoute,
     private appservice: ApplicationsService,
     private breadcrumbService: BreadcrumbService,
-    private router: Router
+    private router: Router,
+    private loadingService: LoadingServiceService
   ) { }
 
   ngOnInit() {
+    this.loadingService.loading$.subscribe(a => { this.loading = a; });
     if (this.route.snapshot.params['id']) {
       this.appId = this.route.snapshot.params['id'];
 

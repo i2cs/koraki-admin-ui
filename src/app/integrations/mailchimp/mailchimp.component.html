@@ -1,16 +1,25 @@
 <div class="container-fluid">
   <div class="col-md-12 mr-auto ml-auto">
-    <div class="card ">
-      <div class="card-header">
-        <h3 class="card-title">
-          MailChimp Email List Integration
-        </h3>
-        <div class="text-center">
-          <img src="assets/img/integrations/mailchimp.png" class="integration-image" />
+    <div class="card integration-card">
+      <div class="card-header card">
+        <div class="row">
+          <div class="col-md-2">
+            <div class="integration-image-wrapper">
+              <img src="assets/img/integrations/mailchimp.png" class="integration-image" />
+            </div>
+          </div>
+          <div class="col-md-10">
+            <div class="integration-header-wrapper">
+              <h3 class="card-title">
+                MailChimp
+              </h3>
+              <h5>Email subscriptions</h5>
+              <h5 class="card-description">This integration can create notifications when subscriber is added to your list. Koraki will create a webhook on your MailChimp account so we get subscriber activities.</h5>
+            </div>
+          </div>
         </div>
-        <h5 class="card-description">Integrate your MailChimp subscribers list activities with Koraki</h5>
-
       </div>
+
       <mat-divider></mat-divider>
       <div class="card-body" [ngClass]="{'loading':loading}">
         <div *ngIf="mcLoggedIn">
@@ -27,35 +36,23 @@
             <div class="fb-page-d">
               <div>
                 <h4>{{list.name}}</h4>
-                <a href="#" mat-raised-button class="btn btn-primary" onclick="return false" (click)="subscribe()">
+                <a href="#" mat-raised-button class="btn btn-warning" onclick="return false" (click)="subscribe()">
                   Subscribe for notifications
                 </a>
               </div>
             </div>
-            <div class="divider"></div>
-            <p>You are about to subscribe '{{list.name}}' page to Koraki widget. It will create notifications upon
-              positive
-              ratings (4 or 5 starts) made on your page and daily or hourly updates of increase of like count.</p>
           </div>
 
         </div>
 
         <div *ngIf="!mcLoggedIn && !integrations['mailchimp']">
-
           <p>
-            This integration can create notifications when subscriber is added to your list. Koraki will create a
-            webhook on your MailChimp
-            account so we get subscriber activities.
-          </p>
-
-          <p>
-            First you need to allow Koraki to read your subscribers list. We will not read/change any contact of your
-            list.
+            First you need to allow Koraki to read your subscribers list.
           </p>
           <div class="divider"></div>
 
-          <a href="#" mat-raised-button class="btn btn-facebook" onclick="return false" (click)="login()">
-            <i class="fa"></i> Connect
+          <a href="#" mat-raised-button class="btn btn-warning" onclick="return false" (click)="login()">
+            Connect
           </a>
         </div>
 
@@ -71,6 +68,21 @@
             <i class="fa"></i> Disconnect
           </a>
         </div>
+      </div>
+
+      <div class="card-body" *ngIf="integrations['mailchimp']" [ngClass]="{'loading':loading}">
+        <mat-tab-group disableRipple="true" color="primary" class="md-no-animation" [@.disabled]="true"
+          dynamicHeight="true">
+          <mat-tab label="Events">
+            <app-event-config-view code="mailchimp" [applicationId]="appId"></app-event-config-view>
+          </mat-tab>
+          <mat-tab label="Triggers">
+            <app-rule-config-view code="mailchimp" [applicationId]="appId"></app-rule-config-view>
+          </mat-tab>
+          <mat-tab label="Help">
+            <app-wp-content-render slug="content-integration-mailchimp"></app-wp-content-render>
+          </mat-tab>
+        </mat-tab-group>
 
       </div>
     </div>

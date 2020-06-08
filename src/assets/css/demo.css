@@ -89,6 +89,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', end
     -moz-animation: loading-bg 14s ease infinite;
     -o-animation: loading-bg 14s ease infinite;
     animation: loading-bg 14s ease infinite;
+    min-height: 130px;
 }
 
 .loading *{
@@ -263,4 +264,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', end
 }
 .nav-app .material-icons.green {
     color:#4caf50;
+}
+
+.card-warning{
+    background-color: #fff7f7;
+    text-align: center;
+    color: #c37c7c;
+    margin-bottom: 10px;
 }

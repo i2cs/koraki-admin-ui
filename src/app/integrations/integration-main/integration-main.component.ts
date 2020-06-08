@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ViewContainerRef, ComponentRef, ComponentFactoryResolver, Input } from '@angular/core';
 import { MailchimpComponent } from '../mailchimp/mailchimp.component';
-import { ApplicationIntegrationViewModel, ApplicationsService, SubscriptionsDataViewModel } from 'koraki-angular-client';
+import { ApplicationIntegrationViewModel, ApplicationsService, SubscriptionsDataViewModel, IntegrationConfig } from 'koraki-angular-client';
 import { AuthService } from 'app/services/auth.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SubscriptionService } from 'app/services/subscription.service';
@@ -9,7 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MemoryDataHolderServiceService } from 'app/services/memory-data-holder-service.service';
 import { BreadcrumbService } from 'app/services/breadcrumb.service';
 import { LoadingServiceService } from 'app/services/loading-service.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { KorakiliveComponent } from '../korakilive/korakilive.component';
 import { KorakirecommendationComponent } from '../korakirecommendation/korakirecommendation.component';
 import { WordpressComponent } from '../wordpress/wordpress.component';
@@ -38,7 +38,9 @@ export class IntegrationMainComponent implements OnInit {
   @Input() id: number;
   @Input() applicationName: string;
   @Input() integration: Observable<string>;
+  integrationConfigs: Subject<Array<IntegrationConfig>> = new Subject();
   componentLoaded: boolean;
+  code: string;
 
   constructor(
     private resolver: ComponentFactoryResolver,
@@ -76,6 +78,8 @@ export class IntegrationMainComponent implements OnInit {
         if (this.componentLoaded) {
           const factory = this.resolver.resolveComponentFactory(component);
           this.componentRef = this.vcRef.createComponent(factory);
+          this.componentRef.instance.configs = this.integrationConfigs;
+          this.code = a;
         } else if (a) {
           window.location.href = "/applications/view/" + this.id + "/integrations";
           return;
@@ -174,14 +178,14 @@ export class IntegrationMainComponent implements OnInit {
     //   ecommerce: false
     // });
 
-    // this.allIntegrations.push({
-    //   code: "mailchimp",
-    //   title: "MailChimp",
-    //   description: "This integration can generate notifications when subscriber is added to email lists.",
-    //   capable: "This integration can <b>Write</b> notifications",
-    //   buttonTitle: "Integrate",
-    //   ecommerce: false
-    // });
+    this.allIntegrations.push({
+      code: "mailchimp",
+      title: "MailChimp",
+      description: "This integration can generate notifications when subscriber is added to email lists.",
+      capable: "This integration can <b>Write</b> notifications",
+      buttonTitle: "Integrate",
+      ecommerce: false
+    });
 
     this.allIntegrations.push({
       code: "zapier",
@@ -212,6 +216,11 @@ export class IntegrationMainComponent implements OnInit {
     if (this.id && this.auth.isAuthenticated()) {
       this.integrations = new Map<string, ApplicationIntegrationViewModel>();
       this.appservice.getApplicationIntegrationsById(this.id).subscribe(a => {
+        let con = a.filter(b => b.code == this.code);
+        if(con && con.length > 0){
+          this.integrationConfigs.next(con[0].configurations);
+        }
+
         for (var i in a) {
           this.integrations[a[i].code] = a[i];
 

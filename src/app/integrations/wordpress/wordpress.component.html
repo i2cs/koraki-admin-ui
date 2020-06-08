@@ -15,15 +15,19 @@
               </h3>
               <h5>E Commerce</h5>
               <p class="card-description">Koraki Wordpress/Woocommerce integration seamlessly connects your blog/shop to
-                produce social proof notifications. Get the <a
-                  href="https://wordpress.org/plugins/koraki-social-proof/" target="_blank">Koraki Wordpress plugin</a> now
+                produce social proof notifications.
               </p>
             </div>
           </div>
         </div>
       </div>
-
+      <mat-divider></mat-divider>
+    
       <div class="card-body" [ngClass]="{'loading':loading}">
+        <div *ngIf="notIntegrated" class="card-body card-warning">
+          <h4>Your WordPress/WooCommerce is not connected to Koraki yet!</h4>
+          <p>Check help section bellow to know how to connect your WordPress/WooCommerce with Koraki</p>
+        </div>
 
         <mat-tab-group disableRipple="true" color="primary" class="md-no-animation" [@.disabled]="true"
           dynamicHeight="true">
