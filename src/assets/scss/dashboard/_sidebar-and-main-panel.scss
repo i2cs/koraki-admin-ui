@@ -11,8 +11,8 @@
     left: 0;
     z-index: 1100;
     width: 260px;
-    background: $white-color;
-    @include shadow-big();
+    background: $black-color;
+    //@include shadow-big();
 
     .logo-img{
         width: 42px;
@@ -39,7 +39,7 @@
     }
 
     &[data-background-color="black"]{
-        background-color: #191919;
+        background-color: $black-color;
     }
 
     &[data-background-color="red"]{
@@ -52,6 +52,7 @@
         overflow: auto;
         width: 260px;
         z-index: 4;
+        background: $black-color;
 
         padding-bottom: 30px;
 
@@ -227,6 +228,7 @@
         left: 0;
         background-size: cover;
         background-position: center center;
+        
 
         &:after{
             position: absolute;

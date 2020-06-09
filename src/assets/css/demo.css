@@ -1,9 +1,9 @@
 body{
 background: #fcfcfc; /* Old browsers */
-background: -moz-radial-gradient(center, ellipse cover, #fcfcfc 0%, #f2f2f2 100%); /* FF3.6-15 */
-background: -webkit-radial-gradient(center, ellipse cover, #fcfcfc 0%,#f2f2f2 100%); /* Chrome10-25,Safari5.1-6 */
-background: radial-gradient(ellipse at center, #fcfcfc 0%,#f2f2f2 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#f2f2f2',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+background: -moz-radial-gradient(center, ellipse cover, #fbfcff 0%, #fcfdff 100%); /* FF3.6-15 */
+background: -webkit-radial-gradient(center, ellipse cover, #fbfcff 0%,#fcfdff 100%); /* Chrome10-25,Safari5.1-6 */
+background: radial-gradient(ellipse at center, #fbfcff 0%,#fcfdff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fbfcff', endColorstr='#fcfdff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
 .app-notify-status{
@@ -271,4 +271,19 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', end
     text-align: center;
     color: #c37c7c;
     margin-bottom: 10px;
+}
+
+.mat-tab-group{
+    font-family: "Quicksand", sans-serif;
+    line-height: normal;
+}
+
+.mat-button, .mat-raised-button, .mat-icon-button, .mat-stroked-button, .mat-flat-button, .mat-fab, .mat-mini-fab {
+    font-family: "Quicksand", sans-serif;
+}
+
+.navbar {
+    background-color: unset;
+    box-shadow: none; 
+    border-bottom: 1px solid #eee;
 }
