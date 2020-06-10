@@ -83,7 +83,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fbfcff', end
     position: relative;
     overflow: hidden;
     width: 100%;
-    background: linear-gradient(270deg, #ffffff, #f2f2f2);
+    background: linear-gradient(270deg, #ffffff, #fbfcfd);
     background-size: 400% 400%;
     -webkit-animation: loading-bg 14s ease infinite;
     -moz-animation: loading-bg 14s ease infinite;

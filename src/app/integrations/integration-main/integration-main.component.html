@@ -2,10 +2,11 @@
   <div class="container-fluid">
     <div class="col-md-12 mr-auto ml-auto">
       <div class="card integration-card">
-      <a class="btn btn-warning" routerLink="/applications/view/{{id}}/integrations/"><i class="material-icons">keyboard_backspace</i> Back to integrations</a>
+        <a class="btn btn-warning" routerLink="/applications/view/{{id}}/integrations/"><i
+            class="material-icons">keyboard_backspace</i> Back to integrations</a>
       </div>
+    </div>
   </div>
-</div>
 </div>
 
 <ng-template #target></ng-template>
@@ -55,7 +56,8 @@
 
       <div class="card-footer" *ngIf="i.type=='zapier'">
         <div>
-          <a mat-raised-button class="btn btn-warning full-length" href="{{i.url}}" target="_blank">Integrate <i class="material-icons">open_in_new</i></a>
+          <a mat-raised-button class="btn btn-warning full-length" href="{{i.url}}" target="_blank">Integrate <i
+              class="material-icons">open_in_new</i></a>
         </div>
       </div>
     </div>
@@ -65,5 +67,5 @@
     <img src="https://static.koraki.io/availablesoon.png" height="300px" />
   </div>
 
-  
+
 </div>

@@ -14,7 +14,7 @@ export class WordpressComponent implements OnInit {
   
   appId: string;
   loading: boolean;
-  notIntegrated: boolean;
+  meta: any = {};
   @Input() configs: Observable<Array<IntegrationConfig>>;
   constructor(
     private route: ActivatedRoute,
@@ -26,11 +26,10 @@ export class WordpressComponent implements OnInit {
 
   ngOnInit() {
     this.configs.subscribe(a => {
-      let results = a.filter(b => b.key == "integration:enabled")[0];
-      if(results){
-        this.notIntegrated = !Boolean(results.value);
-      }else{
-        this.notIntegrated = true;
+      if(a){
+        a.forEach(b => {
+          this.meta[b.key] = b.value;
+        });
       }
     });
     
