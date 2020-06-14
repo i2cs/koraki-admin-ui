@@ -1,6 +1,24 @@
 .card{
-    margin-bottom: 10px;
-    margin-top: 10px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+.and{
+    text-align: center;
+    background-image: linear-gradient(#a7a7a7, #a7a7a7);
+    background-size: 1px 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 34px;
+    padding-top: 8px;
+}
+
+.and span{
+    background-color: #fff;
+    height: 14px;
+    border: 1px solid #a7a7a7;
+    padding: 3px;
+    border-radius: 4px;
 }
 
 .or{
@@ -9,13 +27,16 @@
     background-size: 1px 100%;
     background-repeat: no-repeat;
     background-position: center center;
-    height: 40px;
-    padding-top: 8px;
+    height: 60px;
+    padding-top: 20px;
 }
 
-.or div{
+.or span{
     background-color: #fff;
-    height: 24px;
+    height: 18px;
+    border: 1px solid #a7a7a7;
+    padding: 3px;
+    border-radius: 4px;
 }
 
 .add{
@@ -26,3 +47,10 @@
     padding-top: 6px;
     padding-bottom: 6px;
 }
+
+.small-icon{
+    width: 50px;margin-right: 10px;
+    background-color: #f0f8ff;
+    border: 1px solid #d7f0ff;
+    border-radius: 5px;
+  }

@@ -1,12 +1,21 @@
 <p class="padding-top">Control when notifications generated with this integration should appear in your website</p>
 
 <div *ngFor="let rule of rulesList; index as i">
+  <div *ngIf="rule.combine == 'or'" class="or">
+    <span>OR</span>
+  </div>
+  <div *ngIf="rule.combine == 'and'" class="and">
+    <span>AND</span>
+  </div>
+
   <div class="card">
     <div class="card-header">
       <div class="togglebutton pull-right">
-        <a href="#" onclick="return false" (click)="remove(i)">Remove</a>
+        <a href="#" class="btn btn-default" onclick="return false" (click)="add('and', i)">AND</a>
+        <a href="#" *ngIf="i == rulesList.length - 1" class="btn btn-default" onclick="return false" (click)="add('or', i)">OR</a>
+        <a href="#" onclick="return false" (click)="remove(i)"><i class="material-icons">close</i></a>
       </div>
-      <div class="pull-left" style="width: 28px;">
+      <div class="pull-left small-icon">
         <img src="assets/img/rule.svg" />
       </div>
       <div class="card-title">
@@ -68,12 +77,9 @@
       <h5 class="card-subtitle mb-2 text-muted"></h5>
     </div>
   </div>
-  <div class="or">
-    <div>OR</div>
-  </div>
 </div>
 
-<div class="add">
+<div class="add" *ngIf="rulesList && rulesList.length == 0">
   <a href="#" class="btn btn-primary" onclick="return false" (click)="add()">Add new rule</a>
 </div>
 

@@ -22,7 +22,7 @@ export class KorakiliveComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadingService.loading$.subscribe(a => { this.loading = a; });
+    let loading = this.loadingService.loading$.subscribe(a => { this.loading = a; if(!a) loading.unsubscribe();})
     if (this.route.snapshot.params['id']) {
       this.appId = this.route.snapshot.params['id'];
 

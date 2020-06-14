@@ -12,7 +12,7 @@
         <span class="toggle"></span>
       </label>
     </div>
-    <div class="pull-left" style="width: 28px;padding-right:3px;">
+    <div class="pull-left small-icon">
       <img src="assets/img/event.svg" />
     </div>
     <h4 class="card-title">{{integration.templateName}}</h4>
@@ -57,17 +57,13 @@
             <thead>
               <tr>
                 <th>Variable</th>
-                <th>Name</th>
                 <th>Description</th>
-                <th>Sample</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let variable of integration.variables">
                 <td><span class="badge badge-primary">{{ '{{' + variable.variable + '}' + '}' }}</span></td>
-                <td>{{variable.name}}</td>
-                <td>{{variable.description}}</td>
-                <td><i>{{variable.sample}}</i></td>
+                <td>{{variable.description}}<br/><i>{{variable.sample}}</i></td>
               </tr>
             </tbody>
           </table>

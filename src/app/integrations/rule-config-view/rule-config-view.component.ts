@@ -55,11 +55,14 @@ export class RuleConfigViewComponent implements OnInit {
     var sure = confirm("Are you sure to remove this rule?");
     if(sure){
       this.rulesList.splice(i, 1);
+      if(this.rulesList.length > 1){
+        this.rulesList[0].combine = "";
+      }
     }
   }
 
-  add(){
-    this.rulesList.push({ event: "all" });
+  add(type, position){
+    this.rulesList.splice(position + 1, 0, { combine: type, event: "all" });
   }
 
   updateRules(){
