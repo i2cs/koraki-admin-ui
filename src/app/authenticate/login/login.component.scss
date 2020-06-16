@@ -5,3 +5,11 @@
 :host ::ng-deep .auth0-lock.auth0-lock .auth0-lock-header-avatar{
     display: none
 }
+
+.card-header a{
+    padding-bottom: 0;
+}
+
+#hiw-login-container {
+    margin-bottom: 20px;
+}

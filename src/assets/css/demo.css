@@ -291,3 +291,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fbfcff', end
     box-shadow: none; 
     border-bottom: 1px solid #eee;
 }
+
+.auth0-lock.auth0-lock.auth0-lock-opened-in-frame{
+    border: 1px solid #dde6f4;
+    border-radius: 4px;
+    font-family: "Quicksand", sans-serif;
+}

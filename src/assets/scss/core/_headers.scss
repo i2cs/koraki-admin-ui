@@ -49,9 +49,11 @@
         left: 0;
         top: 0;
         content: "";
+        background: #fcfcfc;
+        background: radial-gradient(ellipse at center,#fbfcff 0,#fcfdff 100%);
     }
 
-    &::before,{
+    &::before{
     background: #ffffff;
     }
 

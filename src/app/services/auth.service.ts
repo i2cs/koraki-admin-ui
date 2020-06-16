@@ -24,9 +24,21 @@ export class AuthService {
     private router: Router
   ) { 
     this.auth0Options = {
+      additionalSignUpFields: [
+      {
+        name: "name",
+        storage: "root",
+        placeholder: "Enter your full name",
+        validator: function(name) {
+          return {
+             valid: name.length >= 3,
+             hint: "Please enter your name"
+          };
+        }
+      }],
       theme: {
         logo: '/assets/img/koraki-logo.png',
-        primaryColor: '#f2a133'
+        primaryColor: '#4285f4'
       },
       auth: {
         redirectUrl: environment.auth.redirect,
