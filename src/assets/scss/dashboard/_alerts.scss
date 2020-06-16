@@ -8,6 +8,7 @@
     position: relative;
     padding: 20px 15px;
     line-height: 20px;
+    font-size: 14px;
 
     b{
         font-weight: $font-weight-bold;
@@ -33,15 +34,15 @@
     }
 
     &.alert-danger{
-        @include shadow-alert-color($brand-danger);
+        //@include shadow-alert-color($brand-danger);
         @include alert-icon-color($brand-danger);
     }
     &.alert-warning{
-        @include shadow-alert-color($brand-warning);
+        //@include shadow-alert-color($brand-warning);
         @include alert-icon-color($brand-warning);
     }
     &.alert-success{
-        @include shadow-alert-color($brand-success);
+        //@include shadow-alert-color($brand-success);
         @include alert-icon-color($brand-success);
     }
     &.alert-info{

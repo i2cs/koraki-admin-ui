@@ -33,7 +33,7 @@
             <tbody>
               <tr *ngFor="let row of table">
                 <td>
-                  <img [src]="row['thumbnailUrl']" height="60" />
+                  <img onerror="this.src= 'https://static.koraki.io/icons/041-graph.svg'" [src]="row['thumbnailUrl']" height="60" />
                 </td>
                 <td>
                   <div *ngIf="isLocalizedNotification(row['notificationText'])">

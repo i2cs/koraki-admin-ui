@@ -46,11 +46,11 @@ export class AuthLayoutComponent implements OnInit {
             this.sidebarOpen();
             var $layer = document.createElement('div');
             $layer.setAttribute('class', 'close-layer');
-            if (body.querySelectorAll('.wrapper-full-page')) {
-                document.getElementsByClassName('wrapper-full-page')[0].appendChild($layer);
-            }else if (body.classList.contains('off-canvas-sidebar')) {
-                document.getElementsByClassName('wrapper-full-page')[0].appendChild($layer);
-            }
+            // if (body.querySelectorAll('.wrapper-full-page')) {
+            //     document.getElementsByClassName('wrapper-full-page')[0].appendChild($layer);
+            // }else if (body.classList.contains('off-canvas-sidebar')) {
+            //     document.getElementsByClassName('wrapper-full-page')[0].appendChild($layer);
+            // }
             setTimeout(function() {
                 $layer.classList.add('visible');
             }, 100);

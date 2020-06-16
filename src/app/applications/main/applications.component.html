@@ -7,10 +7,10 @@
 
                     <div class="card-header card-header-{{app.activeNotificationsCount>0?'success':'rose'}} card-header-icon"
                         [ngClass]="{'card-header-default' : app.status!='Active'}">
-                        <div class="card-icon" *ngIf="app.status=='Active'">
+                        <div class="pull-left app-stats" *ngIf="app.status=='Active'">
                             {{app.activeNotificationsCount==0?'No':app.activeNotificationsCount}} Active notifications
                         </div>
-                        <div class="card-icon" *ngIf="app.status!='Active'">
+                        <div class="pull-left app-stats" *ngIf="app.status!='Active'">
                             Deactivated
                         </div>
                         <img title="Page views over time" class="pull-right" [src]="getAnalyticsThumbnail(app)"

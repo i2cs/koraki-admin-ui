@@ -42,8 +42,8 @@
         background-color: $black-color;
     }
 
-    &[data-background-color="red"]{
-        background-color: #e53935;
+    &[data-background-color="white"]{
+        background-color: #FFFFFF;
     }
 
     .sidebar-wrapper{
@@ -373,11 +373,11 @@
           color: $white-color;
         }
     }
-    &[data-background-color="red"]{
+    &[data-background-color="white"]{
         @include sidebar-background-color($gray-base, $white-color);
 
         .nav li .dropdown-menu .dropdown-item{
-          color: $white-color;
+          color: $black-color;
         }
     }
 
